@@ -14,5 +14,8 @@
     "morgan": "~1.6.1",
     "semantic-ui": "^2.1.8",
     "serve-favicon": "~2.3.0"
+  },
+  "devDependencies": {
+    "mongoose": "^4.4.4"
   }
 }
