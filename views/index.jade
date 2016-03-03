@@ -1,3 +1,243 @@
 extends layout
 
 block content
+  // Following Menu
+  .ui.large.top.fixed.hidden.menu.inverted
+    .ui.container.nav
+      a.item Movies
+      a.item Series
+      a.item Music
+      a.item Plays
+      a.item Classics
+      a.item Collections
+      .ui.category.search.item
+        .ui.transparent.icon.input
+          input.prompt(type='text', placeholder='Search...')
+          i.search.link.icon
+        .results
+
+
+
+      .right.menu
+        a.item
+          h6
+            | MY ACCOUNT
+        a.item
+          h6
+            | WATCHLIST 6
+        a.item
+          h6
+            | LIVE TV
+        a.item
+          h6
+            | ENGLISH
+  // Sidebar Menu
+  .ui.right.vertical.sidebar.menu
+    a.item Movies
+    a.item Series
+    a.item Music
+    a.item Plays
+    a.item Classics
+    a.item Collections
+    .ui.category.search.item
+      .ui.transparent.icon.input
+        input.prompt(type='text', placeholder='Search...')
+        i.search.link.icon
+      .results
+    a.item.horizontal.divider
+    a.item
+      h6
+        | My Account
+    a.item
+      h6
+        | Watchlist
+    a.item
+      h6
+        | Live TV
+    a.sidebar.item
+      h6
+        | English
+
+
+  // Page Contents
+
+  .ui.inverted.vertical.masthead.center.aligned.segment
+    .ui.container
+      .ui.large.secondary.inverted.pointing.menu
+        a.toc.item.right.aligned
+          i.sidebar.icon
+
+    .ui.text.container
+      .image.hero
+        img.ui.huge.image(src='/images/wireframe/image.png')
+
+  .ui.vertical.center.container.aligned.segment.grids
+
+    .ui.one.column.grid.container
+      .column
+        h4.ui.header.grid-title
+          br
+          | Movies >
+
+    .ui.five.column.doubling.grid.container
+      .column
+        a.red.card
+          .image
+            img.ui.medium.image(src='/images/wireframe/image.png')
+      .column
+        a.orange.card
+          .image
+            img.ui.medium.image(src='/images/wireframe/image.png')
+      .column
+        a.yellow.card
+          .image
+            img.ui.medium.image(src='/images/wireframe/image.png')
+      .column.mobile.computer.only
+        a.olive.card
+          .image
+            img.ui.medium.image(src='/images/wireframe/image.png')
+      .column.computer.only
+        a.green.card
+          .image
+            img.ui.medium.image(src='/images/wireframe/image.png')
+
+    .ui.one.column.grid.container
+      .column
+        h4.ui.header.grid-title
+          br
+          | Series >
+
+    .ui.five.column.doubling.grid.container
+      .column
+        a.red.card
+          .image
+            img.ui.medium.image(src='/images/wireframe/image.png')
+      .column
+        a.orange.card
+          .image
+            img.ui.medium.image(src='/images/wireframe/image.png')
+      .column
+        a.yellow.card
+          .image
+            img.ui.medium.image(src='/images/wireframe/image.png')
+      .column.mobile.computer.only
+        a.olive.card
+          .image
+            img.ui.medium.image(src='/images/wireframe/image.png')
+      .column.computer.only
+        a.green.card
+          .image
+            img.ui.medium.image(src='/images/wireframe/image.png')
+
+    .ui.one.column.grid.container
+      .column
+        h4.ui.header.grid-title
+          br
+          | Plays >
+
+    .ui.five.column.doubling.grid.container
+      .column
+        a.red.card
+          .image
+            img.ui.medium.image(src='/images/wireframe/image.png')
+      .column
+        a.orange.card
+          .image
+            img.ui.medium.image(src='/images/wireframe/image.png')
+      .column
+        a.yellow.card
+          .image
+            img.ui.medium.image(src='/images/wireframe/image.png')
+      .column.mobile.computer.only
+        a.olive.card
+          .image
+            img.ui.medium.image(src='/images/wireframe/image.png')
+      .column.computer.only
+        a.green.card
+          .image
+            img.ui.medium.image(src='/images/wireframe/image.png')
+
+    .ui.one.column.grid.container
+      .column
+        h4.ui.header.grid-title
+          br
+          | Classics >
+
+    .ui.five.column.doubling.grid.container
+      .column
+        a.red.card
+          .image
+            img.ui.medium.image(src='/images/wireframe/image.png')
+      .column
+        a.orange.card
+          .image
+            img.ui.medium.image(src='/images/wireframe/image.png')
+      .column
+        a.yellow.card
+          .image
+            img.ui.medium.image(src='/images/wireframe/image.png')
+      .column.mobile.computer.only
+        a.olive.card
+          .image
+            img.ui.medium.image(src='/images/wireframe/image.png')
+      .column.computer.only
+        a.green.card
+          .image
+            img.ui.medium.image(src='/images/wireframe/image.png')
+
+    .ui.one.column.grid.container
+      .column
+        h4.ui.header.grid-title
+          br
+          | Collections >
+
+    .ui.five.column.doubling.grid.container
+
+      .column
+        a.red.card
+          .image
+            img.ui.medium.image(src='/images/wireframe/image.png')
+      .column
+        a.orange.card
+          .image
+            img.ui.medium.image(src='/images/wireframe/image.png')
+      .column
+        a.yellow.card
+          .image
+            img.ui.medium.image(src='/images/wireframe/image.png')
+      .column.mobile.computer.only
+        a.olive.card
+          .image
+            img.ui.medium.image(src='/images/wireframe/image.png')
+      .column.computer.only
+        a.green.card
+          .image
+            img.ui.medium.image(src='/images/wireframe/image.png')
+
+  .ui.inverted.vertical.footer.stackable.center.aligned.segment
+    .ui.middle.aligned.six.column.centered.stackable.grid.footer.container
+      .row
+        .column.middle.aligned
+          a.link
+            h4
+              | FAQ/Help
+        .column.middle.aligned
+          a.link
+            h4
+              | Jobs
+        .column.middle.aligned
+          a.link
+            h4
+              | Terms of Use
+        .column.middle.aligned
+          a.link
+            h4
+              | Privacy Policy
+        .column.middle.aligned
+          a.link
+            h4
+              | Copyright
+        .column.middle.aligned
+          a.link
+            h4.clear
+              | Closed Captioning
