@@ -23,6 +23,16 @@
   font-weight: normal;
 }
 
+.nav-header {
+  min-height: 109px;
+}
+
+@media only screen and (max-width: 700px) {
+  .nav-header {
+    min-height: auto;
+  }
+}
+
 .right.menu {
   color: rgba(198,198,198,1);
 }
@@ -88,20 +98,21 @@
 }
 
 body.pushable>.pusher {
-    background: rgba(0,0,0, .87) !important;
+    background: rgba(0,0,0, 1) !important;
 }
 
 .ui.large.top.fixed.hidden.menu.inverted {
+  display: block;
   height: 107px;
-  background: rgba(0,0,0,.87) !important;
+  background: rgba(0,0,0,1) !important;
 }
 
 .ui.large.top.fixed.hidden.menu.inverted .item:before {
-  background: rgba(0,0,0,.87) !important;
+  background: rgba(0,0,0,1) !important;
 }
 
 .ui.inverted.menu .dropdown.item:hover, .ui.inverted.menu .link.item:hover, .ui.inverted.menu a.item:hover, .ui.link.inverted.menu .item:hover {
-  background: rgba(0,0,0,.87) !important;
+  background: rgba(0,0,0,1) !important;
 }
 
 .ui.container.nav a:hover {
@@ -113,7 +124,7 @@ body.pushable>.pusher {
 }
 
 .ui.inverted.segment, .ui.primary.inverted.segment {
-    background: rgba(0,0,0, .87) !important;
+    background: rgba(0,0,0, 1) !important;
     color: rgba(255,255,255,.9);
 }
 
@@ -127,6 +138,7 @@ body.pushable>.pusher {
 
 .ui.container.nav {
   width: calc(1570px + 2rem)!important;
+  padding-top: 1rem;
 }
 
 .ui.container.hero {
@@ -284,4 +296,20 @@ body.pushable>.pusher {
   font-size: 1.2rem;
   color: white;
   font-weight: 300;
+  line-height: 3.5rem;
+}
+
+.social-share img {
+  position: relative;
+  top: 30px;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 2.5rem;
+}
+
+.tagline {
+  position: relative;
+  text-align: center;
+  font-size: .9em;
+  color: rgba(102,102,102,1);
 }
