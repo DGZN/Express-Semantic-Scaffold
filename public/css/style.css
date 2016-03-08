@@ -141,11 +141,12 @@ body.pushable>.pusher {
 
 .row.subnav span.title {
   color: rgba(255,255,255,1);
-  font-size: 1.3rem;
+  font-size: 1.2em;
   font-weight: 300;
   text-transform: uppercase;
-  line-height: 4.5rem;
+  line-height: 3.7em;
   padding-left: 2rem;
+  letter-spacing: .05em;
 }
 
 .row.subnav .ui.simple.dropdown {
@@ -235,6 +236,12 @@ body.pushable>.pusher {
   margin-top: 2.5rem;
 }
 
+.grids .details h1 {
+  font-size: 2.5em;
+  font-weight: 300;
+  color: rgba(198,198,198,1);
+}
+
 .grids .details h2, h4 {
   color: rgba(198,198,198,1);
 }
@@ -302,7 +309,7 @@ body.pushable>.pusher {
 }
 
 .plus.icon.watchlist-button {
-  margin-top: .1rem;
+  margin-top: .1em;
 }
 
 .icon.watchlist-button {
@@ -320,6 +327,10 @@ body.pushable>.pusher {
   border-radius: 0rem;
   margin: 0rem;
   padding: 1px;
+}
+
+.watchlist .column {
+  /*padding-left: 0rem !important;*/
 }
 
 .ui.progress.watchlist {
