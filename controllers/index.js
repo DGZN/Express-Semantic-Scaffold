@@ -10,4 +10,8 @@ router.get('/details', function(req, res, next) {
   res.render('details');
 });
 
+router.get('/series', function(req, res, next) {
+  res.render('series');
+});
+
 module.exports = router;

@@ -132,6 +132,29 @@ body.pushable>.pusher {
     color: rgba(255,255,255,.9);
 }
 
+.row.subnav {
+  display: block;
+  height: 75px;
+  background-color: rgba(66,66,66,1);
+  padding-bottom: 0rem !important;
+}
+
+.row.subnav span.title {
+  color: rgba(255,255,255,1);
+  font-size: 1.3rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  line-height: 4.5rem;
+  padding-left: 2rem;
+}
+
+.row.subnav .ui.simple.dropdown {
+  position: relative;
+  float: right;
+  margin: 1.5rem;
+  margin-right: 5%;
+}
+
 @media only screen and (max-width: 991px) and (min-width: 768px) {
     .ui.container.hero {
       width: 723px;
@@ -157,7 +180,7 @@ body.pushable>.pusher {
   width: 1600px !important;
 }
 
-.grids .row {
+.grids .row:not(.subnav):not(.watchlist) {
   padding-left: 1rem !important;
   height: 200px;
   overflow: hidden;
@@ -216,6 +239,14 @@ body.pushable>.pusher {
   color: rgba(198,198,198,1);
 }
 
+.details h3 {
+  font-size: 1.1em;
+  line-height: 2em;
+  text-transform: uppercase;
+  color: rgba(198,198,198,1);
+}
+
+
 .details h4 {
   font-size: 1em;
   line-height: 2em;
@@ -256,6 +287,58 @@ body.pushable>.pusher {
   margin: 0px;
 }
 
+
+.watchlist-button {
+  position: relative;
+  float: left;
+  padding-top: .2rem;
+  padding-right: 1rem;
+  font-size: 1.1rem;
+  color: rgba(198,198,198, 1);
+}
+
+.play.large.icon.watchlist-button {
+  top: -1px;
+}
+
+.plus.icon.watchlist-button {
+  margin-top: .1rem;
+}
+
+.icon.watchlist-button {
+  opacity: .2;
+  cursor: pointer;
+}
+
+.icon.watchlist-button:hover {
+  opacity: 1;
+}
+
+.watchlist .ui.progress {
+  border: 2px solid rgba(48,48,48,.3);
+  background: rgba(59,59,59,.1);
+  border-radius: 0rem;
+  margin: 0rem;
+  padding: 1px;
+}
+
+.ui.progress.watchlist {
+  position: relative;
+  margin-top: .4rem;
+  float: left;
+  width: 70%;
+}
+
+.ui.progress.watchlist .bar {
+  border-radius: 0rem;
+}
+
+.ui.small.progress.watchlist .bar {
+  border-radius: 0rem;
+  height: 1.2rem;
+}
+
+
 umn.centered {
   padding: 2rem 0rem 2rem 2rem !important;
 }
@@ -284,7 +367,7 @@ ul.meta.values {
   }
 }
 
-.grids .row:last-child {
+.grids .row:last-child:not(.subnav) {
   padding-bottom: 2rem !important;
 }
 
