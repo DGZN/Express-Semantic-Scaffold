@@ -236,7 +236,7 @@ body.pushable>.pusher {
 
 #seasons-dropdown-filter .menu>.item:hover {
   color: #0e0e0e !important;
-  background: #ffffff;
+  background: #ffffff !important;
 }
 
 
