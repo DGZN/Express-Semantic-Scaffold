@@ -153,6 +153,25 @@ body.pushable>.pusher {
   letter-spacing: .05em;
 }
 
+@media only screen and (max-width: 900px) {
+  .row.subnav span.title {
+    font-size: 1em;
+    font-weight: 300;
+    line-height: 4.5rem;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .row.subnav {
+    height: 55px;
+  }
+  .row.subnav span.title {
+    font-size: 0.8em;
+    font-weight: 200;
+    line-height: 3.2rem;
+  }
+}
+
 
 @media (max-width: 700px) {
   #seasons-dropdown {
@@ -378,21 +397,43 @@ body.pushable>.pusher {
   color: rgba(198,198,198,1);
 }
 
+@media only screen and (max-width: 900px) {
+  .grids .details h1 {
+    margin-bottom: 0.4rem;
+    font-size: 2em;
+  }
+}
+
 .grids .details h2, h4 {
   color: rgba(198,198,198,1);
 }
 
 .details h3 {
+  margin: 0;
   font-size: 1.1em;
   line-height: 2em;
   text-transform: uppercase;
   color: rgba(198,198,198,1);
 }
 
+@media only screen and (max-width: 900px) {
+  .details h3 {
+    font-size: 0.9em;
+  }
+}
+
 
 .details h4 {
   font-size: 1em;
+  font-weight: 300;
   line-height: 2em;
+  margin-top: 0.5rem;
+}
+
+@media only screen and (max-width: 900px) {
+  .details h4 {
+    font-size: 0.9em;
+  }
 }
 
 .movie-details {
@@ -559,9 +600,20 @@ ul.meta.values {
   padding-bottom: 5rem !important;
 }
 
+.pad-bottom-tiny {
+  padding-bottom: 0.7rem;
+}
+
 .pad-right-small {
   padding-right: 2rem;
 }
+
+@media only screen and (max-width: 480px) {
+  .pad-right-small {
+    padding-right: 0rem;
+  }
+}
+
 
 .pad-right-medium {
   padding-right: 2rem;
@@ -679,7 +731,13 @@ ul.meta.values {
   }
 }
 
-.ui.category.search.item {
+@media only screen and (max-width: 480px) {
+  .details .column {
+    padding-right: 0 !important;
+  }
+}
+
+.ui.category.search.item.nav-search {
   width: 20px !important;
 }
 
@@ -753,6 +811,12 @@ ul.meta.values {
 
 #language-dropdown {
   padding-right: 0 !important;
+}
+
+@media only screen and (max-width: 900px) {
+  #language-dropdown {
+    padding-left: 0 !important;
+  }
 }
 
 #language-dropdown .ui.inverted.menu .active.item {

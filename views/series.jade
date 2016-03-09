@@ -14,7 +14,7 @@ block content
       a.item Classics
       a.item Collections
       a.item Live TV
-      .ui.category.search.item
+      .ui.category.search.item.nav-search
         .ui.transparent.icon.input
           input.prompt(type='text', placeholder='Search...')
           i.search.link.icon
@@ -29,7 +29,7 @@ block content
             .item
               i.sa.flag
         .ui.left.dropdown.item(id="account-dropdown")
-          i.settings.icon
+          i.setting.icon
           .menu
             a.item
               i.user.icon
@@ -38,7 +38,6 @@ block content
               i.list.layout.icon
               span.text Watchlist
 
-  // Sidebar Menu
   .ui.right.vertical.sidebar.menu(id="nav-sidebar")
     a.item Movies
     a.item Series
@@ -133,8 +132,6 @@ block content
       span
         | Ep 19
       .watchlist-pct
-
-  // Page Contents
 
   .ui.inverted.vertical.masthead.center.aligned
     .ui.container.nav-header
@@ -278,7 +275,6 @@ block content
                           li Noma
                           li Alex
                           li Noma
-                      .column
                       .column.tight
                         ul.meta.values
                           li Shiradashi Smith
@@ -298,7 +294,6 @@ block content
                           li Alex
                           li Noma
                           .column
-                      .column
                       .column.tight
                         ul.meta.values
                           li Shiradashi Smith
@@ -317,7 +312,6 @@ block content
                           li Noma
                           li Alex
                           li Noma
-                      .column
                       .column.tight
                         ul.meta.values
                           li Shiradashi Smith
@@ -357,7 +351,6 @@ block content
               | Lorem ipsum dolor
 
   .ui.inverted.vertical.footer.stackable.center.aligned.segment
-
     .ui.middle.aligned.six.column.centered.stackable.grid.footer.container
       .row
         .column.middle.aligned

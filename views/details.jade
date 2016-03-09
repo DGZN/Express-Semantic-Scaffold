@@ -1,11 +1,10 @@
 extends layout
 
 block content
-  // Following Menu
-  .sidebar
   .ui.large.top.fixed.hidden.menu.inverted
-    .ui.container.nav
-      a.item(link="/")
+    .sidebar
+    .ui.container.nav(style="height: 65px")
+      a.item(href="/")
         img.ui.tiny.image(src='/images/melody-logo.png')
       a.item Movies
       a.item Series
@@ -13,7 +12,8 @@ block content
       a.item Plays
       a.item Classics
       a.item Collections
-      .ui.category.search.item
+      a.item Live TV
+      .ui.category.search.item.nav-search
         .ui.transparent.icon.input
           input.prompt(type='text', placeholder='Search...')
           i.search.link.icon
@@ -22,31 +22,29 @@ block content
 
 
       .right.menu
-        .item
-          h6
-            a
-              | MY ACCOUNT
-        .item
-          h6
-            a
-              | WATCHLIST
-              span.count 6
-        .item
-          h6
-            a
-              | LIVE TV
-        .item
-          h6
-            a
-              | ENGLISH
-  // Sidebar Menu
-  .ui.right.vertical.sidebar.menu
+        .ui.left.dropdown.item(id="language-dropdown")
+          i.us.flag
+          .menu
+            .item
+              i.sa.flag
+        .ui.left.dropdown.item(id="account-dropdown")
+          i.setting.icon
+          .menu
+            a.item
+              i.user.icon
+              span.text My Account
+            a.item
+              i.list.layout.icon
+              span.text Watchlist
+
+  .ui.right.vertical.sidebar.menu(id="nav-sidebar")
     a.item Movies
     a.item Series
     a.item Music
     a.item Plays
     a.item Classics
     a.item Collections
+    a.item Live TV
     .ui.category.search.item
       .ui.transparent.icon.input
         input.prompt(type='text', placeholder='Search...')
@@ -59,25 +57,18 @@ block content
     a.item
       h6
         | Watchlist
-    a.item
-      h6
-        | Live TV
     a.sidebar.item
       h6
         | English
 
-
-  // Page Contents
-
   .ui.inverted.vertical.masthead.center.aligned
-    .ui.container.nav-header
+    .ui.container.nav-header.pad-bottom-tiny
       .ui.large.secondary.inverted.pointing.menu
         a.toc.item.right.aligned
           i.sidebar.icon
 
   .ui.vertical.center.container.aligned.grids
-
-    .ui.two.column.grid.container.details
+    .ui.two.column.grid.container
         .details.sixteen.wide.tablet.eight.wide.computer.column.centered
           object#flashObj(width='754', height='407', classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000', codebase='http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,47,0')
               param(name='movie', value='http://c.brightcove.com/services/viewer/federated_f9?isVid=1&isUI=1')
