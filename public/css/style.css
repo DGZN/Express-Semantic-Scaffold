@@ -202,6 +202,29 @@ body.pushable>.pusher {
   color: #cecece;
 }
 
+#account-dropdown {
+  padding-left: 0.4rem !important;
+}
+
+#account-dropdown .menu {
+  background: #2d2d2d;
+}
+
+#account-dropdown .menu .item {
+  color: #f2f2f2 !important;
+}
+
+#account-dropdown .menu>.item {
+  font-weight: 100 !important;
+  font-size: 0.9em !important;
+  line-height: 1.5rem;
+}
+
+#account-dropdown .menu>.item:hover {
+  color: #0e0e0e !important;
+  background: #ffffff;
+}
+
 #seasons-dropdown-filter {
   width: 100%;
   padding: .92857143em 1.14285714em;
@@ -656,8 +679,38 @@ ul.meta.values {
   }
 }
 
+.ui.category.search.item {
+  width: 20px !important;
+}
+
 .ui.container.nav .item {
   color: rgba(76,76,76,1) !important;
+}
+
+
+
+@media only screen and (max-width: 900px) {
+  .ui.container.nav .item:nth-child(2) {
+    padding-left: 0.2rem !important
+  }
+  .ui.container.nav .item:nth-child(3) {
+    padding-left: 0.2rem !important
+  }
+  .ui.container.nav .item:nth-child(4) {
+    padding-left: 0.2rem !important
+  }
+  .ui.container.nav .item:nth-child(5) {
+    padding-left: 0.2rem !important
+  }
+  .ui.container.nav .item:nth-child(6) {
+    padding-left: 0.2rem !important
+  }
+  .ui.container.nav .item:nth-child(7) {
+    padding-left: 0.2rem !important
+  }
+  .ui.container.nav .item:nth-child(8) {
+    padding-left: 0.2rem !important
+  }
 }
 
 .ui.container.nav .item h6 a {
@@ -675,8 +728,15 @@ ul.meta.values {
 
 
 .ui.container.nav a, a:visited {
+  cursor: pointer;
+  font-size: 1.1em !important;
+}
+
+@media only screen and (max-width: 900px) {
+  .ui.container.nav a, a:visited {
     cursor: pointer;
-    font-size: 1.1em !important;
+    font-size: 1em !important;
+  }
 }
 
 .ui.menu .item h6 {
@@ -685,6 +745,26 @@ ul.meta.values {
 
 .ui.input input {
   color: rgba(76,76,76,1) !important;
+}
+
+.ui.inverted.menu .active.item {
+  background: rgba(20,20,20, 1) !important;
+}
+
+#language-dropdown {
+  padding-right: 0 !important;
+}
+
+#language-dropdown .ui.inverted.menu .active.item {
+  background: rgba(20,20,20, 1) !important;
+}
+
+#language-dropdown .menu {
+  background: rgba(20,20,20, 1) !important;
+}
+
+#language-dropdown .menu:visited {
+  background: rgba(20,20,20, 1) !important;
 }
 
 .masthead.segment {

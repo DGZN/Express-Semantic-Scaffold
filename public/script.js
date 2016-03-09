@@ -22,6 +22,18 @@ $(document)
       .dropdown()
     ;
 
+    $('#language-dropdown')
+      .dropdown({
+        direction: 'left'
+      })
+    ;
+
+    $('#account-dropdown')
+      .dropdown({
+        direction: 'left'
+      })
+    ;
+
 
     $('#nav-sidebar')
       .sidebar('attach events', '.toc.item')

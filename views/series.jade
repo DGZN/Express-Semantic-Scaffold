@@ -2,8 +2,8 @@ extends layout
 
 block content
   // Following Menu
-  .sidebar
   .ui.large.top.fixed.hidden.menu.inverted
+    .sidebar
     .ui.container.nav
       a.item(href="/")
         img.ui.tiny.image(src='/images/melody-logo.png')
@@ -13,6 +13,7 @@ block content
       a.item Plays
       a.item Classics
       a.item Collections
+      a.item Live TV
       .ui.category.search.item
         .ui.transparent.icon.input
           input.prompt(type='text', placeholder='Search...')
@@ -22,23 +23,20 @@ block content
 
 
       .right.menu
-        .item
-          h6
-            a
-              | MY ACCOUNT
-        .item
-          h6
-            a
-              | WATCHLIST
-              span.count 6
-        .item
-          h6
-            a
-              | LIVE TV
-        .item
-          h6
-            a
-              | ENGLISH
+        .ui.left.dropdown.item(id="language-dropdown")
+          i.us.flag
+          .menu
+            .item
+              i.sa.flag
+        .ui.left.dropdown.item(id="account-dropdown")
+          i.settings.icon
+          .menu
+            a.item
+              i.user.icon
+              span.text My Account
+            a.item
+              i.list.layout.icon
+              span.text Watchlist
 
   // Sidebar Menu
   .ui.right.vertical.sidebar.menu(id="nav-sidebar")
@@ -48,6 +46,7 @@ block content
     a.item Plays
     a.item Classics
     a.item Collections
+    a.item Live TV
     .ui.category.search.item
       .ui.transparent.icon.input
         input.prompt(type='text', placeholder='Search...')
@@ -60,9 +59,6 @@ block content
     a.item
       h6
         | Watchlist
-    a.item
-      h6
-        | Live TV
     a.sidebar.item
       h6
         | English
