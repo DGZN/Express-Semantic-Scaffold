@@ -39,8 +39,9 @@ block content
           h6
             a
               | ENGLISH
+
   // Sidebar Menu
-  .ui.right.vertical.sidebar.menu
+  .ui.right.vertical.sidebar.menu(id="nav-sidebar")
     a.item Movies
     a.item Series
     a.item Music
@@ -66,12 +67,84 @@ block content
       h6
         | English
 
+  .ui.left.vertical.sidebar.inverted.menu(id="watchlist-sidebar")
+    .ui.simple.dropdown.menu.inverted(id="seasons-dropdown-filter")
+      | SEASON 1
+      i.plus.icon
+      .menu
+        a.item SEASON 2
+        a.item SEASON 3
+        a.item SEASON 4
+        a.item SEASON 5
+        a.item SEASON 6
+
+    a.item
+      i.play.tiny.icon.watchlist-button.no-margin
+      i.plus.tiny.icon.watchlist-button
+      span
+        | Ep 12
+      .watchlist-pct
+        | 75%
+
+    a.item
+      i.play.tiny.icon.watchlist-button.no-margin
+      i.plus.tiny.icon.watchlist-button
+      span
+        | Ep 13
+      .watchlist-pct
+        | 30%
+
+    a.item
+      i.play.tiny.icon.watchlist-button.no-margin
+      i.plus.tiny.icon.watchlist-button
+      span
+        | Ep 14
+      .watchlist-pct
+        | 100%
+
+    a.item
+      i.play.tiny.icon.watchlist-button.no-margin
+      i.plus.tiny.icon.watchlist-button
+      span
+        | Ep 15
+      .watchlist-pct
+        | 0%
+
+    a.item
+      i.play.tiny.icon.watchlist-button.no-margin
+      i.plus.tiny.icon.watchlist-button
+      span
+        | Ep 16
+      .watchlist-pct
+
+    a.item
+      i.play.tiny.icon.watchlist-button.no-margin
+      i.plus.tiny.icon.watchlist-button
+      span
+        | Ep 17
+      .watchlist-pct
+
+    a.item
+      i.play.tiny.icon.watchlist-button.no-margin
+      i.plus.tiny.icon.watchlist-button
+      span
+        | Ep 18
+      .watchlist-pct
+
+    a.item
+      i.play.tiny.icon.watchlist-button.no-margin
+      i.plus.tiny.icon.watchlist-button
+      span
+        | Ep 19
+      .watchlist-pct
 
   // Page Contents
 
   .ui.inverted.vertical.masthead.center.aligned
     .ui.container.nav-header
       .ui.large.secondary.inverted.pointing.menu
+        a.watchlist.item.left.aligned
+          i.list.layout.icon
         a.toc.item.right.aligned
           i.sidebar.icon
 
@@ -80,107 +153,107 @@ block content
       .row.subnav
         span.title
           | Series > khatem seliman > season 1
-        .ui.simple.dropdown.item.inverted
+        .ui.simple.dropdown.item.inverted(id="seasons-dropdown")
             | SEASON 1
-            i.dropdown.icon
+            i.plus.icon
             .menu
-              a.item SEASON 1
               a.item SEASON 2
               a.item SEASON 3
-
+              a.item SEASON 4
+              a.item SEASON 5
+              a.item SEASON 6
 
     .ui.vertical.center.container.aligned.grids
 
-
       .ui.two.column.grid.container.details
-          .details.sixteen.wide.tablet.five.wide.computer.column.centered
-            .ui.grid
+
+          .details.six.wide.computer.only.column.centered
+            .ui.stackable.grid
               .row.watchlist
-                .column
-                  i.play.large.icon.watchlist-button
+                .sixteen.wide.tablet.four.wide.computer.column.tight-right
+                  i.play.large.icon.watchlist-button.tight
                   i.plus.icon.watchlist-button
                   span.watchlist-button
                     | Ep 12
-                  .ui.progress.watchlist.small.error(id="ep12")
+                .sixteen.wide.tablet.eleven.wide.computer.column.tight-left
+                  .ui.progress.watchlist.small.error.ep12
                     .bar
 
               .row.watchlist
-                .column
+                .sixteen.wide.tablet.four.wide.computer.column.tight-right
                   i.play.large.icon.watchlist-button
                   i.plus.icon.watchlist-button
                   span.watchlist-button
                     | Ep 13
-                  .ui.progress.watchlist.small.error(id="ep13")
+                .sixteen.wide.tablet.eleven.wide.computer.column.tight-left
+                  .ui.progress.watchlist.small.error.ep13
                     .bar
-                      .progress
 
               .row.watchlist
-                .column
+                .sixteen.wide.tablet.four.wide.computer.column.tight-right
                   i.play.large.icon.watchlist-button
                   i.plus.icon.watchlist-button
                   span.watchlist-button
                     | Ep 14
-                  .ui.progress.watchlist.small.error(id="ep14")
+                .sixteen.wide.tablet.eleven.wide.computer.column.tight-left
+                  .ui.progress.watchlist.small.error.ep14
                     .bar
-                      .progress
 
               .row.watchlist
-                .column
+                .sixteen.wide.tablet.four.wide.computer.column.tight-right
                   i.play.large.icon.watchlist-button
                   i.plus.icon.watchlist-button
                   span.watchlist-button
                     | Ep 15
-                  .ui.progress.watchlist.small.error(id="ep15")
+                .sixteen.wide.tablet.eleven.wide.computer.column.tight-left
+                  .ui.progress.watchlist.small.error.ep15
                     .bar
-                      .progress
 
               .row.watchlist
-                .column
+                .sixteen.wide.tablet.four.wide.computer.column.tight-right
                   i.play.large.icon.watchlist-button
                   i.plus.icon.watchlist-button
                   span.watchlist-button
                     | Ep 16
-                  .ui.progress.watchlist.small.error(id="ep12")
+                .sixteen.wide.tablet.eleven.wide.computer.column.tight-left
+                  .ui.progress.watchlist.small.error.ep16
                     .bar
-                      .progress
 
               .row.watchlist
-                .column
+                .sixteen.wide.tablet.four.wide.computer.column.tight-right
                   i.play.large.icon.watchlist-button
                   i.plus.icon.watchlist-button
                   span.watchlist-button
                     | Ep 17
-                  .ui.progress.watchlist.small.error(id="ep16")
+                .sixteen.wide.tablet.eleven.wide.computer.column.tight-left
+                  .ui.progress.watchlist.small.error.ep17
                     .bar
-                      .progress
 
               .row.watchlist
-                .column
+                .sixteen.wide.tablet.four.wide.computer.column.tight-right
                   i.play.large.icon.watchlist-button
                   i.plus.icon.watchlist-button
                   span.watchlist-button
                     | Ep 18
-                  .ui.progress.watchlist.small.error(id="ep17")
+                .sixteen.wide.tablet.eleven.wide.computer.column.tight-left
+                  .ui.progress.watchlist.small.error.ep18
                     .bar
-                      .progress
 
               .row.watchlist
-                .column
+                .sixteen.wide.tablet.four.wide.computer.column.tight-right
                   i.play.large.icon.watchlist-button
                   i.plus.icon.watchlist-button
                   span.watchlist-button
                     | Ep 19
-                  .ui.progress.watchlist.small.error(id="ep18")
+                .sixteen.wide.tablet.eleven.wide.computer.column.tight-left
+                  .ui.progress.watchlist.small.error.ep19
                     .bar
-                      .progress
-
-
 
           .details.sixteen.wide.tablet.seven.wide.computer.column.centered
-            img.ui.image(src="/images/wireframe/16x9.png")
+            img.ui.huge.image.pad-right-small(src="/images/wireframe/16x9.png")
             h1 KHATEM SELIMAN
             h3 Season 1 - Episode 30
-            h4 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            h4.pad-right-medium Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
             .ui.one.column.grid.center
               .row
                 .column.tight
@@ -195,10 +268,66 @@ block content
                     img.ui.image(src="/images/add-button.png")
                     img.ui.image.social-share(src="/images/social-share-circle-icons.png")
 
+          .details.sixteen.wide.tablet.three.wide.computer.column.centered
+            .sixteen.wide.tablet.ten.wide.computer.column
+              .ui.three.column.grid.container.stackable
+                .five.wide.tablet.sixteen.wide.computer.column.tight
+                  .ui.top.attached.label.detailHeading
+                    | Producers
+                  .ui.grid
+                    .row.tight
+                      .column.tight
+                        ul.meta.tight
+                          li Alex
+                          li Noma
+                          li Alex
+                          li Noma
+                      .column
+                      .column.tight
+                        ul.meta.values
+                          li Shiradashi Smith
+                          li Jane Doe
+                          li John Smit
+                          li Someone
 
+                .five.wide.tablet.sixteen.wide.computer.column.tight
+                  .ui.top.attached.label.detailHeading
+                    | Directors
+                  .ui.grid
+                    .row.tight
+                      .column.tight
+                        ul.meta.tight
+                          li Alex
+                          li Noma
+                          li Alex
+                          li Noma
+                          .column
+                      .column
+                      .column.tight
+                        ul.meta.values
+                          li Shiradashi Smith
+                          li Jane Doe
+                          li John Smit
+                          li Someone
 
-          .details.sixteen.wide.tablet.three.wide.computer.column.centered.tight
-            img.ui.image(src="/images/wireframe/16x9.png")
+                .five.wide.tablet.sixteen.wide.computer.column.tight
+                  .ui.top.attached.label.detailHeading
+                    | Cast & Crew
+                  .ui.grid
+                    .row.tight
+                      .column.tight
+                        ul.meta.tight
+                          li Alex
+                          li Noma
+                          li Alex
+                          li Noma
+                      .column
+                      .column.tight
+                        ul.meta.values
+                          li Shiradashi Smith
+                          li Jane Doe
+                          li John Smit
+                          li Someone
 
       .ui.one.column.grid.container
         .column.header
@@ -232,6 +361,7 @@ block content
               | Lorem ipsum dolor
 
   .ui.inverted.vertical.footer.stackable.center.aligned.segment
+
     .ui.middle.aligned.six.column.centered.stackable.grid.footer.container
       .row
         .column.middle.aligned

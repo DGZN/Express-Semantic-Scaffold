@@ -101,6 +101,10 @@
   }
 }
 
+body {
+  background-color: rgba(24,24,24,1) !important;
+}
+
 body.pushable>.pusher {
     background: rgba(20,20,20, 1) !important;
 }
@@ -149,11 +153,120 @@ body.pushable>.pusher {
   letter-spacing: .05em;
 }
 
+
+@media only screen and (max-width: 700px) {
+  #seasons-dropdown {
+    display: none;
+  }
+}
+
+#watchlist-sidebar .item:first-child {
+  display: none;
+}
+
+#watchlist-sidebar .item span {
+  margin-left: 0.2rem;
+}
+
+#seasons-dropdown .menu {
+  width: 220px;
+  font-size: .9em;
+  letter-spacing: .1em;
+  line-height: 1rem;
+  text-indent: .6rem;
+  border-radius: 0rem !important;
+  background: #2d2d2d;
+}
+
+#seasons-dropdown .menu .item {
+  color: #f2f2f2 !important;
+}
+
+#seasons-dropdown .menu>.item {
+  font-weight: 200 !important;
+  font-size: 1.1em !important;
+  line-height: 1.5rem;
+}
+
+#seasons-dropdown .menu>.item:hover {
+  color: #0e0e0e !important;
+  background: #ffffff;
+}
+
+
+#seasons-dropdown .plus.icon {
+  float: right !important;
+  font-size: .75rem;
+  font-weight: 200;
+  margin-right: 1.3rem;
+  color: #cecece;
+}
+
+#seasons-dropdown-filter {
+  width: 100%;
+  padding: .92857143em 1.14285714em;
+  color: #cecece;
+  font-size: .9em;
+  letter-spacing: .1em;
+  font-weight: 200;
+}
+
+#seasons-dropdown-filter .menu {
+  width: 100%;
+  font-size: .9em;
+  letter-spacing: .1em;
+  line-height: 0.5rem;
+  border-radius: 0rem !important;
+  background: #2d2d2d;
+}
+
+#seasons-dropdown-filter .item {
+  line-height: 2rem;
+}
+
+#seasons-dropdown-filter .menu .item {
+  color: #f2f2f2 !important;
+}
+
+#seasons-dropdown-filter .menu>.item {
+  font-weight: 200 !important;
+  font-size: 1.1em !important;
+  line-height: 1.5rem;
+}
+
+#seasons-dropdown-filter .menu>.item:hover {
+  color: #0e0e0e !important;
+  background: #ffffff;
+}
+
+
+#seasons-dropdown-filter .plus.icon {
+  float: right !important;
+  font-size: .75rem;
+  font-weight: 200;
+  margin-right: 0.7rem;
+  color: #cecece;
+}
+
 .row.subnav .ui.simple.dropdown {
   position: relative;
   float: right;
-  margin: 1.5rem;
-  margin-right: 5%;
+  width: 220px;
+  height: 42px;
+  margin-top: 0.8rem;
+  margin-right: 2rem;
+  padding: .85rem 0 0 1.8rem;
+  color: #cecece;
+  font-size: .9em;
+  letter-spacing: .1em;
+  font-weight: 200;
+  background: #100e0f;
+}
+
+@media only screen (max-width: 530px) {
+  .row.subnav .ui.simple.dropdown.item.inverted {
+    display: none;
+  }
 }
 
 @media only screen and (max-width: 991px) and (min-width: 768px) {
@@ -297,11 +410,19 @@ body.pushable>.pusher {
 
 .watchlist-button {
   position: relative;
-  float: left;
+  float: left !important;
   padding-top: .2rem;
   padding-right: 1rem;
   font-size: 1.1rem;
   color: rgba(198,198,198, 1);
+}
+
+.watchlist-pct {
+  float: right;
+  color: #DB2828;
+  font-weight: 300;
+  font-size: 1.02em;
+  opacity: .7;
 }
 
 .play.large.icon.watchlist-button {
@@ -337,7 +458,36 @@ body.pushable>.pusher {
   position: relative;
   margin-top: .4rem;
   float: left;
-  width: 70%;
+  width: 100%;
+}
+
+@media only screen and (max-width: 1250px) {
+  .watchlist-button {
+    padding-right: 0.4rem;
+    font-size: 0.8rem;
+  }
+  .play.large.icon.watchlist-button {
+    font-size: 1.1em;
+    margin-top: 0.2rem;
+  }
+  .ui.progress.watchlist {
+    margin-top: 0.2rem !important;
+    margin-bottom: 0rem  !important;
+  }
+  .ui.small.progress.watchlist .bar {
+    height: 0.8rem !important;
+  }
+}
+
+
+
+.ui.progress.watchlist.tiny.error {
+  margin-top: 0.4rem;
+  margin-bottom: 0.3rem;
+}
+
+.ui.sidebar.menu .item {
+  padding-bottom: 12px;
 }
 
 .ui.progress.watchlist .bar {
@@ -386,6 +536,14 @@ ul.meta.values {
   padding-bottom: 5rem !important;
 }
 
+.pad-right-small {
+  padding-right: 2rem;
+}
+
+.pad-right-medium {
+  padding-right: 2rem;
+}
+
 .tight {
   padding: 0 !important;
   padding-top: 0 !important;
@@ -393,6 +551,15 @@ ul.meta.values {
   padding-bottom: 0 !important;
   padding-left: 0 !important;
 }
+
+.tight-left {
+  padding-left: 0 !important;
+}
+
+.tight-right {
+  padding-right: 0 !important;
+}
+
 
 .no-margin {
   margin: 0 !important;
