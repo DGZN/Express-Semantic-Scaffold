@@ -358,7 +358,7 @@ body.pushable>.pusher {
   padding-left: 0px;
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 900px) {
   .grids .ui[class*="top attached"].label {
     padding-left: 1rem;
   }
@@ -388,7 +388,11 @@ body.pushable>.pusher {
 }
 
 .details {
-  margin-top: 2.5rem;
+  /*margin-top: 2.5rem;*/
+}
+
+.details .ui.grid>.column:not(.row) {
+  /*padding-top: 0 !important;*/
 }
 
 .grids .details h1 {
@@ -579,6 +583,15 @@ ul.meta {
   color: rgba(221,221,221, 1);
 }
 
+@media only screen and (max-width: 900px) {
+  .meta.tight {
+    padding-left: 1rem !important;
+  }
+  .meta.values {
+    padding-left: 3.4rem !important;
+  }
+}
+
 ul.meta.values {
   color: rgba(168,168,168, 1);
   width: 12rem !important;
@@ -608,15 +621,41 @@ ul.meta.values {
   padding-right: 2rem;
 }
 
+.pad-top-medium {
+  padding-top: 2rem !important;
+}
+
+@media only screen and (max-width: 900px) {
+  .pad-top-medium {
+    padding-top: 0rem !important;
+  }
+}
+
+.pad-top-medium.column.tight {
+  padding-top: 2rem !important;
+}
+
+
+@media only screen and (max-width: 767px) {
+  .ui.stackable.grid>.column.grid>.column, .ui.stackable.grid>.column.row>.column, .ui.stackable.grid>.column:not(.row), .ui.stackable.grid>.row>.column, .ui.stackable.grid>.row>.wide.column, .ui.stackable.grid>.wide.column {
+    padding: 0!important;
+  }
+}
+
 @media only screen and (max-width: 480px) {
   .pad-right-small {
     padding-right: 0rem;
   }
 }
 
-
 .pad-right-medium {
   padding-right: 2rem;
+}
+
+@media only screen and (max-width: 767px) {
+  .footer-row .ui.stackable.grid>.row>.column {
+    padding: 0rem !important;
+  }
 }
 
 .tight {
