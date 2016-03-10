@@ -364,6 +364,19 @@ body.pushable>.pusher {
   }
 }
 
+@media only screen and (max-width: 767px) {
+  .details .cast.sixteen.wide.computer.five.wide.tablet.column.tight {
+    width: 33% !important;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .details .cast.sixteen.wide.computer.five.wide.tablet.column.tight {
+    width: 50% !important;
+  }
+}
+
+
 .ui.top.attached.label:first-child+:not(.attached) {
     margin-top: 0rem!important;
 }
