@@ -891,6 +891,10 @@ ul.meta.values {
   padding-bottom: 7.5rem !important;
 }
 
+.footer-row {
+  padding-top: 2rem !important;
+}
+
 .footer .column {
   position: relative;
   width: 16% !important;
@@ -898,10 +902,16 @@ ul.meta.values {
 }
 
 .footer h4 {
-  font-size: 1.2rem;
+  font-size: 1em;
   color: white;
   font-weight: 300;
   line-height: 3.5rem;
+}
+
+@media only screen and (max-width: 900px) {
+  .footer h4 {
+    font-size: 0.8em;
+  }
 }
 
 .social-share img {
@@ -917,4 +927,11 @@ ul.meta.values {
   text-align: center;
   font-size: .9em;
   color: rgba(102,102,102,1);
+}
+
+
+@media only screen and (max-width: 900px) {
+  .tagline {
+    font-size: .8em;
+  }
 }
