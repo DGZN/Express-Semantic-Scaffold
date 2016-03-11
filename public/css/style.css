@@ -345,6 +345,18 @@ body.pushable>.pusher {
   width: calc(1570px + 2rem)!important;
 }
 
+@media only screen and (max-width: 900px) {
+  .ui.container.hero {
+    padding-left: 1rem;
+    padding-right: 2.5rem;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .ui.container.hero {
+    padding-right: 2rem;
+  }
+}
 
 
 
@@ -794,9 +806,6 @@ ul.meta.values {
 }
 
 @media only screen and (max-width: 480px) {
-  .ui.container.hero {
-    padding-right: 0rem;
-  }
   .grids .column {
     padding-right: 2.5rem !important;
   }
