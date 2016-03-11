@@ -138,7 +138,7 @@ body.pushable>.pusher {
 
 .row.subnav {
   display: block;
-  height: 64px;
+  height: 75px;
   background-color: rgba(66,66,66,1);
   padding-bottom: 0rem !important;
 }
