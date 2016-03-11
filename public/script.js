@@ -39,6 +39,13 @@ $(document)
       .sidebar('attach events', '.toc.item')
     ;
 
+    $('.ep11').progress({
+      percent: 45
+    , showActivity: false
+    , className: 'error'
+    , text: { percent : '' }
+    });
+
     $('.ep12').progress({
       percent: 75
     , showActivity: false

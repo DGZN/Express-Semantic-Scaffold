@@ -6,8 +6,8 @@ block content
     .ui.container.nav
       a.item(href="/")
         img.ui.tiny.image(src='/images/melody-logo.png')
-      a.item Movies
-      a.item Series
+      a.item(href="/movies") Movies
+      a.item(href="/series") Series
       a.item Music
       a.item Plays
       a.item Classics
@@ -22,11 +22,6 @@ block content
 
 
       .right.menu
-        .ui.left.dropdown.item(id="language-dropdown")
-          i.us.flag
-          .menu
-            .item
-              i.sa.flag
         .ui.left.dropdown.item(id="account-dropdown")
           i.setting.icon
           .menu
@@ -36,10 +31,13 @@ block content
             a.item
               i.list.layout.icon
               span.text Watchlist
+            a.item
+              i.flag.icon
+              span.text Arabic
 
   .ui.right.vertical.sidebar.menu(id="nav-sidebar")
-    a.item Movies
-    a.item Series
+    a.item(href="/movies") Movies
+    a.item(href="/series") Series
     a.item Music
     a.item Plays
     a.item Classics
@@ -59,7 +57,7 @@ block content
         | Watchlist
     a.sidebar.item
       h6
-        | English
+        | Arabic
 
   .ui.inverted.vertical.masthead.center.aligned
     .ui.container.nav-header
@@ -81,9 +79,10 @@ block content
 
     .ui.equal.width.grid.container
       .row
-        .image.preview
-          .ui.bottom.attached.label
-            | Khally Balak Men Geranak
+        a(href="/details")
+          .image.preview
+            .ui.bottom.attached.label
+              | Khally Balak Men Geranak
         .image.preview
           .ui.bottom.attached.label
             | Harim Karim

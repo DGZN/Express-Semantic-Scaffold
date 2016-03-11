@@ -955,5 +955,6 @@ ul.meta.values {
 @media only screen and (max-width: 900px) {
   .tagline {
     font-size: .8em;
+    padding-top: 1.5rem;
   }
 }

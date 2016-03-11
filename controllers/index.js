@@ -14,6 +14,11 @@ router.get('/series', function(req, res, next) {
   res.render('series');
 });
 
+router.get('/music', function(req, res, next) {
+  res.render('music');
+});
+
+
 router.get('/details', function(req, res, next) {
   res.render('details');
 });

@@ -6,8 +6,8 @@ block content
     .ui.container.nav(style="height: 65px")
       a.item(href="/")
         img.ui.tiny.image(src='/images/melody-logo.png')
-      a.item Movies
-      a.item Series
+      a.item(href="/movies") Movies
+      a.item(href="/series") Series
       a.item Music
       a.item Plays
       a.item Classics
@@ -22,11 +22,6 @@ block content
 
 
       .right.menu
-        .ui.left.dropdown.item(id="language-dropdown")
-          i.us.flag
-          .menu
-            .item
-              i.sa.flag
         .ui.left.dropdown.item(id="account-dropdown")
           i.setting.icon
           .menu
@@ -36,10 +31,13 @@ block content
             a.item
               i.list.layout.icon
               span.text Watchlist
+            a.item
+              i.flag.icon
+              span.text Arabic
 
   .ui.right.vertical.sidebar.menu(id="nav-sidebar")
-    a.item Movies
-    a.item Series
+    a.item(href="/movies") Movies
+    a.item(href="/series") Series
     a.item Music
     a.item Plays
     a.item Classics
@@ -100,14 +98,13 @@ block content
                     img.ui.image.social-share(src="/images/social-share-circle-icons.png")
 
     .ui.grid.container.details
-        .sixteen.wide.tablet.ten.wide.computer.column
+      .details.sixteen.wide.tablet.sixteen.wide.computer.column.centered
           .ui.three.column.grid.container.stackable
-
-            .sixteen.wide.mobile.five.wide.tablet.five.wide.computer.column.tight
+            .cast.three.wide.computer.five.wide.tablet.column.tight
               .ui.top.attached.label.detailHeading
                 | Producers
               .ui.grid
-                .row.tight
+                .row
                   .pad-top-medium.column.tight
                     ul.meta.tight
                       li Alex
@@ -121,11 +118,11 @@ block content
                       li John Smit
                       li Someone
 
-            .sixteen.wide.mobile.five.wide.tablet.five.wide.computer.column.tight
+            .cast.three.wide.computer.five.wide.tablet.column.tight
               .ui.top.attached.label.detailHeading
                 | Directors
               .ui.grid
-                .row.tight
+                .row
                   .pad-top-medium.column.tight
                     ul.meta.tight
                       li Alex
@@ -140,12 +137,11 @@ block content
                       li John Smit
                       li Someone
 
-
-            .sixteen.wide.mobile.five.wide.tablet.five.wide.computer.column.tight
+            .cast.three.wide.computer.five.wide.tablet.column.tight
               .ui.top.attached.label.detailHeading
                 | Cast & Crew
               .ui.grid
-                .row.tight
+                .row
                   .pad-top-medium.column.tight
                     ul.meta.tight
                       li Alex
