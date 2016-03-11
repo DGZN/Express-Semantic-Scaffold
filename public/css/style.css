@@ -30,6 +30,7 @@
 @media only screen and (max-width: 700px) {
   .nav-header {
     min-height: auto;
+    padding-bottom: 0.5rem !important;
   }
 }
 
@@ -362,6 +363,7 @@ body.pushable>.pusher {
   .ui.container.hero {
     padding-left: 1rem;
     padding-right: 1rem;
+    padding-bottom: 25px !important;
   }
 }
 
