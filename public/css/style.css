@@ -336,6 +336,16 @@ body.pushable>.pusher {
     }
 }
 
+.image.hero {
+  position: relative;
+  display: block;
+  width: 100%;
+  background-image: src('/images/giant-logo-big.jpg');
+  background-position: center;
+  background-size: contain;
+  max-height: 600px;
+}
+
 .ui.container.nav {
   width: calc(1570px + 2rem)!important;
   padding-top: 1rem;
@@ -346,6 +356,9 @@ body.pushable>.pusher {
 }
 
 @media only screen and (max-width: 900px) {
+  .ui.container.hero {
+    width: auto !important;
+  }
   .ui.container.hero {
     padding-left: 1rem;
     padding-right: 1rem;
