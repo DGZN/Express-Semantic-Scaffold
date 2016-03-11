@@ -348,17 +348,9 @@ body.pushable>.pusher {
 @media only screen and (max-width: 900px) {
   .ui.container.hero {
     padding-left: 1rem;
-    padding-right: 2.5rem;
+    padding-right: 1rem;
   }
 }
-
-@media only screen and (max-width: 400px) {
-  .ui.container.hero {
-    padding-right: 2rem;
-  }
-}
-
-
 
 .grids {
   background-color: rgba(24,24,24,1) !important;
@@ -780,6 +772,24 @@ ul.meta.values {
 
 .grids .image.preview:nth-child(5) {
   left: 1240px;
+}
+
+@media only screen and (max-width: 767px) {
+  .grids .image.preview:nth-child(2) {
+    left: 290px;
+  }
+
+  .grids .image.preview:nth-child(3) {
+    left: 580px;
+  }
+
+  .grids .image.preview:nth-child(4) {
+    left: 890px;
+  }
+
+  .grids .image.preview:nth-child(5) {
+    left: 1200px;
+  }
 }
 
 /*.grids .image.preview:nth-child(6) {
