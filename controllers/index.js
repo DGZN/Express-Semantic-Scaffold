@@ -18,6 +18,9 @@ router.get('/music', function(req, res, next) {
   res.render('music');
 });
 
+router.get('/live', function(req, res, next) {
+  res.render('live');
+});
 
 router.get('/details', function(req, res, next) {
   res.render('details');

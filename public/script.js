@@ -22,6 +22,10 @@ $(document)
       .dropdown()
     ;
 
+    $('#schedule-filter-dropdown')
+      .dropdown()
+    ;
+
     $('#language-dropdown')
       .dropdown({
         direction: 'left'

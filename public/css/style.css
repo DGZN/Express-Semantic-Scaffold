@@ -313,6 +313,60 @@ body.pushable>.pusher {
   color: #cecece;
 }
 
+#schedule-filter-dropdown {
+  width: 100%;
+  font-size: .9em;
+  letter-spacing: .1em;
+  line-height: 2.5rem;
+  padding-left: 1rem;
+  border-radius: 0rem !important;
+  color: #fffff7;
+  background: #2d2d2d;
+}
+
+.schedule-filter .input {
+  margin-top: 1rem !important;
+  color: #fffff7 !important;
+}
+
+.schedule-filter input {
+  position: relative;
+  width: 100%;
+  color: #fffff7 !important;
+  background: #2d2d2d !important;
+  border-radius: 0px !important;
+}
+
+#schedule-filter-dropdown .menu {
+  width: 100%;
+  background: #2d2d2d;
+  border-radius: 0px;
+}
+
+#schedule-filter-dropdown .menu .item {
+  border-radius: 0px !important;
+  color: #f2f2f2 !important;
+}
+
+#schedule-filter-dropdown .menu>.item {
+  font-weight: 100 !important;
+  font-size: 0.9em !important;
+  line-height: 1.5rem;
+}
+
+#schedule-filter-dropdown .menu>.item:hover {
+  color: #0e0e0e !important;
+  background: #ffffff;
+}
+
+#schedule-filter-dropdown .plus.icon {
+  float: right !important;
+  font-size: .75rem;
+  font-weight: 200;
+  margin-right: 0.7rem;
+  color: #cecece;
+}
+
 .row.subnav .ui.simple.dropdown {
   position: relative;
   float: right;
@@ -385,6 +439,66 @@ body.pushable>.pusher {
 .ui.container.hero {
   width: calc(1570px + 2rem)!important;
 }
+
+.channels {
+  line-height: 12rem;
+}
+
+.channels .column {
+  height: 8rem !important;
+}
+
+.channels .ui[class*="bottom attached"].label {
+  bottom: 7px;
+  text-align: center;
+  background: transparent;
+  color: rgba(206,206,206, 1);
+  font-weight: 300;
+  font-size: 1em;
+  line-height: 1.3em;
+  padding-left: 0px;
+}
+
+.schedule.grid .filter.column {
+  margin-top: 1rem;
+  background: #5c5c5f;
+}
+
+.ui.schedule.table {
+  border: 0px;
+  border-radius: 0px;
+}
+
+.ui.schedule.table .right-arrow {
+  position: relative;
+  float: right;
+}
+
+.ui.schedule.table tr td:first-child {
+  background: #57585a;
+  color: white;
+  line-height: 3em;
+  font-size: 1em;
+  font-weight: 300;
+  text-align: center;
+}
+
+.ui.schedule.table tr td:not(:first-child) {
+  padding-left: 1em;
+  font-size: 1em;
+  background: #d7d7d9;
+}
+
+.ui.schedule.table thead tr:first-child>th:last-child {
+  padding: 0px !important;
+  padding-right: 10px !important;
+}
+
+.ui.schedule.table tr td:last-child {
+  padding: 0px !important;
+}
+
+
 
 @media only screen and (max-width: 900px) {
   .ui.container.hero {
@@ -707,6 +821,11 @@ ul.meta.values {
 
 .pad-top-medium {
   padding-top: 2rem !important;
+}
+
+.pad-large {
+  padding-top: 5rem !important;
+  padding-bottom: 5rem !important;
 }
 
 @media only screen and (max-width: 900px) {

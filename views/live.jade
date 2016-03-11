@@ -1,0 +1,225 @@
+extends layout
+
+block content
+  .ui.large.top.fixed.hidden.menu.inverted
+    .sidebar
+    .ui.container.nav
+      a.item(href="/")
+        img.ui.tiny.image(src='/images/melody-logo.png')
+      a.item(href="/movies") Movies
+      a.item(href="/series") Series
+      a.item(href="/music") Music
+      a.item Plays
+      a.item Classics
+      a.item Collections
+      a.item Live TV
+      .ui.category.search.item.nav-search
+        .ui.transparent.icon.input
+          input.prompt(type='text', placeholder='Search...')
+          i.search.link.icon
+        .results
+
+
+
+      .right.menu
+        .ui.left.dropdown.item(id="account-dropdown")
+          i.setting.icon
+          .menu
+            a.item
+              i.user.icon
+              span.text My Account
+            a.item
+              i.list.layout.icon
+              span.text Watchlist
+            a.item
+              i.flag.icon
+              span.text Arabic
+
+  .ui.right.vertical.sidebar.menu(id="nav-sidebar")
+    a.item(href="/") Home
+    a.item(href="/movies") Movies
+    a.item(href="/series") Series
+    a.item(href="/music") Music
+    a.item Plays
+    a.item Classics
+    a.item Collections
+    a.item Live TV
+    .ui.category.search.item
+      .ui.transparent.icon.input
+        input.prompt(type='text', placeholder='Search...')
+        i.search.link.icon
+      .results
+    a.item.horizontal.divider
+    a.item
+      h6
+        | My Account
+    a.item
+      h6
+        | Watchlist
+    a.sidebar.item
+      h6
+        | Arabic
+
+  .ui.inverted.vertical.masthead.center.aligned
+    .ui.container.nav-header
+      .ui.large.secondary.inverted.pointing.menu
+        a.toc.item.right.aligned
+          i.sidebar.icon
+
+    .ui.container.hero
+      #img.ui.image.hero
+
+    .ui.container.equal.width.channels.grid.pad-large
+      .column
+        img.ui.tiny.image.centered(src='/images/melody-logo.png')
+        .ui.bottom.attached.label Melody Aflam
+      .column
+        img.ui.tiny.image.centered(src='/images/melody-logo.png')
+        .ui.bottom.attached.label Melody Classic
+      .column
+        img.ui.tiny.image.centered(src='/images/melody-logo.png')
+        .ui.bottom.attached.label Melody Drama
+      .column
+        img.ui.tiny.image.centered(src='/images/melody-logo.png')
+        .ui.bottom.attached.label Melody Hits
+      .column
+        img.ui.tiny.image.centered(src='/images/melody-logo.png')
+        .ui.bottom.attached.label Melody General
+      .column
+        img.ui.tiny.image.centered(src='/images/melody-logo.png')
+        .ui.bottom.attached.label Melody Radio
+
+
+    .ui.vertical.center.container.aligned.grids
+      .ui.two.column.schedule.grid.container.details.pad-top-medium
+        .two.wide.filter.schedule-filter.column
+          h4 TUE, MAY 23
+          .ui.simple.dropdown.item.inverted(id="schedule-filter-dropdown")
+              | 5pm
+              i.plus.icon
+              .menu
+                a.item 5:30
+                a.item 6pm
+                a.item 6:30
+                a.item 7pm
+                a.item 7:30
+          .ui.icon.input.inverted
+            input.prompt(type='text', placeholder='Search...')
+            i.search.link.icon
+          .results
+        .fourteen.wide.column
+          table.ui.schedule.celled.table
+            thead
+              tr
+                th <
+                th 5pm
+                th 5:30
+                th 6pm
+                th 6:30
+                th 7pm
+                th 7:30
+                th 8pm
+                th
+                  span.right-arrow >
+            table.ui.schedule.celled.table
+              tbody
+
+                tr
+                  td Logo
+                  td Title of Show
+                  td
+                  td
+                  td Title of Show
+                  td
+                  td
+                  td
+                  td
+
+                tr
+                  td Logo
+                  td Title of Show
+                  td Title of Show
+                  td Title of Show
+                  td Title of Show
+                  td Title of Show
+                  td
+                  td Title of Show
+                  td
+
+                tr
+                  td Logo
+                  td Title of Show
+                  td
+                  td
+                  td Title of Show
+                  td
+                  td
+                  td
+                  td
+
+                tr
+                  td Logo
+                  td Title of Show
+                  td Title of Show
+                  td Title of Show
+                  td Title of Show
+                  td Title of Show
+                  td
+                  td Title of Show
+                  td
+
+                tr
+                  td Logo
+                  td Title of Show
+                  td
+                  td
+                  td Title of Show
+                  td
+                  td
+                  td
+                  td
+
+                tr
+                  td Logo
+                  td Title of Show
+                  td Title of Show
+                  td Title of Show
+                  td Title of Show
+                  td Title of Show
+                  td
+                  td Title of Show
+                  td
+
+  .ui.inverted.vertical.footer.stackable.center.aligned.segment
+    .ui.middle.aligned.six.column.centered.stackable.grid.footer.container
+      .row
+        .column.middle.aligned
+          a.link
+            h4
+              | FAQ/Help
+        .column.middle.aligned
+          a.link
+            h4
+              | Jobs
+        .column.middle.aligned
+          a.link
+            h4
+              | Terms of Use
+        .column.middle.aligned
+          a.link
+            h4
+              | Privacy Policy
+        .column.middle.aligned
+          a.link
+            h4
+              | Copyright
+        .column.middle.aligned
+          a.link
+            h4
+              | Closed Captioning
+    .ui.middle.aligned.one.column.centered.stackable.grid.container
+      .ui.image.social-share
+        img(src="/images/social-share.png")
+    .ui.middle.aligned.one.column.centered.stackable.grid.container
+          h6.tagline
+            | © Melody Entertainment Group. All Rights Reserved. Lorem ipsum dolor sit amet, consectetur adipisicing elit
