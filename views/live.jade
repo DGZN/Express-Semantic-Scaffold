@@ -91,8 +91,8 @@ block content
 
 
     .ui.vertical.center.container.aligned.grids
-      .ui.two.column.schedule.grid.container.details.pad-top-medium
-        .two.wide.filter.schedule-filter.column
+      .ui.schedule.grid.container.details.pad-top-medium
+        .two.wide.filter.schedule-filter.computer.only.column
           h4 TUE, MAY 23
           .ui.simple.dropdown.item.inverted(id="schedule-filter-dropdown")
               | 5pm
@@ -107,88 +107,103 @@ block content
             input.prompt(type='text', placeholder='Search...')
             i.search.link.icon
           .results
-        .fourteen.wide.column
-          table.ui.schedule.celled.table
+        .fourteen.wide.computer.sixteen.wide.tablet.column
+          table.ui.schedule.celled.fixed.table
             thead
               tr
                 th <
-                th 5pm
-                th 5:30
-                th 6pm
-                th 6:30
-                th 7pm
-                th 7:30
-                th 8pm
+                th 5
+                  sub
+                    | pm
+                th 5
+                  sub.medium
+                    | :30
+                th 6
+                  sub
+                    | pm
+                th 6
+                  sub.medium
+                    | :30
+                th 7
+                  sub
+                    | pm
+                th 7
+                  sub.medium
+                    | :30
+                th 8
+                  sub
+                    | pm
                 th
                   span.right-arrow >
-            table.ui.schedule.celled.table
-              tbody
 
-                tr
-                  td Logo
-                  td Title of Show
-                  td
-                  td
-                  td Title of Show
-                  td
-                  td
-                  td
-                  td
+          table.ui.schedule.fixed.table
+            tbody
 
-                tr
-                  td Logo
-                  td Title of Show
-                  td Title of Show
-                  td Title of Show
-                  td Title of Show
-                  td Title of Show
-                  td
-                  td Title of Show
-                  td
+              tr
+                td Logo
+                td Title of Show
+                td
+                td
+                td Title of Show
+                td
+                td
+                td
+                td
 
-                tr
-                  td Logo
-                  td Title of Show
-                  td
-                  td
-                  td Title of Show
-                  td
-                  td
-                  td
-                  td
+              tr
+                td Logo
+                td Title of Show
+                td Title of Show
+                td Title of Show
+                td Title of Show
+                td Title of Show
+                td
+                td Title of Show
+                td
 
-                tr
-                  td Logo
-                  td Title of Show
-                  td Title of Show
-                  td Title of Show
-                  td Title of Show
-                  td Title of Show
-                  td
-                  td Title of Show
-                  td
+              tr
+                td Logo
+                td Title of Show
+                td
+                td
+                td Title of Show
+                td
+                td
+                td
+                td
 
-                tr
-                  td Logo
-                  td Title of Show
-                  td
-                  td
-                  td Title of Show
-                  td
-                  td
-                  td
-                  td
+              tr
+                td Logo
+                td Title of Show
+                td Title of Show
+                td Title of Show
+                td Title of Show
+                td Title of Show
+                td
+                td Title of Show
+                td
 
-                tr
-                  td Logo
-                  td Title of Show
-                  td Title of Show
-                  td Title of Show
-                  td Title of Show
-                  td Title of Show
-                  td
-                  td Title of Show
-                  td
+              tr
+                td Logo
+                td Title of Show
+                td
+                td
+                td Title of Show
+                td
+                td
+                td
+                td
+
+              tr
+                td Logo
+                td Title of Show
+                td Title of Show
+                td Title of Show
+                td Title of Show
+                td Title of Show
+                td
+                td Title of Show
+                td
 
   .ui.inverted.vertical.footer.stackable.center.aligned.segment
     .ui.middle.aligned.six.column.centered.stackable.grid.footer.container

@@ -474,8 +474,26 @@ body.pushable>.pusher {
   float: right;
 }
 
+.ui.schedule.table thead th {
+  font-size: 1.2em;
+  color: #ffffff;
+}
+
+.ui.schedule.table thead th sub {
+  position: relative;
+  font-size: 0.6em;
+  padding-left: 0.2rem;
+  top: -1px;
+}
+
+.ui.schedule.table thead th sub.medium {
+  top: 0px;
+  font-size: 0.8em;
+}
+
 .ui.schedule.table tr td:first-child {
   background: #57585a;
+  width: 7rem;
   color: white;
   line-height: 3em;
   font-size: 1em;
@@ -489,10 +507,29 @@ body.pushable>.pusher {
   background: #d7d7d9;
 }
 
+.ui.schedule.table thead tr:first-child>th:first-child {
+  width: 7rem;
+  background: #808285;
+  border-radius: 0px;
+}
+
+.ui.schedule.table thead tr:first-child>th:last-child {
+  width: 3rem;
+  background: #808285;
+  border-radius: 0px;
+}
+
+.ui.schedule.table thead tr:first-child>th:not(:first-child):not(:last-child) {
+  background: #3e3e3f;
+}
+
+
 .ui.schedule.table thead tr:first-child>th:last-child {
   padding: 0px !important;
   padding-right: 10px !important;
 }
+
+
 
 .ui.schedule.table tr td:last-child {
   padding: 0px !important;
