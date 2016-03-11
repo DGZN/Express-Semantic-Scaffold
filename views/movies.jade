@@ -1,0 +1,282 @@
+extends layout
+
+block content
+  // Following Menu
+  .ui.large.top.fixed.hidden.menu.inverted
+    .sidebar
+    .ui.container.nav
+      a.item(href="/")
+        img.ui.tiny.image(src='/images/melody-logo.png')
+      a.item(href="/movies") Movies
+      a.item(href="/series") Series
+      a.item Music
+      a.item Plays
+      a.item Classics
+      a.item Collections
+      a.item Live TV
+      .ui.category.search.item.nav-search
+        .ui.transparent.icon.input
+          input.prompt(type='text', placeholder='Search...')
+          i.search.link.icon
+        .results
+
+
+
+      .right.menu
+        .ui.left.dropdown.item(id="account-dropdown")
+          i.setting.icon
+          .menu
+            a.item
+              i.user.icon
+              span.text My Account
+            a.item
+              i.list.layout.icon
+              span.text Watchlist
+            a.item
+              i.flag.icon
+              span.text Arabic
+
+  .ui.right.vertical.sidebar.menu(id="nav-sidebar")
+    a.item(href="/movies") Movies
+    a.item(href="/series") Series
+    a.item Music
+    a.item Plays
+    a.item Classics
+    a.item Collections
+    a.item Live TV
+    .ui.category.search.item
+      .ui.transparent.icon.input
+        input.prompt(type='text', placeholder='Search...')
+        i.search.link.icon
+      .results
+    a.item.horizontal.divider
+    a.item
+      h6
+        | My Account
+    a.item
+      h6
+        | Watchlist
+    a.sidebar.item
+      h6
+        | Arabic
+
+  .ui.inverted.vertical.masthead.center.aligned
+    .ui.container.nav-header
+      .ui.large.secondary.inverted.pointing.menu
+        a.toc.item.right.aligned
+          i.sidebar.icon
+
+    .ui.container.grids.pad-bottom-medium
+
+      .row.subnav
+        span.title
+          | MOVIES > JUST ADDED > DRAMA
+        .ui.simple.dropdown.item.inverted(id="seasons-dropdown")
+            | SEASON 1
+            i.plus.icon
+            .menu
+              a.item SEASON 2
+              a.item SEASON 3
+              a.item SEASON 4
+              a.item SEASON 5
+              a.item SEASON 6
+
+        .ui.simple.dropdown.item.inverted(id="seasons-dropdown")
+            | SORT BY
+            i.plus.icon
+            .menu
+              a.item FEATURED
+              a.item A -Z
+              a.item JUST ADDED
+              a.item TOP
+
+    .ui.vertical.center.container.aligned.grids
+
+      .ui.equal.width.grid.container
+
+        .row
+          .image.preview
+            .ui.bottom.attached.label
+              | Khally Balak Men Geranak
+          .image.preview
+            .ui.bottom.attached.label
+              | Harim Karim
+          .image.preview
+            .ui.bottom.attached.label
+              | Zaki Chan
+          .image.preview
+            .ui.bottom.attached.label
+              | Keda Reda
+          .image.preview
+            .ui.bottom.attached.label
+              | Wahed Sefr
+
+        .row
+          .image.preview
+            .ui.bottom.attached.label
+              | Lorem ipsum dolor
+          .image.preview
+            .ui.bottom.attached.label
+              | Lorem ipsum dolor
+          .image.preview
+            .ui.bottom.attached.label
+              | Lorem ipsum dolor
+          .image.preview
+            .ui.bottom.attached.label
+              | Lorem ipsum dolor
+          .image.preview
+            .ui.bottom.attached.label
+              | Lorem ipsum dolor
+
+        .row
+          .image.preview
+            .ui.bottom.attached.label
+              | Lorem ipsum dolor
+          .image.preview
+            .ui.bottom.attached.label
+              | Lorem ipsum dolor
+          .image.preview
+            .ui.bottom.attached.label
+              | Lorem ipsum dolor
+          .image.preview
+            .ui.bottom.attached.label
+              | Lorem ipsum dolor
+          .image.preview
+            .ui.bottom.attached.label
+              | Lorem ipsum dolor
+
+        .row
+          .image.preview
+            .ui.bottom.attached.label
+              | Lorem ipsum dolor
+          .image.preview
+            .ui.bottom.attached.label
+              | Lorem ipsum dolor
+          .image.preview
+            .ui.bottom.attached.label
+              | Lorem ipsum dolor
+          .image.preview
+            .ui.bottom.attached.label
+              | Lorem ipsum dolor
+          .image.preview
+            .ui.bottom.attached.label
+              | Lorem ipsum dolor
+
+        .row
+          .image.preview
+            .ui.bottom.attached.label
+              | Lorem ipsum dolor
+          .image.preview
+            .ui.bottom.attached.label
+              | Lorem ipsum dolor
+          .image.preview
+            .ui.bottom.attached.label
+              | Lorem ipsum dolor
+          .image.preview
+            .ui.bottom.attached.label
+              | Lorem ipsum dolor
+          .image.preview
+            .ui.bottom.attached.label
+              | Lorem ipsum dolor
+
+        .row
+          .image.preview
+            .ui.bottom.attached.label
+              | Lorem ipsum dolor
+          .image.preview
+            .ui.bottom.attached.label
+              | Lorem ipsum dolor
+          .image.preview
+            .ui.bottom.attached.label
+              | Lorem ipsum dolor
+          .image.preview
+            .ui.bottom.attached.label
+              | Lorem ipsum dolor
+          .image.preview
+            .ui.bottom.attached.label
+              | Lorem ipsum dolor
+
+        .row
+          .image.preview
+            .ui.bottom.attached.label
+              | Lorem ipsum dolor
+          .image.preview
+            .ui.bottom.attached.label
+              | Lorem ipsum dolor
+          .image.preview
+            .ui.bottom.attached.label
+              | Lorem ipsum dolor
+          .image.preview
+            .ui.bottom.attached.label
+              | Lorem ipsum dolor
+          .image.preview
+            .ui.bottom.attached.label
+              | Lorem ipsum dolor
+
+        .row
+          .image.preview
+            .ui.bottom.attached.label
+              | Lorem ipsum dolor
+          .image.preview
+            .ui.bottom.attached.label
+              | Lorem ipsum dolor
+          .image.preview
+            .ui.bottom.attached.label
+              | Lorem ipsum dolor
+          .image.preview
+            .ui.bottom.attached.label
+              | Lorem ipsum dolor
+          .image.preview
+            .ui.bottom.attached.label
+              | Lorem ipsum dolor
+
+        .row
+          .image.preview
+            .ui.bottom.attached.label
+              | Lorem ipsum dolor
+          .image.preview
+            .ui.bottom.attached.label
+              | Lorem ipsum dolor
+          .image.preview
+            .ui.bottom.attached.label
+              | Lorem ipsum dolor
+          .image.preview
+            .ui.bottom.attached.label
+              | Lorem ipsum dolor
+          .image.preview
+            .ui.bottom.attached.label
+              | Lorem ipsum dolor
+
+  .ui.inverted.vertical.footer.stackable.center.aligned
+    .ui.middle.aligned.six.column.centered.stackable.grid.footer.container
+      .row.footer-row
+        .column.middle.aligned
+          a.link
+            h4
+              | FAQ/Help
+        .column.middle.aligned
+          a.link
+            h4
+              | Jobs
+        .column.middle.aligned
+          a.link
+            h4
+              | Terms of Use
+        .column.middle.aligned
+          a.link
+            h4
+              | Privacy Policy
+        .column.middle.aligned
+          a.link
+            h4
+              | Copyright
+        .column.middle.aligned
+          a.link
+            h4
+              | Closed Captioning
+    .ui.middle.aligned.one.column.centered.stackable.grid.container
+      .ui.image.social-share
+        img(src="/images/social-share.png")
+    .ui.middle.aligned.one.column.centered.stackable.grid.container
+          h6.tagline
+            | © Melody Entertainment Group. All Rights Reserved. Lorem ipsum dolor sit amet, consectetur adipisicing elit

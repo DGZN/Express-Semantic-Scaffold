@@ -138,9 +138,26 @@ body.pushable>.pusher {
 
 .row.subnav {
   display: block;
-  height: 75px;
+  height: 64px;
   background-color: rgba(66,66,66,1);
   padding-bottom: 0rem !important;
+}
+
+.page-hr {
+  position: relative;
+  margin: 0 auto;
+  opacity: .2;
+  background-color: rgba(124,124,124,1);
+  color: rgba(64,64,64,1);
+  height: 1px;
+  border: 0px;
+  margin-right: 0.5rem;
+}
+
+@media only screen and (max-width: 400px) {
+  .page-hr {
+    margin-right: 0rem;
+  }
 }
 
 .row.subnav span.title {
@@ -148,7 +165,7 @@ body.pushable>.pusher {
   font-size: 1.2em;
   font-weight: 300;
   text-transform: uppercase;
-  line-height: 3.7em;
+  line-height: 4em;
   padding-left: 2rem;
   letter-spacing: .05em;
 }
@@ -629,6 +646,11 @@ ul.meta.values {
 .pad-bottom-tiny {
   padding-bottom: 0.7rem;
 }
+
+.pad-bottom-medium {
+  padding-bottom: 2rem;
+}
+
 
 .pad-right-small {
   padding-right: 2rem;

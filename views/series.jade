@@ -7,8 +7,8 @@ block content
     .ui.container.nav
       a.item(href="/")
         img.ui.tiny.image(src='/images/melody-logo.png')
-      a.item Movies
-      a.item Series
+      a.item(href="/movies") Movies
+      a.item(href="/series") Series
       a.item Music
       a.item Plays
       a.item Classics
@@ -27,21 +27,18 @@ block content
           i.setting.icon
           .menu
             a.item
-              .ui.left.dropdown.item(id="language-dropdown")
-                i.us.flag
-                .menu
-                  .item
-                    i.sa.flag
-            a.item
               i.user.icon
               span.text My Account
             a.item
               i.list.layout.icon
               span.text Watchlist
+            a.item
+              i.flag.icon
+              span.text Arabic
 
   .ui.right.vertical.sidebar.menu(id="nav-sidebar")
-    a.item Movies
-    a.item Series
+    a.item(href="/movies") Movies
+    a.item(href="/series") Series
     a.item Music
     a.item Plays
     a.item Classics
@@ -61,7 +58,7 @@ block content
         | Watchlist
     a.sidebar.item
       h6
-        | English
+        | Arabic
 
   .ui.left.vertical.sidebar.inverted.menu(id="watchlist-sidebar")
     .ui.simple.dropdown.menu.inverted(id="seasons-dropdown-filter")
@@ -319,6 +316,7 @@ block content
 
       .ui.one.column.grid.container
         .column.header
+          hr.page-hr
           h4.ui.header.grid-title
             br
             | Related Titles >
