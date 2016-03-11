@@ -828,6 +828,12 @@ ul.meta.values {
     width: calc(1532px + 2rem)!important; // 1522
 }
 
+@media only screen and (max-width: 900px) {
+  .grids .ui.grid.container {
+      width: auto !important;
+  }
+}
+
 @media only screen and (max-width: 480px) {
   .grids .column {
     padding-right: 2.5rem !important;
