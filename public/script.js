@@ -26,6 +26,10 @@ $(document)
       .dropdown()
     ;
 
+    $('.schedule-mobile .item')
+      .tab()
+    ;
+
     $('#language-dropdown')
       .dropdown({
         direction: 'left'

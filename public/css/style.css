@@ -444,6 +444,12 @@ body.pushable>.pusher {
   line-height: 12rem;
 }
 
+@media only screen and (max-width: 991px) {
+  .channels {
+    display: none !important;
+  }
+}
+
 .channels .column {
   height: 8rem !important;
 }
@@ -459,6 +465,12 @@ body.pushable>.pusher {
   padding-left: 0px;
 }
 
+@media only screen and (max-width: 900px) {
+  .channels .ui[class*="bottom attached"].label {
+    font-size: 0.8em;
+  }
+}
+
 .schedule.grid .filter.column {
   margin-top: 1rem;
   background: #5c5c5f;
@@ -469,12 +481,97 @@ body.pushable>.pusher {
   border-radius: 0px;
 }
 
+.ui.schedule.table .left-arrow {
+  position: relative;
+  padding-right: 1em;
+  float: right;
+}
+
 .ui.schedule.table .right-arrow {
   position: relative;
   float: right;
 }
 
+.schedule-mobile {
+  display: none !important;
+}
+
+  @media only screen and (max-width: 991px) {
+    .ui.schedule.table {
+      display: none;
+    }
+    .schedule-mobile {
+      display: block !important;
+    }
+  }
+
+.schedule.tabular.menu {
+  border-bottom: 0px;
+}
+
+.schedule.tabular.menu .active.item {
+  background: rgba(0,0,0,0) !important;
+  border: 0px;
+}
+
+.schedule.tabular.menu .item {
+  position: relative;
+  margin: 0 auto;
+  background: rgba(0,0,0,0) !important;
+  border: 0px;
+  padding: 5px;
+}
+
+.schedule.tabular.menu .item .image {
+  cursor: pointer;
+}
+
+
+@media only screen and (max-width: 600px) {
+  .schedule.tabular.menu .item {
+    padding: 3px;
+  }
+  .schedule.tabular.menu .item .image {
+    width: 75px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .schedule.tabular.menu .item {
+    padding: 1px;
+  }
+  .schedule.tabular.menu .item .image {
+    width: 55px;
+  }
+}
+
+@media only screen and (max-width: 200px) {
+  .schedule.tabular.menu .item {
+    padding: 0px;
+  }
+  .schedule.tabular.menu .item .image {
+    width: 35px;
+  }
+}
+
+.schedule .ui.segment {
+  background: rgba(0,0,0,0) !important;
+  border: 0px;
+}
+
+.schedule.divided.list .item .header {
+  position: relative;
+  float: right;
+  font-weight: 200;
+}
+
+.ui.schedule.tab {
+  background: rgba(0,0,0,0) !important;
+  border: 0px;
+}
+
 .ui.schedule.table thead th {
+  text-indent: 0.4em;
   font-size: 1.2em;
   color: #ffffff;
 }
@@ -511,6 +608,10 @@ body.pushable>.pusher {
   width: 7rem;
   background: #808285;
   border-radius: 0px;
+}
+
+.ui.schedule.table thead th {
+  padding: 4px;
 }
 
 .ui.schedule.table thead tr:first-child>th:last-child {
