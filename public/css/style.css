@@ -529,10 +529,19 @@ body.pushable>.pusher {
 
 @media only screen and (max-width: 600px) {
   .schedule.tabular.menu .item {
-    padding: 3px;
+    padding: 2px;
   }
   .schedule.tabular.menu .item .image {
-    width: 75px;
+    width: 65px;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .schedule.tabular.menu .item {
+    padding: 1px;
+  }
+  .schedule.tabular.menu .item .image {
+    width: 55px;
   }
 }
 
@@ -541,7 +550,7 @@ body.pushable>.pusher {
     padding: 1px;
   }
   .schedule.tabular.menu .item .image {
-    width: 55px;
+    width: 45px;
   }
 }
 
