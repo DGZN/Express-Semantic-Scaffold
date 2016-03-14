@@ -1,0 +1,21 @@
+const React = require('react');
+const Row = require('./row.js')
+
+const Carousel = React.createClass({
+  render() {
+    return (
+      <div>
+        <div className="ui one column grid container">
+         <div className="column header">
+            <h4 className="ui header grid-title"><br/>{this.props.title} &gt;</h4>
+         </div>
+        </div>
+        <div className="ui equal width grid container">
+          <Row source={this.props.source} limit={this.props.limit} href={this.props.href} />
+        </div>
+      </div>
+    );
+  }
+});
+
+module.exports = Carousel;

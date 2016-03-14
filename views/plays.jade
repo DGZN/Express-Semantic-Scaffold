@@ -1,5 +1,7 @@
 extends layout
+
 block content
+  // Following Menu
   .ui.large.top.fixed.hidden.menu.inverted
     .sidebar
     .ui.container.nav
@@ -39,7 +41,7 @@ block content
     a.item(href="/movies") Movies
     a.item(href="/series") Series
     a.item(href="/music") Music
-    a.item Plays
+    a.item(href="/plays") Plays
     a.item Classics
     a.item Collections
     a.item(href="/live") Live TV
@@ -65,10 +67,32 @@ block content
         a.toc.item.right.aligned
           i.sidebar.icon
 
-    .ui.container.hero
-      #img.ui.image.hero
+    .ui.container.grids.pad-bottom-medium
 
-  .ui.vertical.center.container.aligned.grids#home
+      .row.subnav
+        span.title
+          | PLAYS
+        .ui.simple.dropdown.item.inverted(id="seasons-dropdown")
+            | GENRE 1
+            i.plus.icon
+            .menu
+              a.item GENRE 2
+              a.item GENRE 3
+              a.item GENRE 4
+              a.item GENRE 5
+              a.item GENRE 6
+
+        .ui.simple.dropdown.item.inverted(id="seasons-dropdown")
+            | SORT BY
+            i.plus.icon
+            .menu
+              a.item FEATURED
+              a.item A -Z
+              a.item JUST ADDED
+              a.item TOP
+
+    .ui.vertical.center.container.aligned.grids#plays-grid
+
 
   .ui.inverted.vertical.footer.stackable.center.aligned.segment#footer
 

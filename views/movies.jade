@@ -10,7 +10,7 @@ block content
       a.item(href="/movies") Movies
       a.item(href="/series") Series
       a.item(href="/music") Music
-      a.item Plays
+      a.item(href="/plays") Plays
       a.item Classics
       a.item Collections
       a.item(href="/live") Live TV
@@ -41,7 +41,7 @@ block content
     a.item(href="/movies") Movies
     a.item(href="/series") Series
     a.item(href="/music") Music
-    a.item Plays
+    a.item(href="/plays") Plays
     a.item Classics
     a.item Collections
     a.item(href="/live") Live TV
@@ -73,14 +73,14 @@ block content
         span.title
           | MOVIES > JUST ADDED > DRAMA
         .ui.simple.dropdown.item.inverted(id="seasons-dropdown")
-            | SEASON 1
+            | GENRE 1
             i.plus.icon
             .menu
-              a.item SEASON 2
-              a.item SEASON 3
-              a.item SEASON 4
-              a.item SEASON 5
-              a.item SEASON 6
+              a.item GENRE 2
+              a.item GENRE 3
+              a.item GENRE 4
+              a.item GENRE 5
+              a.item GENRE 6
 
         .ui.simple.dropdown.item.inverted(id="seasons-dropdown")
             | SORT BY
@@ -91,193 +91,9 @@ block content
               a.item JUST ADDED
               a.item TOP
 
-    .ui.vertical.center.container.aligned.grids
+    .ui.vertical.center.container.aligned.grids#movies-grid
 
-      .ui.equal.width.grid.container
 
-        .row
-          .image.preview
-            .ui.bottom.attached.label
-              | Khally Balak Men Geranak
-          .image.preview
-            .ui.bottom.attached.label
-              | Harim Karim
-          .image.preview
-            .ui.bottom.attached.label
-              | Zaki Chan
-          .image.preview
-            .ui.bottom.attached.label
-              | Keda Reda
-          .image.preview
-            .ui.bottom.attached.label
-              | Wahed Sefr
+  .ui.inverted.vertical.footer.stackable.center.aligned.segment#footer
 
-        .row
-          .image.preview
-            .ui.bottom.attached.label
-              | Lorem ipsum dolor
-          .image.preview
-            .ui.bottom.attached.label
-              | Lorem ipsum dolor
-          .image.preview
-            .ui.bottom.attached.label
-              | Lorem ipsum dolor
-          .image.preview
-            .ui.bottom.attached.label
-              | Lorem ipsum dolor
-          .image.preview
-            .ui.bottom.attached.label
-              | Lorem ipsum dolor
-
-        .row
-          .image.preview
-            .ui.bottom.attached.label
-              | Lorem ipsum dolor
-          .image.preview
-            .ui.bottom.attached.label
-              | Lorem ipsum dolor
-          .image.preview
-            .ui.bottom.attached.label
-              | Lorem ipsum dolor
-          .image.preview
-            .ui.bottom.attached.label
-              | Lorem ipsum dolor
-          .image.preview
-            .ui.bottom.attached.label
-              | Lorem ipsum dolor
-
-        .row
-          .image.preview
-            .ui.bottom.attached.label
-              | Lorem ipsum dolor
-          .image.preview
-            .ui.bottom.attached.label
-              | Lorem ipsum dolor
-          .image.preview
-            .ui.bottom.attached.label
-              | Lorem ipsum dolor
-          .image.preview
-            .ui.bottom.attached.label
-              | Lorem ipsum dolor
-          .image.preview
-            .ui.bottom.attached.label
-              | Lorem ipsum dolor
-
-        .row
-          .image.preview
-            .ui.bottom.attached.label
-              | Lorem ipsum dolor
-          .image.preview
-            .ui.bottom.attached.label
-              | Lorem ipsum dolor
-          .image.preview
-            .ui.bottom.attached.label
-              | Lorem ipsum dolor
-          .image.preview
-            .ui.bottom.attached.label
-              | Lorem ipsum dolor
-          .image.preview
-            .ui.bottom.attached.label
-              | Lorem ipsum dolor
-
-        .row
-          .image.preview
-            .ui.bottom.attached.label
-              | Lorem ipsum dolor
-          .image.preview
-            .ui.bottom.attached.label
-              | Lorem ipsum dolor
-          .image.preview
-            .ui.bottom.attached.label
-              | Lorem ipsum dolor
-          .image.preview
-            .ui.bottom.attached.label
-              | Lorem ipsum dolor
-          .image.preview
-            .ui.bottom.attached.label
-              | Lorem ipsum dolor
-
-        .row
-          .image.preview
-            .ui.bottom.attached.label
-              | Lorem ipsum dolor
-          .image.preview
-            .ui.bottom.attached.label
-              | Lorem ipsum dolor
-          .image.preview
-            .ui.bottom.attached.label
-              | Lorem ipsum dolor
-          .image.preview
-            .ui.bottom.attached.label
-              | Lorem ipsum dolor
-          .image.preview
-            .ui.bottom.attached.label
-              | Lorem ipsum dolor
-
-        .row
-          .image.preview
-            .ui.bottom.attached.label
-              | Lorem ipsum dolor
-          .image.preview
-            .ui.bottom.attached.label
-              | Lorem ipsum dolor
-          .image.preview
-            .ui.bottom.attached.label
-              | Lorem ipsum dolor
-          .image.preview
-            .ui.bottom.attached.label
-              | Lorem ipsum dolor
-          .image.preview
-            .ui.bottom.attached.label
-              | Lorem ipsum dolor
-
-        .row
-          .image.preview
-            .ui.bottom.attached.label
-              | Lorem ipsum dolor
-          .image.preview
-            .ui.bottom.attached.label
-              | Lorem ipsum dolor
-          .image.preview
-            .ui.bottom.attached.label
-              | Lorem ipsum dolor
-          .image.preview
-            .ui.bottom.attached.label
-              | Lorem ipsum dolor
-          .image.preview
-            .ui.bottom.attached.label
-              | Lorem ipsum dolor
-
-  .ui.inverted.vertical.footer.stackable.center.aligned
-    .ui.middle.aligned.six.column.centered.stackable.grid.footer.container
-      .row.footer-row
-        .column.middle.aligned
-          a.link
-            h4
-              | FAQ/Help
-        .column.middle.aligned
-          a.link
-            h4
-              | Jobs
-        .column.middle.aligned
-          a.link
-            h4
-              | Terms of Use
-        .column.middle.aligned
-          a.link
-            h4
-              | Privacy Policy
-        .column.middle.aligned
-          a.link
-            h4
-              | Copyright
-        .column.middle.aligned
-          a.link
-            h4
-              | Closed Captioning
-    .ui.middle.aligned.one.column.centered.stackable.grid.container
-      .ui.image.social-share
-        img(src="/images/social-share.png")
-    .ui.middle.aligned.one.column.centered.stackable.grid.container
-          h6.tagline
-            | © Melody Entertainment Group. All Rights Reserved. Lorem ipsum dolor sit amet, consectetur adipisicing elit
+  script(src="js/bundle.js")

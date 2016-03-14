@@ -1,3 +1,8 @@
+#home, #movies-grid, #series-grid, #music-grid, #plays-grid {
+  padding-bottom: 20px;
+}
+
+
 .hidden.menu {
   display: none;
 }

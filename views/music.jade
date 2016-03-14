@@ -9,8 +9,8 @@ block content
         img.ui.tiny.image(src='/images/melody-logo.png')
       a.item(href="/movies") Movies
       a.item(href="/series") Series
-      a.item Music
-      a.item Plays
+      a.item(href="/music") Music
+      a.item(href="/plays") Plays
       a.item Classics
       a.item Collections
       a.item(href="/live") Live TV
@@ -40,8 +40,8 @@ block content
     a.item(href="/") Home
     a.item(href="/movies") Movies
     a.item(href="/series") Series
-    a.item Music
-    a.item Plays
+    a.item(href="/music") Music
+    a.item(href="/plays") Plays
     a.item Classics
     a.item Collections
     a.item(href="/live") Live TV
@@ -61,330 +61,39 @@ block content
       h6
         | Arabic
 
-  .ui.left.vertical.sidebar.inverted.menu(id="watchlist-sidebar")
-    .ui.simple.dropdown.menu.inverted(id="seasons-dropdown-filter")
-      | ALBUM 1
-      i.plus.icon
-      .menu
-        a.item ALBUM 2
-        a.item ALBUM 2
-        a.item ALBUM 3
-
-    a.item
-      i.play.tiny.icon.watchlist-button.no-margin
-      i.plus.tiny.icon.watchlist-button
-      span
-        | # 1
-      .watchlist-pct
-        | 45%
-
-    a.item
-      i.play.tiny.icon.watchlist-button.no-margin
-      i.plus.tiny.icon.watchlist-button
-      span
-        | # 2
-      .watchlist-pct
-        | 75%
-
-    a.item
-      i.play.tiny.icon.watchlist-button.no-margin
-      i.plus.tiny.icon.watchlist-button
-      span
-        | # 3
-      .watchlist-pct
-        | 30%
-
-    a.item
-      i.play.tiny.icon.watchlist-button.no-margin
-      i.plus.tiny.icon.watchlist-button
-      span
-        | # 4
-      .watchlist-pct
-        | 100%
-
-    a.item
-      i.play.tiny.icon.watchlist-button.no-margin
-      i.plus.tiny.icon.watchlist-button
-      span
-        | # 5
-      .watchlist-pct
-        | 0%
-
-    a.item
-      i.play.tiny.icon.watchlist-button.no-margin
-      i.plus.tiny.icon.watchlist-button
-      span
-        | # 6
-      .watchlist-pct
-
-    a.item
-      i.play.tiny.icon.watchlist-button.no-margin
-      i.plus.tiny.icon.watchlist-button
-      span
-        | # 7
-      .watchlist-pct
-
-    a.item
-      i.play.tiny.icon.watchlist-button.no-margin
-      i.plus.tiny.icon.watchlist-button
-      span
-        | # 8
-      .watchlist-pct
-
-    a.item
-      i.play.tiny.icon.watchlist-button.no-margin
-      i.plus.tiny.icon.watchlist-button
-      span
-        | # 9
-      .watchlist-pct
-
   .ui.inverted.vertical.masthead.center.aligned
     .ui.container.nav-header
       .ui.large.secondary.inverted.pointing.menu
-        a.watchlist.item.left.aligned
-          i.list.layout.icon
         a.toc.item.right.aligned
           i.sidebar.icon
 
-    .ui.container.grids
+    .ui.container.grids.pad-bottom-medium
 
       .row.subnav
         span.title
-          | Music > SELIMAN
+          | MUSIC
         .ui.simple.dropdown.item.inverted(id="seasons-dropdown")
-            | ALBUM 1
+            | GENRE 1
             i.plus.icon
             .menu
-              a.item ALBUM 2
-              a.item ALBUM 3
+              a.item GENRE 2
+              a.item GENRE 3
+              a.item GENRE 4
+              a.item GENRE 5
+              a.item GENRE 6
 
-    .ui.vertical.center.container.aligned.grids
-      .ui.two.column.grid.container.details.pad-top-medium
-          .details.six.wide.computer.only.column.centered
-            .ui.stackable.grid
+        .ui.simple.dropdown.item.inverted(id="seasons-dropdown")
+            | SORT BY
+            i.plus.icon
+            .menu
+              a.item FEATURED
+              a.item A -Z
+              a.item JUST ADDED
+              a.item TOP
 
-              .row.watchlist
-                .sixteen.wide.tablet.four.wide.computer.column.tight-right
-                  i.play.large.icon.watchlist-button.tight
-                  i.plus.icon.watchlist-button
-                  span.watchlist-button
-                    | #1
-                .sixteen.wide.tablet.eleven.wide.computer.column.tight-left
-                  .ui.progress.watchlist.small.error.ep11
-                    .bar
+    .ui.vertical.center.container.aligned.grids#music-grid
 
-              .row.watchlist
-                .sixteen.wide.tablet.four.wide.computer.column.tight-right
-                  i.play.large.icon.watchlist-button.tight
-                  i.plus.icon.watchlist-button
-                  span.watchlist-button
-                    | #2
-                .sixteen.wide.tablet.eleven.wide.computer.column.tight-left
-                  .ui.progress.watchlist.small.error.ep12
-                    .bar
 
-              .row.watchlist
-                .sixteen.wide.tablet.four.wide.computer.column.tight-right
-                  i.play.large.icon.watchlist-button
-                  i.plus.icon.watchlist-button
-                  span.watchlist-button
-                    | #3
-                .sixteen.wide.tablet.eleven.wide.computer.column.tight-left
-                  .ui.progress.watchlist.small.error.ep13
-                    .bar
+  .ui.inverted.vertical.footer.stackable.center.aligned.segment#footer
 
-              .row.watchlist
-                .sixteen.wide.tablet.four.wide.computer.column.tight-right
-                  i.play.large.icon.watchlist-button
-                  i.plus.icon.watchlist-button
-                  span.watchlist-button
-                    | #4
-                .sixteen.wide.tablet.eleven.wide.computer.column.tight-left
-                  .ui.progress.watchlist.small.error.ep14
-                    .bar
-
-              .row.watchlist
-                .sixteen.wide.tablet.four.wide.computer.column.tight-right
-                  i.play.large.icon.watchlist-button
-                  i.plus.icon.watchlist-button
-                  span.watchlist-button
-                    | #5
-                .sixteen.wide.tablet.eleven.wide.computer.column.tight-left
-                  .ui.progress.watchlist.small.error.ep15
-                    .bar
-
-              .row.watchlist
-                .sixteen.wide.tablet.four.wide.computer.column.tight-right
-                  i.play.large.icon.watchlist-button
-                  i.plus.icon.watchlist-button
-                  span.watchlist-button
-                    | #6
-                .sixteen.wide.tablet.eleven.wide.computer.column.tight-left
-                  .ui.progress.watchlist.small.error.ep16
-                    .bar
-
-              .row.watchlist
-                .sixteen.wide.tablet.four.wide.computer.column.tight-right
-                  i.play.large.icon.watchlist-button
-                  i.plus.icon.watchlist-button
-                  span.watchlist-button
-                    | #7
-                .sixteen.wide.tablet.eleven.wide.computer.column.tight-left
-                  .ui.progress.watchlist.small.error.ep17
-                    .bar
-
-              .row.watchlist
-                .sixteen.wide.tablet.four.wide.computer.column.tight-right
-                  i.play.large.icon.watchlist-button
-                  i.plus.icon.watchlist-button
-                  span.watchlist-button
-                    | #8
-                .sixteen.wide.tablet.eleven.wide.computer.column.tight-left
-                  .ui.progress.watchlist.small.error.ep18
-                    .bar
-
-              .row.watchlist
-                .sixteen.wide.tablet.four.wide.computer.column.tight-right
-                  i.play.large.icon.watchlist-button
-                  i.plus.icon.watchlist-button
-                  span.watchlist-button
-                    | #9
-                .sixteen.wide.tablet.eleven.wide.computer.column.tight-left
-                  .ui.progress.watchlist.small.error.ep19
-                    .bar
-
-          .details.sixteen.wide.tablet.seven.wide.computer.column.centered
-            img.ui.huge.image.pad-right-small(src="/images/wireframe/16x9.png")
-            h1 SELIMAN KHATEM
-            h3 Album 1
-            h4.pad-right-medium Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            .ui.one.column.grid.center
-              .row
-                .column.tight
-                  .movie-details
-                    span R
-                    span 23 min
-                    span Released 2015
-                    span 5.1
-                  .movie-actions
-                    img.ui.image(src="/images/play-button.png")
-                    img.ui.image(src="/images/add-button.png")
-                    img.ui.image.social-share(src="/images/social-share-circle-icons.png")
-
-          .details.sixteen.wide.tablet.three.wide.computer.column.centered
-              .ui.three.column.grid.container.stackable
-                .cast.sixteen.wide.computer.five.wide.tablet.column.tight
-                  .ui.top.attached.label.detailHeading
-                    | Singers
-                  .ui.grid
-                    .row
-                      .pad-top-medium.column.tight
-                        ul.meta.tight
-                          li Seliman
-                          li Some
-                          li Alex
-                          li Noma
-                      .pad-top-medium.column.tight
-                        ul.meta.values
-                          li Shiradashi Smith
-                          li Jane Doe
-                          li John Smit
-                          li Someone
-
-                .cast.sixteen.wide.computer.five.wide.tablet.column.tight
-                  .ui.top.attached.label.detailHeading
-                    | Producers
-                  .ui.grid
-                    .row
-                      .pad-top-medium.column.tight
-                        ul.meta.tight
-                          li Alex
-                          li Noma
-                      .pad-top-medium.column.tight
-                        ul.meta.values
-                          li Shiradashi Smith
-                          li Jane Doe
-
-                .cast.sixteen.wide.computer.five.wide.tablet.column.tight
-                  .ui.top.attached.label.detailHeading
-                    | Cast & Crew
-                  .ui.grid
-                    .row
-                      .pad-top-medium.column.tight
-                        ul.meta.tight
-                          li Alex
-                          li Noma
-                          li Alex
-                          li Noma
-                      .pad-top-medium.column.tight
-                        ul.meta.values
-                          li Shiradashi Smith
-                          li Jane Doe
-                          li John Smit
-                          li Someone
-
-      .ui.one.column.grid.container
-        .column.header
-          hr.page-hr
-          h4.ui.header.grid-title
-            br
-            | Related Titles >
-
-      .ui.equal.width.grid.container.bottom-padding
-        .row
-          .image.preview
-            .ui.bottom.attached.label
-              | Khally Balak Men Geranak
-          .image.preview
-            .ui.bottom.attached.label
-              | Harim Karim
-          .image.preview
-            .ui.bottom.attached.label
-              | Zaki Chan
-          .image.preview
-            .ui.bottom.attached.label
-              | Keda Reda
-          .image.preview
-            .ui.bottom.attached.label
-              | Wahed Sefr
-        .row
-          .image.preview
-            .ui.bottom.attached.label
-              | Lorem ipsum dolor
-          .image.preview
-            .ui.bottom.attached.label
-              | Lorem ipsum dolor
-
-  .ui.inverted.vertical.footer.stackable.center.aligned
-    .ui.middle.aligned.six.column.centered.stackable.grid.footer.container
-      .row.footer-row
-        .column.middle.aligned
-          a.link
-            h4
-              | FAQ/Help
-        .column.middle.aligned
-          a.link
-            h4
-              | Jobs
-        .column.middle.aligned
-          a.link
-            h4
-              | Terms of Use
-        .column.middle.aligned
-          a.link
-            h4
-              | Privacy Policy
-        .column.middle.aligned
-          a.link
-            h4
-              | Copyright
-        .column.middle.aligned
-          a.link
-            h4
-              | Closed Captioning
-    .ui.middle.aligned.one.column.centered.stackable.grid.container
-      .ui.image.social-share
-        img(src="/images/social-share.png")
-    .ui.middle.aligned.one.column.centered.stackable.grid.container
-          h6.tagline
-            | © Melody Entertainment Group. All Rights Reserved. Lorem ipsum dolor sit amet, consectetur adipisicing elit
+  script(src="js/bundle.js")

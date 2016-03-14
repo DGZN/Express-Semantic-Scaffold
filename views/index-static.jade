@@ -1,0 +1,227 @@
+extends layout
+
+block content
+  .ui.large.top.fixed.hidden.menu.inverted
+    .sidebar
+    .ui.container.nav
+      a.item(href="/")
+        img.ui.tiny.image(src='/images/melody-logo.png')
+      a.item(href="/movies") Movies
+      a.item(href="/series") Series
+      a.item(href="/music") Music
+      a.item(href="/plays") Plays
+      a.item Classics
+      a.item Collections
+      a.item(href="/live") Live TV
+      .ui.category.search.item.nav-search
+        .ui.transparent.icon.input
+          input.prompt(type='text', placeholder='Search...')
+          i.search.link.icon
+        .results
+
+
+
+      .right.menu
+        .ui.left.dropdown.item(id="account-dropdown")
+          i.setting.icon
+          .menu
+            a.item
+              i.user.icon
+              span.text My Account
+            a.item
+              i.list.layout.icon
+              span.text Watchlist
+            a.item
+              i.flag.icon
+              span.text Arabic
+
+  .ui.right.vertical.sidebar.menu(id="nav-sidebar")
+    a.item(href="/") Home
+    a.item(href="/movies") Movies
+    a.item(href="/series") Series
+    a.item(href="/music") Music
+    a.item(href="/plays") Plays
+    a.item Classics
+    a.item Collections
+    a.item(href="/live") Live TV
+    .ui.category.search.item
+      .ui.transparent.icon.input
+        input.prompt(type='text', placeholder='Search...')
+        i.search.link.icon
+      .results
+    a.item.horizontal.divider
+    a.item
+      h6
+        | My Account
+    a.item
+      h6
+        | Watchlist
+    a.sidebar.item
+      h6
+        | Arabic
+
+  .ui.inverted.vertical.masthead.center.aligned
+    .ui.container.nav-header
+      .ui.large.secondary.inverted.pointing.menu
+        a.toc.item.right.aligned
+          i.sidebar.icon
+
+    .ui.container.hero
+      #img.ui.image.hero
+
+  .ui.vertical.center.container.aligned.grids
+
+    .ui.one.column.grid.container
+      .column.header
+        h4.ui.header.grid-title
+          br
+          | Movies >
+
+    .ui.equal.width.grid.container
+      .row
+        a(href="/details")
+          .image.preview
+            .ui.bottom.attached.label
+              | Khally Balak Men Geranak
+        .image.preview
+          .ui.bottom.attached.label
+            | Harim Karim
+        .image.preview
+          .ui.bottom.attached.label
+            | Zaki Chan
+        .image.preview
+          .ui.bottom.attached.label
+            | Keda Reda
+        .image.preview
+          .ui.bottom.attached.label
+            | Wahed Sefr
+
+    .ui.one.column.grid.container
+      .column
+        h4.ui.header.grid-title
+          br
+          | Series >
+
+    .ui.equal.width.grid.container
+      .row
+        .image.preview
+          .ui.bottom.attached.label
+            | Lorem ipsum dolor
+        .image.preview
+          .ui.bottom.attached.label
+            | Lorem ipsum dolor
+        .image.preview
+          .ui.bottom.attached.label
+            | Lorem ipsum dolor
+        .image.preview
+          .ui.bottom.attached.label
+            | Lorem ipsum dolor
+        .image.preview
+          .ui.bottom.attached.label
+            | Lorem ipsum dolor
+
+    .ui.one.column.grid.container
+      .column
+        h4.ui.header.grid-title
+          br
+          | Plays >
+
+    .ui.equal.width.grid.container
+      .row
+        .image.preview
+          .ui.bottom.attached.label
+            | Abdo Yatahada Rambo
+        .image.preview
+          .ui.bottom.attached.label
+            | Roda Qardy
+        .image.preview
+          .ui.bottom.attached.label
+            | El Fahlawy
+        .image.preview
+          .ui.bottom.attached.label
+            | Afrotto
+        .image.preview
+          .ui.bottom.attached.label
+            | El Pyjama El Hamra
+
+    .ui.one.column.grid.container
+      .column
+        h4.ui.header.grid-title
+          br
+          | Classics >
+
+    .ui.equal.width.grid.container
+      .row
+        .image.preview
+          .ui.bottom.attached.label
+            | Lorem ipsum dolor
+        .image.preview
+          .ui.bottom.attached.label
+            | Lorem ipsum dolor
+        .image.preview
+          .ui.bottom.attached.label
+            | Lorem ipsum dolor
+        .image.preview
+          .ui.bottom.attached.label
+            | Lorem ipsum dolor
+        .image.preview
+          .ui.bottom.attached.label
+            | Lorem ipsum dolor
+
+    .ui.one.column.grid.container
+      .column
+        h4.ui.header.grid-title
+          br
+          | Collections >
+
+    .ui.equal.width.grid.container.last
+      .row
+        .image.preview
+          .ui.bottom.attached.label
+            | Lorem ipsum dolor
+        .image.preview
+          .ui.bottom.attached.label
+            | Lorem ipsum dolor
+        .image.preview
+          .ui.bottom.attached.label
+            | Lorem ipsum dolor
+        .image.preview
+          .ui.bottom.attached.label
+            | Lorem ipsum dolor
+        .image.preview
+          .ui.bottom.attached.label
+            | Lorem ipsum dolor
+
+  .ui.inverted.vertical.footer.stackable.center.aligned.segment
+    .ui.middle.aligned.six.column.centered.stackable.grid.footer.container
+      .row
+        .column.middle.aligned
+          a.link
+            h4
+              | FAQ/Help
+        .column.middle.aligned
+          a.link
+            h4
+              | Jobs
+        .column.middle.aligned
+          a.link
+            h4
+              | Terms of Use
+        .column.middle.aligned
+          a.link
+            h4
+              | Privacy Policy
+        .column.middle.aligned
+          a.link
+            h4
+              | Copyright
+        .column.middle.aligned
+          a.link
+            h4
+              | Closed Captioning
+    .ui.middle.aligned.one.column.centered.stackable.grid.container
+      .ui.image.social-share
+        img(src="/images/social-share.png")
+    .ui.middle.aligned.one.column.centered.stackable.grid.container
+          h6.tagline
+            | © Melody Entertainment Group. All Rights Reserved. Lorem ipsum dolor sit amet, consectetur adipisicing elit
