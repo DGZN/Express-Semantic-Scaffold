@@ -10,7 +10,7 @@ block content
       a.item(href="/movies") Movies
       a.item(href="/series") Series
       a.item(href="/music") Music
-      a.item Plays
+      a.item(href="/plays") Plays
       a.item Classics
       a.item Collections
       a.item(href="/live") Live TV
@@ -41,7 +41,7 @@ block content
     a.item(href="/movies") Movies
     a.item(href="/series") Series
     a.item(href="/music") Music
-    a.item Plays
+    a.item(href="/plays") Plays
     a.item Classics
     a.item Collections
     a.item(href="/live") Live TV
@@ -140,23 +140,9 @@ block content
         a.toc.item.right.aligned
           i.sidebar.icon
 
-    .ui.container.grids
 
-      .row.subnav
-        span.title
-          | Series > khatem seliman > season 1
-        .ui.simple.dropdown.item.inverted(id="seasons-dropdown")
-            | SEASON 1
-            i.plus.icon
-            .menu
-              a.item SEASON 2
-              a.item SEASON 3
-              a.item SEASON 4
-              a.item SEASON 5
-              a.item SEASON 6
 
-    .ui.vertical.center.container.aligned.grids
-      #season-details(data-id='#{data.id}')
+    #season-details(data-id='#{data.id}')
 
       .ui.one.column.grid.container
         .column.header
@@ -167,28 +153,35 @@ block content
 
       .ui.equal.width.grid.container.bottom-padding
         .row
-          .image.preview
-            .ui.bottom.attached.label
-              | Khally Balak Men Geranak
-          .image.preview
-            .ui.bottom.attached.label
-              | Harim Karim
-          .image.preview
-            .ui.bottom.attached.label
-              | Zaki Chan
-          .image.preview
-            .ui.bottom.attached.label
-              | Keda Reda
-          .image.preview
-            .ui.bottom.attached.label
-              | Wahed Sefr
+          a.image.preview
+            .image.preview
+              .ui.bottom.attached.label
+                | Khally Balak Men Geranak
+          a.image.preview
+            .image.preview
+              .ui.bottom.attached.label
+                | Khally Balak Men Geranak
+          a.image.preview
+            .image.preview
+              .ui.bottom.attached.label
+                | Khally Balak Men Geranak
+          a.image.preview
+            .image.preview
+              .ui.bottom.attached.label
+                | Khally Balak Men Geranak
+          a.image.preview
+            .image.preview
+              .ui.bottom.attached.label
+                | Khally Balak Men Geranak
         .row
-          .image.preview
-            .ui.bottom.attached.label
-              | Lorem ipsum dolor
-          .image.preview
-            .ui.bottom.attached.label
-              | Lorem ipsum dolor
+          a.image.preview
+            .image.preview
+              .ui.bottom.attached.label
+                | Khally Balak Men Geranak
+          a.image.preview
+            .image.preview
+              .ui.bottom.attached.label
+                | Khally Balak Men Geranak
 
   .ui.inverted.vertical.footer.stackable.center.aligned.segment#footer
 

@@ -3,6 +3,8 @@ const React = require('react');
 const Watchlist = React.createClass({
   render() {
     var ROWS = []
+    if (!this.props.episodes)
+      return (<div className="row watchlist"></div>)
     this.props.episodes.map((episode, i) => {
       ROWS.push(<WatchlistRow index={i+1} episode={episode} />)
     })

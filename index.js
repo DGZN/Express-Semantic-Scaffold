@@ -8,14 +8,14 @@ const AlbumDetail = require('./public/js/album-detail.js')
 const VideoDetail = require('./public/js/video-detail.js')
 const Footer = require('./public/js/footer.js')
 
-if ($('#home').length)
+if ($('#home-grid').length)
   ReactDOM.render(
     <div>
       <Carousel title="Movies" source="/movies" limit="5" href="/movies/:id" />
       <Carousel title="Series" source="/series" limit="5" href="/series/:id" />
       <Carousel title="Plays"  source="/plays"  limit="5" href="/plays/:id" />
     </div>,
-    document.getElementById('home')
+    document.getElementById('home-grid')
   );
 
 if ($('#movies-grid').length)
@@ -67,7 +67,7 @@ if ($('#plays-grid').length)
   );
 
 if ($('#play-details').length) {
-  var play = '/plays/' + $('#video-details').data('id');
+  var play = '/plays/' + $('#play-details').data('id');
   ReactDOM.render(
     <VideoDetail source={play} />,
     document.getElementById('play-details')

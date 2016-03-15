@@ -671,7 +671,7 @@ body.pushable>.pusher {
 
 .grids .row:not(.subnav):not(.watchlist) {
   padding-left: 1rem !important;
-  height: 200px;
+  height: 220px;
   overflow: hidden;
 }
 
@@ -1059,7 +1059,7 @@ ul.meta.values {
     text-transform: uppercase !important;
 }
 
-.grids .row a {
+.grids .row:not(.subnav) a {
   position: absolute;
   float: left;
   top: 1rem;
