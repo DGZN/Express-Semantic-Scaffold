@@ -33,6 +33,7 @@ const Grid = React.createClass({
       }
       return ROWS.length === this.props.rows
     })
+    console.log("PROP", this.props, "ROWS", ROWS)
     return (
       <div className="ui equal width grid container">
         {ROWS}

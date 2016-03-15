@@ -5,15 +5,15 @@ const Carousel = require('./public/js/carousel.js')
 const Grid = require('./public/js/grid.js')
 const SeasonDetail = require('./public/js/season-detail.js')
 const AlbumDetail = require('./public/js/album-detail.js')
-const MovieDetail = require('./public/js/movie-detail.js')
+const VideoDetail = require('./public/js/video-detail.js')
 const Footer = require('./public/js/footer.js')
 
 if ($('#home').length)
   ReactDOM.render(
     <div>
-      <Carousel title="Movies" source="/movies" limit="5" />
-      <Carousel title="Series" source="/series" limit="5" href="/season" />
-      <Carousel title="Plays"  source="/plays"  limit="5" />
+      <Carousel title="Movies" source="/movies" limit="5" href="/movies/:id" />
+      <Carousel title="Series" source="/series" limit="5" href="/series/:id" />
+      <Carousel title="Plays"  source="/plays"  limit="5" href="/plays/:id" />
     </div>,
     document.getElementById('home')
   );
@@ -27,7 +27,7 @@ if ($('#movies-grid').length)
 if ($('#movie-details').length) {
   var movie = '/movies/' + $('#movie-details').data('id');
   ReactDOM.render(
-    <MovieDetail source={movie} />,
+    <VideoDetail source={movie} />,
     document.getElementById('movie-details')
   );
 }
@@ -62,9 +62,17 @@ if ($('#album-details').length) {
 
 if ($('#plays-grid').length)
   ReactDOM.render(
-    <Grid title="Plays" source="/plays" limit="5" />,
+    <Grid title="Plays" source="/plays" limit="5" href="/plays/:id" />,
     document.getElementById('plays-grid')
   );
+
+if ($('#play-details').length) {
+  var play = '/plays/' + $('#video-details').data('id');
+  ReactDOM.render(
+    <VideoDetail source={play} />,
+    document.getElementById('play-details')
+  );
+}
 
 ReactDOM.render(
   <Footer />,

@@ -1059,35 +1059,41 @@ ul.meta.values {
     text-transform: uppercase !important;
 }
 
-.grids .image.preview {
+.grids .row a {
   position: absolute;
   float: left;
   top: 1rem;
   width: 280px;
-  height: auto;
-  min-height: 160px;
   margin-left: 1rem;
   background-image: url('/images/wireframe/16x9.png');
   background-repeat: no-repeat;
 }
 
-.grids .image.preview:nth-child(1) {
+.grids .image.preview {
+  width: 280px;
+  height: auto;
+  min-height: 160px;
+  background-image: url('/images/wireframe/16x9.png');
+  background-repeat: no-repeat;
+}
+
+.grids a.image.preview:nth-child(1) {
   left: 0px;
 }
 
-.grids .image.preview:nth-child(2) {
+.grids a.image.preview:nth-child(2) {
   left: 310px;
 }
 
-.grids .image.preview:nth-child(3) {
+.grids a.image.preview:nth-child(3) {
   left: 620px;
 }
 
-.grids .image.preview:nth-child(4) {
+.grids a.image.preview:nth-child(4) {
   left: 930px;
 }
 
-.grids .image.preview:nth-child(5) {
+.grids a.image.preview:nth-child(5) {
   left: 1240px;
 }
 

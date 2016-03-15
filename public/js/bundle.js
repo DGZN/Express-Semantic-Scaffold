@@ -51,15 +51,15 @@
 	const Grid = __webpack_require__(162)
 	const SeasonDetail = __webpack_require__(163)
 	const AlbumDetail = __webpack_require__(165)
-	const MovieDetail = __webpack_require__(167)
+	const VideoDetail = __webpack_require__(167)
 	const Footer = __webpack_require__(168)
 
 	if ($('#home').length)
 	  ReactDOM.render(
 	    React.createElement("div", null, 
-	      React.createElement(Carousel, {title: "Movies", source: "/movies", limit: "5"}), 
-	      React.createElement(Carousel, {title: "Series", source: "/series", limit: "5", href: "/season"}), 
-	      React.createElement(Carousel, {title: "Plays", source: "/plays", limit: "5"})
+	      React.createElement(Carousel, {title: "Movies", source: "/movies", limit: "5", href: "/movies/:id"}), 
+	      React.createElement(Carousel, {title: "Series", source: "/series", limit: "5", href: "/series/:id"}), 
+	      React.createElement(Carousel, {title: "Plays", source: "/plays", limit: "5", href: "/plays/:id"})
 	    ),
 	    document.getElementById('home')
 	  );
@@ -73,7 +73,7 @@
 	if ($('#movie-details').length) {
 	  var movie = '/movies/' + $('#movie-details').data('id');
 	  ReactDOM.render(
-	    React.createElement(MovieDetail, {source: movie}),
+	    React.createElement(VideoDetail, {source: movie}),
 	    document.getElementById('movie-details')
 	  );
 	}
@@ -108,9 +108,17 @@
 
 	if ($('#plays-grid').length)
 	  ReactDOM.render(
-	    React.createElement(Grid, {title: "Plays", source: "/plays", limit: "5"}),
+	    React.createElement(Grid, {title: "Plays", source: "/plays", limit: "5", href: "/plays/:id"}),
 	    document.getElementById('plays-grid')
 	  );
+
+	if ($('#play-details').length) {
+	  var play = '/plays/' + $('#video-details').data('id');
+	  ReactDOM.render(
+	    React.createElement(VideoDetail, {source: play}),
+	    document.getElementById('play-details')
+	  );
+	}
 
 	ReactDOM.render(
 	  React.createElement(Footer, null),
@@ -19802,9 +19810,9 @@
 	      ? link = generateLink(this.props)
 	      : link = this.props.href;
 	    return (
-	      React.createElement("div", {className: "image preview"}, 
-	        React.createElement("a", {href: link || '#'}, 
-	          React.createElement("div", {className: "ui bottom attached label"}, this.props.data.meta.en.name)
+	      React.createElement("a", {href: link || '#', className: "image preview"}, 
+	        React.createElement("div", {className: "image preview"}, 
+	            React.createElement("div", {className: "ui bottom attached label"}, this.props.data.meta.en.name)
 	        )
 	      )
 	    );
@@ -19868,6 +19876,7 @@
 	      }
 	      return ROWS.length === this.props.rows
 	    })
+	    console.log("PROP", this.props, "ROWS", ROWS)
 	    return (
 	      React.createElement("div", {className: "ui equal width grid container"}, 
 	        ROWS
@@ -20300,7 +20309,7 @@
 
 	const React = __webpack_require__(1);
 
-	const MovieDetail = React.createClass({displayName: "MovieDetail",
+	const VideoDetail = React.createClass({displayName: "VideoDetail",
 	  getInitialState: function() {
 	    return {
 	      movie: ''
@@ -20333,28 +20342,106 @@
 	      }
 	    }
 	    return (
-	      React.createElement("div", {className: "ui two column grid container"}, 
-	        React.createElement("div", {className: "details sixteen wide tablet eight wide computer column centered"}, 
-	          React.createElement("object", {id: "flashObj", width: "754", height: "407", classid: "clsid:D27CDB6E-AE6D-11cf-96B8-444553540000", codebase: "http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,47,0"}, 
-	            React.createElement("param", {name: "movie", value: "http://c.brightcove.com/services/viewer/federated_f9?isVid=1&isUI=1"}), 
-	            React.createElement("param", {name: "bgcolor", value: "#FFFFFF"}), 
-	            React.createElement("param", {name: "flashVars", value: "videoId=4564740753001&playerID=3815086849001&playerKey=AQ~~,AAADd9u4__E~,fHl6JWluMnctnUR7lsNevXxKfibpHuew&domain=embed&dynamicStreaming=true"}), 
-	            React.createElement("param", {name: "base", value: "http://admin.brightcove.com"}), 
-	            React.createElement("param", {name: "seamlesstabbing", value: "false"}), 
-	            React.createElement("param", {name: "allowFullScreen", value: "true"}), 
-	            React.createElement("param", {name: "swLiveConnect", value: "true"}), 
-	            React.createElement("param", {name: "allowScriptAccess", value: "always"}), 
-	            React.createElement("embed", {src: "http://c.brightcove.com/services/viewer/federated_f9?isVid=1&isUI=1", bgcolor: "#FFFFFF", flashvars: "videoId=4564740753001&playerID=3815086849001&playerKey=AQ~~,AAADd9u4__E~,fHl6JWluMnctnUR7lsNevXxKfibpHuew&domain=embed&dynamicStreaming=true", base: "http://admin.brightcove.com", name: "flashObj", width: "98%", height: "407", seamlesstabbing: "false", type: "application/x-shockwave-flash", allowfullscreen: "true", allowscriptaccess: "always", swliveconnect: "true", pluginspage: "http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"})
+	      React.createElement("div", {class: "ui vertical center container aligned grids pad-top-medium"}, 
+	        React.createElement("div", {className: "ui two column grid container"}, 
+	          React.createElement("div", {className: "details sixteen wide tablet eight wide computer column centered"}, 
+	            React.createElement("object", {id: "flashObj", width: "754", height: "407", classid: "clsid:D27CDB6E-AE6D-11cf-96B8-444553540000", codebase: "http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,47,0"}, 
+	              React.createElement("param", {name: "movie", value: "http://c.brightcove.com/services/viewer/federated_f9?isVid=1&isUI=1"}), 
+	              React.createElement("param", {name: "bgcolor", value: "#FFFFFF"}), 
+	              React.createElement("param", {name: "flashVars", value: "videoId=4564740753001&playerID=3815086849001&playerKey=AQ~~,AAADd9u4__E~,fHl6JWluMnctnUR7lsNevXxKfibpHuew&domain=embed&dynamicStreaming=true"}), 
+	              React.createElement("param", {name: "base", value: "http://admin.brightcove.com"}), 
+	              React.createElement("param", {name: "seamlesstabbing", value: "false"}), 
+	              React.createElement("param", {name: "allowFullScreen", value: "true"}), 
+	              React.createElement("param", {name: "swLiveConnect", value: "true"}), 
+	              React.createElement("param", {name: "allowScriptAccess", value: "always"}), 
+	              React.createElement("embed", {src: "http://c.brightcove.com/services/viewer/federated_f9?isVid=1&isUI=1", bgcolor: "#FFFFFF", flashvars: "videoId=4564740753001&playerID=3815086849001&playerKey=AQ~~,AAADd9u4__E~,fHl6JWluMnctnUR7lsNevXxKfibpHuew&domain=embed&dynamicStreaming=true", base: "http://admin.brightcove.com", name: "flashObj", width: "98%", height: "407", seamlesstabbing: "false", type: "application/x-shockwave-flash", allowfullscreen: "true", allowscriptaccess: "always", swliveconnect: "true", pluginspage: "http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"})
+	            )
+	          ), 
+	          React.createElement("div", {className: "details sixteen wide tablet eight wide computer column centered"}, React.createElement("img", {src: "/images/banner01.png", className: "ui image"}), 
+	            React.createElement("h2", null, movie.name), 
+	            React.createElement("h4", null, movie.description), 
+	            React.createElement("div", {className: "ui one column grid center"}, 
+	              React.createElement("div", {className: "row"}, 
+	                React.createElement("div", {className: "column tight"}, 
+	                  React.createElement("div", {className: "movie-details"}, React.createElement("span", null, "R"), React.createElement("span", null, "123 min"), React.createElement("span", null, movie.productionYear), React.createElement("span", null, "5.1"), React.createElement("span", null, "HD")), 
+	                  React.createElement("div", {className: "movie-actions"}, React.createElement("img", {src: "/images/play-button.png", className: "ui image"}), React.createElement("img", {src: "/images/add-button.png", className: "ui image"}), React.createElement("img", {src: "/images/social-share-circle-icons.png", className: "ui image social-share"}))
+	                )
+	              )
+	            )
 	          )
 	        ), 
-	        React.createElement("div", {className: "details sixteen wide tablet eight wide computer column centered"}, React.createElement("img", {src: "/images/banner01.png", className: "ui image"}), 
-	          React.createElement("h2", null, movie.name), 
-	          React.createElement("h4", null, movie.description), 
-	          React.createElement("div", {className: "ui one column grid center"}, 
-	            React.createElement("div", {className: "row"}, 
-	              React.createElement("div", {className: "column tight"}, 
-	                React.createElement("div", {className: "movie-details"}, React.createElement("span", null, "R"), React.createElement("span", null, "123 min"), React.createElement("span", null, movie.productionYear), React.createElement("span", null, "5.1"), React.createElement("span", null, "HD")), 
-	                React.createElement("div", {className: "movie-actions"}, React.createElement("img", {src: "/images/play-button.png", className: "ui image"}), React.createElement("img", {src: "/images/add-button.png", className: "ui image"}), React.createElement("img", {src: "/images/social-share-circle-icons.png", className: "ui image social-share"}))
+	        React.createElement("div", {className: "ui grid container details"}, 
+	          React.createElement("div", {className: "details sixteen wide tablet sixteen wide computer column centered"}, 
+	            React.createElement("div", {className: "ui three column grid container stackable"}, 
+	              React.createElement("div", {className: "cast three wide computer five wide tablet column tight"}, 
+	                React.createElement("div", {className: "ui top attached label detailHeading"}, "Producers"), 
+	                React.createElement("div", {className: "ui grid"}, 
+	                  React.createElement("div", {className: "row"}, 
+	                    React.createElement("div", {className: "pad-top-medium column tight"}, 
+	                      React.createElement("ul", {className: "meta tight"}, 
+	                        React.createElement("li", null, "Alex"), 
+	                        React.createElement("li", null, "Noma"), 
+	                        React.createElement("li", null, "Alex"), 
+	                        React.createElement("li", null, "Noma")
+	                      )
+	                    ), 
+	                    React.createElement("div", {className: "pad-top-medium column tight"}, 
+	                      React.createElement("ul", {className: "meta values"}, 
+	                        React.createElement("li", null, "Shiradashi Smith"), 
+	                        React.createElement("li", null, "Jane Doe"), 
+	                        React.createElement("li", null, "John Smit"), 
+	                        React.createElement("li", null, "Someone")
+	                      )
+	                    )
+	                  )
+	                )
+	              ), 
+	              React.createElement("div", {className: "cast three wide computer five wide tablet column tight"}, 
+	                React.createElement("div", {className: "ui top attached label detailHeading"}, "Directors"), 
+	                React.createElement("div", {className: "ui grid"}, 
+	                  React.createElement("div", {className: "row"}, 
+	                    React.createElement("div", {className: "pad-top-medium column tight"}, 
+	                      React.createElement("ul", {className: "meta tight"}, 
+	                        React.createElement("li", null, "Alex"), 
+	                        React.createElement("li", null, "Noma"), 
+	                        React.createElement("li", null, "Alex"), 
+	                        React.createElement("li", null, "Noma"), 
+	                        React.createElement("div", {className: "column"})
+	                      )
+	                    ), 
+	                    React.createElement("div", {className: "pad-top-medium column tight"}, 
+	                      React.createElement("ul", {className: "meta values"}, 
+	                        React.createElement("li", null, "Shiradashi Smith"), 
+	                        React.createElement("li", null, "Jane Doe"), 
+	                        React.createElement("li", null, "John Smit"), 
+	                        React.createElement("li", null, "Someone")
+	                      )
+	                    )
+	                  )
+	                )
+	              ), 
+	              React.createElement("div", {className: "cast three wide computer five wide tablet column tight"}, 
+	                React.createElement("div", {className: "ui top attached label detailHeading"}, "Cast & Crew"), 
+	                React.createElement("div", {className: "ui grid"}, 
+	                  React.createElement("div", {className: "row"}, 
+	                    React.createElement("div", {className: "pad-top-medium column tight"}, 
+	                      React.createElement("ul", {className: "meta tight"}, 
+	                        React.createElement("li", null, "Alex"), 
+	                        React.createElement("li", null, "Noma"), 
+	                        React.createElement("li", null, "Alex"), 
+	                        React.createElement("li", null, "Noma")
+	                      )
+	                    ), 
+	                    React.createElement("div", {className: "pad-top-medium column tight"}, 
+	                      React.createElement("ul", {className: "meta values"}, 
+	                        React.createElement("li", null, "Shiradashi Smith"), 
+	                        React.createElement("li", null, "Jane Doe"), 
+	                        React.createElement("li", null, "John Smit"), 
+	                        React.createElement("li", null, "Someone")
+	                      )
+	                    )
+	                  )
+	                )
 	              )
 	            )
 	          )
@@ -20364,7 +20451,7 @@
 	  },
 	});
 
-	module.exports = MovieDetail;
+	module.exports = VideoDetail;
 
 
 /***/ },

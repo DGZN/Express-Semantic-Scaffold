@@ -46,12 +46,16 @@ router.get('/albums/:id', function(req, res, next) {
   });
 });
 
-router.get('/album', function(req, res, next) {
-  res.render('albums');
-});
-
 router.get('/plays', function(req, res, next) {
   res.render('plays');
+});
+
+router.get('/plays/:id', function(req, res, next) {
+  res.render('play', {
+    data: {
+      id: req.params.id
+    }
+  });
 });
 
 router.get('/live', function(req, res, next) {

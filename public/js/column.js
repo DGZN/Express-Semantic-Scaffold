@@ -6,11 +6,11 @@ const Column = React.createClass({
       ? link = generateLink(this.props)
       : link = this.props.href;
     return (
-      <div className="image preview">
-        <a href={link || '#'}>
-          <div className="ui bottom attached label">{this.props.data.meta.en.name}</div>
-        </a>
-      </div>
+      <a href={link || '#'} className="image preview">
+        <div className="image preview">
+            <div className="ui bottom attached label">{this.props.data.meta.en.name}</div>
+        </div>
+      </a>
     );
   },
   componentDidMount: function() {
