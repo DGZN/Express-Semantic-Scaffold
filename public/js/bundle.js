@@ -49,7 +49,10 @@
 
 	const Carousel = __webpack_require__(159)
 	const Grid = __webpack_require__(162)
-	const Footer = __webpack_require__(163)
+	const SeasonDetail = __webpack_require__(163)
+	const AlbumDetail = __webpack_require__(165)
+	const MovieDetail = __webpack_require__(167)
+	const Footer = __webpack_require__(168)
 
 	if ($('#home').length)
 	  ReactDOM.render(
@@ -63,21 +66,45 @@
 
 	if ($('#movies-grid').length)
 	  ReactDOM.render(
-	    React.createElement(Grid, {title: "Movies", source: "/movies", limit: "5"}),
+	    React.createElement(Grid, {title: "Movies", source: "/movies", limit: "5", href: "/movies/:id"}),
 	    document.getElementById('movies-grid')
 	  );
 
+	if ($('#movie-details').length) {
+	  var movie = '/movies/' + $('#movie-details').data('id');
+	  ReactDOM.render(
+	    React.createElement(MovieDetail, {source: movie}),
+	    document.getElementById('movie-details')
+	  );
+	}
+
 	if ($('#series-grid').length)
 	  ReactDOM.render(
-	    React.createElement(Grid, {title: "Series", source: "/series", limit: "5", href: "/season"}),
+	    React.createElement(Grid, {title: "Series", source: "/series", limit: "5", href: "/series/:id"}),
 	    document.getElementById('series-grid')
 	  );
 
+	if ($('#season-details').length) {
+	  var season = '/series/' + $('#season-details').data('id');
+	  ReactDOM.render(
+	    React.createElement(SeasonDetail, {source: season}),
+	    document.getElementById('season-details')
+	  );
+	}
+
 	if ($('#music-grid').length)
 	  ReactDOM.render(
-	    React.createElement(Grid, {title: "Music", source: "/albums", limit: "5", href: "/album"}),
+	    React.createElement(Grid, {title: "Music", source: "/albums", limit: "5", href: "/albums/:id"}),
 	    document.getElementById('music-grid')
 	  );
+
+	if ($('#album-details').length) {
+	  var album = '/albums/' + $('#album-details').data('id');
+	  ReactDOM.render(
+	    React.createElement(AlbumDetail, {source: album}),
+	    document.getElementById('album-details')
+	  );
+	}
 
 	if ($('#plays-grid').length)
 	  ReactDOM.render(
@@ -19771,9 +19798,12 @@
 
 	const Column = React.createClass({displayName: "Column",
 	  render() {
+	    this.props.href
+	      ? link = generateLink(this.props)
+	      : link = this.props.href;
 	    return (
 	      React.createElement("div", {className: "image preview"}, 
-	        React.createElement("a", {href: this.props.href || '#'}, 
+	        React.createElement("a", {href: link || '#'}, 
 	          React.createElement("div", {className: "ui bottom attached label"}, this.props.data.meta.en.name)
 	        )
 	      )
@@ -19783,6 +19813,18 @@
 	    console.log("Grid > Row > Column [Properties]", this.props)
 	  }
 	});
+
+	function generateLink(props){
+	  var link = props.href;
+	  var keys = props.href.match(/[:]\w+/g);
+	  keys.map((key) => {
+	    var _key = key.replace(':','')
+	    if (props.data[_key]) {
+	      link = link.replace(key, props.data[_key])
+	    }
+	  })
+	  return link;
+	}
 
 	module.exports = Column;
 
@@ -19839,6 +19881,494 @@
 
 /***/ },
 /* 163 */
+/***/ function(module, exports, __webpack_require__) {
+
+	const React = __webpack_require__(1);
+
+	const SeasonWatchlist = __webpack_require__(164)
+
+	const SeasonDetail = React.createClass({displayName: "SeasonDetail",
+	  getInitialState: function() {
+	    return {
+	      series: ''
+	    };
+	  },
+
+	  componentDidMount: function() {
+	    this.fetch = $.get('http://localhost:8000/v1/assets'+this.props.source, function (result) {
+	      this.setState({
+	        series: result[0]
+	      });
+	    }.bind(this));
+	  },
+
+	  componentWillUnmount: function() {
+	    this.fetch.abort();
+	  },
+
+	  render() {
+	    var series = {
+	      name: ''
+	    , description: ''
+	    , seasonText: 'Season 1'
+	    , productionYear: ''
+	    , episodes: []
+	    }
+	    if (this.state.series) {
+	      var series = {
+	        name: this.state.series.meta.en.name
+	      , description: this.state.series.meta.en.description
+	      , seasonText: 'Season 1'
+	      , productionYear: 'Released ' + this.state.series['production_year']
+	      , episodes: this.state.series.seasons[0].episodes
+	      }
+	    }
+	    return (
+	      React.createElement("div", {className: "ui two column grid container details pad-top-medium"}, 
+	        React.createElement("div", {className: "details six wide computer only column centered"}, 
+	          React.createElement(SeasonWatchlist, {episodes: series.episodes})
+	        ), 
+	        React.createElement("div", {className: "details sixteen wide tablet seven wide computer column centered"}, 
+	          React.createElement("img", {src: "/images/wireframe/16x9.png", className: "ui huge image pad-right-small"}), 
+	          React.createElement("h1", null, series.name), 
+	          React.createElement("h3", null, series.seriesText), 
+	          React.createElement("h4", {className: "pad-right-medium"}, series.description), 
+	          React.createElement("div", {className: "ui one column grid center"}, 
+	            React.createElement("div", {className: "row"}, 
+	              React.createElement("div", {className: "column tight"}, 
+	                React.createElement("div", {className: "movie-details"}, 
+	                  React.createElement("span", null, "R"), React.createElement("span", null, "123 min"), React.createElement("span", null, series.productionYear), React.createElement("span", null, "5.1"), React.createElement("span", null, "HD")
+	                ), 
+	                React.createElement("div", {className: "movie-actions"}, 
+	                  React.createElement("img", {src: "/images/play-button.png", className: "ui image"}), 
+	                  React.createElement("img", {src: "/images/add-button.png", className: "ui image"}), 
+	                  React.createElement("img", {src: "/images/social-share-circle-icons.png", className: "ui image social-share"})
+	                )
+	              )
+	            )
+	          )
+	        ), 
+	        React.createElement("div", {className: "details sixteen wide tablet three wide computer column centered"}, 
+	          React.createElement("div", {className: "ui three column grid container stackable"}, 
+	            React.createElement("div", {className: "cast sixteen wide computer five wide tablet column tight"}, 
+	              React.createElement("div", {className: "ui top attached label detailHeading"}, "Producers"), 
+	              React.createElement("div", {className: "ui grid"}, 
+	                React.createElement("div", {className: "row"}, 
+	                  React.createElement("div", {className: "pad-top-medium column tight"}, 
+	                    React.createElement("ul", {className: "meta tight"}, 
+	                      React.createElement("li", null, "Alex"), 
+	                      React.createElement("li", null, "Noma"), 
+	                      React.createElement("li", null, "Alex"), 
+	                      React.createElement("li", null, "Noma")
+	                    )
+	                  ), 
+	                  React.createElement("div", {className: "pad-top-medium column tight"}, 
+	                    React.createElement("ul", {className: "meta values"}, 
+	                      React.createElement("li", null, "Shiradashi Smith"), 
+	                      React.createElement("li", null, "Jane Doe"), 
+	                      React.createElement("li", null, "John Smit"), 
+	                      React.createElement("li", null, "Someone")
+	                    )
+	                  )
+	                )
+	              )
+	            ), 
+	            React.createElement("div", {className: "cast sixteen wide computer five wide tablet column tight"}, 
+	              React.createElement("div", {className: "ui top attached label detailHeading"}, "Directors"), 
+	              React.createElement("div", {className: "ui grid"}, 
+	                React.createElement("div", {className: "row"}, 
+	                  React.createElement("div", {className: "pad-top-medium column tight"}, 
+	                    React.createElement("ul", {className: "meta tight"}, 
+	                      React.createElement("li", null, "Alex"), 
+	                      React.createElement("li", null, "Noma"), 
+	                      React.createElement("li", null, "Alex"), 
+	                      React.createElement("li", null, "Noma"), 
+	                      React.createElement("div", {className: "column"})
+	                    )
+	                  ), 
+	                  React.createElement("div", {className: "pad-top-medium column tight"}, 
+	                    React.createElement("ul", {className: "meta values"}, 
+	                      React.createElement("li", null, "Shiradashi Smith"), 
+	                      React.createElement("li", null, "Jane Doe"), 
+	                      React.createElement("li", null, "John Smit"), 
+	                      React.createElement("li", null, "Someone")
+	                    )
+	                  )
+	                )
+	              )
+	            ), 
+	            React.createElement("div", {className: "cast sixteen wide computer five wide tablet column tight"}, 
+	              React.createElement("div", {className: "ui top attached label detailHeading"}, "Cast & Crew"), 
+	              React.createElement("div", {className: "ui grid"}, 
+	                React.createElement("div", {className: "row"}, 
+	                  React.createElement("div", {className: "pad-top-medium column tight"}, 
+	                    React.createElement("ul", {className: "meta tight"}, 
+	                      React.createElement("li", null, "Alex"), 
+	                      React.createElement("li", null, "Noma"), 
+	                      React.createElement("li", null, "Alex"), 
+	                      React.createElement("li", null, "Noma")
+	                    )
+	                  ), 
+	                  React.createElement("div", {className: "pad-top-medium column tight"}, 
+	                    React.createElement("ul", {className: "meta values"}, 
+	                      React.createElement("li", null, "Shiradashi Smith"), 
+	                      React.createElement("li", null, "Jane Doe"), 
+	                      React.createElement("li", null, "John Smit"), 
+	                      React.createElement("li", null, "Someone")
+	                    )
+	                  )
+	                )
+	              )
+	            )
+	          )
+	        )
+	      )
+	    );
+	  },
+	});
+
+	module.exports = SeasonDetail;
+
+
+/***/ },
+/* 164 */
+/***/ function(module, exports, __webpack_require__) {
+
+	const React = __webpack_require__(1);
+
+	const Watchlist = React.createClass({displayName: "Watchlist",
+	  render() {
+	    var ROWS = []
+	    this.props.episodes.map((episode, i) => {
+	      ROWS.push(React.createElement(WatchlistRow, {index: i+1, episode: episode}))
+	    })
+	    return (
+	      React.createElement("div", {className: "ui stackable grid"}, 
+	        ROWS
+	      )
+	    );
+	  },
+	  componentDidMount: function() {
+	    console.log("Grid > Row > Watchlist [Properties]", this.props)
+	  }
+	});
+
+	const WatchlistRow = React.createClass({displayName: "WatchlistRow",
+	  render() {
+	    return (
+	      React.createElement("div", {className: "row watchlist"}, 
+	        React.createElement("div", {className: "sixteen wide tablet four wide computer column tight-right"}, 
+	          React.createElement("i", {className: "play large icon watchlist-button tight"}), 
+	          React.createElement("i", {className: "plus icon watchlist-button"}), 
+	          React.createElement("span", {className: "watchlist-button"}, "Ep ", this.props.index)
+	        ), 
+	        React.createElement("div", {className: "sixteen wide tablet eleven wide computer column tight-left"}, 
+	          React.createElement("div", {className: "ui progress watchlist small error episode"}, 
+	            React.createElement("div", {className: "bar"})
+	          )
+	        )
+	      )
+	    )
+	  }
+	})
+
+	function generateLink(props){
+	  var link = props.href;
+	  var keys = props.href.match(/[:]\w+/g);
+	  keys.map((key) => {
+	    var _key = key.replace(':','')
+	    if (props.data[_key]) {
+	      link = link.replace(key, props.data[_key])
+	    }
+	  })
+	  return link;
+	}
+
+	module.exports = Watchlist;
+
+
+/***/ },
+/* 165 */
+/***/ function(module, exports, __webpack_require__) {
+
+	const React = __webpack_require__(1);
+
+	const AlbumWatchlist = __webpack_require__(166)
+
+
+	const AlbumDetail = React.createClass({displayName: "AlbumDetail",
+	  getInitialState: function() {
+	    return {
+	      album: ''
+	    };
+	  },
+
+	  componentDidMount: function() {
+	    this.fetch = $.get('http://localhost:8000/v1/assets'+this.props.source, function (result) {
+	      this.setState({
+	        album: result[0]
+	      });
+	    }.bind(this));
+	  },
+
+	  componentWillUnmount: function() {
+	    this.fetch.abort();
+	  },
+
+	  render() {
+	    var album = {
+	      name: ''
+	    , description: ''
+	    , albumText: 'Album 1'
+	    , songs: []
+	    }
+	    if (this.state.album) {
+	      var album = {
+	        name: this.state.album.meta.en.name
+	      , description: this.state.album.meta.en.description
+	      , albumText: 'Album 1'
+	      , songs: this.state.album.songs
+	      }
+	    }
+	    return (
+	      React.createElement("div", {className: "ui two column grid container details pad-top-medium"}, 
+	        React.createElement("div", {className: "details six wide computer only column centered"}, 
+	          React.createElement(AlbumWatchlist, {songs: album.songs})
+	        ), 
+	        React.createElement("div", {className: "details sixteen wide tablet seven wide computer column centered"}, 
+	          React.createElement("img", {src: "/images/wireframe/16x9.png", className: "ui huge image pad-right-small"}), 
+	          React.createElement("h1", null, album.name), 
+	          React.createElement("h3", null, album.albumText), 
+	          React.createElement("h4", {className: "pad-right-medium"}, album.description), 
+	          React.createElement("div", {className: "ui one column grid center"}, 
+	            React.createElement("div", {className: "row"}, 
+	              React.createElement("div", {className: "column tight"}, 
+	                React.createElement("div", {className: "movie-details"}, 
+	                  React.createElement("span", null, "R"), React.createElement("span", null, "123 min"), React.createElement("span", null, "5.1"), React.createElement("span", null, "HD")
+	                ), 
+	                React.createElement("div", {className: "movie-actions"}, 
+	                  React.createElement("img", {src: "/images/play-button.png", className: "ui image"}), 
+	                  React.createElement("img", {src: "/images/add-button.png", className: "ui image"}), 
+	                  React.createElement("img", {src: "/images/social-share-circle-icons.png", className: "ui image social-share"})
+	                )
+	              )
+	            )
+	          )
+	        ), 
+	        React.createElement("div", {className: "details sixteen wide tablet three wide computer column centered"}, 
+	          React.createElement("div", {className: "ui three column grid container stackable"}, 
+	            React.createElement("div", {className: "cast sixteen wide computer five wide tablet column tight"}, 
+	              React.createElement("div", {className: "ui top attached label detailHeading"}, "Producers"), 
+	              React.createElement("div", {className: "ui grid"}, 
+	                React.createElement("div", {className: "row"}, 
+	                  React.createElement("div", {className: "pad-top-medium column tight"}, 
+	                    React.createElement("ul", {className: "meta tight"}, 
+	                      React.createElement("li", null, "Alex"), 
+	                      React.createElement("li", null, "Noma"), 
+	                      React.createElement("li", null, "Alex"), 
+	                      React.createElement("li", null, "Noma")
+	                    )
+	                  ), 
+	                  React.createElement("div", {className: "pad-top-medium column tight"}, 
+	                    React.createElement("ul", {className: "meta values"}, 
+	                      React.createElement("li", null, "Shiradashi Smith"), 
+	                      React.createElement("li", null, "Jane Doe"), 
+	                      React.createElement("li", null, "John Smit"), 
+	                      React.createElement("li", null, "Someone")
+	                    )
+	                  )
+	                )
+	              )
+	            ), 
+	            React.createElement("div", {className: "cast sixteen wide computer five wide tablet column tight"}, 
+	              React.createElement("div", {className: "ui top attached label detailHeading"}, "Directors"), 
+	              React.createElement("div", {className: "ui grid"}, 
+	                React.createElement("div", {className: "row"}, 
+	                  React.createElement("div", {className: "pad-top-medium column tight"}, 
+	                    React.createElement("ul", {className: "meta tight"}, 
+	                      React.createElement("li", null, "Alex"), 
+	                      React.createElement("li", null, "Noma"), 
+	                      React.createElement("li", null, "Alex"), 
+	                      React.createElement("li", null, "Noma"), 
+	                      React.createElement("div", {className: "column"})
+	                    )
+	                  ), 
+	                  React.createElement("div", {className: "pad-top-medium column tight"}, 
+	                    React.createElement("ul", {className: "meta values"}, 
+	                      React.createElement("li", null, "Shiradashi Smith"), 
+	                      React.createElement("li", null, "Jane Doe"), 
+	                      React.createElement("li", null, "John Smit"), 
+	                      React.createElement("li", null, "Someone")
+	                    )
+	                  )
+	                )
+	              )
+	            ), 
+	            React.createElement("div", {className: "cast sixteen wide computer five wide tablet column tight"}, 
+	              React.createElement("div", {className: "ui top attached label detailHeading"}, "Cast & Crew"), 
+	              React.createElement("div", {className: "ui grid"}, 
+	                React.createElement("div", {className: "row"}, 
+	                  React.createElement("div", {className: "pad-top-medium column tight"}, 
+	                    React.createElement("ul", {className: "meta tight"}, 
+	                      React.createElement("li", null, "Alex"), 
+	                      React.createElement("li", null, "Noma"), 
+	                      React.createElement("li", null, "Alex"), 
+	                      React.createElement("li", null, "Noma")
+	                    )
+	                  ), 
+	                  React.createElement("div", {className: "pad-top-medium column tight"}, 
+	                    React.createElement("ul", {className: "meta values"}, 
+	                      React.createElement("li", null, "Shiradashi Smith"), 
+	                      React.createElement("li", null, "Jane Doe"), 
+	                      React.createElement("li", null, "John Smit"), 
+	                      React.createElement("li", null, "Someone")
+	                    )
+	                  )
+	                )
+	              )
+	            )
+	          )
+	        )
+	      )
+	    );
+	  },
+	});
+
+	module.exports = AlbumDetail;
+
+
+/***/ },
+/* 166 */
+/***/ function(module, exports, __webpack_require__) {
+
+	const React = __webpack_require__(1);
+
+	const Watchlist = React.createClass({displayName: "Watchlist",
+	  render() {
+	    var ROWS = []
+	    this.props.songs.map((episode, i) => {
+	      ROWS.push(React.createElement(WatchlistRow, {index: i+1, episode: episode}))
+	    })
+	    return (
+	      React.createElement("div", {className: "ui stackable grid"}, 
+	        ROWS
+	      )
+	    );
+	  },
+	  componentDidMount: function() {
+	    console.log("Grid > Row > Watchlist [Properties]", this.props)
+	  }
+	});
+
+	const WatchlistRow = React.createClass({displayName: "WatchlistRow",
+	  render() {
+	    return (
+	      React.createElement("div", {className: "row watchlist"}, 
+	        React.createElement("div", {className: "sixteen wide tablet four wide computer column tight-right"}, 
+	          React.createElement("i", {className: "play large icon watchlist-button"}), 
+	          React.createElement("i", {className: "plus icon watchlist-button"}), 
+	          React.createElement("span", {className: "watchlist-button"}, "#", this.props.index)
+	        ), 
+	        React.createElement("div", {className: "sixteen wide tablet eleven wide computer column tight-left"}, 
+	          React.createElement("div", {className: "ui progress watchlist small error ep19"}, 
+	            React.createElement("div", {className: "bar"})
+	          )
+	        )
+	      )
+	    )
+	  }
+	})
+
+	function generateLink(props){
+	  var link = props.href;
+	  var keys = props.href.match(/[:]\w+/g);
+	  keys.map((key) => {
+	    var _key = key.replace(':','')
+	    if (props.data[_key]) {
+	      link = link.replace(key, props.data[_key])
+	    }
+	  })
+	  return link;
+	}
+
+	module.exports = Watchlist;
+
+
+/***/ },
+/* 167 */
+/***/ function(module, exports, __webpack_require__) {
+
+	const React = __webpack_require__(1);
+
+	const MovieDetail = React.createClass({displayName: "MovieDetail",
+	  getInitialState: function() {
+	    return {
+	      movie: ''
+	    };
+	  },
+
+	  componentDidMount: function() {
+	    this.fetch = $.get('http://localhost:8000/v1/assets'+this.props.source, function (result) {
+	      this.setState({
+	        movie: result[0]
+	      });
+	    }.bind(this));
+	  },
+
+	  componentWillUnmount: function() {
+	    this.fetch.abort();
+	  },
+
+	  render() {
+	    var movie = {
+	      name: ''
+	    , description: ''
+	    , productionYear: 'Produced ' + this.state.movie['production_year']
+	    }
+	    if (this.state.movie) {
+	      var movie = {
+	        name: this.state.movie.meta.en.name
+	      , description: this.state.movie.meta.en.description
+	      , productionYear: 'Produced ' + this.state.movie['production_year']
+	      }
+	    }
+	    return (
+	      React.createElement("div", {className: "ui two column grid container"}, 
+	        React.createElement("div", {className: "details sixteen wide tablet eight wide computer column centered"}, 
+	          React.createElement("object", {id: "flashObj", width: "754", height: "407", classid: "clsid:D27CDB6E-AE6D-11cf-96B8-444553540000", codebase: "http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,47,0"}, 
+	            React.createElement("param", {name: "movie", value: "http://c.brightcove.com/services/viewer/federated_f9?isVid=1&isUI=1"}), 
+	            React.createElement("param", {name: "bgcolor", value: "#FFFFFF"}), 
+	            React.createElement("param", {name: "flashVars", value: "videoId=4564740753001&playerID=3815086849001&playerKey=AQ~~,AAADd9u4__E~,fHl6JWluMnctnUR7lsNevXxKfibpHuew&domain=embed&dynamicStreaming=true"}), 
+	            React.createElement("param", {name: "base", value: "http://admin.brightcove.com"}), 
+	            React.createElement("param", {name: "seamlesstabbing", value: "false"}), 
+	            React.createElement("param", {name: "allowFullScreen", value: "true"}), 
+	            React.createElement("param", {name: "swLiveConnect", value: "true"}), 
+	            React.createElement("param", {name: "allowScriptAccess", value: "always"}), 
+	            React.createElement("embed", {src: "http://c.brightcove.com/services/viewer/federated_f9?isVid=1&isUI=1", bgcolor: "#FFFFFF", flashvars: "videoId=4564740753001&playerID=3815086849001&playerKey=AQ~~,AAADd9u4__E~,fHl6JWluMnctnUR7lsNevXxKfibpHuew&domain=embed&dynamicStreaming=true", base: "http://admin.brightcove.com", name: "flashObj", width: "98%", height: "407", seamlesstabbing: "false", type: "application/x-shockwave-flash", allowfullscreen: "true", allowscriptaccess: "always", swliveconnect: "true", pluginspage: "http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"})
+	          )
+	        ), 
+	        React.createElement("div", {className: "details sixteen wide tablet eight wide computer column centered"}, React.createElement("img", {src: "/images/banner01.png", className: "ui image"}), 
+	          React.createElement("h2", null, movie.name), 
+	          React.createElement("h4", null, movie.description), 
+	          React.createElement("div", {className: "ui one column grid center"}, 
+	            React.createElement("div", {className: "row"}, 
+	              React.createElement("div", {className: "column tight"}, 
+	                React.createElement("div", {className: "movie-details"}, React.createElement("span", null, "R"), React.createElement("span", null, "123 min"), React.createElement("span", null, movie.productionYear), React.createElement("span", null, "5.1"), React.createElement("span", null, "HD")), 
+	                React.createElement("div", {className: "movie-actions"}, React.createElement("img", {src: "/images/play-button.png", className: "ui image"}), React.createElement("img", {src: "/images/add-button.png", className: "ui image"}), React.createElement("img", {src: "/images/social-share-circle-icons.png", className: "ui image social-share"}))
+	              )
+	            )
+	          )
+	        )
+	      )
+	    );
+	  },
+	});
+
+	module.exports = MovieDetail;
+
+
+/***/ },
+/* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);

@@ -14,6 +14,7 @@ $(document)
     // ;
 
     // create sidebar and attach to menu open
+
     $('#watchlist-sidebar')
       .sidebar('attach events', '.watchlist.item')
     ;
@@ -46,6 +47,16 @@ $(document)
     $('#nav-sidebar')
       .sidebar('attach events', '.toc.item')
     ;
+
+
+    setTimeout(function(){
+      $('.episode').progress({
+        percent: 0
+      , showActivity: false
+      , className: ''
+      , text: { percent : '' }
+      });
+    }, 1000)
 
     $('.ep11').progress({
       percent: 45

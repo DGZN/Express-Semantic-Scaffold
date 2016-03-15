@@ -3,6 +3,9 @@ const ReactDOM = require('react-dom');
 
 const Carousel = require('./public/js/carousel.js')
 const Grid = require('./public/js/grid.js')
+const SeasonDetail = require('./public/js/season-detail.js')
+const AlbumDetail = require('./public/js/album-detail.js')
+const MovieDetail = require('./public/js/movie-detail.js')
 const Footer = require('./public/js/footer.js')
 
 if ($('#home').length)
@@ -17,21 +20,45 @@ if ($('#home').length)
 
 if ($('#movies-grid').length)
   ReactDOM.render(
-    <Grid title="Movies" source="/movies" limit="5" />,
+    <Grid title="Movies" source="/movies" limit="5" href="/movies/:id" />,
     document.getElementById('movies-grid')
   );
 
+if ($('#movie-details').length) {
+  var movie = '/movies/' + $('#movie-details').data('id');
+  ReactDOM.render(
+    <MovieDetail source={movie} />,
+    document.getElementById('movie-details')
+  );
+}
+
 if ($('#series-grid').length)
   ReactDOM.render(
-    <Grid title="Series" source="/series" limit="5"  href="/season" />,
+    <Grid title="Series" source="/series" limit="5" href="/series/:id" />,
     document.getElementById('series-grid')
   );
 
+if ($('#season-details').length) {
+  var season = '/series/' + $('#season-details').data('id');
+  ReactDOM.render(
+    <SeasonDetail source={season} />,
+    document.getElementById('season-details')
+  );
+}
+
 if ($('#music-grid').length)
   ReactDOM.render(
-    <Grid title="Music" source="/albums" limit="5" href="/album" />,
+    <Grid title="Music" source="/albums" limit="5" href="/albums/:id" />,
     document.getElementById('music-grid')
   );
+
+if ($('#album-details').length) {
+  var album = '/albums/' + $('#album-details').data('id');
+  ReactDOM.render(
+    <AlbumDetail source={album} />,
+    document.getElementById('album-details')
+  );
+}
 
 if ($('#plays-grid').length)
   ReactDOM.render(

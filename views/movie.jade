@@ -1,16 +1,15 @@
 extends layout
 
 block content
-  // Following Menu
   .ui.large.top.fixed.hidden.menu.inverted
     .sidebar
-    .ui.container.nav
+    .ui.container.nav(style="height: 65px")
       a.item(href="/")
         img.ui.tiny.image(src='/images/melody-logo.png')
       a.item(href="/movies") Movies
       a.item(href="/series") Series
       a.item(href="/music") Music
-      a.item Plays
+      a.item(href="/plays") Plays
       a.item Classics
       a.item Collections
       a.item(href="/live") Live TV
@@ -41,7 +40,7 @@ block content
     a.item(href="/movies") Movies
     a.item(href="/series") Series
     a.item(href="/music") Music
-    a.item Plays
+    a.item(href="/plays") Plays
     a.item Classics
     a.item Collections
     a.item(href="/live") Live TV
@@ -61,109 +60,82 @@ block content
       h6
         | Arabic
 
-  .ui.left.vertical.sidebar.inverted.menu(id="watchlist-sidebar")
-    .ui.simple.dropdown.menu.inverted(id="seasons-dropdown-filter")
-      | SEASON 1
-      i.plus.icon
-      .menu
-        a.item SEASON 2
-        a.item SEASON 3
-        a.item SEASON 4
-        a.item SEASON 5
-        a.item SEASON 6
-
-    a.item
-      i.play.tiny.icon.watchlist-button.no-margin
-      i.plus.tiny.icon.watchlist-button
-      span
-        | Ep 12
-      .watchlist-pct
-        | 75%
-
-    a.item
-      i.play.tiny.icon.watchlist-button.no-margin
-      i.plus.tiny.icon.watchlist-button
-      span
-        | Ep 13
-      .watchlist-pct
-        | 30%
-
-    a.item
-      i.play.tiny.icon.watchlist-button.no-margin
-      i.plus.tiny.icon.watchlist-button
-      span
-        | Ep 14
-      .watchlist-pct
-        | 100%
-
-    a.item
-      i.play.tiny.icon.watchlist-button.no-margin
-      i.plus.tiny.icon.watchlist-button
-      span
-        | Ep 15
-      .watchlist-pct
-        | 0%
-
-    a.item
-      i.play.tiny.icon.watchlist-button.no-margin
-      i.plus.tiny.icon.watchlist-button
-      span
-        | Ep 16
-      .watchlist-pct
-
-    a.item
-      i.play.tiny.icon.watchlist-button.no-margin
-      i.plus.tiny.icon.watchlist-button
-      span
-        | Ep 17
-      .watchlist-pct
-
-    a.item
-      i.play.tiny.icon.watchlist-button.no-margin
-      i.plus.tiny.icon.watchlist-button
-      span
-        | Ep 18
-      .watchlist-pct
-
-    a.item
-      i.play.tiny.icon.watchlist-button.no-margin
-      i.plus.tiny.icon.watchlist-button
-      span
-        | Ep 19
-      .watchlist-pct
-
   .ui.inverted.vertical.masthead.center.aligned
-    .ui.container.nav-header
+    .ui.container.nav-header.pad-bottom-tiny
       .ui.large.secondary.inverted.pointing.menu
-        a.watchlist.item.left.aligned
-          i.list.layout.icon
         a.toc.item.right.aligned
           i.sidebar.icon
 
-    .ui.container.grids
+  .ui.vertical.center.container.aligned.grids.pad-top-medium
+    #movie-details(data-id='#{data.id}')
 
-      .row.subnav
-        span.title
-          | Series > khatem seliman > season 1
-        .ui.simple.dropdown.item.inverted(id="seasons-dropdown")
-            | SEASON 1
-            i.plus.icon
-            .menu
-              a.item SEASON 2
-              a.item SEASON 3
-              a.item SEASON 4
-              a.item SEASON 5
-              a.item SEASON 6
+    
+
+    .ui.grid.container.details
+      .details.sixteen.wide.tablet.sixteen.wide.computer.column.centered
+          .ui.three.column.grid.container.stackable
+            .cast.three.wide.computer.five.wide.tablet.column.tight
+              .ui.top.attached.label.detailHeading
+                | Producers
+              .ui.grid
+                .row
+                  .pad-top-medium.column.tight
+                    ul.meta.tight
+                      li Alex
+                      li Noma
+                      li Alex
+                      li Noma
+                  .pad-top-medium.column.tight
+                    ul.meta.values
+                      li Shiradashi Smith
+                      li Jane Doe
+                      li John Smit
+                      li Someone
+
+            .cast.three.wide.computer.five.wide.tablet.column.tight
+              .ui.top.attached.label.detailHeading
+                | Directors
+              .ui.grid
+                .row
+                  .pad-top-medium.column.tight
+                    ul.meta.tight
+                      li Alex
+                      li Noma
+                      li Alex
+                      li Noma
+                      .column
+                  .pad-top-medium.column.tight
+                    ul.meta.values
+                      li Shiradashi Smith
+                      li Jane Doe
+                      li John Smit
+                      li Someone
+
+            .cast.three.wide.computer.five.wide.tablet.column.tight
+              .ui.top.attached.label.detailHeading
+                | Cast & Crew
+              .ui.grid
+                .row
+                  .pad-top-medium.column.tight
+                    ul.meta.tight
+                      li Alex
+                      li Noma
+                      li Alex
+                      li Noma
+                  .pad-top-medium.column.tight
+                    ul.meta.values
+                      li Shiradashi Smith
+                      li Jane Doe
+                      li John Smit
+                      li Someone
+
 
     .ui.vertical.center.container.aligned.grids
-      #season-details(data-id='#{data.id}')
-
       .ui.one.column.grid.container
         .column.header
-          hr.page-hr
           h4.ui.header.grid-title
             br
-            | Related Titles >
+            | Similar Titles >
 
       .ui.equal.width.grid.container.bottom-padding
         .row
