@@ -25,6 +25,7 @@ const SeasonDetail = React.createClass({
     var series = {
       name: ''
     , description: ''
+    , thumb: '/images/wireframe/16x9.png'
     , seasonText: 'Season 1'
     , productionYear: ''
     , seasons: []
@@ -34,6 +35,7 @@ const SeasonDetail = React.createClass({
       var series = {
         name: this.state.series.meta.en.name
       , description: this.state.series.meta.en.description
+      , thumb: '/images/melody/' + this.state.series.thumb.replace('M1','M11')
       , seasonText: 'Season 1'
       , productionYear: 'Released ' + this.state.series['production_year']
       , seasons: this.state.series.seasons
@@ -51,7 +53,7 @@ const SeasonDetail = React.createClass({
               <SeasonWatchlist episodes={series.episodes} />
             </div>
             <div className="details sixteen wide tablet seven wide computer column centered">
-              <img src="/images/wireframe/16x9.png" className="ui huge image pad-right-small"/>
+              <img src={series.thumb} className="ui huge image pad-right-small"/>
               <h1>{series.name}</h1>
               <h3>{series.seriesText}</h3>
               <h4 className="pad-right-medium">{series.description}</h4>

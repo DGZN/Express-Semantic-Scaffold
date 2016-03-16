@@ -48,7 +48,7 @@ if ($('#season-details').length) {
 
 if ($('#music-grid').length)
   ReactDOM.render(
-    <Grid title="Music" source="/albums" limit="5" href="/albums/:id" />,
+    <Grid title="Music" source="/albums" limit="5" href="/albums/:id" thumbPath="songs" />,
     document.getElementById('music-grid')
   );
 

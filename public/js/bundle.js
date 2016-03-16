@@ -94,7 +94,7 @@
 
 	if ($('#music-grid').length)
 	  ReactDOM.render(
-	    React.createElement(Grid, {title: "Music", source: "/albums", limit: "5", href: "/albums/:id"}),
+	    React.createElement(Grid, {title: "Music", source: "/albums", limit: "5", href: "/albums/:id", thumbPath: "songs"}),
 	    document.getElementById('music-grid')
 	  );
 
@@ -19809,9 +19809,13 @@
 	    this.props.href
 	      ? link = generateLink(this.props)
 	      : link = this.props.href;
+	    var thumb = this.props.data.thumb.replace('M1','M11');
+	    if (this.props.thumbPath) {
+	      thumb = this.props.data[this.props.thumbPath][0].thumb.replace('M1','M11');
+	    }
 	    return (
 	      React.createElement("a", {href: link || '#', className: "image preview"}, 
-	        React.createElement("div", {className: "image preview"}, 
+	        React.createElement("div", {className: "image preview thumb", style: {"background-image": 'url("/images/melody/' + thumb + '") !important;'}}, 
 	            React.createElement("div", {className: "ui bottom attached label"}, this.props.data.meta.en.name)
 	        )
 	      )
@@ -19867,7 +19871,7 @@
 	    var ROWS = []
 	    var COLUMNS = [];
 	    this.state.collection.some((data, i) => {
-	      COLUMNS.push(React.createElement(Column, {key: i, data: data, href: this.props.href}))
+	      COLUMNS.push(React.createElement(Column, React.__spread({key: i, data: data},  this.props)))
 	      if (COLUMNS.length==5) {
 	        ROWS.push(React.createElement("div", {className: "row"}, 
 	          COLUMNS
@@ -19918,6 +19922,7 @@
 	    var series = {
 	      name: ''
 	    , description: ''
+	    , thumb: '/images/wireframe/16x9.png'
 	    , seasonText: 'Season 1'
 	    , productionYear: ''
 	    , seasons: []
@@ -19927,6 +19932,7 @@
 	      var series = {
 	        name: this.state.series.meta.en.name
 	      , description: this.state.series.meta.en.description
+	      , thumb: '/images/melody/' + this.state.series.thumb.replace('M1','M11')
 	      , seasonText: 'Season 1'
 	      , productionYear: 'Released ' + this.state.series['production_year']
 	      , seasons: this.state.series.seasons
@@ -19944,7 +19950,7 @@
 	              React.createElement(SeasonWatchlist, {episodes: series.episodes})
 	            ), 
 	            React.createElement("div", {className: "details sixteen wide tablet seven wide computer column centered"}, 
-	              React.createElement("img", {src: "/images/wireframe/16x9.png", className: "ui huge image pad-right-small"}), 
+	              React.createElement("img", {src: series.thumb, className: "ui huge image pad-right-small"}), 
 	              React.createElement("h1", null, series.name), 
 	              React.createElement("h3", null, series.seriesText), 
 	              React.createElement("h4", {className: "pad-right-medium"}, series.description), 
@@ -20370,29 +20376,21 @@
 	      name: ''
 	    , description: ''
 	    , productionYear: 'Produced ' + this.state.movie['production_year']
+	    , videoURL: ''
 	    }
 	    if (this.state.movie) {
 	      var movie = {
 	        name: this.state.movie.meta.en.name
 	      , description: this.state.movie.meta.en.description
 	      , productionYear: 'Produced ' + this.state.movie['production_year']
+	      , videoURL: this.state.movie['video_url']
 	      }
 	    }
 	    return (
 	      React.createElement("div", {class: "ui vertical center container aligned grids pad-top-medium"}, 
 	        React.createElement("div", {className: "ui two column grid container"}, 
 	          React.createElement("div", {className: "details sixteen wide tablet eight wide computer column centered"}, 
-	            React.createElement("object", {id: "flashObj", width: "754", height: "407", classid: "clsid:D27CDB6E-AE6D-11cf-96B8-444553540000", codebase: "http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,47,0"}, 
-	              React.createElement("param", {name: "movie", value: "http://c.brightcove.com/services/viewer/federated_f9?isVid=1&isUI=1"}), 
-	              React.createElement("param", {name: "bgcolor", value: "#FFFFFF"}), 
-	              React.createElement("param", {name: "flashVars", value: "videoId=4564740753001&playerID=3815086849001&playerKey=AQ~~,AAADd9u4__E~,fHl6JWluMnctnUR7lsNevXxKfibpHuew&domain=embed&dynamicStreaming=true"}), 
-	              React.createElement("param", {name: "base", value: "http://admin.brightcove.com"}), 
-	              React.createElement("param", {name: "seamlesstabbing", value: "false"}), 
-	              React.createElement("param", {name: "allowFullScreen", value: "true"}), 
-	              React.createElement("param", {name: "swLiveConnect", value: "true"}), 
-	              React.createElement("param", {name: "allowScriptAccess", value: "always"}), 
-	              React.createElement("embed", {src: "http://c.brightcove.com/services/viewer/federated_f9?isVid=1&isUI=1", bgcolor: "#FFFFFF", flashvars: "videoId=4564740753001&playerID=3815086849001&playerKey=AQ~~,AAADd9u4__E~,fHl6JWluMnctnUR7lsNevXxKfibpHuew&domain=embed&dynamicStreaming=true", base: "http://admin.brightcove.com", name: "flashObj", width: "98%", height: "407", seamlesstabbing: "false", type: "application/x-shockwave-flash", allowfullscreen: "true", allowscriptaccess: "always", swliveconnect: "true", pluginspage: "http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"})
-	            )
+	            React.createElement("iframe", {src: movie.videoURL, width: "754", height: "407"})
 	          ), 
 	          React.createElement("div", {className: "details sixteen wide tablet eight wide computer column centered"}, React.createElement("img", {src: "/images/banner01.png", className: "ui image"}), 
 	            React.createElement("h2", null, movie.name), 

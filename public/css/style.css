@@ -1077,6 +1077,11 @@ ul.meta.values {
   background-repeat: no-repeat;
 }
 
+.grids .image.preview .thumb {
+  background-size: cover;
+  background-color: rgba(24,24,24,1) !important
+}
+
 .grids a.image.preview:nth-child(1) {
   left: 0px;
 }

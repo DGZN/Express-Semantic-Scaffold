@@ -5,9 +5,13 @@ const Column = React.createClass({
     this.props.href
       ? link = generateLink(this.props)
       : link = this.props.href;
+    var thumb = this.props.data.thumb.replace('M1','M11');
+    if (this.props.thumbPath) {
+      thumb = this.props.data[this.props.thumbPath][0].thumb.replace('M1','M11');
+    }
     return (
       <a href={link || '#'} className="image preview">
-        <div className="image preview">
+        <div className="image preview thumb" style={{"background-image": 'url("/images/melody/' + thumb + '") !important;'}}>
             <div className="ui bottom attached label">{this.props.data.meta.en.name}</div>
         </div>
       </a>
