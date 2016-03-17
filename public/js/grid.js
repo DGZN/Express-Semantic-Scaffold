@@ -25,7 +25,7 @@ const Grid = React.createClass({
     var COLUMNS = [];
     this.state.collection.some((data, i) => {
       COLUMNS.push(<Column key={i} data={data} {...this.props} />)
-      if (COLUMNS.length==5) {
+      if (COLUMNS.length==this.props.limit) {
         ROWS.push(<div className="row">
           {COLUMNS}
         </div>)

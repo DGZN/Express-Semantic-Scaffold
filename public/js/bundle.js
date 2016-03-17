@@ -19872,7 +19872,7 @@
 	    var COLUMNS = [];
 	    this.state.collection.some((data, i) => {
 	      COLUMNS.push(React.createElement(Column, React.__spread({key: i, data: data},  this.props)))
-	      if (COLUMNS.length==5) {
+	      if (COLUMNS.length==this.props.limit) {
 	        ROWS.push(React.createElement("div", {className: "row"}, 
 	          COLUMNS
 	        ))
@@ -20376,21 +20376,20 @@
 	      name: ''
 	    , description: ''
 	    , productionYear: 'Produced ' + this.state.movie['production_year']
-	    , videoURL: ''
+	    , player: ''
 	    }
 	    if (this.state.movie) {
 	      var movie = {
 	        name: this.state.movie.meta.en.name
 	      , description: this.state.movie.meta.en.description
 	      , productionYear: 'Produced ' + this.state.movie['production_year']
-	      , videoURL: this.state.movie['video_url']
+	      , player: this.getPlayer(this.state.movie['video_url'])
 	      }
 	    }
 	    return (
-	      React.createElement("div", {class: "ui vertical center container aligned grids pad-top-medium"}, 
+	      React.createElement("div", {className: "ui vertical center container aligned grids pad-top-medium"}, 
 	        React.createElement("div", {className: "ui two column grid container"}, 
-	          React.createElement("div", {className: "details sixteen wide tablet eight wide computer column centered"}, 
-	            React.createElement("iframe", {src: movie.videoURL, width: "754", height: "407"})
+	          React.createElement("div", {className: "details sixteen wide tablet eight wide computer column centered", dangerouslySetInnerHTML: {__html:movie.player}}
 	          ), 
 	          React.createElement("div", {className: "details sixteen wide tablet eight wide computer column centered"}, React.createElement("img", {src: "/images/banner01.png", className: "ui image"}), 
 	            React.createElement("h2", null, movie.name), 
@@ -20484,7 +20483,35 @@
 	      )
 	    );
 	  },
+
+	  getPlayer: function(url){
+	    console.log("getting player url", url)
+	    if (url.indexOf('youtube')>=0)
+	      return YouTubePlayer(url.split('v=')[1])
+	    if (url.indexOf('bctid'))
+	      return BrightCovePlayer(url.split('&bctid=')[1])
+	  }
 	});
+
+	function YouTubePlayer(id){
+	  return '<iframe width="98%" height="407" src="https://www.youtube.com/embed/'+id+'?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>'
+	}
+
+	function BrightCovePlayer(id){
+	    console.log("BrightcoveID", id)
+	    return ('<object id="flashObj" width="98%" height="407" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,47,0"> \
+	      <param name="movie" value="http://c.brightcove.com/services/viewer/federated_f9?isVid=1&isUI=1" />                                                                                                          \
+	      <param name="bgcolor" value="#FFFFFF" />                                                                                                                                                                    \
+	      <param name="flashVars" value="videoId='+id+'&playerID=3815086849001&playerKey=AQ~~,AAADd9u4__E~,fHl6JWluMnctnUR7lsNevXxKfibpHuew&domain=embed&dynamicStreaming=true" />                             \
+	      <param name="base" value="http://admin.brightcove.com" />                                                                                                                                                   \
+	      <param name="seamlesstabbing" value="false" /> \
+	      <param name="allowFullScreen" value="true" /> \
+	      <param name="swLiveConnect" value="true" /> \
+	      <param name="allowScriptAccess" value="always" /> \
+	      <embed src="http://c.brightcove.com/services/viewer/federated_f9?isVid=1&isUI=1" bgcolor="#FFFFFF"  flashVars="videoId='+id+'&playerID=3815086849001&playerKey=AQ~~,AAADd9u4__E~,fHl6JWluMnctnUR7lsNevXxKfibpHuew&domain=embed&dynamicStreaming=true" base="http://admin.brightcove.com" name="flashObj" width="98%" height="407" seamlesstabbing="false" type="application/x-shockwave-flash" allowFullScreen="true" allowScriptAccess="always" swLiveConnect="true" pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"> \
+	    </embed></object>')
+	}
+
 
 	module.exports = VideoDetail;
 

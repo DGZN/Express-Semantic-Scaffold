@@ -406,8 +406,8 @@ body.pushable>.pusher {
   position: relative;
   display: block;
   width: 100%;
-  min-height: 400px;
-  background-image: url('/images/giant-logo-big.jpg');
+  min-height: 533px;
+  background-image: url('/images/melody/Melody-logo-slider.jpg');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
