@@ -1,0 +1,11 @@
+{
+  "apps" : [{
+    "name"        : "melody",
+    "script"      : "./bin/www",
+    "merge_logs"  : true,
+    "env": {
+      "NODE_ENV": "production"
+    , "DEBUG": "*"
+    }
+  }]
+}
