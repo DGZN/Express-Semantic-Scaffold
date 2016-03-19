@@ -3,7 +3,7 @@ const React = require('react');
 const Footer = React.createClass({
   render() {
     return (
-      <div>
+      <div className="ui inverted vertical footer stackable center aligned segment">
         <div className="ui middle aligned six column centered stackable grid footer container">
           <div className="row">
             <div className="column middle aligned"><a className="link">

@@ -1,11 +1,13 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 
+const App = require('./public/js/app.js')
 const Carousel = require('./public/js/carousel.js')
 const Grid = require('./public/js/grid.js')
 const SeasonDetail = require('./public/js/season-detail.js')
 const AlbumDetail = require('./public/js/album-detail.js')
 const VideoDetail = require('./public/js/video-detail.js')
+const SimilarTitles = require('./public/js/similar-titles.js')
 const Footer = require('./public/js/footer.js')
 
 if ($('#home-grid').length)
@@ -24,11 +26,12 @@ if ($('#movies-grid').length)
     document.getElementById('movies-grid')
   );
 
-if ($('#movie-details').length) {
-  var movie = '/movies/' + $('#movie-details').data('id');
+
+if ($('#movie').length) {
+  var movie = '/movies/' + $('#movie').data('id');
   ReactDOM.render(
-    <VideoDetail source={movie} />,
-    document.getElementById('movie-details')
+    <App source={movie} />,
+    document.getElementById('movie')
   );
 }
 
@@ -66,15 +69,16 @@ if ($('#plays-grid').length)
     document.getElementById('plays-grid')
   );
 
-if ($('#play-details').length) {
-  var play = '/plays/' + $('#play-details').data('id');
+if ($('#play').length) {
+  var play = '/plays/' + $('#play').data('id');
   ReactDOM.render(
-    <VideoDetail source={play} />,
-    document.getElementById('play-details')
+    <App source={play} />,
+    document.getElementById('play')
   );
 }
 
-ReactDOM.render(
-  <Footer />,
-  document.getElementById('footer')
-);
+if ($('#footer').length)
+  ReactDOM.render(
+    <Footer />,
+    document.getElementById('footer')
+  );
