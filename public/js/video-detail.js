@@ -10,7 +10,7 @@ const VideoDetail = React.createClass({
   componentDidMount: function() {
     this.fetch = $.get('http://util.giantdev.com/v1/assets'+this.props.source, function (result) {
       this.setState({
-        movie: result[0]
+        movie: result
       });
     }.bind(this));
   },
@@ -23,12 +23,14 @@ const VideoDetail = React.createClass({
     var movie = {
       name: ''
     , description: ''
+    , productionYear: 'Produced ' + this.state.movie['production_year']
     , player: ''
     }
     if (this.state.movie) {
       var movie = {
         name: this.state.movie.meta[this.props.language].name
       , description: this.state.movie.meta[this.props.language].description
+      , productionYear: 'Produced ' + this.state.movie['production_year']
       , player: this.getPlayer(this.state.movie['video_url'])
       }
     }
@@ -44,7 +46,7 @@ const VideoDetail = React.createClass({
               <div className="ui one column grid center">
                 <div className="row">
                   <div className="column tight">
-                    <div className="movie-details"><span>R</span><span>123 min</span><span></span><span>5.1</span><span>HD</span></div>
+                    <div className="movie-details"><span>R</span><span>123 min</span><span>{movie.productionYear}</span><span>5.1</span><span>HD</span></div>
                     <div className="movie-actions"><img src="/images/play-button.png" className="ui image"/><img src="/images/add-button.png" className="ui image"/><img src="/images/social-share-circle-icons.png" className="ui image social-share"/></div>
                   </div>
                 </div>
