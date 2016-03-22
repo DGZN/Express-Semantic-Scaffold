@@ -48,13 +48,13 @@
 	const ReactDOM = __webpack_require__(158);
 
 	const App = __webpack_require__(159)
-	const Carousel = __webpack_require__(164)
-	const Grid = __webpack_require__(167)
-	const SeasonDetail = __webpack_require__(168)
-	const AlbumDetail = __webpack_require__(170)
+	const Carousel = __webpack_require__(167)
+	const Grid = __webpack_require__(170)
+	const SeasonDetail = __webpack_require__(171)
+	const AlbumDetail = __webpack_require__(173)
 	const VideoDetail = __webpack_require__(161)
-	const SimilarTitles = __webpack_require__(162)
-	const Footer = __webpack_require__(163)
+	const SimilarTitles = __webpack_require__(165)
+	const Footer = __webpack_require__(166)
 
 	if ($('#home-grid').length)
 	  ReactDOM.render(
@@ -19739,8 +19739,8 @@
 
 	const Nav = __webpack_require__(160)
 	const VideoDetail = __webpack_require__(161)
-	const SimilarTitles = __webpack_require__(162)
-	const Footer = __webpack_require__(163)
+	const SimilarTitles = __webpack_require__(165)
+	const Footer = __webpack_require__(166)
 
 	const App = React.createClass({displayName: "App",
 
@@ -19853,6 +19853,8 @@
 
 	const React = __webpack_require__(1);
 
+	const Roles = __webpack_require__(162);
+
 	const VideoDetail = React.createClass({displayName: "VideoDetail",
 	  getInitialState: function() {
 	    return {
@@ -19861,7 +19863,7 @@
 	  },
 
 	  componentDidMount: function() {
-	    this.fetch = $.get('http://util.giantdev.com/v1/assets'+this.props.source, function (result) {
+	    this.fetch = $.get('http://dgzn.io:8080/v1/assets'+this.props.source, function (result) {
 	      this.setState({
 	        movie: result
 	      });
@@ -19880,11 +19882,18 @@
 	    , player: ''
 	    }
 	    if (this.state.movie) {
+	      var _roles = this.state.movie.roles
+	      var roles = []
+	      this.state.movie.people.map((person) => {
+	        roles[_roles[person.role].meta[this.props.language].name] = roles[_roles[person.role].meta[this.props.language].name] || [];
+	        roles[_roles[person.role].meta[this.props.language].name].push(person)
+	      })
 	      var movie = {
 	        name: this.state.movie.meta[this.props.language].name
 	      , description: this.state.movie.meta[this.props.language].description
 	      , productionYear: 'Produced ' + this.state.movie['production_year']
 	      , player: this.getPlayer(this.state.movie['video_url'])
+	      , roles: roles
 	      }
 	    }
 	    return (
@@ -19908,78 +19917,7 @@
 	          ), 
 	          React.createElement("div", {className: "ui grid container details"}, 
 	            React.createElement("div", {className: "details sixteen wide tablet sixteen wide computer column centered"}, 
-	              React.createElement("div", {className: "ui three column grid container stackable"}, 
-	                React.createElement("div", {className: "cast three wide computer five wide tablet column tight"}, 
-	                  React.createElement("div", {className: "ui top attached label detailHeading"}, "Producers"), 
-	                  React.createElement("div", {className: "ui grid"}, 
-	                    React.createElement("div", {className: "row"}, 
-	                      React.createElement("div", {className: "pad-top-medium column tight"}, 
-	                        React.createElement("ul", {className: "meta tight"}, 
-	                          React.createElement("li", null, "Alex"), 
-	                          React.createElement("li", null, "Noma"), 
-	                          React.createElement("li", null, "Alex"), 
-	                          React.createElement("li", null, "Noma")
-	                        )
-	                      ), 
-	                      React.createElement("div", {className: "pad-top-medium column tight"}, 
-	                        React.createElement("ul", {className: "meta values"}, 
-	                          React.createElement("li", null, "Shiradashi Smith"), 
-	                          React.createElement("li", null, "Jane Doe"), 
-	                          React.createElement("li", null, "John Smit"), 
-	                          React.createElement("li", null, "Someone")
-	                        )
-	                      )
-	                    )
-	                  )
-	                ), 
-	                React.createElement("div", {className: "cast three wide computer five wide tablet column tight"}, 
-	                  React.createElement("div", {className: "ui top attached label detailHeading"}, "Directors"), 
-	                  React.createElement("div", {className: "ui grid"}, 
-	                    React.createElement("div", {className: "row"}, 
-	                      React.createElement("div", {className: "pad-top-medium column tight"}, 
-	                        React.createElement("ul", {className: "meta tight"}, 
-	                          React.createElement("li", null, "Alex"), 
-	                          React.createElement("li", null, "Noma"), 
-	                          React.createElement("li", null, "Alex"), 
-	                          React.createElement("li", null, "Noma"), 
-	                          React.createElement("div", {className: "column"})
-	                        )
-	                      ), 
-	                      React.createElement("div", {className: "pad-top-medium column tight"}, 
-	                        React.createElement("ul", {className: "meta values"}, 
-	                          React.createElement("li", null, "Shiradashi Smith"), 
-	                          React.createElement("li", null, "Jane Doe"), 
-	                          React.createElement("li", null, "John Smit"), 
-	                          React.createElement("li", null, "Someone")
-	                        )
-	                      )
-	                    )
-	                  )
-	                ), 
-	                React.createElement("div", {className: "cast three wide computer five wide tablet column tight"}, 
-	                  React.createElement("div", {className: "ui top attached label detailHeading"}, "Cast & Crew"), 
-	                  React.createElement("div", {className: "ui grid"}, 
-	                    React.createElement("div", {className: "row"}, 
-	                      React.createElement("div", {className: "pad-top-medium column tight"}, 
-	                        React.createElement("ul", {className: "meta tight"}, 
-	                          React.createElement("li", null, "Alex"), 
-	                          React.createElement("li", null, "Noma"), 
-	                          React.createElement("li", null, "Alex"), 
-	                          React.createElement("li", null, "Noma")
-	                        )
-	                      ), 
-	                      React.createElement("div", {className: "pad-top-medium column tight"}, 
-	                        React.createElement("ul", {className: "meta values"}, 
-	                          React.createElement("li", null, "Shiradashi Smith"), 
-	                          React.createElement("li", null, "Jane Doe"), 
-	                          React.createElement("li", null, "John Smit"), 
-	                          React.createElement("li", null, "Someone")
-	                        )
-	                      )
-	                    )
-	                  )
-	                )
-	              )
+	              React.createElement(Roles, {roles: movie.roles, language: this.props.language})
 	            )
 	          )
 	        )
@@ -20021,6 +19959,116 @@
 
 /***/ },
 /* 162 */
+/***/ function(module, exports, __webpack_require__) {
+
+	const React = __webpack_require__(1);
+
+	const People = __webpack_require__(163)
+
+	const Roles = React.createClass({displayName: "Roles",
+
+	  getInitialState: function() {
+	    return {
+	      roles: []
+	    };
+	  },
+
+	  componentWillReceiveProps: function(props) {
+	    this.setState({
+	      roles: props['roles'] || []
+	    , people: []
+	    })
+	  },
+
+	  render() {
+	    var PEOPLE = this.state.people;
+	    if (this.state.roles) {
+	      var PEOPLE = []
+	      for (var role in this.state.roles) {
+	        PEOPLE.push(React.createElement(People, {key: role, title: role, people: this.state.roles[role], language: this.props.language}))
+	      }
+	    }
+	    return (
+	      React.createElement("div", {className: "ui three column grid container stackable"}, 
+	        PEOPLE
+	      )
+	    );
+	  }
+	});
+
+	module.exports = Roles;
+
+
+/***/ },
+/* 163 */
+/***/ function(module, exports, __webpack_require__) {
+
+	const React = __webpack_require__(1);
+
+	const Person = __webpack_require__(164)
+
+
+	const People = React.createClass({displayName: "People",
+	  getInitialState: function() {
+	    return {
+	      title: this.props.title
+	    , people: this.props.people || []
+	    };
+	  },
+
+	  render() {
+	    var people = []
+	    this.state.people.map((person, i) => {
+	      people.push(React.createElement(Person, {key: i, name: person.meta[this.props.language]["first_name"] + ' ' + person.meta[this.props.language]["last_name"]}))
+	    })
+	    return (
+	      React.createElement("div", {className: "cast three wide computer five wide tablet column tight"}, 
+	        React.createElement("div", {className: "ui top attached label detailHeading"}, this.state.title), 
+	        React.createElement("div", {className: "ui grid"}, 
+	          React.createElement("div", {className: "row"}, 
+	            React.createElement("div", {className: "pad-top-medium column tight"}, 
+	              React.createElement("ul", {className: "meta tight"}, 
+	                people
+	              )
+	            )
+	          )
+	        )
+	      )
+	    );
+	  }
+	});
+
+	function getChararcters(){
+	  return (React.createElement("div", {className: "pad-top-medium column tight"}, 
+	            React.createElement("ul", {className: "meta tight"}, 
+	              React.createElement("li", null, "Alex"), 
+	              React.createElement("li", null, "Noma"), 
+	              React.createElement("li", null, "Alex"), 
+	              React.createElement("li", null, "Noma")
+	            )
+	          ));
+	}
+
+	module.exports = People;
+
+
+/***/ },
+/* 164 */
+/***/ function(module, exports, __webpack_require__) {
+
+	const React = __webpack_require__(1);
+
+	const Person = React.createClass({displayName: "Person",
+	  render() {
+	    return (React.createElement("li", null, this.props.name));
+	  }
+	});
+
+	module.exports = Person;
+
+
+/***/ },
+/* 165 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
@@ -20068,7 +20116,7 @@
 
 
 /***/ },
-/* 163 */
+/* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
@@ -20110,11 +20158,11 @@
 
 
 /***/ },
-/* 164 */
+/* 167 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
-	const Row = __webpack_require__(165)
+	const Row = __webpack_require__(168)
 
 	const Carousel = React.createClass({displayName: "Carousel",
 	  render() {
@@ -20137,12 +20185,12 @@
 
 
 /***/ },
-/* 165 */
+/* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
 
-	const Column = __webpack_require__(166)
+	const Column = __webpack_require__(169)
 
 	const Row = React.createClass({displayName: "Row",
 	  getInitialState: function() {
@@ -20181,7 +20229,7 @@
 
 
 /***/ },
-/* 166 */
+/* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
@@ -20224,11 +20272,11 @@
 
 
 /***/ },
-/* 167 */
+/* 170 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
-	const Column = __webpack_require__(166)
+	const Column = __webpack_require__(169)
 
 	const Grid = React.createClass({displayName: "Grid",
 	  getInitialState: function() {
@@ -20239,7 +20287,7 @@
 	  },
 
 	  componentDidMount: function() {
-	    this.fetch = $.get('http://util.giantdev.com/v1/assets'+this.props.source, function (result) {
+	    this.fetch = $.get('http://dgzn.io:8080/v1/assets'+this.props.source, function (result) {
 	      this.setState({
 	        collection: result
 	      });
@@ -20274,12 +20322,12 @@
 
 
 /***/ },
-/* 168 */
+/* 171 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
 
-	const SeasonWatchlist = __webpack_require__(169)
+	const SeasonWatchlist = __webpack_require__(172)
 
 	const SeasonDetail = React.createClass({displayName: "SeasonDetail",
 	  getInitialState: function() {
@@ -20463,7 +20511,7 @@
 
 
 /***/ },
-/* 169 */
+/* 172 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
@@ -20522,12 +20570,12 @@
 
 
 /***/ },
-/* 170 */
+/* 173 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
 
-	const AlbumWatchlist = __webpack_require__(171)
+	const AlbumWatchlist = __webpack_require__(174)
 
 
 	const AlbumDetail = React.createClass({displayName: "AlbumDetail",
@@ -20672,7 +20720,7 @@
 
 
 /***/ },
-/* 171 */
+/* 174 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);

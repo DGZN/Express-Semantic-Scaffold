@@ -1,5 +1,7 @@
 const React = require('react');
 
+const Roles = require('./roles.js');
+
 const VideoDetail = React.createClass({
   getInitialState: function() {
     return {
@@ -8,7 +10,7 @@ const VideoDetail = React.createClass({
   },
 
   componentDidMount: function() {
-    this.fetch = $.get('http://util.giantdev.com/v1/assets'+this.props.source, function (result) {
+    this.fetch = $.get('http://dgzn.io:8080/v1/assets'+this.props.source, function (result) {
       this.setState({
         movie: result
       });
@@ -27,11 +29,18 @@ const VideoDetail = React.createClass({
     , player: ''
     }
     if (this.state.movie) {
+      var _roles = this.state.movie.roles
+      var roles = []
+      this.state.movie.people.map((person) => {
+        roles[_roles[person.role].meta[this.props.language].name] = roles[_roles[person.role].meta[this.props.language].name] || [];
+        roles[_roles[person.role].meta[this.props.language].name].push(person)
+      })
       var movie = {
         name: this.state.movie.meta[this.props.language].name
       , description: this.state.movie.meta[this.props.language].description
       , productionYear: 'Produced ' + this.state.movie['production_year']
       , player: this.getPlayer(this.state.movie['video_url'])
+      , roles: roles
       }
     }
     return (
@@ -55,78 +64,7 @@ const VideoDetail = React.createClass({
           </div>
           <div className="ui grid container details">
             <div className="details sixteen wide tablet sixteen wide computer column centered">
-              <div className="ui three column grid container stackable">
-                <div className="cast three wide computer five wide tablet column tight">
-                  <div className="ui top attached label detailHeading">Producers</div>
-                  <div className="ui grid">
-                    <div className="row">
-                      <div className="pad-top-medium column tight">
-                        <ul className="meta tight">
-                          <li>Alex</li>
-                          <li>Noma</li>
-                          <li>Alex</li>
-                          <li>Noma</li>
-                        </ul>
-                      </div>
-                      <div className="pad-top-medium column tight">
-                        <ul className="meta values">
-                          <li>Shiradashi Smith</li>
-                          <li>Jane Doe</li>
-                          <li>John Smit</li>
-                          <li>Someone</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="cast three wide computer five wide tablet column tight">
-                  <div className="ui top attached label detailHeading">Directors</div>
-                  <div className="ui grid">
-                    <div className="row">
-                      <div className="pad-top-medium column tight">
-                        <ul className="meta tight">
-                          <li>Alex</li>
-                          <li>Noma</li>
-                          <li>Alex</li>
-                          <li>Noma</li>
-                          <div className="column"></div>
-                        </ul>
-                      </div>
-                      <div className="pad-top-medium column tight">
-                        <ul className="meta values">
-                          <li>Shiradashi Smith</li>
-                          <li>Jane Doe</li>
-                          <li>John Smit</li>
-                          <li>Someone</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="cast three wide computer five wide tablet column tight">
-                  <div className="ui top attached label detailHeading">Cast & Crew</div>
-                  <div className="ui grid">
-                    <div className="row">
-                      <div className="pad-top-medium column tight">
-                        <ul className="meta tight">
-                          <li>Alex</li>
-                          <li>Noma</li>
-                          <li>Alex</li>
-                          <li>Noma</li>
-                        </ul>
-                      </div>
-                      <div className="pad-top-medium column tight">
-                        <ul className="meta values">
-                          <li>Shiradashi Smith</li>
-                          <li>Jane Doe</li>
-                          <li>John Smit</li>
-                          <li>Someone</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <Roles roles={movie.roles} language={this.props.language} />
             </div>
           </div>
         </div>
