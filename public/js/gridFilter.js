@@ -4,7 +4,8 @@ const GridFilter = React.createClass({
 
   getInitialState: function() {
     return {
-      genres: []
+      filter: ''
+    , genres: []
     };
   },
 
@@ -49,10 +50,10 @@ const GridFilter = React.createClass({
           <div id="seasons-dropdown" className="ui simple dropdown item inverted">
             SORT BY <i className="plus icon"></i>
             <div className="menu">
-              <a className="item">FEATURED</a>
-              <a className="item">A -Z</a>
-              <a className="item">JUST ADDED</a>
-              <a className="item">TOP</a>
+              <a className="item" onClick={this.props.filter.bind(null, 'featured')}>FEATURED</a>
+              <a className="item" onClick={this.props.filter.bind(null, 'a-z')}>A -Z</a>
+              <a className="item" onClick={this.props.filter.bind(null, 'new')}>JUST ADDED</a>
+              <a className="item" onClick={this.props.filter.bind(null, 'top')}>TOP</a>
             </div>
           </div>
         </div>

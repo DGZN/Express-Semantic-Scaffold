@@ -20211,6 +20211,12 @@
 
 	const Grid = React.createClass({displayName: "Grid",
 
+	  filter: function(filter) {
+	    this.setState({
+	      filter: filter
+	    })
+	  },
+
 	  filterGenre: function(genre) {
 	    this.setState({
 	      genre: genre
@@ -20240,7 +20246,28 @@
 	  render() {
 	    var ROWS = []
 	    var COLUMNS = [];
-	    this.state.collection.some((data, i) => {
+
+	    var collection = this.state.collection
+
+
+	    if (this.state.filter) {
+	      switch (this.state.filter) {
+	        case 'a-z':
+	          var collection = this.state.collection.sort((a, b) => {
+	            if (a.meta[this.props.language].name < b.meta[this.props.language].name) return -1;
+	            if (a.meta[this.props.language].name > b.meta[this.props.language].name) return 1;
+	            return 0;
+	          })
+	          break;
+	        case 'new':
+	          var collection = this.state.collection.sort((a, b) => {
+	            return b.id - a.id;
+	          })
+	          break;
+	      }
+	    }
+
+	    collection.some((data, i) => {
 	      if (this.state.genre[this.props.language]) {
 	        if (data.genres) {
 	          data.genres.some((genre) => {
@@ -20268,7 +20295,7 @@
 	    }
 	    return (
 	      React.createElement("div", null, 
-	        React.createElement(GridFilter, React.__spread({},  this.props, {filterGenre: this.filterGenre, activeGenre: this.state.genre})), 
+	        React.createElement(GridFilter, React.__spread({},  this.props, {filter: this.filter, filterGenre: this.filterGenre, activeFilter: this.state.filter, activeGenre: this.state.genre})), 
 	        React.createElement("div", {className: "ui vertical center container aligned grids"}, 
 	          React.createElement("div", {className: "ui equal width grid container"}, 
 	            ROWS
@@ -20292,7 +20319,8 @@
 
 	  getInitialState: function() {
 	    return {
-	      genres: []
+	      filter: ''
+	    , genres: []
 	    };
 	  },
 
@@ -20337,10 +20365,10 @@
 	          React.createElement("div", {id: "seasons-dropdown", className: "ui simple dropdown item inverted"}, 
 	            "SORT BY ", React.createElement("i", {className: "plus icon"}), 
 	            React.createElement("div", {className: "menu"}, 
-	              React.createElement("a", {className: "item"}, "FEATURED"), 
-	              React.createElement("a", {className: "item"}, "A -Z"), 
-	              React.createElement("a", {className: "item"}, "JUST ADDED"), 
-	              React.createElement("a", {className: "item"}, "TOP")
+	              React.createElement("a", {className: "item", onClick: this.props.filter.bind(null, 'featured')}, "FEATURED"), 
+	              React.createElement("a", {className: "item", onClick: this.props.filter.bind(null, 'a-z')}, "A -Z"), 
+	              React.createElement("a", {className: "item", onClick: this.props.filter.bind(null, 'new')}, "JUST ADDED"), 
+	              React.createElement("a", {className: "item", onClick: this.props.filter.bind(null, 'top')}, "TOP")
 	            )
 	          )
 	        )
