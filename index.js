@@ -2,6 +2,7 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 
 const App = require('./public/js/app.js')
+const GridApp = require('./public/js/gridApp.js')
 const Carousel = require('./public/js/carousel.js')
 const Grid = require('./public/js/grid.js')
 const SeasonDetail = require('./public/js/season-detail.js')
@@ -20,10 +21,10 @@ if ($('#home-grid').length)
     document.getElementById('home-grid')
   );
 
-if ($('#movies-grid').length)
+if ($('#movies').length)
   ReactDOM.render(
-    <Grid title="Movies" source="/movies" limit="5" href="/movies/:id" />,
-    document.getElementById('movies-grid')
+    <GridApp title="Movies" source="/movies" limit="5" href="/movies/:id" />,
+    document.getElementById('movies')
   );
 
 
@@ -35,10 +36,10 @@ if ($('#movie').length) {
   );
 }
 
-if ($('#series-grid').length)
+if ($('#series').length)
   ReactDOM.render(
-    <Grid title="Series" source="/series" limit="5" href="/series/:id" />,
-    document.getElementById('series-grid')
+    <GridApp title="Series" source="/series" limit="5" href="/series/:id" />,
+    document.getElementById('series')
   );
 
 if ($('#season-details').length) {
@@ -49,10 +50,10 @@ if ($('#season-details').length) {
   );
 }
 
-if ($('#music-grid').length)
+if ($('#music').length)
   ReactDOM.render(
-    <Grid title="Music" source="/albums" limit="5" href="/albums/:id" thumbPath="songs" />,
-    document.getElementById('music-grid')
+    <GridApp title="Music" source="/albums" limit="5" href="/albums/:id" thumbPath="songs" />,
+    document.getElementById('music')
   );
 
 if ($('#album-details').length) {
@@ -63,10 +64,10 @@ if ($('#album-details').length) {
   );
 }
 
-if ($('#plays-grid').length)
+if ($('#plays').length)
   ReactDOM.render(
-    <Grid title="Plays" source="/plays" limit="5" href="/plays/:id" />,
-    document.getElementById('plays-grid')
+    <GridApp title="Plays" source="/plays" limit="5" href="/plays/:id" />,
+    document.getElementById('plays')
   );
 
 if ($('#play').length) {

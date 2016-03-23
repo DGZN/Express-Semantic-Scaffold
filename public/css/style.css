@@ -777,6 +777,7 @@ body.pushable>.pusher {
   font-size: 1em;
   font-weight: 300;
   line-height: 2em;
+  min-height: 120px;
   margin-top: 0.5rem;
 }
 

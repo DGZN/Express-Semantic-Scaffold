@@ -22,7 +22,7 @@ const People = React.createClass({
         <div className="ui grid">
           <div className="row">
             <div className="pad-top-medium column tight">
-              <ul className="meta tight">
+              <ul className="meta values tight">
                 {people}
               </ul>
             </div>
