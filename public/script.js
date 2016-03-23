@@ -15,9 +15,11 @@ $(document)
 
     // create sidebar and attach to menu open
 
-    $('#watchlist-sidebar')
-      .sidebar('attach events', '.watchlist.item')
-    ;
+    setTimeout(function(){
+      $('#watchlist-sidebar')
+        .sidebar('attach events', '.watchlist.item')
+      ;
+    }, 1000)
 
     $('#seasons-dropdown-filter')
       .dropdown()

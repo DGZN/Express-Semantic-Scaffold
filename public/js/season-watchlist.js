@@ -1,12 +1,12 @@
 const React = require('react');
 
-const Watchlist = React.createClass({
+const SeasonWatchlist = React.createClass({
   render() {
     var ROWS = []
     if (!this.props.episodes)
       return (<div className="row watchlist"></div>)
     this.props.episodes.map((episode, i) => {
-      ROWS.push(<WatchlistRow index={i+1} episode={episode} />)
+      ROWS.push(<WatchlistRow key={'watchlist-'+i} episode={episode} />)
     })
     return (
       <div className="ui stackable grid">
@@ -50,4 +50,4 @@ function generateLink(props){
   return link;
 }
 
-module.exports = Watchlist;
+module.exports = SeasonWatchlist;

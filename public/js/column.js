@@ -24,7 +24,7 @@ const Column = React.createClass({
     }
     return (
       <a href={link || '#'} className="image preview">
-        <div className="image preview thumb" style={{"background-image": 'url(' + thumb + ') !important;'}}>
+        <div className="image preview thumb" style={{"backgroundImage": 'url(' + thumb + ') !important'}}>
             <div className="ui bottom attached label">{this.props.data.meta[this.state.language].name}</div>
         </div>
       </a>

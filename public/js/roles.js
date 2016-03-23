@@ -22,7 +22,7 @@ const Roles = React.createClass({
     if (this.state.roles) {
       var PEOPLE = []
       for (var role in this.state.roles) {
-        PEOPLE.push(<People key={role} title={role} people={this.state.roles[role]} language={this.props.language} />)
+        PEOPLE.push(<People key={role} title={role} people={this.state.roles[role]} language={this.props.language} {...this.props} />)
       }
     }
     return (

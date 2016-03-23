@@ -1,6 +1,7 @@
 const React = require('react');
 
 const GridFilter = React.createClass({
+
   getInitialState: function() {
     return {
       genres: []
@@ -20,20 +21,27 @@ const GridFilter = React.createClass({
   },
 
   render() {
-    var defaultGenre = '';
+    var title = this.props.activeGenre[this.props.language]
+      ? this.props.activeGenre[this.props.language].name
+      : 'Genres';
     var GENRES = []
     this.state.genres.map((genre, i) => {
         if (genre.meta[this.props.language]) {
-          if (i==0)
-            defaultGenre = genre.meta[this.props.language].name
-          GENRES.push(<a className="item" onClick={this.props.filterGenre.bind(null, genre.meta[this.props.language].name)}>{genre.meta[this.props.language].name}</a>)
+          var name = genre.meta[this.props.language].name;
+          GENRES.push(
+            <a
+              className="item"
+              key={i*Math.random(9,99)}
+              onClick={this.props.filterGenre.bind(null, genre.meta)}> {name}
+            </a>
+          )
         }
     })
     return (
       <div className="ui container grids pad-bottom-medium">
         <div className="row subnav"><span className="title">{this.props.title}</span>
           <div id="seasons-dropdown" className="ui simple dropdown item inverted">
-            Genres <i className="plus icon"></i>
+            {title} <i className="plus icon"></i>
             <div className="menu">
               {GENRES}
             </div>

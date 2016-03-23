@@ -13,11 +13,13 @@ const People = React.createClass({
 
   render() {
     var people = []
+    var colWidth = this.props.colWidth ? this.props.colWidth : 'three'
     this.state.people.map((person, i) => {
       people.push(<Person key={i} name={person.meta[this.props.language]["first_name"] + ' ' + person.meta[this.props.language]["last_name"]} />)
     })
+    var className = 'cast ' + colWidth + ' wide computer five wide tablet column tight'
     return (
-      <div className="cast three wide computer five wide tablet column tight">
+      <div className={className}>
         <div className="ui top attached label detailHeading">{this.state.title}</div>
         <div className="ui grid">
           <div className="row">

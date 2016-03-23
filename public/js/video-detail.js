@@ -26,6 +26,7 @@ const VideoDetail = React.createClass({
       name: ''
     , description: ''
     , productionYear: 'Produced ' + this.state.movie['production_year']
+    , duration: 0
     , player: ''
     }
     if (this.state.movie) {
@@ -39,6 +40,7 @@ const VideoDetail = React.createClass({
         name: this.state.movie.meta[this.props.language].name
       , description: this.state.movie.meta[this.props.language].description
       , productionYear: 'Produced ' + this.state.movie['production_year']
+      , duration: Math.floor(this.state.movie.duration / 60) + ' min'
       , player: this.getPlayer(this.state.movie['video_url'])
       , roles: roles
       }
@@ -55,7 +57,7 @@ const VideoDetail = React.createClass({
               <div className="ui one column grid center">
                 <div className="row">
                   <div className="column tight">
-                    <div className="movie-details"><span>R</span><span>123 min</span><span>{movie.productionYear}</span><span>5.1</span><span>HD</span></div>
+                    <div className="movie-details"><span>{movie.duration}</span><span>{movie.productionYear}</span></div>
                     <div className="movie-actions"><img src="/images/play-button.png" className="ui image"/><img src="/images/add-button.png" className="ui image"/><img src="/images/social-share-circle-icons.png" className="ui image social-share"/></div>
                   </div>
                 </div>

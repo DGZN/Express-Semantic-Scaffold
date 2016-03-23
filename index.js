@@ -3,9 +3,9 @@ const ReactDOM = require('react-dom');
 
 const App = require('./public/js/app.js')
 const GridApp = require('./public/js/gridApp.js')
+const SeasonApp = require('./public/js/seasonApp.js')
 const Carousel = require('./public/js/carousel.js')
 const Grid = require('./public/js/grid.js')
-const SeasonDetail = require('./public/js/season-detail.js')
 const AlbumDetail = require('./public/js/album-detail.js')
 const VideoDetail = require('./public/js/video-detail.js')
 const SimilarTitles = require('./public/js/similar-titles.js')
@@ -42,11 +42,11 @@ if ($('#series').length)
     document.getElementById('series')
   );
 
-if ($('#season-details').length) {
-  var season = '/series/' + $('#season-details').data('id');
+if ($('#season').length) {
+  var season = '/series/' + $('#season').data('id');
   ReactDOM.render(
-    <SeasonDetail source={season} />,
-    document.getElementById('season-details')
+    <SeasonApp source={season} />,
+    document.getElementById('season')
   );
 }
 

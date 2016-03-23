@@ -1,8 +1,11 @@
 const React = require('react');
 
+const SeasonFilter = require('./season-filter.js')
 const SeasonWatchlist = require('./season-watchlist.js')
+const Roles = require('./roles.js');
 
 const SeasonDetail = React.createClass({
+
   getInitialState: function() {
     return {
       series: ''
@@ -10,9 +13,9 @@ const SeasonDetail = React.createClass({
   },
 
   componentDidMount: function() {
-    this.fetch = $.get('http://util.giantdev.com/v1/assets'+this.props.source, function (result) {
+    this.fetch = $.get('http://dgzn.io:8080/v1/assets'+this.props.source, function (result) {
       this.setState({
-        series: result[0]
+        series: result
       });
     }.bind(this));
   },
@@ -28,24 +31,38 @@ const SeasonDetail = React.createClass({
     , thumb: '/images/wireframe/16x9.png'
     , seasonText: 'Season 1'
     , productionYear: ''
+    , duration: 0
     , seasons: []
     , episodes: []
     }
     if (this.state.series) {
+      var _roles = this.state.series.seasons[0].roles
+      var roles = []
+      this.state.series.seasons[0].people.map((person) => {
+        roles[_roles[person.role].meta[this.props.language].name] = roles[_roles[person.role].meta[this.props.language].name] || [];
+        roles[_roles[person.role].meta[this.props.language].name].push(person)
+      })
       var series = {
-        name: this.state.series.meta.en.name
-      , description: this.state.series.meta.en.description
+        name: this.state.series.meta[this.props.language].name
+      , description: this.state.series.meta[this.props.language].description
       , thumb: '/images/melody/' + this.state.series.thumb.replace('M1','M11')
       , seasonText: 'Season 1'
       , productionYear: 'Released ' + this.state.series['production_year']
+      , duration: Math.floor(this.state.series.seasons[0].episodes[0].duration / 60) + ' min'
       , seasons: this.state.series.seasons
       , episodes: this.state.series.seasons[0].episodes
+      , roles: roles
       }
     }
+    setTimeout(function(){
+      $('#watchlist-sidebar')
+        .sidebar('attach events', '.watchlist.item')
+      ;
+    }, 1000)
     return (
       <div>
         <div className="ui container grids">
-          <SeasonFilterNav seasons={series.seasons} />
+          <SeasonFilter title={series.name} seasons={series.seasons} />
         </div>
         <div className="ui vertical center container aligned grids">
           <div className="ui two column grid container details pad-top-medium">
@@ -61,7 +78,7 @@ const SeasonDetail = React.createClass({
                 <div className="row">
                   <div className="column tight">
                     <div className="movie-details">
-                      <span>R</span><span>123 min</span><span>{series.productionYear}</span><span>5.1</span><span>HD</span>
+                      <span>{series.duration}</span><span>{series.productionYear}</span>
                     </div>
                     <div className="movie-actions">
                       <img src="/images/play-button.png" className="ui image"/>
@@ -73,111 +90,13 @@ const SeasonDetail = React.createClass({
               </div>
             </div>
             <div className="details sixteen wide tablet three wide computer column centered">
-              <div className="ui three column grid container stackable">
-                <div className="cast sixteen wide computer five wide tablet column tight">
-                  <div className="ui top attached label detailHeading">Producers</div>
-                  <div className="ui grid">
-                    <div className="row">
-                      <div className="pad-top-medium column tight">
-                        <ul className="meta tight">
-                          <li>Alex</li>
-                          <li>Noma</li>
-                          <li>Alex</li>
-                          <li>Noma</li>
-                        </ul>
-                      </div>
-                      <div className="pad-top-medium column tight">
-                        <ul className="meta values">
-                          <li>Shiradashi Smith</li>
-                          <li>Jane Doe</li>
-                          <li>John Smit</li>
-                          <li>Someone</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="cast sixteen wide computer five wide tablet column tight">
-                  <div className="ui top attached label detailHeading">Directors</div>
-                  <div className="ui grid">
-                    <div className="row">
-                      <div className="pad-top-medium column tight">
-                        <ul className="meta tight">
-                          <li>Alex</li>
-                          <li>Noma</li>
-                          <li>Alex</li>
-                          <li>Noma</li>
-                          <div className="column"></div>
-                        </ul>
-                      </div>
-                      <div className="pad-top-medium column tight">
-                        <ul className="meta values">
-                          <li>Shiradashi Smith</li>
-                          <li>Jane Doe</li>
-                          <li>John Smit</li>
-                          <li>Someone</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="cast sixteen wide computer five wide tablet column tight">
-                  <div className="ui top attached label detailHeading">Cast & Crew</div>
-                  <div className="ui grid">
-                    <div className="row">
-                      <div className="pad-top-medium column tight">
-                        <ul className="meta tight">
-                          <li>Alex</li>
-                          <li>Noma</li>
-                          <li>Alex</li>
-                          <li>Noma</li>
-                        </ul>
-                      </div>
-                      <div className="pad-top-medium column tight">
-                        <ul className="meta values">
-                          <li>Shiradashi Smith</li>
-                          <li>Jane Doe</li>
-                          <li>John Smit</li>
-                          <li>Someone</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <Roles roles={series.roles} language={this.props.language} colWidth="sixteen" />
             </div>
           </div>
         </div>
       </div>
     );
   },
-});
-
-const SeasonFilterNav = React.createClass({
-  render() {
-    if (!this.props.seasons || this.props.seasons.length <= 1)
-      return (
-        <div className="row subnav">
-          <span className="title">Series khatem seliman season 1</span>
-        </div>
-      )
-    var SEASONS = []
-    this.props.seasons.map((season, i) => {
-      SEASONS.push(<a key={i} className="item">SEASON {i+1}</a>)
-    })
-    return (
-      <div className="row subnav">
-        <span className="title">Series khatem seliman season 1</span>
-        <div id="seasons-dropdown" className="ui simple dropdown item inverted">
-          SEASON 1
-          <i className="plus icon"></i>
-          <div className="menu">
-            {SEASONS}
-          </div>
-        </div>
-      </div>
-    )
-  }
 });
 
 module.exports = SeasonDetail;

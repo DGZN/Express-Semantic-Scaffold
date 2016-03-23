@@ -34,16 +34,17 @@ const Grid = React.createClass({
     var ROWS = []
     var COLUMNS = [];
     this.state.collection.some((data, i) => {
-      if (this.state.genre.length) {
-        data.genres.some((genre) => {
-          if (genre.meta[this.props.language])
-            if (genre.meta[this.props.language].name == this.state.genre) {
-              COLUMNS.push(<Column key={data.id} data={data} {...this.props} />)
+      if (this.state.genre[this.props.language]) {
+        if (data.genres) {
+          data.genres.some((genre) => {
+            if (genre.meta[this.props.language].name == this.state.genre[this.props.language].name) {
+              COLUMNS.push(<Column key={'col-'+data.id} data={data} {...this.props} />)
               return true;
             }
-        })
+          })
+        }
       } else {
-        COLUMNS.push(<Column key={data.id} data={data} {...this.props} />)
+        COLUMNS.push(<Column key={'col-'+data.id} data={data} {...this.props} />)
       }
       if (COLUMNS.length==this.props.limit) {
         ROWS.push(<div className="row">
@@ -53,9 +54,14 @@ const Grid = React.createClass({
       }
       return ROWS.length === this.props.rows
     })
+    if ( ! ROWS.length ) {
+      ROWS.push(<div className="row">
+        {COLUMNS}
+      </div>)
+    }
     return (
       <div>
-        <GridFilter {...this.props} filterGenre={this.filterGenre} />
+        <GridFilter {...this.props} filterGenre={this.filterGenre} activeGenre={this.state.genre} />
         <div className="ui vertical center container aligned grids">
           <div className="ui equal width grid container">
             {ROWS}

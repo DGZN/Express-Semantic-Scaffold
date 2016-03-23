@@ -49,10 +49,10 @@
 
 	const App = __webpack_require__(159)
 	const GridApp = __webpack_require__(167)
-	const Carousel = __webpack_require__(171)
+	const SeasonApp = __webpack_require__(171)
+	const Carousel = __webpack_require__(176)
 	const Grid = __webpack_require__(168)
-	const SeasonDetail = __webpack_require__(173)
-	const AlbumDetail = __webpack_require__(175)
+	const AlbumDetail = __webpack_require__(178)
 	const VideoDetail = __webpack_require__(161)
 	const SimilarTitles = __webpack_require__(165)
 	const Footer = __webpack_require__(166)
@@ -88,11 +88,11 @@
 	    document.getElementById('series')
 	  );
 
-	if ($('#season-details').length) {
-	  var season = '/series/' + $('#season-details').data('id');
+	if ($('#season').length) {
+	  var season = '/series/' + $('#season').data('id');
 	  ReactDOM.render(
-	    React.createElement(SeasonDetail, {source: season}),
-	    document.getElementById('season-details')
+	    React.createElement(SeasonApp, {source: season}),
+	    document.getElementById('season')
 	  );
 	}
 
@@ -19880,6 +19880,7 @@
 	      name: ''
 	    , description: ''
 	    , productionYear: 'Produced ' + this.state.movie['production_year']
+	    , duration: 0
 	    , player: ''
 	    }
 	    if (this.state.movie) {
@@ -19893,6 +19894,7 @@
 	        name: this.state.movie.meta[this.props.language].name
 	      , description: this.state.movie.meta[this.props.language].description
 	      , productionYear: 'Produced ' + this.state.movie['production_year']
+	      , duration: Math.floor(this.state.movie.duration / 60) + ' min'
 	      , player: this.getPlayer(this.state.movie['video_url'])
 	      , roles: roles
 	      }
@@ -19909,7 +19911,7 @@
 	              React.createElement("div", {className: "ui one column grid center"}, 
 	                React.createElement("div", {className: "row"}, 
 	                  React.createElement("div", {className: "column tight"}, 
-	                    React.createElement("div", {className: "movie-details"}, React.createElement("span", null, "R"), React.createElement("span", null, "123 min"), React.createElement("span", null, movie.productionYear), React.createElement("span", null, "5.1"), React.createElement("span", null, "HD")), 
+	                    React.createElement("div", {className: "movie-details"}, React.createElement("span", null, movie.duration), React.createElement("span", null, movie.productionYear)), 
 	                    React.createElement("div", {className: "movie-actions"}, React.createElement("img", {src: "/images/play-button.png", className: "ui image"}), React.createElement("img", {src: "/images/add-button.png", className: "ui image"}), React.createElement("img", {src: "/images/social-share-circle-icons.png", className: "ui image social-share"}))
 	                  )
 	                )
@@ -19986,7 +19988,7 @@
 	    if (this.state.roles) {
 	      var PEOPLE = []
 	      for (var role in this.state.roles) {
-	        PEOPLE.push(React.createElement(People, {key: role, title: role, people: this.state.roles[role], language: this.props.language}))
+	        PEOPLE.push(React.createElement(People, React.__spread({key: role, title: role, people: this.state.roles[role], language: this.props.language},  this.props)))
 	      }
 	    }
 	    return (
@@ -20019,11 +20021,13 @@
 
 	  render() {
 	    var people = []
+	    var colWidth = this.props.colWidth ? this.props.colWidth : 'three'
 	    this.state.people.map((person, i) => {
 	      people.push(React.createElement(Person, {key: i, name: person.meta[this.props.language]["first_name"] + ' ' + person.meta[this.props.language]["last_name"]}))
 	    })
+	    var className = 'cast ' + colWidth + ' wide computer five wide tablet column tight'
 	    return (
-	      React.createElement("div", {className: "cast three wide computer five wide tablet column tight"}, 
+	      React.createElement("div", {className: className}, 
 	        React.createElement("div", {className: "ui top attached label detailHeading"}, this.state.title), 
 	        React.createElement("div", {className: "ui grid"}, 
 	          React.createElement("div", {className: "row"}, 
@@ -20237,16 +20241,17 @@
 	    var ROWS = []
 	    var COLUMNS = [];
 	    this.state.collection.some((data, i) => {
-	      if (this.state.genre.length) {
-	        data.genres.some((genre) => {
-	          if (genre.meta[this.props.language])
-	            if (genre.meta[this.props.language].name == this.state.genre) {
-	              COLUMNS.push(React.createElement(Column, React.__spread({key: data.id, data: data},  this.props)))
+	      if (this.state.genre[this.props.language]) {
+	        if (data.genres) {
+	          data.genres.some((genre) => {
+	            if (genre.meta[this.props.language].name == this.state.genre[this.props.language].name) {
+	              COLUMNS.push(React.createElement(Column, React.__spread({key: 'col-'+data.id, data: data},  this.props)))
 	              return true;
 	            }
-	        })
+	          })
+	        }
 	      } else {
-	        COLUMNS.push(React.createElement(Column, React.__spread({key: data.id, data: data},  this.props)))
+	        COLUMNS.push(React.createElement(Column, React.__spread({key: 'col-'+data.id, data: data},  this.props)))
 	      }
 	      if (COLUMNS.length==this.props.limit) {
 	        ROWS.push(React.createElement("div", {className: "row"}, 
@@ -20256,9 +20261,14 @@
 	      }
 	      return ROWS.length === this.props.rows
 	    })
+	    if ( ! ROWS.length ) {
+	      ROWS.push(React.createElement("div", {className: "row"}, 
+	        COLUMNS
+	      ))
+	    }
 	    return (
 	      React.createElement("div", null, 
-	        React.createElement(GridFilter, React.__spread({},  this.props, {filterGenre: this.filterGenre})), 
+	        React.createElement(GridFilter, React.__spread({},  this.props, {filterGenre: this.filterGenre, activeGenre: this.state.genre})), 
 	        React.createElement("div", {className: "ui vertical center container aligned grids"}, 
 	          React.createElement("div", {className: "ui equal width grid container"}, 
 	            ROWS
@@ -20279,6 +20289,7 @@
 	const React = __webpack_require__(1);
 
 	const GridFilter = React.createClass({displayName: "GridFilter",
+
 	  getInitialState: function() {
 	    return {
 	      genres: []
@@ -20298,20 +20309,27 @@
 	  },
 
 	  render() {
-	    var defaultGenre = '';
+	    var title = this.props.activeGenre[this.props.language]
+	      ? this.props.activeGenre[this.props.language].name
+	      : 'Genres';
 	    var GENRES = []
 	    this.state.genres.map((genre, i) => {
 	        if (genre.meta[this.props.language]) {
-	          if (i==0)
-	            defaultGenre = genre.meta[this.props.language].name
-	          GENRES.push(React.createElement("a", {className: "item", onClick: this.props.filterGenre.bind(null, genre.meta[this.props.language].name)}, genre.meta[this.props.language].name))
+	          var name = genre.meta[this.props.language].name;
+	          GENRES.push(
+	            React.createElement("a", {
+	              className: "item", 
+	              key: i*Math.random(9,99), 
+	              onClick: this.props.filterGenre.bind(null, genre.meta)}, " ", name
+	            )
+	          )
 	        }
 	    })
 	    return (
 	      React.createElement("div", {className: "ui container grids pad-bottom-medium"}, 
 	        React.createElement("div", {className: "row subnav"}, React.createElement("span", {className: "title"}, this.props.title), 
 	          React.createElement("div", {id: "seasons-dropdown", className: "ui simple dropdown item inverted"}, 
-	            "Genres ", React.createElement("i", {className: "plus icon"}), 
+	            title, " ", React.createElement("i", {className: "plus icon"}), 
 	            React.createElement("div", {className: "menu"}, 
 	              GENRES
 	            )
@@ -20364,7 +20382,7 @@
 	    }
 	    return (
 	      React.createElement("a", {href: link || '#', className: "image preview"}, 
-	        React.createElement("div", {className: "image preview thumb", style: {"background-image": 'url(' + thumb + ') !important;'}}, 
+	        React.createElement("div", {className: "image preview thumb", style: {"backgroundImage": 'url(' + thumb + ') !important'}}, 
 	            React.createElement("div", {className: "ui bottom attached label"}, this.props.data.meta[this.state.language].name)
 	        )
 	      )
@@ -20395,26 +20413,38 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
-	const Row = __webpack_require__(172)
 
-	const Carousel = React.createClass({displayName: "Carousel",
+	const SeasonNav = __webpack_require__(172)
+	const SeasonDetail = __webpack_require__(173)
+	const SimilarTitles = __webpack_require__(165)
+	const Footer = __webpack_require__(166)
+
+	const GridApp = React.createClass({displayName: "GridApp",
+
+	  setLanguage: function(lang) {
+	    this.setState({
+	      language: lang
+	    })
+	  },
+
+	  getInitialState: function() {
+	    return {
+	      language: 'en'
+	    }
+	  },
+
 	  render() {
 	    return (
 	      React.createElement("div", null, 
-	        React.createElement("div", {className: "ui one column grid container"}, 
-	         React.createElement("div", {className: "column header"}, 
-	            React.createElement("h4", {className: "ui header grid-title"}, React.createElement("br", null), this.props.title, " >")
-	         )
-	        ), 
-	        React.createElement("div", {className: "ui equal width grid container"}, 
-	          React.createElement(Row, {source: this.props.source, limit: this.props.limit, href: this.props.href})
-	        )
+	        React.createElement(SeasonNav, {setLanguage: this.setLanguage, language: this.state.language}), 
+	        React.createElement(SeasonDetail, React.__spread({},  this.props, {language: this.state.language})), 
+	        React.createElement(Footer, null)
 	      )
 	    );
 	  }
 	});
 
-	module.exports = Carousel;
+	module.exports = GridApp;
 
 
 /***/ },
@@ -20423,42 +20453,135 @@
 
 	const React = __webpack_require__(1);
 
-	const Column = __webpack_require__(170)
-
-	const Row = React.createClass({displayName: "Row",
-	  getInitialState: function() {
-	    return {
-	      collection: []
-	    };
-	  },
-
-	  componentDidMount: function() {
-	    this.fetch = $.get('http://dgzn.io:8080/v1/assets'+this.props.source, function (result) {
-	      this.setState({
-	        collection: result
-	      });
-	    }.bind(this));
-	  },
-
-	  componentWillUnmount: function() {
-	    this.fetch.abort();
-	  },
+	const SeasonNav = React.createClass({displayName: "SeasonNav",
 
 	  render() {
-	    var COLUMNS = [];
-	    this.state.collection.some((data, i) => {
-	      COLUMNS.push(React.createElement(Column, {key: i, data: data, href: this.props.href}))
-	      return i === this.props.limit - 1;
-	    })
+	    var menu = languageMenu(this.props.language)
 	    return (
-	      React.createElement("div", {className: "row"}, 
-	        COLUMNS
+	      React.createElement("div", null, 
+	        React.createElement("div", {className: "ui large top fixed hidden menu inverted"}, 
+	          React.createElement("div", {className: "sidebar"}), 
+	          React.createElement("div", {className: "ui container nav"}, React.createElement("a", {href: "/", className: "item"}, React.createElement("img", {src: "/images/melody-logo.png", className: "ui tiny image"})), React.createElement("a", {href: "/movies", className: "item"}, "Movies"), React.createElement("a", {href: "/series", className: "item"}, "Series"), React.createElement("a", {href: "/music", className: "item"}, "Music"), React.createElement("a", {href: "/plays", className: "item"}, "Plays"), React.createElement("a", {className: "item"}, "Classics"), React.createElement("a", {className: "item"}, "Collections"), React.createElement("a", {href: "/live", className: "item"}, "Live TV"), 
+	            React.createElement("div", {className: "ui category search item nav-search"}, 
+	              React.createElement("div", {className: "ui transparent icon input"}, 
+	                React.createElement("input", {type: "text", placeholder: "Search...", className: "prompt"}), React.createElement("i", {className: "search link icon"})
+	              ), 
+	              React.createElement("div", {className: "results"})
+	            ), 
+	            React.createElement("div", {className: "right menu"}, 
+	              React.createElement("div", {id: "account-dropdown", className: "ui left dropdown item"}, React.createElement("i", {className: "setting icon"}), 
+	                React.createElement("div", {className: "menu"}, 
+	                  React.createElement("a", {className: "item"}, React.createElement("i", {className: "user icon"}), React.createElement("span", {className: "text"}, "My Account")), React.createElement("a", {className: "item"}, React.createElement("i", {className: "list layout icon"}), React.createElement("span", {className: "text"}, "Watchlist")), 
+	                  React.createElement("a", {className: "item", onClick: this.props.setLanguage.bind(null, menu.lang)}, 
+	                    React.createElement("i", {className: "flag icon"}), 
+	                    React.createElement("span", {className: "text"}, menu.name)
+	                  )
+	                )
+	              )
+	            )
+	          )
+	        ), 
+	        React.createElement("div", {id: "nav-sidebar", className: "ui right vertical sidebar menu"}, " ", React.createElement("a", {href: "/", className: "item"}, "Home"), React.createElement("a", {href: "/movies", className: "item"}, "Movies"), React.createElement("a", {href: "/series", className: "item"}, "Series"), React.createElement("a", {href: "/music", className: "item"}, "Music"), React.createElement("a", {href: "/plays", className: "item"}, "Plays"), React.createElement("a", {className: "item"}, "Classics"), React.createElement("a", {className: "item"}, "Collections"), React.createElement("a", {href: "/live", className: "item"}, "Live TV"), 
+	          React.createElement("div", {className: "ui category search item"}, 
+	            React.createElement("div", {className: "ui transparent icon input"}, 
+	              React.createElement("input", {type: "text", placeholder: "Search...", className: "prompt"}), React.createElement("i", {className: "search link icon"})
+	            ), 
+	            React.createElement("div", {className: "results"})
+	          ), React.createElement("a", {className: "item horizontal divider"}), 
+	            React.createElement("a", {className: "item", onClick: this.handleClick}, 
+	              React.createElement("h6", null, "My Account")), React.createElement("a", {className: "item"}, 
+	              React.createElement("h6", null, "Watchlist")), React.createElement("a", {className: "sidebar item"}, 
+	              React.createElement("h6", null, "Arabic")
+	            )
+	        ), 
+	        React.createElement("div", {id: "watchlist-sidebar", className: "ui left vertical sidebar inverted menu"}, 
+	          React.createElement("div", {id: "seasons-dropdown-filter", className: "ui simple dropdown menu inverted"}, 
+	            "SEASON 1", 
+	            React.createElement("i", {className: "plus icon"}), 
+	            React.createElement("div", {className: "menu"}, 
+	              React.createElement("a", {className: "item"}, "SEASON 2"), 
+	              React.createElement("a", {className: "item"}, "SEASON 3"), 
+	              React.createElement("a", {className: "item"}, "SEASON 4"), 
+	              React.createElement("a", {className: "item"}, "SEASON 5"), 
+	              React.createElement("a", {className: "item"}, "SEASON 6")
+	            )
+	          ), 
+	          React.createElement("a", {className: "item"}, 
+	            React.createElement("i", {className: "play tiny icon watchlist-button no-margin"}), 
+	            React.createElement("i", {className: "plus tiny icon watchlist-button"}), 
+	            React.createElement("span", null, "Ep 12"), 
+	            React.createElement("div", {className: "watchlist-pct"}, "75%")
+	          ), 
+	          React.createElement("a", {className: "item"}, 
+	            React.createElement("i", {className: "play tiny icon watchlist-button no-margin"}), 
+	            React.createElement("i", {className: "plus tiny icon watchlist-button"}), React.createElement("span", null, "Ep 13"), 
+	            React.createElement("div", {className: "watchlist-pct"}, "30%")
+	          ), 
+	          React.createElement("a", {className: "item"}, 
+	            React.createElement("i", {className: "play tiny icon watchlist-button no-margin"}), 
+	            React.createElement("i", {className: "plus tiny icon watchlist-button"}), React.createElement("span", null, "Ep 14"), 
+	            React.createElement("div", {className: "watchlist-pct"}, "100%")
+	          ), 
+	          React.createElement("a", {className: "item"}, 
+	            React.createElement("i", {className: "play tiny icon watchlist-button no-margin"}), 
+	            React.createElement("i", {className: "plus tiny icon watchlist-button"}), React.createElement("span", null, "Ep 15"), 
+	            React.createElement("div", {className: "watchlist-pct"}, "0%")
+	          ), 
+	          React.createElement("a", {className: "item"}, 
+	            React.createElement("i", {className: "play tiny icon watchlist-button no-margin"}), 
+	            React.createElement("i", {className: "plus tiny icon watchlist-button"}), React.createElement("span", null, "Ep 16"), 
+	            React.createElement("div", {className: "watchlist-pct"})
+	          ), 
+	          React.createElement("a", {className: "item"}, 
+	            React.createElement("i", {className: "play tiny icon watchlist-button no-margin"}), 
+	            React.createElement("i", {className: "plus tiny icon watchlist-button"}), React.createElement("span", null, "Ep 17"), 
+	            React.createElement("div", {className: "watchlist-pct"})
+	          ), 
+	          React.createElement("a", {className: "item"}, 
+	            React.createElement("i", {className: "play tiny icon watchlist-button no-margin"}), 
+	            React.createElement("i", {className: "plus tiny icon watchlist-button"}), React.createElement("span", null, "Ep 18"), 
+	            React.createElement("div", {className: "watchlist-pct"})
+	          ), 
+	          React.createElement("a", {className: "item"}, 
+	            React.createElement("i", {className: "play tiny icon watchlist-button no-margin"}), 
+	            React.createElement("i", {className: "plus tiny icon watchlist-button"}), React.createElement("span", null, "Ep 19"), 
+	            React.createElement("div", {className: "watchlist-pct"})
+	          )
+	        ), 
+	        React.createElement("div", {className: "ui inverted vertical masthead center aligned"}, 
+	          React.createElement("div", {className: "ui container nav-header"}, 
+	            React.createElement("div", {className: "ui large secondary inverted pointing menu"}, 
+	              React.createElement("a", {className: "watchlist item left aligned"}, 
+	                React.createElement("i", {className: "list layout icon"})
+	              ), 
+	              React.createElement("a", {className: "toc item right aligned"}, 
+	                React.createElement("i", {className: "sidebar icon"})
+	              )
+	            )
+	          )
+	        )
 	      )
 	    );
 	  }
 	});
 
-	module.exports = Row;
+	var languageMenu = function(lang){
+	  switch (lang) {
+	    case 'ar':
+	      return {
+	        name: 'English'
+	      , lang: 'en'
+	      }
+	      break;
+	    default:
+	      return {
+	        name: 'Arabic'
+	      , lang: 'ar'
+	      }
+	  }
+	}
+
+	module.exports = SeasonNav;
 
 
 /***/ },
@@ -20467,9 +20590,12 @@
 
 	const React = __webpack_require__(1);
 
-	const SeasonWatchlist = __webpack_require__(174)
+	const SeasonFilter = __webpack_require__(174)
+	const SeasonWatchlist = __webpack_require__(175)
+	const Roles = __webpack_require__(162);
 
 	const SeasonDetail = React.createClass({displayName: "SeasonDetail",
+
 	  getInitialState: function() {
 	    return {
 	      series: ''
@@ -20477,9 +20603,9 @@
 	  },
 
 	  componentDidMount: function() {
-	    this.fetch = $.get('http://util.giantdev.com/v1/assets'+this.props.source, function (result) {
+	    this.fetch = $.get('http://dgzn.io:8080/v1/assets'+this.props.source, function (result) {
 	      this.setState({
-	        series: result[0]
+	        series: result
 	      });
 	    }.bind(this));
 	  },
@@ -20495,24 +20621,38 @@
 	    , thumb: '/images/wireframe/16x9.png'
 	    , seasonText: 'Season 1'
 	    , productionYear: ''
+	    , duration: 0
 	    , seasons: []
 	    , episodes: []
 	    }
 	    if (this.state.series) {
+	      var _roles = this.state.series.seasons[0].roles
+	      var roles = []
+	      this.state.series.seasons[0].people.map((person) => {
+	        roles[_roles[person.role].meta[this.props.language].name] = roles[_roles[person.role].meta[this.props.language].name] || [];
+	        roles[_roles[person.role].meta[this.props.language].name].push(person)
+	      })
 	      var series = {
-	        name: this.state.series.meta.en.name
-	      , description: this.state.series.meta.en.description
+	        name: this.state.series.meta[this.props.language].name
+	      , description: this.state.series.meta[this.props.language].description
 	      , thumb: '/images/melody/' + this.state.series.thumb.replace('M1','M11')
 	      , seasonText: 'Season 1'
 	      , productionYear: 'Released ' + this.state.series['production_year']
+	      , duration: Math.floor(this.state.series.seasons[0].episodes[0].duration / 60) + ' min'
 	      , seasons: this.state.series.seasons
 	      , episodes: this.state.series.seasons[0].episodes
+	      , roles: roles
 	      }
 	    }
+	    setTimeout(function(){
+	      $('#watchlist-sidebar')
+	        .sidebar('attach events', '.watchlist.item')
+	      ;
+	    }, 1000)
 	    return (
 	      React.createElement("div", null, 
 	        React.createElement("div", {className: "ui container grids"}, 
-	          React.createElement(SeasonFilterNav, {seasons: series.seasons})
+	          React.createElement(SeasonFilter, {title: series.name, seasons: series.seasons})
 	        ), 
 	        React.createElement("div", {className: "ui vertical center container aligned grids"}, 
 	          React.createElement("div", {className: "ui two column grid container details pad-top-medium"}, 
@@ -20528,7 +20668,7 @@
 	                React.createElement("div", {className: "row"}, 
 	                  React.createElement("div", {className: "column tight"}, 
 	                    React.createElement("div", {className: "movie-details"}, 
-	                      React.createElement("span", null, "R"), React.createElement("span", null, "123 min"), React.createElement("span", null, series.productionYear), React.createElement("span", null, "5.1"), React.createElement("span", null, "HD")
+	                      React.createElement("span", null, series.duration), React.createElement("span", null, series.productionYear)
 	                    ), 
 	                    React.createElement("div", {className: "movie-actions"}, 
 	                      React.createElement("img", {src: "/images/play-button.png", className: "ui image"}), 
@@ -20540,78 +20680,7 @@
 	              )
 	            ), 
 	            React.createElement("div", {className: "details sixteen wide tablet three wide computer column centered"}, 
-	              React.createElement("div", {className: "ui three column grid container stackable"}, 
-	                React.createElement("div", {className: "cast sixteen wide computer five wide tablet column tight"}, 
-	                  React.createElement("div", {className: "ui top attached label detailHeading"}, "Producers"), 
-	                  React.createElement("div", {className: "ui grid"}, 
-	                    React.createElement("div", {className: "row"}, 
-	                      React.createElement("div", {className: "pad-top-medium column tight"}, 
-	                        React.createElement("ul", {className: "meta tight"}, 
-	                          React.createElement("li", null, "Alex"), 
-	                          React.createElement("li", null, "Noma"), 
-	                          React.createElement("li", null, "Alex"), 
-	                          React.createElement("li", null, "Noma")
-	                        )
-	                      ), 
-	                      React.createElement("div", {className: "pad-top-medium column tight"}, 
-	                        React.createElement("ul", {className: "meta values"}, 
-	                          React.createElement("li", null, "Shiradashi Smith"), 
-	                          React.createElement("li", null, "Jane Doe"), 
-	                          React.createElement("li", null, "John Smit"), 
-	                          React.createElement("li", null, "Someone")
-	                        )
-	                      )
-	                    )
-	                  )
-	                ), 
-	                React.createElement("div", {className: "cast sixteen wide computer five wide tablet column tight"}, 
-	                  React.createElement("div", {className: "ui top attached label detailHeading"}, "Directors"), 
-	                  React.createElement("div", {className: "ui grid"}, 
-	                    React.createElement("div", {className: "row"}, 
-	                      React.createElement("div", {className: "pad-top-medium column tight"}, 
-	                        React.createElement("ul", {className: "meta tight"}, 
-	                          React.createElement("li", null, "Alex"), 
-	                          React.createElement("li", null, "Noma"), 
-	                          React.createElement("li", null, "Alex"), 
-	                          React.createElement("li", null, "Noma"), 
-	                          React.createElement("div", {className: "column"})
-	                        )
-	                      ), 
-	                      React.createElement("div", {className: "pad-top-medium column tight"}, 
-	                        React.createElement("ul", {className: "meta values"}, 
-	                          React.createElement("li", null, "Shiradashi Smith"), 
-	                          React.createElement("li", null, "Jane Doe"), 
-	                          React.createElement("li", null, "John Smit"), 
-	                          React.createElement("li", null, "Someone")
-	                        )
-	                      )
-	                    )
-	                  )
-	                ), 
-	                React.createElement("div", {className: "cast sixteen wide computer five wide tablet column tight"}, 
-	                  React.createElement("div", {className: "ui top attached label detailHeading"}, "Cast & Crew"), 
-	                  React.createElement("div", {className: "ui grid"}, 
-	                    React.createElement("div", {className: "row"}, 
-	                      React.createElement("div", {className: "pad-top-medium column tight"}, 
-	                        React.createElement("ul", {className: "meta tight"}, 
-	                          React.createElement("li", null, "Alex"), 
-	                          React.createElement("li", null, "Noma"), 
-	                          React.createElement("li", null, "Alex"), 
-	                          React.createElement("li", null, "Noma")
-	                        )
-	                      ), 
-	                      React.createElement("div", {className: "pad-top-medium column tight"}, 
-	                        React.createElement("ul", {className: "meta values"}, 
-	                          React.createElement("li", null, "Shiradashi Smith"), 
-	                          React.createElement("li", null, "Jane Doe"), 
-	                          React.createElement("li", null, "John Smit"), 
-	                          React.createElement("li", null, "Someone")
-	                        )
-	                      )
-	                    )
-	                  )
-	                )
-	              )
+	              React.createElement(Roles, {roles: series.roles, language: this.props.language, colWidth: "sixteen"})
 	            )
 	          )
 	        )
@@ -20620,21 +20689,24 @@
 	  },
 	});
 
-	const SeasonFilterNav = React.createClass({displayName: "SeasonFilterNav",
+	module.exports = SeasonDetail;
+
+
+/***/ },
+/* 174 */
+/***/ function(module, exports, __webpack_require__) {
+
+	const React = __webpack_require__(1);
+
+	const SeasonFilter = React.createClass({displayName: "SeasonFilter",
 	  render() {
-	    if (!this.props.seasons || this.props.seasons.length <= 1)
-	      return (
-	        React.createElement("div", {className: "row subnav"}, 
-	          React.createElement("span", {className: "title"}, "Series khatem seliman season 1")
-	        )
-	      )
 	    var SEASONS = []
 	    this.props.seasons.map((season, i) => {
 	      SEASONS.push(React.createElement("a", {key: i, className: "item"}, "SEASON ", i+1))
 	    })
 	    return (
 	      React.createElement("div", {className: "row subnav"}, 
-	        React.createElement("span", {className: "title"}, "Series khatem seliman season 1"), 
+	        React.createElement("span", {className: "title"}, "Series ", this.props.title, " season 1"), 
 	        React.createElement("div", {id: "seasons-dropdown", className: "ui simple dropdown item inverted"}, 
 	          "SEASON 1", 
 	          React.createElement("i", {className: "plus icon"}), 
@@ -20647,22 +20719,22 @@
 	  }
 	});
 
-	module.exports = SeasonDetail;
+	module.exports = SeasonFilter;
 
 
 /***/ },
-/* 174 */
+/* 175 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
 
-	const Watchlist = React.createClass({displayName: "Watchlist",
+	const SeasonWatchlist = React.createClass({displayName: "SeasonWatchlist",
 	  render() {
 	    var ROWS = []
 	    if (!this.props.episodes)
 	      return (React.createElement("div", {className: "row watchlist"}))
 	    this.props.episodes.map((episode, i) => {
-	      ROWS.push(React.createElement(WatchlistRow, {index: i+1, episode: episode}))
+	      ROWS.push(React.createElement(WatchlistRow, {key: 'watchlist-'+i, episode: episode}))
 	    })
 	    return (
 	      React.createElement("div", {className: "ui stackable grid"}, 
@@ -20706,16 +20778,87 @@
 	  return link;
 	}
 
-	module.exports = Watchlist;
+	module.exports = SeasonWatchlist;
 
 
 /***/ },
-/* 175 */
+/* 176 */
+/***/ function(module, exports, __webpack_require__) {
+
+	const React = __webpack_require__(1);
+	const Row = __webpack_require__(177)
+
+	const Carousel = React.createClass({displayName: "Carousel",
+	  render() {
+	    return (
+	      React.createElement("div", null, 
+	        React.createElement("div", {className: "ui one column grid container"}, 
+	         React.createElement("div", {className: "column header"}, 
+	            React.createElement("h4", {className: "ui header grid-title"}, React.createElement("br", null), this.props.title, " >")
+	         )
+	        ), 
+	        React.createElement("div", {className: "ui equal width grid container"}, 
+	          React.createElement(Row, {source: this.props.source, limit: this.props.limit, href: this.props.href})
+	        )
+	      )
+	    );
+	  }
+	});
+
+	module.exports = Carousel;
+
+
+/***/ },
+/* 177 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
 
-	const AlbumWatchlist = __webpack_require__(176)
+	const Column = __webpack_require__(170)
+
+	const Row = React.createClass({displayName: "Row",
+	  getInitialState: function() {
+	    return {
+	      collection: []
+	    };
+	  },
+
+	  componentDidMount: function() {
+	    this.fetch = $.get('http://dgzn.io:8080/v1/assets'+this.props.source, function (result) {
+	      this.setState({
+	        collection: result
+	      });
+	    }.bind(this));
+	  },
+
+	  componentWillUnmount: function() {
+	    this.fetch.abort();
+	  },
+
+	  render() {
+	    var COLUMNS = [];
+	    this.state.collection.some((data, i) => {
+	      COLUMNS.push(React.createElement(Column, {key: i, data: data, href: this.props.href}))
+	      return i === this.props.limit - 1;
+	    })
+	    return (
+	      React.createElement("div", {className: "row"}, 
+	        COLUMNS
+	      )
+	    );
+	  }
+	});
+
+	module.exports = Row;
+
+
+/***/ },
+/* 178 */
+/***/ function(module, exports, __webpack_require__) {
+
+	const React = __webpack_require__(1);
+
+	const AlbumWatchlist = __webpack_require__(179)
 
 
 	const AlbumDetail = React.createClass({displayName: "AlbumDetail",
@@ -20860,7 +21003,7 @@
 
 
 /***/ },
-/* 176 */
+/* 179 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
