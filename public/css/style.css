@@ -2,6 +2,65 @@
   padding-bottom: 20px;
 }
 
+.ui.basic.my-account.modal {
+  position: absolute;
+  top: 0px;
+  width: 100% !important;
+  height: 1000px;
+  background-color: rgba(0,0,0,.55);
+  left: 0;
+  display: none;
+}
+
+.my-account .account-settings {
+  margin-left: 3%;
+  margin-top: 3.6rem;
+  color: #f0f0f0;
+  font-weight: 100;
+}
+
+.ui.basic.my-watchlist.modal {
+  position: absolute;
+  top: 0px;
+  width: 100% !important;
+  height: 1000px;
+  background-color: rgba(0,0,0,.55);
+  left: 0;
+  display: none;
+}
+
+.my-watchlist .account-settings {
+  margin-left: 3%;
+  margin-top: 3.6rem;
+  color: #f0f0f0;
+  font-weight: 100;
+}
+
+.account-settings h3 {
+  font-size: 1.8em;
+  padding-bottom: 3rem;
+}
+
+.account-settings h4 {
+  font-size: 1.3em;
+  padding-bottom: 1.2rem;
+}
+
+.account-settings a h4 {
+  opacity: .7;
+}
+
+
+.account-settings a:hover h4 {
+  opacity: 1;
+}
+
+.account-settings .text {
+  font-size: 0.9em;
+  margin-bottom: 5px;
+  color: #999;
+}
+
 
 .hidden.menu {
   display: none;
@@ -670,10 +729,19 @@ body.pushable>.pusher {
   width: 1600px !important;
 }
 
-.grids .row:not(.subnav):not(.watchlist) {
+.my-watchlist.grids {
+  background-color: rgba(0,0,0,0) !important;
+  width: 1600px !important;
+}
+
+.grids .row:not(.subnav):not(.watchlist):not(.my-account) {
   padding-left: 1rem !important;
   height: 220px;
   overflow: hidden;
+}
+
+.my-watchlist.grids .row:not(.subnav):not(.watchlist):not(.my-account) {
+  padding-left: 0rem !important;
 }
 
 .grids .ui[class*="bottom attached"].label {
@@ -1071,6 +1139,11 @@ ul.meta.values {
   background-repeat: no-repeat;
 }
 
+.my-watchlist.grids .row:not(.subnav) a {
+  margin-left: 0rem !important;
+}
+
+
 .grids .image.preview {
   width: 280px;
   height: auto;
@@ -1102,6 +1175,26 @@ ul.meta.values {
 
 .grids a.image.preview:nth-child(5) {
   left: 1240px;
+}
+
+.my-watchlist.grids a.image.preview:nth-child(1) {
+  left: 0px;
+}
+
+.my-watchlist.grids a.image.preview:nth-child(2) {
+  left: 280px;
+}
+
+.my-watchlist.grids a.image.preview:nth-child(3) {
+  left: 560px;
+}
+
+.my-watchlist.grids a.image.preview:nth-child(4) {
+  left: 840px;
+}
+
+.my-watchlist.grids a.image.preview:nth-child(5) {
+  left: 1120px;
 }
 
 @media only screen and (max-width: 767px) {

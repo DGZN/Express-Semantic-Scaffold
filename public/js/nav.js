@@ -18,7 +18,14 @@ const Nav = React.createClass({
             <div className="right menu">
               <div id="account-dropdown" className="ui left dropdown item"><i className="setting icon"></i>
                 <div className="menu">
-                  <a className="item"><i className="user icon"></i><span className="text">My Account</span></a><a className="item"><i className="list layout icon"></i><span className="text">Watchlist</span></a>
+                  <a className="item" onClick={this.myAccount}>
+                    <i className="user icon"></i>
+                    <span className="text">My Account</span>
+                  </a>
+                  <a className="item" onClick={this.myWatchlist}>
+                    <i className="list layout icon"></i>
+                    <span className="text">Watchlist</span>
+                  </a>
                   <a className="item" onClick={this.props.setLanguage.bind(null, menu.lang)}>
                     <i className="flag icon"></i>
                     <span className="text">{menu.name}</span>
@@ -48,7 +55,16 @@ const Nav = React.createClass({
         </div>
       </div>
     );
+  },
+
+  myAccount() {
+    $('.my-account.modal').modal('show');
+  },
+
+  myWatchlist() {
+    $('.my-watchlist.modal').modal('show');
   }
+
 });
 
 var languageMenu = function(lang){

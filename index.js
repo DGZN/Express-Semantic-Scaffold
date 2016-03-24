@@ -1,32 +1,30 @@
-const React = require('react');
-const ReactDOM = require('react-dom');
+const React         = require('react');
+const ReactDOM      = require('react-dom');
 
-const App = require('./public/js/app.js')
-const GridApp = require('./public/js/gridApp.js')
-const SeasonApp = require('./public/js/seasonApp.js')
-const Carousel = require('./public/js/carousel.js')
-const Grid = require('./public/js/grid.js')
-const AlbumDetail = require('./public/js/album-detail.js')
-const VideoDetail = require('./public/js/video-detail.js')
+const App           = require('./public/js/app.js')
+const Grid          = require('./public/js/grid.js')
+const Footer        = require('./public/js/footer.js')
+const GridApp       = require('./public/js/gridApp.js')
+const HomeApp       = require('./public/js/homeApp.js')
+const MyAccount     = require('./public/js/my-account.js')
+const SeasonApp     = require('./public/js/seasonApp.js')
+const AlbumDetail   = require('./public/js/album-detail.js')
+const VideoDetail   = require('./public/js/video-detail.js')
 const SimilarTitles = require('./public/js/similar-titles.js')
-const Footer = require('./public/js/footer.js')
 
-if ($('#home-grid').length)
+if ($('#home').length) {
   ReactDOM.render(
-    <div>
-      <Carousel title="Movies" source="/movies" limit="5" href="/movies/:id" />
-      <Carousel title="Series" source="/series" limit="5" href="/series/:id" />
-      <Carousel title="Plays"  source="/plays"  limit="5" href="/plays/:id" />
-    </div>,
-    document.getElementById('home-grid')
+    <HomeApp />,
+    document.getElementById('home')
   );
+}
 
-if ($('#movies').length)
+if ($('#movies').length) {
   ReactDOM.render(
     <GridApp title="Movies" source="/movies" limit="5" href="/movies/:id" />,
     document.getElementById('movies')
   );
-
+}
 
 if ($('#movie').length) {
   var movie = '/movies/' + $('#movie').data('id');
@@ -36,11 +34,12 @@ if ($('#movie').length) {
   );
 }
 
-if ($('#series').length)
+if ($('#series').length) {
   ReactDOM.render(
     <GridApp title="Series" source="/series" limit="5" href="/series/:id" />,
     document.getElementById('series')
   );
+}
 
 if ($('#season').length) {
   var season = '/series/' + $('#season').data('id');
@@ -50,11 +49,12 @@ if ($('#season').length) {
   );
 }
 
-if ($('#music').length)
+if ($('#music').length) {
   ReactDOM.render(
     <GridApp title="Music" source="/albums" limit="5" href="/albums/:id" thumbPath="songs" />,
     document.getElementById('music')
   );
+}
 
 if ($('#album-details').length) {
   var album = '/albums/' + $('#album-details').data('id');
@@ -64,11 +64,12 @@ if ($('#album-details').length) {
   );
 }
 
-if ($('#plays').length)
+if ($('#plays').length) {
   ReactDOM.render(
     <GridApp title="Plays" source="/plays" limit="5" href="/plays/:id" />,
     document.getElementById('plays')
   );
+}
 
 if ($('#play').length) {
   var play = '/plays/' + $('#play').data('id');
@@ -78,8 +79,9 @@ if ($('#play').length) {
   );
 }
 
-if ($('#footer').length)
+if ($('#footer').length) {
   ReactDOM.render(
     <Footer />,
     document.getElementById('footer')
   );
+}

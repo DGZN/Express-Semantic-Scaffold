@@ -16,9 +16,17 @@ const SeasonNav = React.createClass({
               <div className="results"></div>
             </div>
             <div className="right menu">
-              <div id="account-dropdown" className="ui left dropdown item"><i className="setting icon"></i>
+              <div id="account-dropdown" className="ui left dropdown item">
+                <i className="setting icon"></i>
                 <div className="menu">
-                  <a className="item"><i className="user icon"></i><span className="text">My Account</span></a><a className="item"><i className="list layout icon"></i><span className="text">Watchlist</span></a>
+                  <a className="item" onClick={this.myAccount}>
+                    <i className="user icon"></i>
+                    <span className="text">My Account</span>
+                  </a>
+                  <a className="item" onClick={this.myWatchlist}>
+                    <i className="list layout icon"></i>
+                    <span className="text">Watchlist</span>
+                  </a>
                   <a className="item" onClick={this.props.setLanguage.bind(null, menu.lang)}>
                     <i className="flag icon"></i>
                     <span className="text">{menu.name}</span>
@@ -36,8 +44,12 @@ const SeasonNav = React.createClass({
             <div className="results"></div>
           </div><a className="item horizontal divider"></a>
             <a className="item" onClick={this.handleClick} >
-              <h6>My Account</h6></a><a className="item">
-              <h6>Watchlist</h6></a><a className="sidebar item">
+              <h6>My Account</h6>
+            </a>
+            <a className="item" onClick={this.myAccount}>
+              <h6>Watchlist</h6>
+            </a>
+            <a className="sidebar item">
               <h6 >Arabic</h6>
             </a>
         </div>
@@ -109,7 +121,17 @@ const SeasonNav = React.createClass({
         </div>
       </div>
     );
+  },
+
+  myAccount() {
+    $('.my-account.modal').modal('show');
+  },
+
+  myWatchlist() {
+    console.log("showing my watchlist");
+    $('.my-watchlist.modal').modal('show');
   }
+
 });
 
 var languageMenu = function(lang){

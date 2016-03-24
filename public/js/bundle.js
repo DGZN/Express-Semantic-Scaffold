@@ -44,35 +44,33 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	const React = __webpack_require__(1);
-	const ReactDOM = __webpack_require__(158);
+	const React         = __webpack_require__(1);
+	const ReactDOM      = __webpack_require__(158);
 
-	const App = __webpack_require__(159)
-	const GridApp = __webpack_require__(167)
-	const SeasonApp = __webpack_require__(171)
-	const Carousel = __webpack_require__(176)
-	const Grid = __webpack_require__(168)
-	const AlbumDetail = __webpack_require__(178)
-	const VideoDetail = __webpack_require__(161)
-	const SimilarTitles = __webpack_require__(165)
-	const Footer = __webpack_require__(166)
+	const App           = __webpack_require__(159)
+	const Grid          = __webpack_require__(170)
+	const Footer        = __webpack_require__(169)
+	const GridApp       = __webpack_require__(173)
+	const HomeApp       = __webpack_require__(174)
+	const MyAccount     = __webpack_require__(160)
+	const SeasonApp     = __webpack_require__(177)
+	const AlbumDetail   = __webpack_require__(182)
+	const VideoDetail   = __webpack_require__(164)
+	const SimilarTitles = __webpack_require__(168)
 
-	if ($('#home-grid').length)
+	if ($('#home').length) {
 	  ReactDOM.render(
-	    React.createElement("div", null, 
-	      React.createElement(Carousel, {title: "Movies", source: "/movies", limit: "5", href: "/movies/:id"}), 
-	      React.createElement(Carousel, {title: "Series", source: "/series", limit: "5", href: "/series/:id"}), 
-	      React.createElement(Carousel, {title: "Plays", source: "/plays", limit: "5", href: "/plays/:id"})
-	    ),
-	    document.getElementById('home-grid')
+	    React.createElement(HomeApp, null),
+	    document.getElementById('home')
 	  );
+	}
 
-	if ($('#movies').length)
+	if ($('#movies').length) {
 	  ReactDOM.render(
 	    React.createElement(GridApp, {title: "Movies", source: "/movies", limit: "5", href: "/movies/:id"}),
 	    document.getElementById('movies')
 	  );
-
+	}
 
 	if ($('#movie').length) {
 	  var movie = '/movies/' + $('#movie').data('id');
@@ -82,11 +80,12 @@
 	  );
 	}
 
-	if ($('#series').length)
+	if ($('#series').length) {
 	  ReactDOM.render(
 	    React.createElement(GridApp, {title: "Series", source: "/series", limit: "5", href: "/series/:id"}),
 	    document.getElementById('series')
 	  );
+	}
 
 	if ($('#season').length) {
 	  var season = '/series/' + $('#season').data('id');
@@ -96,11 +95,12 @@
 	  );
 	}
 
-	if ($('#music').length)
+	if ($('#music').length) {
 	  ReactDOM.render(
 	    React.createElement(GridApp, {title: "Music", source: "/albums", limit: "5", href: "/albums/:id", thumbPath: "songs"}),
 	    document.getElementById('music')
 	  );
+	}
 
 	if ($('#album-details').length) {
 	  var album = '/albums/' + $('#album-details').data('id');
@@ -110,11 +110,12 @@
 	  );
 	}
 
-	if ($('#plays').length)
+	if ($('#plays').length) {
 	  ReactDOM.render(
 	    React.createElement(GridApp, {title: "Plays", source: "/plays", limit: "5", href: "/plays/:id"}),
 	    document.getElementById('plays')
 	  );
+	}
 
 	if ($('#play').length) {
 	  var play = '/plays/' + $('#play').data('id');
@@ -124,11 +125,12 @@
 	  );
 	}
 
-	if ($('#footer').length)
+	if ($('#footer').length) {
 	  ReactDOM.render(
 	    React.createElement(Footer, null),
 	    document.getElementById('footer')
 	  );
+	}
 
 
 /***/ },
@@ -19738,10 +19740,12 @@
 
 	const React = __webpack_require__(1);
 
-	const Nav = __webpack_require__(160)
-	const VideoDetail = __webpack_require__(161)
-	const SimilarTitles = __webpack_require__(165)
-	const Footer = __webpack_require__(166)
+	const MyAccount = __webpack_require__(160)
+	const MyWatchlist = __webpack_require__(161)
+	const Nav = __webpack_require__(163)
+	const VideoDetail = __webpack_require__(164)
+	const SimilarTitles = __webpack_require__(168)
+	const Footer = __webpack_require__(169)
 
 	const App = React.createClass({displayName: "App",
 
@@ -19760,6 +19764,8 @@
 	  render() {
 	    return (
 	      React.createElement("div", null, 
+	        React.createElement(MyAccount, null), 
+	        React.createElement(MyWatchlist, null), 
 	        React.createElement(Nav, {setLanguage: this.setLanguage, language: this.state.language}), 
 	        React.createElement(VideoDetail, React.__spread({},  this.props, {language: this.state.language})), 
 	        React.createElement(SimilarTitles, null), 
@@ -19774,6 +19780,166 @@
 
 /***/ },
 /* 160 */
+/***/ function(module, exports, __webpack_require__) {
+
+	const React = __webpack_require__(1);
+
+	const MyAccount = React.createClass({displayName: "MyAccount",
+	  render() {
+	    return (
+	      React.createElement("div", {className: "ui basic my-account modal"}, 
+	        React.createElement("div", {className: "ui grid"}, 
+	          React.createElement("div", {className: "two column row account-settings"}, 
+	            React.createElement("div", {className: "twelve wide column"}, 
+	              React.createElement("h3", null, "Profile"), 
+	              React.createElement("div", {className: "ui grid"}, 
+	                React.createElement("div", {className: "ui two column row"}, 
+	                  React.createElement("div", {className: "three wide computer five wide tablet column"}, 
+	                    React.createElement("div", {className: "ui text"}, "First Name")
+	                  ), 
+	                  React.createElement("div", {className: "three wide computer five wide tablet column"}, 
+	                    React.createElement("div", {className: "ui text"}, "Last Name")
+	                  )
+	                ), 
+	                React.createElement("div", {className: "ui two column row"}, 
+	                  React.createElement("div", {className: "three wide computer five wide tablet column"}, 
+	                    React.createElement("div", {className: "ui text"}, "Keiichi")
+	                  ), 
+	                  React.createElement("div", {className: "three wide computer five wide tablet column"}, 
+	                    React.createElement("div", {className: "ui text"}, "Lindley")
+	                  )
+	                ), 
+	                React.createElement("div", {className: "ui one column row"}, 
+	                  React.createElement("div", {className: "five wide computer eight wide tablet column"}, 
+	                    React.createElement("div", {className: "ui text"}, "Email Address")
+	                  )
+	                ), 
+	                React.createElement("div", {className: "ui one column row"}, 
+	                  React.createElement("div", {className: "five wide computer eight wide tablet column"}, 
+	                    React.createElement("div", {className: "ui text"}, "keiichi.lindley@gmail.com")
+	                  )
+	                ), 
+	                React.createElement("div", {className: "ui one column row"}, 
+	                  React.createElement("div", {className: "five wide computer eight wide tablet column"}, 
+	                    React.createElement("div", {className: "ui text"}, "Password")
+	                  )
+	                ), 
+	                React.createElement("div", {className: "ui one column row"}, 
+	                  React.createElement("div", {className: "five wide computer eight wide tablet column"}, 
+	                    React.createElement("div", {className: "ui text"}, "*******")
+	                  )
+	                ), 
+	                React.createElement("div", {className: "ui one column row"}, 
+	                  React.createElement("div", {className: "five wide computer eight wide tablet column"}, 
+	                    React.createElement("div", {className: "ui text"}, "ZIP Code")
+	                  )
+	                ), 
+	                React.createElement("div", {className: "ui one column row"}, 
+	                  React.createElement("div", {className: "five wide computer eight wide tablet column"}, 
+	                    React.createElement("div", {className: "ui text"}, "80110")
+	                  )
+	                ), 
+	                React.createElement("div", {className: "ui one column row"}, 
+	                  React.createElement("div", {className: "five wide computer eight wide tablet column"}, 
+	                    React.createElement("div", {className: "ui text"}, "Phone Number")
+	                  )
+	                ), 
+	                React.createElement("div", {className: "ui one column row"}, 
+	                  React.createElement("div", {className: "five wide computer eight wide tablet column"}, 
+	                    React.createElement("div", {className: "ui text"}, "###-###-####")
+	                  )
+	                )
+	              )
+	            ), 
+	            React.createElement("div", {className: "four wide column"}, React.createElement("a", {href: "#"}, 
+	                React.createElement("h4", null, "Profile")), React.createElement("a", {href: "#"}, 
+	                React.createElement("h4", null, "Notifications")), React.createElement("a", {href: "#"}, 
+	                React.createElement("h4", null, "Settings")), React.createElement("a", {href: "#"}, 
+	                React.createElement("h4", null, "Sign Out")))
+	          )
+	        )
+	      )
+	    );
+	  }
+	});
+
+	module.exports = MyAccount;
+
+
+/***/ },
+/* 161 */
+/***/ function(module, exports, __webpack_require__) {
+
+	const React = __webpack_require__(1);
+	const WatchlistGrid = __webpack_require__(162)
+
+	const MyWatchlist = React.createClass({displayName: "MyWatchlist",
+	  render() {
+	    return (
+	      React.createElement("div", {className: "ui basic my-watchlist modal"}, 
+	        React.createElement("div", {className: "ui grid"}, 
+	          React.createElement("div", {className: "two column row account-settings"}, 
+	            React.createElement("div", {className: "twelve wide column"}, 
+	              React.createElement("h3", null, "Watchlist"), 
+	              React.createElement(WatchlistGrid, null)
+	            ), 
+	            React.createElement("div", {className: "four wide column"}, 
+	              React.createElement("a", {href: "#"}, 
+	                React.createElement("h4", null, "Watchlist")
+	              ), 
+	              React.createElement("a", {href: "#"}, 
+	                React.createElement("h4", null, "Continue Watching")
+	              )
+	            )
+	          )
+	        )
+	      )
+	    )
+	  }
+	});
+
+	module.exports = MyWatchlist;
+
+
+/***/ },
+/* 162 */
+/***/ function(module, exports, __webpack_require__) {
+
+	const React = __webpack_require__(1);
+
+	const WatchlistGrid = React.createClass({displayName: "WatchlistGrid",
+	  render() {
+	    return (
+	      React.createElement("div", {className: "ui vertical center container details my-watchlist grids"}, 
+	        React.createElement("div", {className: "ui equal width grid container bottom-padding"}, 
+	          React.createElement("div", {className: "row"}, 
+	            React.createElement("a", {className: "image preview"}, 
+	                React.createElement("div", {className: "image preview thumb", style: {"backgroundImage": 'url(/images/melody/M21031.jpg) !important'}}, 
+	                React.createElement("div", {className: "ui bottom attached label"}, "El Sayed Abo El Araby Wasal")
+	              )
+	            ), 
+	            React.createElement("a", {className: "image preview"}, 
+	              React.createElement("div", {className: "image preview thumb", style: {"backgroundImage": 'url(/images/melody/M21032.jpg) !important'}}, 
+	                React.createElement("div", {className: "ui bottom attached label"}, "Losoos Khamas Nogoom")
+	              )
+	            ), 
+	            React.createElement("a", {className: "image preview"}, 
+	              React.createElement("div", {className: "image preview thumb", style: {"backgroundImage": 'url(/images/melody/M22016.jpg) !important'}}, 
+	                React.createElement("div", {className: "ui bottom attached label"}, "Dalou3a Ya Beih")
+	              )
+	            )
+	          )
+	        )
+	      )
+	    );
+	  }
+	});
+
+	module.exports = WatchlistGrid;
+
+
+/***/ },
+/* 163 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
@@ -19796,7 +19962,14 @@
 	            React.createElement("div", {className: "right menu"}, 
 	              React.createElement("div", {id: "account-dropdown", className: "ui left dropdown item"}, React.createElement("i", {className: "setting icon"}), 
 	                React.createElement("div", {className: "menu"}, 
-	                  React.createElement("a", {className: "item"}, React.createElement("i", {className: "user icon"}), React.createElement("span", {className: "text"}, "My Account")), React.createElement("a", {className: "item"}, React.createElement("i", {className: "list layout icon"}), React.createElement("span", {className: "text"}, "Watchlist")), 
+	                  React.createElement("a", {className: "item", onClick: this.myAccount}, 
+	                    React.createElement("i", {className: "user icon"}), 
+	                    React.createElement("span", {className: "text"}, "My Account")
+	                  ), 
+	                  React.createElement("a", {className: "item", onClick: this.myWatchlist}, 
+	                    React.createElement("i", {className: "list layout icon"}), 
+	                    React.createElement("span", {className: "text"}, "Watchlist")
+	                  ), 
 	                  React.createElement("a", {className: "item", onClick: this.props.setLanguage.bind(null, menu.lang)}, 
 	                    React.createElement("i", {className: "flag icon"}), 
 	                    React.createElement("span", {className: "text"}, menu.name)
@@ -19826,7 +19999,16 @@
 	        )
 	      )
 	    );
+	  },
+
+	  myAccount() {
+	    $('.my-account.modal').modal('show');
+	  },
+
+	  myWatchlist() {
+	    $('.my-watchlist.modal').modal('show');
 	  }
+
 	});
 
 	var languageMenu = function(lang){
@@ -19849,12 +20031,12 @@
 
 
 /***/ },
-/* 161 */
+/* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
 
-	const Roles = __webpack_require__(162);
+	const Roles = __webpack_require__(165);
 
 	const VideoDetail = React.createClass({displayName: "VideoDetail",
 	  getInitialState: function() {
@@ -19961,12 +20143,12 @@
 
 
 /***/ },
-/* 162 */
+/* 165 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
 
-	const People = __webpack_require__(163)
+	const People = __webpack_require__(166)
 
 	const Roles = React.createClass({displayName: "Roles",
 
@@ -20003,12 +20185,12 @@
 
 
 /***/ },
-/* 163 */
+/* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
 
-	const Person = __webpack_require__(164)
+	const Person = __webpack_require__(167)
 
 
 	const People = React.createClass({displayName: "People",
@@ -20058,7 +20240,7 @@
 
 
 /***/ },
-/* 164 */
+/* 167 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
@@ -20073,7 +20255,7 @@
 
 
 /***/ },
-/* 165 */
+/* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
@@ -20121,7 +20303,7 @@
 
 
 /***/ },
-/* 166 */
+/* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
@@ -20163,51 +20345,12 @@
 
 
 /***/ },
-/* 167 */
+/* 170 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
-
-	const Nav = __webpack_require__(160)
-	const Grid = __webpack_require__(168)
-	const SimilarTitles = __webpack_require__(165)
-	const Footer = __webpack_require__(166)
-
-	const GridApp = React.createClass({displayName: "GridApp",
-
-	  setLanguage: function(lang) {
-	    this.setState({
-	      language: lang
-	    })
-	  },
-
-	  getInitialState: function() {
-	    return {
-	      language: 'en'
-	    }
-	  },
-
-	  render() {
-	    return (
-	      React.createElement("div", null, 
-	        React.createElement(Nav, {setLanguage: this.setLanguage, language: this.state.language}), 
-	        React.createElement(Grid, React.__spread({},  this.props, {language: this.state.language})), 
-	        React.createElement(Footer, null)
-	      )
-	    );
-	  }
-	});
-
-	module.exports = GridApp;
-
-
-/***/ },
-/* 168 */
-/***/ function(module, exports, __webpack_require__) {
-
-	const React = __webpack_require__(1);
-	const GridFilter = __webpack_require__(169);
-	const Column = __webpack_require__(170)
+	const GridFilter = __webpack_require__(171);
+	const Column = __webpack_require__(172)
 
 	const Grid = React.createClass({displayName: "Grid",
 
@@ -20310,7 +20453,7 @@
 
 
 /***/ },
-/* 169 */
+/* 171 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
@@ -20381,7 +20524,7 @@
 
 
 /***/ },
-/* 170 */
+/* 172 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
@@ -20437,15 +20580,17 @@
 
 
 /***/ },
-/* 171 */
+/* 173 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
 
-	const SeasonNav = __webpack_require__(172)
-	const SeasonDetail = __webpack_require__(173)
-	const SimilarTitles = __webpack_require__(165)
-	const Footer = __webpack_require__(166)
+	const MyAccount = __webpack_require__(160)
+	const MyWatchlist = __webpack_require__(161)
+	const Nav = __webpack_require__(163)
+	const Grid = __webpack_require__(170)
+	const SimilarTitles = __webpack_require__(168)
+	const Footer = __webpack_require__(169)
 
 	const GridApp = React.createClass({displayName: "GridApp",
 
@@ -20464,8 +20609,10 @@
 	  render() {
 	    return (
 	      React.createElement("div", null, 
-	        React.createElement(SeasonNav, {setLanguage: this.setLanguage, language: this.state.language}), 
-	        React.createElement(SeasonDetail, React.__spread({},  this.props, {language: this.state.language})), 
+	        React.createElement(MyAccount, null), 
+	        React.createElement(MyWatchlist, null), 
+	        React.createElement(Nav, {setLanguage: this.setLanguage, language: this.state.language}), 
+	        React.createElement(Grid, React.__spread({},  this.props, {language: this.state.language})), 
 	        React.createElement(Footer, null)
 	      )
 	    );
@@ -20476,7 +20623,172 @@
 
 
 /***/ },
-/* 172 */
+/* 174 */
+/***/ function(module, exports, __webpack_require__) {
+
+	const React = __webpack_require__(1);
+
+	const MyAccount = __webpack_require__(160)
+	const MyWatchlist = __webpack_require__(161)
+	const Nav = __webpack_require__(163)
+	const Carousel = __webpack_require__(175)
+	const Footer = __webpack_require__(169)
+
+	const HomeApp = React.createClass({displayName: "HomeApp",
+
+	  setLanguage: function(lang) {
+	    this.setState({
+	      language: lang
+	    })
+	  },
+
+	  getInitialState: function() {
+	    return {
+	      language: 'en'
+	    }
+	  },
+
+	  render() {
+	    return (
+	      React.createElement("div", null, 
+	        React.createElement(MyAccount, null), 
+	        React.createElement(MyWatchlist, null), 
+	        React.createElement(Nav, {setLanguage: this.setLanguage, language: this.state.language}), 
+	        React.createElement("div", {className: "ui container hero"}, 
+	          React.createElement("div", {id: "img", className: "ui image hero"})
+	        ), 
+	        React.createElement("div", {className: "ui vertical center container aligned grids"}, 
+	          React.createElement(Carousel, {title: "Movies", source: "/movies", limit: "5", href: "/movies/:id"}), 
+	          React.createElement(Carousel, {title: "Series", source: "/series", limit: "5", href: "/series/:id"}), 
+	          React.createElement(Carousel, {title: "Plays", source: "/plays", limit: "5", href: "/plays/:id"})
+	        ), 
+	        React.createElement(Footer, null)
+	      )
+	    );
+	  }
+	});
+
+	module.exports = HomeApp;
+
+
+/***/ },
+/* 175 */
+/***/ function(module, exports, __webpack_require__) {
+
+	const React = __webpack_require__(1);
+	const Row = __webpack_require__(176)
+
+	const Carousel = React.createClass({displayName: "Carousel",
+	  render() {
+	    return (
+	      React.createElement("div", null, 
+	        React.createElement("div", {className: "ui one column grid container"}, 
+	         React.createElement("div", {className: "column header"}, 
+	            React.createElement("a", {href: '/'+this.props.title}, 
+	              React.createElement("h4", {className: "ui header grid-title"}, React.createElement("br", null), this.props.title, " >")
+	            )
+	         )
+	        ), 
+	        React.createElement("div", {className: "ui equal width grid container"}, 
+	          React.createElement(Row, {source: this.props.source, limit: this.props.limit, href: this.props.href})
+	        )
+	      )
+	    );
+	  }
+	});
+
+	module.exports = Carousel;
+
+
+/***/ },
+/* 176 */
+/***/ function(module, exports, __webpack_require__) {
+
+	const React = __webpack_require__(1);
+
+	const Column = __webpack_require__(172)
+
+	const Row = React.createClass({displayName: "Row",
+	  getInitialState: function() {
+	    return {
+	      collection: []
+	    };
+	  },
+
+	  componentDidMount: function() {
+	    this.fetch = $.get('http://dgzn.io:8080/v1/assets'+this.props.source, function (result) {
+	      this.setState({
+	        collection: result
+	      });
+	    }.bind(this));
+	  },
+
+	  componentWillUnmount: function() {
+	    this.fetch.abort();
+	  },
+
+	  render() {
+	    var COLUMNS = [];
+	    this.state.collection.some((data, i) => {
+	      COLUMNS.push(React.createElement(Column, {key: i, data: data, href: this.props.href}))
+	      return i === this.props.limit - 1;
+	    })
+	    return (
+	      React.createElement("div", {className: "row"}, 
+	        COLUMNS
+	      )
+	    );
+	  }
+	});
+
+	module.exports = Row;
+
+
+/***/ },
+/* 177 */
+/***/ function(module, exports, __webpack_require__) {
+
+	const React = __webpack_require__(1);
+
+	const MyAccount = __webpack_require__(160)
+	const MyWatchlist = __webpack_require__(161)
+	const SeasonNav = __webpack_require__(178)
+	const SeasonDetail = __webpack_require__(179)
+	const SimilarTitles = __webpack_require__(168)
+	const Footer = __webpack_require__(169)
+
+	const SeasonApp = React.createClass({displayName: "SeasonApp",
+
+	  setLanguage: function(lang) {
+	    this.setState({
+	      language: lang
+	    })
+	  },
+
+	  getInitialState: function() {
+	    return {
+	      language: 'en'
+	    }
+	  },
+
+	  render() {
+	    return (
+	      React.createElement("div", null, 
+	        React.createElement(MyAccount, null), 
+	        React.createElement(MyWatchlist, null), 
+	        React.createElement(SeasonNav, {setLanguage: this.setLanguage, language: this.state.language}), 
+	        React.createElement(SeasonDetail, React.__spread({},  this.props, {language: this.state.language})), 
+	        React.createElement(Footer, null)
+	      )
+	    );
+	  }
+	});
+
+	module.exports = SeasonApp;
+
+
+/***/ },
+/* 178 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
@@ -20497,9 +20809,17 @@
 	              React.createElement("div", {className: "results"})
 	            ), 
 	            React.createElement("div", {className: "right menu"}, 
-	              React.createElement("div", {id: "account-dropdown", className: "ui left dropdown item"}, React.createElement("i", {className: "setting icon"}), 
+	              React.createElement("div", {id: "account-dropdown", className: "ui left dropdown item"}, 
+	                React.createElement("i", {className: "setting icon"}), 
 	                React.createElement("div", {className: "menu"}, 
-	                  React.createElement("a", {className: "item"}, React.createElement("i", {className: "user icon"}), React.createElement("span", {className: "text"}, "My Account")), React.createElement("a", {className: "item"}, React.createElement("i", {className: "list layout icon"}), React.createElement("span", {className: "text"}, "Watchlist")), 
+	                  React.createElement("a", {className: "item", onClick: this.myAccount}, 
+	                    React.createElement("i", {className: "user icon"}), 
+	                    React.createElement("span", {className: "text"}, "My Account")
+	                  ), 
+	                  React.createElement("a", {className: "item", onClick: this.myWatchlist}, 
+	                    React.createElement("i", {className: "list layout icon"}), 
+	                    React.createElement("span", {className: "text"}, "Watchlist")
+	                  ), 
 	                  React.createElement("a", {className: "item", onClick: this.props.setLanguage.bind(null, menu.lang)}, 
 	                    React.createElement("i", {className: "flag icon"}), 
 	                    React.createElement("span", {className: "text"}, menu.name)
@@ -20517,8 +20837,12 @@
 	            React.createElement("div", {className: "results"})
 	          ), React.createElement("a", {className: "item horizontal divider"}), 
 	            React.createElement("a", {className: "item", onClick: this.handleClick}, 
-	              React.createElement("h6", null, "My Account")), React.createElement("a", {className: "item"}, 
-	              React.createElement("h6", null, "Watchlist")), React.createElement("a", {className: "sidebar item"}, 
+	              React.createElement("h6", null, "My Account")
+	            ), 
+	            React.createElement("a", {className: "item", onClick: this.myAccount}, 
+	              React.createElement("h6", null, "Watchlist")
+	            ), 
+	            React.createElement("a", {className: "sidebar item"}, 
 	              React.createElement("h6", null, "Arabic")
 	            )
 	        ), 
@@ -20590,7 +20914,17 @@
 	        )
 	      )
 	    );
+	  },
+
+	  myAccount() {
+	    $('.my-account.modal').modal('show');
+	  },
+
+	  myWatchlist() {
+	    console.log("showing my watchlist");
+	    $('.my-watchlist.modal').modal('show');
 	  }
+
 	});
 
 	var languageMenu = function(lang){
@@ -20613,14 +20947,14 @@
 
 
 /***/ },
-/* 173 */
+/* 179 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
 
-	const SeasonFilter = __webpack_require__(174)
-	const SeasonWatchlist = __webpack_require__(175)
-	const Roles = __webpack_require__(162);
+	const SeasonFilter = __webpack_require__(180)
+	const SeasonWatchlist = __webpack_require__(181)
+	const Roles = __webpack_require__(165);
 
 	const SeasonDetail = React.createClass({displayName: "SeasonDetail",
 
@@ -20721,7 +21055,7 @@
 
 
 /***/ },
-/* 174 */
+/* 180 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
@@ -20751,7 +21085,7 @@
 
 
 /***/ },
-/* 175 */
+/* 181 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
@@ -20810,83 +21144,12 @@
 
 
 /***/ },
-/* 176 */
-/***/ function(module, exports, __webpack_require__) {
-
-	const React = __webpack_require__(1);
-	const Row = __webpack_require__(177)
-
-	const Carousel = React.createClass({displayName: "Carousel",
-	  render() {
-	    return (
-	      React.createElement("div", null, 
-	        React.createElement("div", {className: "ui one column grid container"}, 
-	         React.createElement("div", {className: "column header"}, 
-	            React.createElement("h4", {className: "ui header grid-title"}, React.createElement("br", null), this.props.title, " >")
-	         )
-	        ), 
-	        React.createElement("div", {className: "ui equal width grid container"}, 
-	          React.createElement(Row, {source: this.props.source, limit: this.props.limit, href: this.props.href})
-	        )
-	      )
-	    );
-	  }
-	});
-
-	module.exports = Carousel;
-
-
-/***/ },
-/* 177 */
+/* 182 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
 
-	const Column = __webpack_require__(170)
-
-	const Row = React.createClass({displayName: "Row",
-	  getInitialState: function() {
-	    return {
-	      collection: []
-	    };
-	  },
-
-	  componentDidMount: function() {
-	    this.fetch = $.get('http://dgzn.io:8080/v1/assets'+this.props.source, function (result) {
-	      this.setState({
-	        collection: result
-	      });
-	    }.bind(this));
-	  },
-
-	  componentWillUnmount: function() {
-	    this.fetch.abort();
-	  },
-
-	  render() {
-	    var COLUMNS = [];
-	    this.state.collection.some((data, i) => {
-	      COLUMNS.push(React.createElement(Column, {key: i, data: data, href: this.props.href}))
-	      return i === this.props.limit - 1;
-	    })
-	    return (
-	      React.createElement("div", {className: "row"}, 
-	        COLUMNS
-	      )
-	    );
-	  }
-	});
-
-	module.exports = Row;
-
-
-/***/ },
-/* 178 */
-/***/ function(module, exports, __webpack_require__) {
-
-	const React = __webpack_require__(1);
-
-	const AlbumWatchlist = __webpack_require__(179)
+	const AlbumWatchlist = __webpack_require__(183)
 
 
 	const AlbumDetail = React.createClass({displayName: "AlbumDetail",
@@ -21031,7 +21294,7 @@
 
 
 /***/ },
-/* 179 */
+/* 183 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
