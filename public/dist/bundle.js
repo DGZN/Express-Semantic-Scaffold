@@ -21023,26 +21023,28 @@
 	            ), 
 	            React.createElement("div", {className: "details sixteen wide tablet seven wide computer column centered"}, 
 	              React.createElement("div", {id: "video-slide-out"}), 
-	              React.createElement("img", {src: series.thumb, className: "ui huge image pad-right-small"}), 
-	              React.createElement("h1", null, series.name), 
-	              React.createElement("h3", null, series.seriesText), 
-	              React.createElement("h4", {className: "pad-right-medium"}, series.description), 
-	              React.createElement("div", {className: "ui one column grid center"}, 
-	                React.createElement("div", {className: "row"}, 
-	                  React.createElement("div", {className: "column tight"}, 
-	                    React.createElement("div", {className: "movie-details"}, 
-	                      React.createElement("span", null, series.duration), React.createElement("span", null, series.productionYear)
-	                    ), 
-	                    React.createElement("div", {className: "movie-actions"}, 
-	                      React.createElement("img", {src: "/images/play-button.png", className: "ui image"}), 
-	                      React.createElement("img", {src: "/images/add-button.png", className: "ui image"}), 
-	                      React.createElement("img", {src: "/images/social-share-circle-icons.png", className: "ui image social-share"})
+	              React.createElement("div", {className: "season-detail"}, 
+	                React.createElement("img", {src: series.thumb, className: "ui huge image pad-right-small"}), 
+	                React.createElement("h1", null, series.name), 
+	                React.createElement("h3", null, series.seriesText), 
+	                React.createElement("h4", {className: "pad-right-medium"}, series.description), 
+	                React.createElement("div", {className: "ui one column grid center"}, 
+	                  React.createElement("div", {className: "row"}, 
+	                    React.createElement("div", {className: "column tight"}, 
+	                      React.createElement("div", {className: "movie-details"}, 
+	                        React.createElement("span", null, series.duration), React.createElement("span", null, series.productionYear)
+	                      ), 
+	                      React.createElement("div", {className: "movie-actions"}, 
+	                        React.createElement("img", {src: "/images/play-button.png", className: "ui image"}), 
+	                        React.createElement("img", {src: "/images/add-button.png", className: "ui image"}), 
+	                        React.createElement("img", {src: "/images/social-share-circle-icons.png", className: "ui image social-share"})
+	                      )
 	                    )
 	                  )
 	                )
 	              )
 	            ), 
-	            React.createElement("div", {className: "details sixteen wide tablet three wide computer column centered"}, 
+	            React.createElement("div", {className: "details sixteen wide tablet three wide computer column centered season-detail"}, 
 	              React.createElement(Roles, {roles: series.roles, language: this.props.language, colWidth: "sixteen"})
 	            )
 	          )
@@ -21114,6 +21116,7 @@
 	});
 
 	const WatchlistRow = React.createClass({displayName: "WatchlistRow",
+
 	  render() {
 	    return (
 	      React.createElement("div", {className: "row watchlist"}, 
@@ -21132,23 +21135,41 @@
 	  },
 
 	  playEpisode() {
-	    ReactDOM.render(
-	      React.createElement(VideoPlayer, {video: this.props.episode, language: this.props.language}),
-	      document.getElementById('video-slide-out')
-	    );
-	    $('#video-slide-out').css({
-	      "top": "-110%"
-	    , "left": "0%"
-	    , "position": "absolute"
-	    , "width": "1000px"
-	    , "height": "100%"
-	    , "display": "block"
-	    , "opacity": "0.7"
-	    , "z-index": "1"
-	  }).delay(100).velocity({
+
+	    const episode = this.props.episode;
+	    const language = this.props.language;
+
+	    $('#video-slide-out, .videoPlayer').animate({
+	      opacity: 0
+	    }, function(){
+	      ReactDOM.render(
+	        React.createElement(VideoPlayer, {video: episode, language: language}),
+	        document.getElementById('video-slide-out')
+	      );
+	    })
+
+	    $('.season-detail').velocity({
+	      opacity: "0"
+	    }, 740, "ease-out")
+
+	    $('#video-slide-out').velocity({
+	        "left": "0%"
+	      , "position": "absolute"
+	      , "width": "1000px"
+	      , "height": "100%"
+	      , "display": "block"
+	      , "opacity": "0"
+	      , "z-index": "1"
+	    }, 300, "easeOutQuart").velocity({
 	        top: "-4.5%"
 	      , opacity: "1"
-	    }, 900, "spring")
+	    } , 1500, "easeOutQuart")
+
+	    $('.videoPlayer').velocity({
+	        top: "-4.5%"
+	      , opacity: "1"
+	    }, 1500, "easeOutQuart")
+
 	  }
 	})
 
@@ -21185,7 +21206,7 @@
 	    return (
 	      React.createElement("div", {className: "ui vertical center container aligned grids pad-top-medium"}, 
 	        React.createElement("div", {className: "ui vertical center container aligned grids pad-top-medium"}, 
-	          React.createElement("div", {className: "ui one column grid container"}, 
+	          React.createElement("div", {className: "ui one column grid container videoPlayer"}, 
 	            React.createElement("div", {className: "details column ", dangerouslySetInnerHTML: {__html:video.player}}
 	            )
 	          ), 
@@ -21207,7 +21228,7 @@
 	});
 
 	function YouTubePlayer(id){
-	  return '<iframe width="98%" height="510" src="https://www.youtube.com/embed/'+id+'?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>'
+	  return '<iframe width="98%" height="510" src="https://www.youtube.com/embed/'+id+'?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0"  allowfullscreen></iframe>'
 	}
 
 	function BrightCovePlayer(id){

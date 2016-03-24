@@ -3,7 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "webpack && node ./bin/www"
+    "build:js": "webpack",
+    "build": "npm run build:js",
+    "watch": "watch 'npm run build' ./public/js",
+    "start": "node ./bin/www"
   },
   "dependencies": {
     "babel-preset-react": "^6.5.0",
@@ -22,6 +25,7 @@
     "jsx-loader": "^0.13.2",
     "mongoose": "^4.4.4",
     "react": "^0.14.7",
-    "react-dom": "^0.14.7"
+    "react-dom": "^0.14.7",
+    "watch": "^0.17.1"
   }
 }

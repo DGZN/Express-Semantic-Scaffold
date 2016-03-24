@@ -66,30 +66,33 @@ const SeasonDetail = React.createClass({
         </div>
         <div className="ui vertical center container aligned grids">
           <div className="ui two column grid container details pad-top-medium">
-            <div className="details six wide computer only column centered">
-              <SeasonWatchlist episodes={series.episodes} />
+            <div className="details six wide computer only column centered season-watchlist">
+              <SeasonWatchlist language={this.props.language} episodes={series.episodes} />
             </div>
             <div className="details sixteen wide tablet seven wide computer column centered">
-              <img src={series.thumb} className="ui huge image pad-right-small"/>
-              <h1>{series.name}</h1>
-              <h3>{series.seriesText}</h3>
-              <h4 className="pad-right-medium">{series.description}</h4>
-              <div className="ui one column grid center">
-                <div className="row">
-                  <div className="column tight">
-                    <div className="movie-details">
-                      <span>{series.duration}</span><span>{series.productionYear}</span>
-                    </div>
-                    <div className="movie-actions">
-                      <img src="/images/play-button.png" className="ui image"/>
-                      <img src="/images/add-button.png" className="ui image"/>
-                      <img src="/images/social-share-circle-icons.png" className="ui image social-share"/>
+              <div id="video-slide-out"></div>
+              <div className="season-detail">
+                <img src={series.thumb} className="ui huge image pad-right-small"/>
+                <h1>{series.name}</h1>
+                <h3>{series.seriesText}</h3>
+                <h4 className="pad-right-medium">{series.description}</h4>
+                <div className="ui one column grid center">
+                  <div className="row">
+                    <div className="column tight">
+                      <div className="movie-details">
+                        <span>{series.duration}</span><span>{series.productionYear}</span>
+                      </div>
+                      <div className="movie-actions">
+                        <img src="/images/play-button.png" className="ui image"/>
+                        <img src="/images/add-button.png" className="ui image"/>
+                        <img src="/images/social-share-circle-icons.png" className="ui image social-share"/>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="details sixteen wide tablet three wide computer column centered">
+            <div className="details sixteen wide tablet three wide computer column centered season-detail">
               <Roles roles={series.roles} language={this.props.language} colWidth="sixteen" />
             </div>
           </div>

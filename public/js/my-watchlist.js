@@ -4,7 +4,7 @@ const WatchlistGrid = require('./watchlist-grid.js')
 const MyWatchlist = React.createClass({
   render() {
     return (
-      <div className="ui basic my-watchlist modal">
+      <div className="my-watchlist modal">
         <div className="ui grid">
           <div className="two column row account-settings">
             <div className="twelve wide column">

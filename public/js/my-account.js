@@ -3,7 +3,7 @@ const React = require('react');
 const MyAccount = React.createClass({
   render() {
     return (
-      <div className="ui basic my-account modal">
+      <div className="my-account modal">
         <div className="ui grid">
           <div className="two column row account-settings">
             <div className="twelve wide column">
