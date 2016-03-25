@@ -2,7 +2,7 @@ const React = require('react');
 const GridFilter = require('./gridFilter.js');
 const Column = require('./column.js')
 
-const Grid = React.createClass({
+const SetGrid = React.createClass({
 
   filter: function(filter) {
     this.setState({
@@ -27,7 +27,7 @@ const Grid = React.createClass({
   componentDidMount: function() {
     this.fetch = $.get('http://dgzn.io:8080/v1/assets'+this.props.source, function (result) {
       this.setState({
-        collection: result
+        collection: result.sets
       });
     }.bind(this));
   },
@@ -41,7 +41,6 @@ const Grid = React.createClass({
     var COLUMNS = [];
 
     var collection = this.state.collection
-
 
     if (this.state.filter) {
       switch (this.state.filter) {
@@ -98,4 +97,4 @@ const Grid = React.createClass({
   },
 });
 
-module.exports = Grid;
+module.exports = SetGrid;

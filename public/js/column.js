@@ -15,9 +15,13 @@ const Column = React.createClass({
   },
 
   render() {
-    this.props.href
-      ? link = generateLink(this.props)
-      : link = this.props.href;
+    if (this.props.data.ref) {
+      link = this.props.data.ref.link
+    } else {
+      this.props.href
+        ? link = generateLink(this.props)
+        : link = this.props.href;
+    }
     var thumb = '/images/melody/' + this.props.data.thumb.replace('M1','M11');
     if (this.props.thumbPath) {
       thumb = '/images/wireframe/16x9.png';

@@ -5,10 +5,12 @@ const App           = require('./public/js/app.js')
 const Grid          = require('./public/js/grid.js')
 const Footer        = require('./public/js/footer.js')
 const GridApp       = require('./public/js/gridApp.js')
+const SetApp        = require('./public/js/setApp.js')
 const HomeApp       = require('./public/js/homeApp.js')
 const MyAccount     = require('./public/js/my-account.js')
 const SeasonApp     = require('./public/js/seasonApp.js')
 const AlbumDetail   = require('./public/js/album-detail.js')
+const CollectionApp = require('./public/js/collectionApp.js')
 const VideoDetail   = require('./public/js/video-detail.js')
 const SimilarTitles = require('./public/js/similar-titles.js')
 
@@ -78,6 +80,22 @@ if ($('#play').length) {
     document.getElementById('play')
   );
 }
+
+if ($('#collections').length) {
+  ReactDOM.render(
+    <SetApp title="Collections" source="/sets/collections" limit="5" href="/collections/:id" />,
+    document.getElementById('collections')
+  );
+}
+
+if ($('#collection').length) {
+  var collection = '/sets/' + $('#collection').data('id');
+  ReactDOM.render(
+    <CollectionApp source={collection} />,
+    document.getElementById('collection')
+  );
+}
+
 
 if ($('#footer').length) {
   ReactDOM.render(

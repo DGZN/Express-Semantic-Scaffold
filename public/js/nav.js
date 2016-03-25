@@ -8,7 +8,17 @@ const Nav = React.createClass({
       <div>
         <div className="ui large top fixed hidden menu inverted">
           <div className="sidebar"></div>
-          <div className="ui container nav"><a href="/" className="item"><img src="/images/melody-logo.png" className="ui tiny image"/></a><a href="/movies" className="item">Movies</a><a href="/series" className="item">Series</a><a href="/music" className="item">Music</a><a href="/plays" className="item">Plays</a><a className="item">Classics</a><a className="item">Collections</a><a href="/live" className="item">Live TV</a>
+          <div className="ui container nav">
+            <a href="/" className="item">
+              <img src="/images/melody-logo.png" className="ui tiny image"/>
+            </a>
+            <a href="/movies" className="item">Movies</a>
+            <a href="/series" className="item">Series</a>
+            <a href="/music" className="item">Music</a>
+            <a href="/plays" className="item">Plays</a>
+            <a className="item">Classics</a>
+            <a href="/collections" className="item">Collections</a>
+            <a href="/live" className="item">Live TV</a>
             <div className="ui category search item nav-search">
               <div className="ui transparent icon input">
                 <input type="text" placeholder="Search..." className="prompt"/><i className="search link icon"></i>

@@ -58,6 +58,18 @@ router.get('/plays/:id', function(req, res, next) {
   });
 });
 
+router.get('/collections', function(req, res, next) {
+  res.render('collections');
+});
+
+router.get('/collections/:id', function(req, res, next) {
+  res.render('collection', {
+    data: {
+      id: req.params.id
+    }
+  });
+});
+
 router.get('/live', function(req, res, next) {
   res.render('live');
 });

@@ -51,10 +51,12 @@
 	const Grid          = __webpack_require__(170)
 	const Footer        = __webpack_require__(169)
 	const GridApp       = __webpack_require__(173)
-	const HomeApp       = __webpack_require__(174)
+	const SetApp        = __webpack_require__(174)
+	const HomeApp       = __webpack_require__(176)
 	const MyAccount     = __webpack_require__(160)
-	const SeasonApp     = __webpack_require__(177)
-	const AlbumDetail   = __webpack_require__(183)
+	const SeasonApp     = __webpack_require__(179)
+	const AlbumDetail   = __webpack_require__(185)
+	const CollectionApp = __webpack_require__(187)
 	const VideoDetail   = __webpack_require__(164)
 	const SimilarTitles = __webpack_require__(168)
 
@@ -124,6 +126,22 @@
 	    document.getElementById('play')
 	  );
 	}
+
+	if ($('#collections').length) {
+	  ReactDOM.render(
+	    React.createElement(SetApp, {title: "Collections", source: "/sets/collections", limit: "5", href: "/collections/:id"}),
+	    document.getElementById('collections')
+	  );
+	}
+
+	if ($('#collection').length) {
+	  var collection = '/sets/' + $('#collection').data('id');
+	  ReactDOM.render(
+	    React.createElement(CollectionApp, {source: collection}),
+	    document.getElementById('collection')
+	  );
+	}
+
 
 	if ($('#footer').length) {
 	  ReactDOM.render(
@@ -19952,7 +19970,17 @@
 	      React.createElement("div", null, 
 	        React.createElement("div", {className: "ui large top fixed hidden menu inverted"}, 
 	          React.createElement("div", {className: "sidebar"}), 
-	          React.createElement("div", {className: "ui container nav"}, React.createElement("a", {href: "/", className: "item"}, React.createElement("img", {src: "/images/melody-logo.png", className: "ui tiny image"})), React.createElement("a", {href: "/movies", className: "item"}, "Movies"), React.createElement("a", {href: "/series", className: "item"}, "Series"), React.createElement("a", {href: "/music", className: "item"}, "Music"), React.createElement("a", {href: "/plays", className: "item"}, "Plays"), React.createElement("a", {className: "item"}, "Classics"), React.createElement("a", {className: "item"}, "Collections"), React.createElement("a", {href: "/live", className: "item"}, "Live TV"), 
+	          React.createElement("div", {className: "ui container nav"}, 
+	            React.createElement("a", {href: "/", className: "item"}, 
+	              React.createElement("img", {src: "/images/melody-logo.png", className: "ui tiny image"})
+	            ), 
+	            React.createElement("a", {href: "/movies", className: "item"}, "Movies"), 
+	            React.createElement("a", {href: "/series", className: "item"}, "Series"), 
+	            React.createElement("a", {href: "/music", className: "item"}, "Music"), 
+	            React.createElement("a", {href: "/plays", className: "item"}, "Plays"), 
+	            React.createElement("a", {className: "item"}, "Classics"), 
+	            React.createElement("a", {href: "/collections", className: "item"}, "Collections"), 
+	            React.createElement("a", {href: "/live", className: "item"}, "Live TV"), 
 	            React.createElement("div", {className: "ui category search item nav-search"}, 
 	              React.createElement("div", {className: "ui transparent icon input"}, 
 	                React.createElement("input", {type: "text", placeholder: "Search...", className: "prompt"}), React.createElement("i", {className: "search link icon"})
@@ -20410,7 +20438,7 @@
 	      }
 	    }
 
-	    collection.some((data, i) => {
+	    collection.map((data, i) => {
 	      if (this.state.genre[this.props.language]) {
 	        if (data.genres) {
 	          data.genres.some((genre) => {
@@ -20429,11 +20457,10 @@
 	        ))
 	        COLUMNS = []
 	      }
-	      return ROWS.length === this.props.rows
 	    })
-	    if ( ! ROWS.length ) {
+	    if (COLUMNS.length) {
 	      ROWS.push(React.createElement("div", {className: "row"}, 
-	        COLUMNS
+	      COLUMNS
 	      ))
 	    }
 	    return (
@@ -20544,9 +20571,13 @@
 	  },
 
 	  render() {
-	    this.props.href
-	      ? link = generateLink(this.props)
-	      : link = this.props.href;
+	    if (this.props.data.ref) {
+	      link = this.props.data.ref.link
+	    } else {
+	      this.props.href
+	        ? link = generateLink(this.props)
+	        : link = this.props.href;
+	    }
 	    var thumb = '/images/melody/' + this.props.data.thumb.replace('M1','M11');
 	    if (this.props.thumbPath) {
 	      thumb = '/images/wireframe/16x9.png';
@@ -20631,7 +20662,156 @@
 	const MyAccount = __webpack_require__(160)
 	const MyWatchlist = __webpack_require__(161)
 	const Nav = __webpack_require__(163)
-	const Carousel = __webpack_require__(175)
+	const SetGrid = __webpack_require__(175)
+	const SimilarTitles = __webpack_require__(168)
+	const Footer = __webpack_require__(169)
+
+	const SetApp = React.createClass({displayName: "SetApp",
+
+	  setLanguage: function(lang) {
+	    this.setState({
+	      language: lang
+	    })
+	  },
+
+	  getInitialState: function() {
+	    return {
+	      language: 'en'
+	    }
+	  },
+
+	  render() {
+	    return (
+	      React.createElement("div", null, 
+	        React.createElement(MyAccount, null), 
+	        React.createElement(MyWatchlist, null), 
+	        React.createElement(Nav, {setLanguage: this.setLanguage, language: this.state.language}), 
+	        React.createElement(SetGrid, React.__spread({},  this.props, {limit: "5", language: this.state.language})), 
+	        React.createElement(Footer, null)
+	      )
+	    );
+	  }
+	});
+
+	module.exports = SetApp;
+
+
+/***/ },
+/* 175 */
+/***/ function(module, exports, __webpack_require__) {
+
+	const React = __webpack_require__(1);
+	const GridFilter = __webpack_require__(171);
+	const Column = __webpack_require__(172)
+
+	const SetGrid = React.createClass({displayName: "SetGrid",
+
+	  filter: function(filter) {
+	    this.setState({
+	      filter: filter
+	    })
+	  },
+
+	  filterGenre: function(genre) {
+	    this.setState({
+	      genre: genre
+	    })
+	  },
+
+	  getInitialState: function() {
+	    return {
+	      genre: ''
+	    , collection: []
+	    , rows: this.props.rows || 1
+	    };
+	  },
+
+	  componentDidMount: function() {
+	    this.fetch = $.get('http://dgzn.io:8080/v1/assets'+this.props.source, function (result) {
+	      this.setState({
+	        collection: result.sets
+	      });
+	    }.bind(this));
+	  },
+
+	  componentWillUnmount: function() {
+	    this.fetch.abort();
+	  },
+
+	  render() {
+	    var ROWS = []
+	    var COLUMNS = [];
+
+	    var collection = this.state.collection
+
+	    if (this.state.filter) {
+	      switch (this.state.filter) {
+	        case 'a-z':
+	          var collection = this.state.collection.sort((a, b) => {
+	            if (a.meta[this.props.language].name < b.meta[this.props.language].name) return -1;
+	            if (a.meta[this.props.language].name > b.meta[this.props.language].name) return 1;
+	            return 0;
+	          })
+	          break;
+	        case 'new':
+	          var collection = this.state.collection.sort((a, b) => {
+	            return b.id - a.id;
+	          })
+	          break;
+	      }
+	    }
+
+	    collection.map((data, i) => {
+	      if (this.state.genre[this.props.language]) {
+	        if (data.genres) {
+	          data.genres.some((genre) => {
+	            if (genre.meta[this.props.language].name == this.state.genre[this.props.language].name) {
+	              COLUMNS.push(React.createElement(Column, React.__spread({key: 'col-'+data.id, data: data},  this.props)))
+	              return true;
+	            }
+	          })
+	        }
+	      } else {
+	        COLUMNS.push(React.createElement(Column, React.__spread({key: 'col-'+data.id, data: data},  this.props)))
+	      }
+	      if (COLUMNS.length==this.props.limit) {
+	        ROWS.push(React.createElement("div", {className: "row"}, 
+	          COLUMNS
+	        ))
+	        COLUMNS = []
+	      }
+	    })
+	    if (COLUMNS.length) {
+	      ROWS.push(React.createElement("div", {className: "row"}, 
+	      COLUMNS
+	      ))
+	    }
+	    return (
+	      React.createElement("div", null, 
+	        React.createElement(GridFilter, React.__spread({},  this.props, {filter: this.filter, filterGenre: this.filterGenre, activeFilter: this.state.filter, activeGenre: this.state.genre})), 
+	        React.createElement("div", {className: "ui vertical center container aligned grids"}, 
+	          React.createElement("div", {className: "ui equal width grid container"}, 
+	            ROWS
+	          )
+	        )
+	      )
+	    );
+	  },
+	});
+
+	module.exports = SetGrid;
+
+
+/***/ },
+/* 176 */
+/***/ function(module, exports, __webpack_require__) {
+
+	const React = __webpack_require__(1);
+
+	const MyAccount = __webpack_require__(160)
+	const MyWatchlist = __webpack_require__(161)
+	const Nav = __webpack_require__(163)
+	const Carousel = __webpack_require__(177)
 	const Footer = __webpack_require__(169)
 
 	const HomeApp = React.createClass({displayName: "HomeApp",
@@ -20672,11 +20852,11 @@
 
 
 /***/ },
-/* 175 */
+/* 177 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
-	const Row = __webpack_require__(176)
+	const Row = __webpack_require__(178)
 
 	const Carousel = React.createClass({displayName: "Carousel",
 	  render() {
@@ -20701,7 +20881,7 @@
 
 
 /***/ },
-/* 176 */
+/* 178 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
@@ -20745,15 +20925,15 @@
 
 
 /***/ },
-/* 177 */
+/* 179 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
 
 	const MyAccount = __webpack_require__(160)
 	const MyWatchlist = __webpack_require__(161)
-	const SeasonNav = __webpack_require__(178)
-	const SeasonDetail = __webpack_require__(179)
+	const SeasonNav = __webpack_require__(180)
+	const SeasonDetail = __webpack_require__(181)
 	const SimilarTitles = __webpack_require__(168)
 	const Footer = __webpack_require__(169)
 
@@ -20788,7 +20968,7 @@
 
 
 /***/ },
-/* 178 */
+/* 180 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
@@ -20947,13 +21127,13 @@
 
 
 /***/ },
-/* 179 */
+/* 181 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
 
-	const SeasonFilter = __webpack_require__(180)
-	const SeasonWatchlist = __webpack_require__(181)
+	const SeasonFilter = __webpack_require__(182)
+	const SeasonWatchlist = __webpack_require__(183)
 	const Roles = __webpack_require__(165);
 
 	const SeasonDetail = React.createClass({displayName: "SeasonDetail",
@@ -21058,7 +21238,7 @@
 
 
 /***/ },
-/* 180 */
+/* 182 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
@@ -21088,13 +21268,13 @@
 
 
 /***/ },
-/* 181 */
+/* 183 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
 	const ReactDOM = __webpack_require__(158);
 
-	const VideoPlayer = __webpack_require__(182)
+	const VideoPlayer = __webpack_require__(184)
 
 	const SeasonWatchlist = React.createClass({displayName: "SeasonWatchlist",
 	  render() {
@@ -21189,7 +21369,7 @@
 
 
 /***/ },
-/* 182 */
+/* 184 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
@@ -21249,12 +21429,12 @@
 
 
 /***/ },
-/* 183 */
+/* 185 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
 
-	const AlbumWatchlist = __webpack_require__(184)
+	const AlbumWatchlist = __webpack_require__(186)
 
 
 	const AlbumDetail = React.createClass({displayName: "AlbumDetail",
@@ -21399,7 +21579,7 @@
 
 
 /***/ },
-/* 184 */
+/* 186 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
@@ -21453,6 +21633,160 @@
 	}
 
 	module.exports = Watchlist;
+
+
+/***/ },
+/* 187 */
+/***/ function(module, exports, __webpack_require__) {
+
+	const React = __webpack_require__(1);
+
+	const MyAccount = __webpack_require__(160)
+	const MyWatchlist = __webpack_require__(161)
+	const Nav = __webpack_require__(163)
+	const CollectionGrid = __webpack_require__(188)
+	const SimilarTitles = __webpack_require__(168)
+	const Footer = __webpack_require__(169)
+
+	const CollectionApp = React.createClass({displayName: "CollectionApp",
+
+	  setLanguage: function(lang) {
+	    this.setState({
+	      language: lang
+	    })
+	  },
+
+	  getInitialState: function() {
+	    return {
+	      language: 'en'
+	    }
+	  },
+
+	  render() {
+	    return (
+	      React.createElement("div", null, 
+	        React.createElement(MyAccount, null), 
+	        React.createElement(MyWatchlist, null), 
+	        React.createElement(Nav, {setLanguage: this.setLanguage, language: this.state.language}), 
+	        React.createElement(CollectionGrid, React.__spread({},  this.props, {limit: "5", language: this.state.language})), 
+	        React.createElement(Footer, null)
+	      )
+	    );
+	  }
+	});
+
+	module.exports = CollectionApp;
+
+
+/***/ },
+/* 188 */
+/***/ function(module, exports, __webpack_require__) {
+
+	const React = __webpack_require__(1);
+	const GridFilter = __webpack_require__(171);
+	const Column = __webpack_require__(172)
+
+	const CollectionGrid = React.createClass({displayName: "CollectionGrid",
+
+	  filter: function(filter) {
+	    this.setState({
+	      filter: filter
+	    })
+	  },
+
+	  filterGenre: function(genre) {
+	    this.setState({
+	      genre: genre
+	    })
+	  },
+
+	  getInitialState: function() {
+	    return {
+	      genre: ''
+	    , meta: {
+	      en: { name: '' }
+	    , ar: { name: '' }
+	    }
+	    , collection: []
+	    , rows: this.props.rows || 1
+	    };
+	  },
+
+	  componentDidMount: function() {
+	    this.fetch = $.get('http://dgzn.io:8080/v1/assets'+this.props.source, function (result) {
+	      this.setState({
+	        meta: result.meta
+	      , collection: result.assets
+	      });
+	    }.bind(this));
+	  },
+
+	  componentWillUnmount: function() {
+	    this.fetch.abort();
+	  },
+
+	  render() {
+	    var ROWS = []
+	    var COLUMNS = [];
+
+	    var collection = this.state.collection
+
+	    if (this.state.filter) {
+	      switch (this.state.filter) {
+	        case 'a-z':
+	          var collection = this.state.collection.sort((a, b) => {
+	            if (a.meta[this.props.language].name < b.meta[this.props.language].name) return -1;
+	            if (a.meta[this.props.language].name > b.meta[this.props.language].name) return 1;
+	            return 0;
+	          })
+	          break;
+	        case 'new':
+	          var collection = this.state.collection.sort((a, b) => {
+	            return b.id - a.id;
+	          })
+	          break;
+	      }
+	    }
+
+	    collection.map((data, i) => {
+	      if (this.state.genre[this.props.language]) {
+	        if (data.genres) {
+	          data.genres.some((genre) => {
+	            if (genre.meta[this.props.language].name == this.state.genre[this.props.language].name) {
+	              COLUMNS.push(React.createElement(Column, React.__spread({key: 'col-'+data.id, data: data},  this.props)))
+	              return true;
+	            }
+	          })
+	        }
+	      } else {
+	        COLUMNS.push(React.createElement(Column, React.__spread({key: 'col-'+data.id, data: data},  this.props)))
+	      }
+	      if (COLUMNS.length==this.props.limit) {
+	        ROWS.push(React.createElement("div", {className: "row"}, 
+	          COLUMNS
+	        ))
+	        COLUMNS = []
+	      }
+	    })
+	    if (COLUMNS.length) {
+	      ROWS.push(React.createElement("div", {className: "row"}, 
+	      COLUMNS
+	      ))
+	    }
+	    return (
+	      React.createElement("div", null, 
+	        React.createElement(GridFilter, React.__spread({},  this.props, {title: this.state.meta[this.props.language].name, filter: this.filter, filterGenre: this.filterGenre, activeFilter: this.state.filter, activeGenre: this.state.genre})), 
+	        React.createElement("div", {className: "ui vertical center container aligned grids"}, 
+	          React.createElement("div", {className: "ui equal width grid container"}, 
+	            ROWS
+	          )
+	        )
+	      )
+	    );
+	  },
+	});
+
+	module.exports = CollectionGrid;
 
 
 /***/ }
