@@ -15,7 +15,7 @@ const SeasonDetail = React.createClass({
   componentDidMount: function() {
     this.fetch = $.get('http://util.giantdev.com/v1/assets'+this.props.source, function (result) {
       this.setState({
-        series: result
+        series: JSON.parse(result)
       });
     }.bind(this));
   },

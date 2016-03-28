@@ -11,6 +11,7 @@ const GridFilter = React.createClass({
 
   componentDidMount: function() {
     this.fetch = $.get('http://util.giantdev.com/v1/assets/sets/Genres', function (genres) {
+      var genres = JSON.parse(genres)
       this.setState({
         genres: genres['sets']
       });

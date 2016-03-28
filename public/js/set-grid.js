@@ -26,6 +26,7 @@ const SetGrid = React.createClass({
 
   componentDidMount: function() {
     this.fetch = $.get('http://util.giantdev.com/v1/assets'+this.props.source, function (result) {
+      var result = JSON.parse(result)
       this.setState({
         collection: result.sets
       });

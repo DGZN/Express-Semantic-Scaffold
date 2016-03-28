@@ -30,6 +30,7 @@ const CollectionGrid = React.createClass({
 
   componentDidMount: function() {
     this.fetch = $.get('http://util.giantdev.com/v1/assets'+this.props.source, function (result) {
+      var result = JSON.parse(result)
       this.setState({
         meta: result.meta
       , collection: result.assets

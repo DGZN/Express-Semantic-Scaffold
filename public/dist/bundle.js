@@ -20076,7 +20076,7 @@
 	  componentDidMount: function() {
 	    this.fetch = $.get('http://util.giantdev.com/v1/assets'+this.props.source, function (result) {
 	      this.setState({
-	        movie: result
+	        movie: JSON.parse(result)
 	      });
 	    }.bind(this));
 	  },
@@ -20405,11 +20405,12 @@
 	  componentDidMount: function() {
 	    this.fetch = $.get('http://util.giantdev.com/v1/assets'+this.props.source, function (result) {
 	      this.setState({
-	        collection: result
+	        collection: JSON.parse(result)
 	      });
 	    }.bind(this));
 	    if (this.props.featured) {
 	      this.fetchFeatured = $.get('http://util.giantdev.com/v1/assets' + this.props.featured, function (featured) {
+	        var featured = JSON.parse(fetured)
 	        this.setState({
 	          featured: featured['assets']
 	        });
@@ -20513,6 +20514,7 @@
 
 	  componentDidMount: function() {
 	    this.fetch = $.get('http://util.giantdev.com/v1/assets/sets/Genres', function (genres) {
+	      var genres = JSON.parse(genres)
 	      this.setState({
 	        genres: genres['sets']
 	      });
@@ -20745,6 +20747,7 @@
 
 	  componentDidMount: function() {
 	    this.fetch = $.get('http://util.giantdev.com/v1/assets'+this.props.source, function (result) {
+	      var result = JSON.parse(result)
 	      this.setState({
 	        collection: result.sets
 	      });
@@ -21165,7 +21168,7 @@
 	  componentDidMount: function() {
 	    this.fetch = $.get('http://util.giantdev.com/v1/assets'+this.props.source, function (result) {
 	      this.setState({
-	        series: result
+	        series: JSON.parse(result)
 	      });
 	    }.bind(this));
 	  },
@@ -21464,6 +21467,7 @@
 
 	  componentDidMount: function() {
 	    this.fetch = $.get('http://util.giantdev.com/v1/assets'+this.props.source, function (result) {
+	      var result = JSON.parse(result)
 	      this.setState({
 	        album: result[0]
 	      });
@@ -21732,6 +21736,7 @@
 
 	  componentDidMount: function() {
 	    this.fetch = $.get('http://util.giantdev.com/v1/assets'+this.props.source, function (result) {
+	      var result = JSON.parse(result)
 	      this.setState({
 	        meta: result.meta
 	      , collection: result.assets
