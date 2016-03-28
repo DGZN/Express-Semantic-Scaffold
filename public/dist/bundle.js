@@ -20915,7 +20915,7 @@
 	  componentDidMount: function() {
 	    this.fetch = $.get('http://util.giantdev.com/v1/assets'+this.props.source, function (result) {
 	      this.setState({
-	        collection: result
+	        collection: JSON.parse(result)
 	      });
 	    }.bind(this));
 	  },
@@ -20925,6 +20925,7 @@
 	  },
 
 	  render() {
+	    console.log(this.state)
 	    var COLUMNS = [];
 	    this.state.collection.some((data, i) => {
 	      COLUMNS.push(React.createElement(Column, {key: i, data: data, href: this.props.href}))

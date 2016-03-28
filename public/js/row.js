@@ -12,7 +12,7 @@ const Row = React.createClass({
   componentDidMount: function() {
     this.fetch = $.get('http://util.giantdev.com/v1/assets'+this.props.source, function (result) {
       this.setState({
-        collection: result
+        collection: JSON.parse(result)
       });
     }.bind(this));
   },
@@ -22,6 +22,7 @@ const Row = React.createClass({
   },
 
   render() {
+    console.log(this.state)
     var COLUMNS = [];
     this.state.collection.some((data, i) => {
       COLUMNS.push(<Column key={i} data={data} href={this.props.href} />)
