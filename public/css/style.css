@@ -1159,7 +1159,7 @@ ul.meta.values {
   top: 1rem;
   width: 280px;
   margin-left: 1rem;
-  background-image: url('/images/wireframe/16x9.png');
+  background-image: url('/images/wireframe/thumb_placeholder.png');
   background-repeat: no-repeat;
 }
 
@@ -1182,11 +1182,11 @@ ul.meta.values {
 .grids .image.preview .thumb {
   background-size: cover;
   background-color: rgba(24,24,24,1) !important;
-  -webkit-transition:   opacity 1s ease-in;
-       -moz-transition: opacity 1s ease-in;
-        -ms-transition: opacity 1s ease-in;
-         -o-transition: opacity 1s ease-in;
-            transition: opacity 1s ease-in;
+  -webkit-transition:   opacity 3s ease-in;
+       -moz-transition: opacity 3s ease-in;
+        -ms-transition: opacity 3s ease-in;
+         -o-transition: opacity 3s ease-in;
+            transition: opacity 3s ease-in;
   opacity: 0;
 }
 
