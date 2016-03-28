@@ -1192,12 +1192,12 @@ ul.meta.values {
 .grids .image.preview .thumb {
   background-size: cover;
   background-color: rgba(24,24,24,1) !important;
-  -webkit-transition:   opacity 2s ease-in;
-       -moz-transition: opacity 2s ease-in;
-        -ms-transition: opacity 2s ease-in;
-         -o-transition: opacity 2s ease-in;
-            transition: opacity 2s ease-in;
-  opacity: 0;
+  /*-webkit-transition:   opacity s ease-in;
+       -moz-transition: opacity s ease-in;
+        -ms-transition: opacity s ease-in;
+         -o-transition: opacity s ease-in;
+            transition: opacity s ease-in;
+  opacity: 0;*/
 }
 
 .grids .image.preview.load {
