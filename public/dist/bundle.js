@@ -20893,9 +20893,9 @@
 	          React.createElement("div", {id: "img", className: "ui image hero"})
 	        ), 
 	        React.createElement("div", {className: "ui vertical center container aligned grids"}, 
-	          React.createElement(Carousel, {title: "Movies", source: "/movies", limit: "5", href: "/movies/:id"}), 
-	          React.createElement(Carousel, {title: "Series", source: "/series", limit: "5", href: "/series/:id"}), 
-	          React.createElement(Carousel, {title: "Plays", source: "/plays", limit: "5", href: "/plays/:id"})
+	          React.createElement(Carousel, {title: "Movies", source: "/movies", language: this.state.language, limit: "5", href: "/movies/:id"}), 
+	          React.createElement(Carousel, {title: "Series", source: "/series", language: this.state.language, limit: "5", href: "/series/:id"}), 
+	          React.createElement(Carousel, {title: "Plays", source: "/plays", language: this.state.language, limit: "5", href: "/plays/:id"})
 	        ), 
 	        React.createElement(Footer, null)
 	      )
@@ -20925,7 +20925,7 @@
 	         )
 	        ), 
 	        React.createElement("div", {className: "ui equal width grid container"}, 
-	          React.createElement(Row, {source: this.props.source, limit: this.props.limit, href: this.props.href})
+	          React.createElement(Row, React.__spread({},  this.props))
 	        )
 	      )
 	    );
@@ -20968,7 +20968,7 @@
 	    console.log(this.state)
 	    var COLUMNS = [];
 	    this.state.collection.some((data, i) => {
-	      COLUMNS.push(React.createElement(Column, {key: i, data: data, href: this.props.href}))
+	      COLUMNS.push(React.createElement(Column, {key: i, data: data, language: this.props.language, href: this.props.href}))
 	      return i === this.props.limit - 1;
 	    })
 	    return (

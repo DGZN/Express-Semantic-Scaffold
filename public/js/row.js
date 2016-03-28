@@ -27,7 +27,7 @@ const Row = React.createClass({
     console.log(this.state)
     var COLUMNS = [];
     this.state.collection.some((data, i) => {
-      COLUMNS.push(<Column key={i} data={data} href={this.props.href} />)
+      COLUMNS.push(<Column key={i} data={data} language={this.props.language} href={this.props.href} />)
       return i === this.props.limit - 1;
     })
     return (

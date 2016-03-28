@@ -13,7 +13,7 @@ const Carousel = React.createClass({
          </div>
         </div>
         <div className="ui equal width grid container">
-          <Row source={this.props.source} limit={this.props.limit} href={this.props.href} />
+          <Row {...this.props} />
         </div>
       </div>
     );
