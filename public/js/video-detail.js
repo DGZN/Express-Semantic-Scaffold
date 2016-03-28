@@ -10,7 +10,7 @@ const VideoDetail = React.createClass({
   },
 
   componentDidMount: function() {
-    this.fetch = $.get('http://dgzn.io:8080/v1/assets'+this.props.source, function (result) {
+    this.fetch = $.get('http://util.giantdev.com/v1/assets'+this.props.source, function (result) {
       this.setState({
         movie: result
       });

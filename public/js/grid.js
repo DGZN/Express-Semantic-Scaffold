@@ -25,13 +25,13 @@ const Grid = React.createClass({
   },
 
   componentDidMount: function() {
-    this.fetch = $.get('http://dgzn.io:8080/v1/assets'+this.props.source, function (result) {
+    this.fetch = $.get('http://util.giantdev.com/v1/assets'+this.props.source, function (result) {
       this.setState({
         collection: result
       });
     }.bind(this));
     if (this.props.featured) {
-      this.fetchFeatured = $.get('http://dgzn.io:8080/v1/assets' + this.props.featured, function (featured) {
+      this.fetchFeatured = $.get('http://util.giantdev.com/v1/assets' + this.props.featured, function (featured) {
         this.setState({
           featured: featured['assets']
         });
