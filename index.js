@@ -23,7 +23,7 @@ if ($('#home').length) {
 
 if ($('#movies').length) {
   ReactDOM.render(
-    <GridApp title="Movies" source="/movies" limit="5" href="/movies/:id" />,
+    <GridApp title="Movies" source="/movies" limit="5" href="/movies/:id" featured="/sets/Featuredmovies" />,
     document.getElementById('movies')
   );
 }

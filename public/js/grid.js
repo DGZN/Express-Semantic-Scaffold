@@ -30,6 +30,13 @@ const Grid = React.createClass({
         collection: result
       });
     }.bind(this));
+    if (this.props.featured) {
+      this.fetchFeatured = $.get('http://dgzn.io:8080/v1/assets' + this.props.featured, function (featured) {
+        this.setState({
+          featured: featured['assets']
+        });
+      }.bind(this));
+    }
   },
 
   componentWillUnmount: function() {
@@ -45,6 +52,16 @@ const Grid = React.createClass({
 
     if (this.state.filter) {
       switch (this.state.filter) {
+        case 'featured':
+          if ( ! this.state.featured)
+            return collection;
+          var collection = this.state.featured.sort((a, b) => {
+            return a.order - b.order;
+          })
+          collection.map((item) => {
+            console.log(item.order)
+          })
+          break;
         case 'a-z':
           var collection = this.state.collection.sort((a, b) => {
             if (a.meta[this.props.language].name < b.meta[this.props.language].name) return -1;
