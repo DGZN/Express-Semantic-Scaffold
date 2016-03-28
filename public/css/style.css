@@ -1272,7 +1272,7 @@ ul.meta.values {
 }
 
 .grids .ui.grid.container {
-    width: calc(1532px + 2rem)!important; // 1522
+    width: calc(1532px + 2rem)!important;
 }
 
 @media only screen and (max-width: 900px) {
