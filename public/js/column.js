@@ -34,8 +34,13 @@ const Column = React.createClass({
       </a>
     );
   },
-  componentDidMount: function() {
+
+  componentDidMount() {
     //console.log("Grid > Row > Column [Properties]", this.props)
+  },
+
+  fadeInImages() {
+
   }
 });
 

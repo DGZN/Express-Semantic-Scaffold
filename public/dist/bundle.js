@@ -20424,7 +20424,7 @@
 	    }.bind(this));
 	    if (this.props.featured) {
 	      this.fetchFeatured = $.get(env.endpoint + '/v1/assets' + this.props.featured, function (featured) {
-	        var featured = JSON.parse(fetured)
+	        var featured = JSON.parse(featured)
 	        this.setState({
 	          featured: featured['assets']
 	        });
@@ -20626,8 +20626,13 @@
 	      )
 	    );
 	  },
-	  componentDidMount: function() {
+
+	  componentDidMount() {
 	    //console.log("Grid > Row > Column [Properties]", this.props)
+	  },
+
+	  fadeInImages() {
+
 	  }
 	});
 
@@ -20674,6 +20679,7 @@
 	  },
 
 	  render() {
+	    this.fadeInImages()
 	    return (
 	      React.createElement("div", null, 
 	        React.createElement(MyAccount, null), 
@@ -20683,6 +20689,15 @@
 	        React.createElement(Footer, null)
 	      )
 	    );
+	  },
+
+	  fadeInImages() {
+	    setTimeout(function(){
+	      $('.image .preview.thumb').each(function(image){
+	        console.log("image", image)
+	        $(this).addClass('load')
+	      })
+	    }, 500)
 	  }
 	});
 

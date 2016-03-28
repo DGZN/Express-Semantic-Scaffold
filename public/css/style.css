@@ -1172,13 +1172,26 @@ ul.meta.values {
   width: 280px;
   height: auto;
   min-height: 160px;
-  background-image: url('/images/wireframe/16x9.png');
+  /*background-image: url('/images/wireframe/16x9.png');*/
+  background-color: rgba(24,24,24,1) !important;
   background-repeat: no-repeat;
 }
 
+
+
 .grids .image.preview .thumb {
   background-size: cover;
-  background-color: rgba(24,24,24,1) !important
+  background-color: rgba(24,24,24,1) !important;
+  -webkit-transition:   opacity 1s ease-in;
+       -moz-transition: opacity 1s ease-in;
+        -ms-transition: opacity 1s ease-in;
+         -o-transition: opacity 1s ease-in;
+            transition: opacity 1s ease-in;
+  opacity: 0;
+}
+
+.grids .image.preview.load {
+  opacity: 1;
 }
 
 .grids a.image.preview:nth-child(1) {

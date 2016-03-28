@@ -22,6 +22,7 @@ const GridApp = React.createClass({
   },
 
   render() {
+    this.fadeInImages()
     return (
       <div>
         <MyAccount />
@@ -31,6 +32,15 @@ const GridApp = React.createClass({
         <Footer />
       </div>
     );
+  },
+
+  fadeInImages() {
+    setTimeout(function(){
+      $('.image .preview.thumb').each(function(image){
+        console.log("image", image)
+        $(this).addClass('load')
+      })
+    }, 500)
   }
 });
 
