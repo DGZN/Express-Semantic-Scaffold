@@ -1172,7 +1172,7 @@ ul.meta.values {
   width: 280px;
   height: auto;
   min-height: 160px;
-  /*background-image: url('/images/wireframe/16x9.png');*/
+  background-image: url('/images/wireframe/thumb_placeholder.png');
   background-color: rgba(24,24,24,1) !important;
   background-repeat: no-repeat;
 }
@@ -1182,12 +1182,12 @@ ul.meta.values {
 .grids .image.preview .thumb {
   background-size: cover;
   background-color: rgba(24,24,24,1) !important;
-  -webkit-transition:   opacity 3s ease-in;
-       -moz-transition: opacity 3s ease-in;
-        -ms-transition: opacity 3s ease-in;
-         -o-transition: opacity 3s ease-in;
-            transition: opacity 3s ease-in;
-  opacity: 0;
+  /*-webkit-transition:   opacity s ease-in;
+       -moz-transition: opacity s ease-in;
+        -ms-transition: opacity s ease-in;
+         -o-transition: opacity s ease-in;
+            transition: opacity s ease-in;
+  opacity: 0;*/
 }
 
 .grids .image.preview.load {
