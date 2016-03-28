@@ -2,6 +2,9 @@ const React = require('react');
 
 const Roles = require('./roles.js');
 
+const env = require('./env.js')
+
+
 const VideoDetail = React.createClass({
   getInitialState: function() {
     return {
@@ -10,7 +13,7 @@ const VideoDetail = React.createClass({
   },
 
   componentDidMount: function() {
-    this.fetch = $.get('http://util.giantdev.com/v1/assets'+this.props.source, function (result) {
+    this.fetch = $.get(env.endpoint + '/v1/assets' +this.props.source, function (result) {
       this.setState({
         movie: JSON.parse(result)
       });

@@ -2,6 +2,9 @@ const React = require('react');
 const GridFilter = require('./gridFilter.js');
 const Column = require('./column.js')
 
+const env = require('./env.js')
+
+
 const SetGrid = React.createClass({
 
   filter: function(filter) {
@@ -25,7 +28,7 @@ const SetGrid = React.createClass({
   },
 
   componentDidMount: function() {
-    this.fetch = $.get('http://util.giantdev.com/v1/assets'+this.props.source, function (result) {
+    this.fetch = $.get(env.endpoint + '/v1/assets' +this.props.source, function (result) {
       var result = JSON.parse(result)
       this.setState({
         collection: result.sets

@@ -1,5 +1,8 @@
 const React = require('react');
 
+const env = require('./env.js')
+
+
 const GridFilter = React.createClass({
 
   getInitialState: function() {
@@ -10,7 +13,7 @@ const GridFilter = React.createClass({
   },
 
   componentDidMount: function() {
-    this.fetch = $.get('http://util.giantdev.com/v1/assets/sets/Genres', function (genres) {
+    this.fetch = $.get(env.endpoint + '/v1/assets/sets/Genres', function (genres) {
       var genres = JSON.parse(genres)
       this.setState({
         genres: genres['sets']

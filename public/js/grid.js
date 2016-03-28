@@ -2,6 +2,8 @@ const React = require('react');
 const GridFilter = require('./gridFilter.js');
 const Column = require('./column.js')
 
+const env = require('./env.js')
+
 const Grid = React.createClass({
 
   filter: function(filter) {
@@ -25,13 +27,13 @@ const Grid = React.createClass({
   },
 
   componentDidMount: function() {
-    this.fetch = $.get('http://util.giantdev.com/v1/assets'+this.props.source, function (result) {
+    this.fetch = $.get(env.endpoint + '/v1/assets' +this.props.source, function (result) {
       this.setState({
         collection: JSON.parse(result)
       });
     }.bind(this));
     if (this.props.featured) {
-      this.fetchFeatured = $.get('http://util.giantdev.com/v1/assets' + this.props.featured, function (featured) {
+      this.fetchFeatured = $.get(env.endpoint + '/v1/assets' + this.props.featured, function (featured) {
         var featured = JSON.parse(fetured)
         this.setState({
           featured: featured['assets']

@@ -4,6 +4,9 @@ const SeasonFilter = require('./season-filter.js')
 const SeasonWatchlist = require('./season-watchlist.js')
 const Roles = require('./roles.js');
 
+const env = require('./env.js')
+
+
 const SeasonDetail = React.createClass({
 
   getInitialState: function() {
@@ -13,7 +16,7 @@ const SeasonDetail = React.createClass({
   },
 
   componentDidMount: function() {
-    this.fetch = $.get('http://util.giantdev.com/v1/assets'+this.props.source, function (result) {
+    this.fetch = $.get(env.endpoint + '/v1/assets' +this.props.source, function (result) {
       this.setState({
         series: JSON.parse(result)
       });

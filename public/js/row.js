@@ -2,6 +2,8 @@ const React = require('react');
 
 const Column = require('./column.js')
 
+const env = require('./env.js')
+
 const Row = React.createClass({
   getInitialState: function() {
     return {
@@ -10,7 +12,7 @@ const Row = React.createClass({
   },
 
   componentDidMount: function() {
-    this.fetch = $.get('http://util.giantdev.com/v1/assets'+this.props.source, function (result) {
+    this.fetch = $.get(env.endpoint + '/v1/assets' +this.props.source, function (result) {
       this.setState({
         collection: JSON.parse(result)
       });

@@ -48,17 +48,17 @@
 	const ReactDOM      = __webpack_require__(158);
 
 	const App           = __webpack_require__(159)
-	const Grid          = __webpack_require__(170)
-	const Footer        = __webpack_require__(169)
-	const GridApp       = __webpack_require__(173)
-	const SetApp        = __webpack_require__(174)
-	const HomeApp       = __webpack_require__(176)
+	const Grid          = __webpack_require__(171)
+	const Footer        = __webpack_require__(170)
+	const GridApp       = __webpack_require__(174)
+	const SetApp        = __webpack_require__(175)
+	const HomeApp       = __webpack_require__(177)
 	const MyAccount     = __webpack_require__(160)
-	const SeasonApp     = __webpack_require__(179)
-	const AlbumDetail   = __webpack_require__(185)
-	const CollectionApp = __webpack_require__(187)
+	const SeasonApp     = __webpack_require__(180)
+	const AlbumDetail   = __webpack_require__(186)
+	const CollectionApp = __webpack_require__(188)
 	const VideoDetail   = __webpack_require__(164)
-	const SimilarTitles = __webpack_require__(168)
+	const SimilarTitles = __webpack_require__(169)
 
 	if ($('#home').length) {
 	  ReactDOM.render(
@@ -19762,8 +19762,8 @@
 	const MyWatchlist = __webpack_require__(161)
 	const Nav = __webpack_require__(163)
 	const VideoDetail = __webpack_require__(164)
-	const SimilarTitles = __webpack_require__(168)
-	const Footer = __webpack_require__(169)
+	const SimilarTitles = __webpack_require__(169)
+	const Footer = __webpack_require__(170)
 
 	const App = React.createClass({displayName: "App",
 
@@ -20066,6 +20066,9 @@
 
 	const Roles = __webpack_require__(165);
 
+	const env = __webpack_require__(168)
+
+
 	const VideoDetail = React.createClass({displayName: "VideoDetail",
 	  getInitialState: function() {
 	    return {
@@ -20074,7 +20077,7 @@
 	  },
 
 	  componentDidMount: function() {
-	    this.fetch = $.get('http://util.giantdev.com/v1/assets'+this.props.source, function (result) {
+	    this.fetch = $.get(env.endpoint + '/v1/assets' +this.props.source, function (result) {
 	      this.setState({
 	        movie: JSON.parse(result)
 	      });
@@ -20284,6 +20287,15 @@
 
 /***/ },
 /* 168 */
+/***/ function(module, exports) {
+
+	module.exports = {
+	  "endpoint": "http://dgzn.io:8080"
+	}
+
+
+/***/ },
+/* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
@@ -20331,7 +20343,7 @@
 
 
 /***/ },
-/* 169 */
+/* 170 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
@@ -20373,12 +20385,14 @@
 
 
 /***/ },
-/* 170 */
+/* 171 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
-	const GridFilter = __webpack_require__(171);
-	const Column = __webpack_require__(172)
+	const GridFilter = __webpack_require__(172);
+	const Column = __webpack_require__(173)
+
+	const env = __webpack_require__(168)
 
 	const Grid = React.createClass({displayName: "Grid",
 
@@ -20403,13 +20417,13 @@
 	  },
 
 	  componentDidMount: function() {
-	    this.fetch = $.get('http://util.giantdev.com/v1/assets'+this.props.source, function (result) {
+	    this.fetch = $.get(env.endpoint + '/v1/assets' +this.props.source, function (result) {
 	      this.setState({
 	        collection: JSON.parse(result)
 	      });
 	    }.bind(this));
 	    if (this.props.featured) {
-	      this.fetchFeatured = $.get('http://util.giantdev.com/v1/assets' + this.props.featured, function (featured) {
+	      this.fetchFeatured = $.get(env.endpoint + '/v1/assets' + this.props.featured, function (featured) {
 	        var featured = JSON.parse(fetured)
 	        this.setState({
 	          featured: featured['assets']
@@ -20498,10 +20512,13 @@
 
 
 /***/ },
-/* 171 */
+/* 172 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
+
+	const env = __webpack_require__(168)
+
 
 	const GridFilter = React.createClass({displayName: "GridFilter",
 
@@ -20513,7 +20530,7 @@
 	  },
 
 	  componentDidMount: function() {
-	    this.fetch = $.get('http://util.giantdev.com/v1/assets/sets/Genres', function (genres) {
+	    this.fetch = $.get(env.endpoint + '/v1/assets/sets/Genres', function (genres) {
 	      var genres = JSON.parse(genres)
 	      this.setState({
 	        genres: genres['sets']
@@ -20570,7 +20587,7 @@
 
 
 /***/ },
-/* 172 */
+/* 173 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
@@ -20630,7 +20647,7 @@
 
 
 /***/ },
-/* 173 */
+/* 174 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
@@ -20638,9 +20655,9 @@
 	const MyAccount = __webpack_require__(160)
 	const MyWatchlist = __webpack_require__(161)
 	const Nav = __webpack_require__(163)
-	const Grid = __webpack_require__(170)
-	const SimilarTitles = __webpack_require__(168)
-	const Footer = __webpack_require__(169)
+	const Grid = __webpack_require__(171)
+	const SimilarTitles = __webpack_require__(169)
+	const Footer = __webpack_require__(170)
 
 	const GridApp = React.createClass({displayName: "GridApp",
 
@@ -20673,7 +20690,7 @@
 
 
 /***/ },
-/* 174 */
+/* 175 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
@@ -20681,9 +20698,9 @@
 	const MyAccount = __webpack_require__(160)
 	const MyWatchlist = __webpack_require__(161)
 	const Nav = __webpack_require__(163)
-	const SetGrid = __webpack_require__(175)
-	const SimilarTitles = __webpack_require__(168)
-	const Footer = __webpack_require__(169)
+	const SetGrid = __webpack_require__(176)
+	const SimilarTitles = __webpack_require__(169)
+	const Footer = __webpack_require__(170)
 
 	const SetApp = React.createClass({displayName: "SetApp",
 
@@ -20716,12 +20733,15 @@
 
 
 /***/ },
-/* 175 */
+/* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
-	const GridFilter = __webpack_require__(171);
-	const Column = __webpack_require__(172)
+	const GridFilter = __webpack_require__(172);
+	const Column = __webpack_require__(173)
+
+	const env = __webpack_require__(168)
+
 
 	const SetGrid = React.createClass({displayName: "SetGrid",
 
@@ -20746,7 +20766,7 @@
 	  },
 
 	  componentDidMount: function() {
-	    this.fetch = $.get('http://util.giantdev.com/v1/assets'+this.props.source, function (result) {
+	    this.fetch = $.get(env.endpoint + '/v1/assets' +this.props.source, function (result) {
 	      var result = JSON.parse(result)
 	      this.setState({
 	        collection: result.sets
@@ -20823,7 +20843,7 @@
 
 
 /***/ },
-/* 176 */
+/* 177 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
@@ -20831,8 +20851,8 @@
 	const MyAccount = __webpack_require__(160)
 	const MyWatchlist = __webpack_require__(161)
 	const Nav = __webpack_require__(163)
-	const Carousel = __webpack_require__(177)
-	const Footer = __webpack_require__(169)
+	const Carousel = __webpack_require__(178)
+	const Footer = __webpack_require__(170)
 
 	const HomeApp = React.createClass({displayName: "HomeApp",
 
@@ -20872,11 +20892,11 @@
 
 
 /***/ },
-/* 177 */
+/* 178 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
-	const Row = __webpack_require__(178)
+	const Row = __webpack_require__(179)
 
 	const Carousel = React.createClass({displayName: "Carousel",
 	  render() {
@@ -20901,12 +20921,14 @@
 
 
 /***/ },
-/* 178 */
+/* 179 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
 
-	const Column = __webpack_require__(172)
+	const Column = __webpack_require__(173)
+
+	const env = __webpack_require__(168)
 
 	const Row = React.createClass({displayName: "Row",
 	  getInitialState: function() {
@@ -20916,7 +20938,7 @@
 	  },
 
 	  componentDidMount: function() {
-	    this.fetch = $.get('http://util.giantdev.com/v1/assets'+this.props.source, function (result) {
+	    this.fetch = $.get(env.endpoint + '/v1/assets' +this.props.source, function (result) {
 	      this.setState({
 	        collection: JSON.parse(result)
 	      });
@@ -20946,17 +20968,17 @@
 
 
 /***/ },
-/* 179 */
+/* 180 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
 
 	const MyAccount = __webpack_require__(160)
 	const MyWatchlist = __webpack_require__(161)
-	const SeasonNav = __webpack_require__(180)
-	const SeasonDetail = __webpack_require__(181)
-	const SimilarTitles = __webpack_require__(168)
-	const Footer = __webpack_require__(169)
+	const SeasonNav = __webpack_require__(181)
+	const SeasonDetail = __webpack_require__(182)
+	const SimilarTitles = __webpack_require__(169)
+	const Footer = __webpack_require__(170)
 
 	const SeasonApp = React.createClass({displayName: "SeasonApp",
 
@@ -20989,7 +21011,7 @@
 
 
 /***/ },
-/* 180 */
+/* 181 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
@@ -21148,14 +21170,17 @@
 
 
 /***/ },
-/* 181 */
+/* 182 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
 
-	const SeasonFilter = __webpack_require__(182)
-	const SeasonWatchlist = __webpack_require__(183)
+	const SeasonFilter = __webpack_require__(183)
+	const SeasonWatchlist = __webpack_require__(184)
 	const Roles = __webpack_require__(165);
+
+	const env = __webpack_require__(168)
+
 
 	const SeasonDetail = React.createClass({displayName: "SeasonDetail",
 
@@ -21166,7 +21191,7 @@
 	  },
 
 	  componentDidMount: function() {
-	    this.fetch = $.get('http://util.giantdev.com/v1/assets'+this.props.source, function (result) {
+	    this.fetch = $.get(env.endpoint + '/v1/assets' +this.props.source, function (result) {
 	      this.setState({
 	        series: JSON.parse(result)
 	      });
@@ -21259,7 +21284,7 @@
 
 
 /***/ },
-/* 182 */
+/* 183 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
@@ -21289,13 +21314,13 @@
 
 
 /***/ },
-/* 183 */
+/* 184 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
 	const ReactDOM = __webpack_require__(158);
 
-	const VideoPlayer = __webpack_require__(184)
+	const VideoPlayer = __webpack_require__(185)
 
 	const SeasonWatchlist = React.createClass({displayName: "SeasonWatchlist",
 	  render() {
@@ -21390,7 +21415,7 @@
 
 
 /***/ },
-/* 184 */
+/* 185 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
@@ -21450,13 +21475,13 @@
 
 
 /***/ },
-/* 185 */
+/* 186 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
+	const AlbumWatchlist = __webpack_require__(187);
 
-	const AlbumWatchlist = __webpack_require__(186)
-
+	const env = __webpack_require__(168);
 
 	const AlbumDetail = React.createClass({displayName: "AlbumDetail",
 	  getInitialState: function() {
@@ -21466,7 +21491,7 @@
 	  },
 
 	  componentDidMount: function() {
-	    this.fetch = $.get('http://util.giantdev.com/v1/assets'+this.props.source, function (result) {
+	    this.fetch = $.get(env.endpoint + '/v1/assets' + this.props.source, function (result) {
 	      var result = JSON.parse(result)
 	      this.setState({
 	        album: result[0]
@@ -21601,7 +21626,7 @@
 
 
 /***/ },
-/* 186 */
+/* 187 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
@@ -21658,7 +21683,7 @@
 
 
 /***/ },
-/* 187 */
+/* 188 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
@@ -21666,9 +21691,9 @@
 	const MyAccount = __webpack_require__(160)
 	const MyWatchlist = __webpack_require__(161)
 	const Nav = __webpack_require__(163)
-	const CollectionGrid = __webpack_require__(188)
-	const SimilarTitles = __webpack_require__(168)
-	const Footer = __webpack_require__(169)
+	const CollectionGrid = __webpack_require__(189)
+	const SimilarTitles = __webpack_require__(169)
+	const Footer = __webpack_require__(170)
 
 	const CollectionApp = React.createClass({displayName: "CollectionApp",
 
@@ -21701,12 +21726,15 @@
 
 
 /***/ },
-/* 188 */
+/* 189 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
-	const GridFilter = __webpack_require__(171);
-	const Column = __webpack_require__(172)
+	const GridFilter = __webpack_require__(172);
+	const Column = __webpack_require__(173);
+
+	const env = __webpack_require__(168);
+
 
 	const CollectionGrid = React.createClass({displayName: "CollectionGrid",
 
@@ -21735,7 +21763,7 @@
 	  },
 
 	  componentDidMount: function() {
-	    this.fetch = $.get('http://util.giantdev.com/v1/assets'+this.props.source, function (result) {
+	    this.fetch = $.get(env.endpoint + '/v1/assets' +this.props.source, function (result) {
 	      var result = JSON.parse(result)
 	      this.setState({
 	        meta: result.meta
