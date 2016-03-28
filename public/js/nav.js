@@ -68,7 +68,7 @@ const Nav = React.createClass({
   },
 
   myAccount() {
-    $('.my-account.modal').modal('show');
+    $('.my-account.modal').modal({closable: false}).modal('show');
   },
 
   myWatchlist() {

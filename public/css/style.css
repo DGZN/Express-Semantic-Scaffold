@@ -39,6 +39,16 @@
   font-weight: 100;
 }
 
+.account-settings input {
+  color: #f0f0f0;
+}
+
+.account-settings .ui.register.button {
+  float: right;
+  position: absolute;
+  right: 75px;
+}
+
 .my-watchlist.modal {
   position: absolute;
   top: 0px;

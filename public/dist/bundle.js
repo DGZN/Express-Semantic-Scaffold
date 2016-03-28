@@ -19804,80 +19804,160 @@
 
 	const MyAccount = React.createClass({displayName: "MyAccount",
 	  render() {
+	    var loggedIn = false;
+	    switch (loggedIn) {
+	      case true:
+	        var ACCOUNT = this.myAccount()
+	        break;
+	      default:
+	        var ACCOUNT = this.register()
+	    }
 	    return (
 	      React.createElement("div", {className: "my-account modal"}, 
 	        React.createElement("div", {className: "ui grid"}, 
-	          React.createElement("div", {className: "two column row account-settings"}, 
-	            React.createElement("div", {className: "twelve wide column"}, 
-	              React.createElement("h3", null, "Profile"), 
-	              React.createElement("div", {className: "ui grid"}, 
-	                React.createElement("div", {className: "ui two column row"}, 
-	                  React.createElement("div", {className: "three wide computer five wide tablet column"}, 
-	                    React.createElement("div", {className: "ui text"}, "First Name")
-	                  ), 
-	                  React.createElement("div", {className: "three wide computer five wide tablet column"}, 
-	                    React.createElement("div", {className: "ui text"}, "Last Name")
-	                  )
-	                ), 
-	                React.createElement("div", {className: "ui two column row"}, 
-	                  React.createElement("div", {className: "three wide computer five wide tablet column"}, 
-	                    React.createElement("div", {className: "ui text"}, "Keiichi")
-	                  ), 
-	                  React.createElement("div", {className: "three wide computer five wide tablet column"}, 
-	                    React.createElement("div", {className: "ui text"}, "Lindley")
-	                  )
-	                ), 
-	                React.createElement("div", {className: "ui one column row"}, 
-	                  React.createElement("div", {className: "five wide computer eight wide tablet column"}, 
-	                    React.createElement("div", {className: "ui text"}, "Email Address")
-	                  )
-	                ), 
-	                React.createElement("div", {className: "ui one column row"}, 
-	                  React.createElement("div", {className: "five wide computer eight wide tablet column"}, 
-	                    React.createElement("div", {className: "ui text"}, "keiichi.lindley@gmail.com")
-	                  )
-	                ), 
-	                React.createElement("div", {className: "ui one column row"}, 
-	                  React.createElement("div", {className: "five wide computer eight wide tablet column"}, 
-	                    React.createElement("div", {className: "ui text"}, "Password")
-	                  )
-	                ), 
-	                React.createElement("div", {className: "ui one column row"}, 
-	                  React.createElement("div", {className: "five wide computer eight wide tablet column"}, 
-	                    React.createElement("div", {className: "ui text"}, "*******")
-	                  )
-	                ), 
-	                React.createElement("div", {className: "ui one column row"}, 
-	                  React.createElement("div", {className: "five wide computer eight wide tablet column"}, 
-	                    React.createElement("div", {className: "ui text"}, "ZIP Code")
-	                  )
-	                ), 
-	                React.createElement("div", {className: "ui one column row"}, 
-	                  React.createElement("div", {className: "five wide computer eight wide tablet column"}, 
-	                    React.createElement("div", {className: "ui text"}, "80110")
-	                  )
-	                ), 
-	                React.createElement("div", {className: "ui one column row"}, 
-	                  React.createElement("div", {className: "five wide computer eight wide tablet column"}, 
-	                    React.createElement("div", {className: "ui text"}, "Phone Number")
-	                  )
-	                ), 
-	                React.createElement("div", {className: "ui one column row"}, 
-	                  React.createElement("div", {className: "five wide computer eight wide tablet column"}, 
-	                    React.createElement("div", {className: "ui text"}, "###-###-####")
-	                  )
-	                )
-	              )
-	            ), 
-	            React.createElement("div", {className: "four wide column"}, React.createElement("a", {href: "#"}, 
-	                React.createElement("h4", null, "Profile")), React.createElement("a", {href: "#"}, 
-	                React.createElement("h4", null, "Notifications")), React.createElement("a", {href: "#"}, 
-	                React.createElement("h4", null, "Settings")), React.createElement("a", {href: "#"}, 
-	                React.createElement("h4", null, "Sign Out")))
-	          )
+	          ACCOUNT
 	        )
 	      )
 	    );
+	  },
+
+	  myAccount() {
+	    return (
+	      React.createElement("div", {className: "two column row account-settings"}, 
+	        React.createElement("div", {className: "twelve wide column"}, 
+	          React.createElement("h3", null, "Profile"), 
+	          React.createElement("div", {className: "ui grid"}, 
+	            React.createElement("div", {className: "ui two column row"}, 
+	              React.createElement("div", {className: "three wide computer five wide tablet column"}, 
+	                React.createElement("div", {className: "ui text"}, "First Name")
+	              ), 
+	              React.createElement("div", {className: "three wide computer five wide tablet column"}, 
+	                React.createElement("div", {className: "ui text"}, "Last Name")
+	              )
+	            ), 
+	            React.createElement("div", {className: "ui two column row"}, 
+	              React.createElement("div", {className: "three wide computer five wide tablet column"}, 
+	                React.createElement("div", {className: "ui text"}, "Keiichi")
+	              ), 
+	              React.createElement("div", {className: "three wide computer five wide tablet column"}, 
+	                React.createElement("div", {className: "ui text"}, "Lindley")
+	              )
+	            ), 
+	            React.createElement("div", {className: "ui one column row"}, 
+	              React.createElement("div", {className: "five wide computer eight wide tablet column"}, 
+	                React.createElement("div", {className: "ui text"}, "Email Address")
+	              )
+	            ), 
+	            React.createElement("div", {className: "ui one column row"}, 
+	              React.createElement("div", {className: "five wide computer eight wide tablet column"}, 
+	                React.createElement("div", {className: "ui text"}, "keiichi.lindley@gmail.com")
+	              )
+	            ), 
+	            React.createElement("div", {className: "ui one column row"}, 
+	              React.createElement("div", {className: "five wide computer eight wide tablet column"}, 
+	                React.createElement("div", {className: "ui text"}, "Password")
+	              )
+	            ), 
+	            React.createElement("div", {className: "ui one column row"}, 
+	              React.createElement("div", {className: "five wide computer eight wide tablet column"}, 
+	                React.createElement("div", {className: "ui text"}, "*******")
+	              )
+	            ), 
+	            React.createElement("div", {className: "ui one column row"}, 
+	              React.createElement("div", {className: "five wide computer eight wide tablet column"}, 
+	                React.createElement("div", {className: "ui text"}, "ZIP Code")
+	              )
+	            ), 
+	            React.createElement("div", {className: "ui one column row"}, 
+	              React.createElement("div", {className: "five wide computer eight wide tablet column"}, 
+	                React.createElement("div", {className: "ui text"}, "80110")
+	              )
+	            ), 
+	            React.createElement("div", {className: "ui one column row"}, 
+	              React.createElement("div", {className: "five wide computer eight wide tablet column"}, 
+	                React.createElement("div", {className: "ui text"}, "Phone Number")
+	              )
+	            ), 
+	            React.createElement("div", {className: "ui one column row"}, 
+	              React.createElement("div", {className: "five wide computer eight wide tablet column"}, 
+	                React.createElement("div", {className: "ui text"}, "###-###-####")
+	              )
+	            )
+	          )
+	        ), 
+	        React.createElement("div", {className: "four wide column"}, React.createElement("a", {href: "#"}, 
+	            React.createElement("h4", null, "Profile")), React.createElement("a", {href: "#"}, 
+	            React.createElement("h4", null, "Notifications")), React.createElement("a", {href: "#"}, 
+	            React.createElement("h4", null, "Settings")), React.createElement("a", {href: "#"}, 
+	            React.createElement("h4", null, "Sign Out")))
+	      )
+	    )
+	  },
+
+	  register() {
+	    return (
+	      React.createElement("div", {className: "two column row account-settings"}, 
+	        React.createElement("div", {className: "twelve wide column"}, 
+	          React.createElement("h3", null, "Register"), 
+	          React.createElement("div", {className: "ui grid"}, 
+	            React.createElement("div", {className: "ui one column row"}, 
+	              React.createElement("div", {className: "five wide computer eight wide tablet column"}, 
+	                React.createElement("div", {className: "ui text"}, "Email Address")
+	              )
+	            ), 
+	            React.createElement("div", {className: "ui one column row"}, 
+	              React.createElement("div", {className: "five wide computer eight wide tablet column"}, 
+	                React.createElement("input", {className: "ui massive input", type: "text", name: "emailAddress"})
+	              )
+	            ), 
+	            React.createElement("div", {className: "ui two column row"}, 
+	              React.createElement("div", {className: "three wide computer five wide tablet column"}, 
+	                React.createElement("div", {className: "ui text"}, "First Name")
+	              ), 
+	              React.createElement("div", {className: "three wide computer five wide tablet column"}, 
+	                React.createElement("div", {className: "ui text"}, "Last Name")
+	              )
+	            ), 
+	            React.createElement("div", {className: "ui two column row"}, 
+	              React.createElement("div", {className: "three wide computer five wide tablet column"}, 
+	                React.createElement("input", {className: "ui massive input", type: "text", name: "firstName"})
+	              ), 
+	              React.createElement("div", {className: "three wide computer five wide tablet column"}, 
+	                React.createElement("input", {className: "ui massive input", type: "text", name: "lastName"})
+	              )
+	            ), 
+	            React.createElement("div", {className: "ui two column row"}, 
+	              React.createElement("div", {className: "three wide computer five wide tablet column"}, 
+	                React.createElement("div", {className: "ui text"}, "Password")
+	              ), 
+	              React.createElement("div", {className: "three wide computer five wide tablet column"}, 
+	                React.createElement("div", {className: "ui text"}, "Confirm Password")
+	              )
+	            ), 
+	            React.createElement("div", {className: "ui two column row"}, 
+	              React.createElement("div", {className: "three wide computer five wide tablet column"}, 
+	                React.createElement("input", {className: "ui massive input", type: "password", name: "password"})
+	              ), 
+	              React.createElement("div", {className: "three wide computer five wide tablet column"}, 
+	                React.createElement("input", {className: "ui massive input", type: "password", name: "confirmPassword"})
+	              )
+	            ), 
+	            React.createElement("div", {className: "ui one column row"}, 
+	              React.createElement("div", {className: "six wide computer five wide tablet column"}, 
+	                React.createElement("button", {className: "ui register button", text: "Register", title: "Register"}, 
+	                  "Register"
+	                )
+	              )
+	            )
+	          )
+	        ), 
+	        React.createElement("div", {className: "four wide column"}, React.createElement("a", {href: "#"}, 
+	            React.createElement("h4", null, "Profile")), React.createElement("a", {href: "#"}, 
+	            React.createElement("h4", null, "Notifications")), React.createElement("a", {href: "#"}, 
+	            React.createElement("h4", null, "Settings")), React.createElement("a", {href: "#"}, 
+	            React.createElement("h4", null, "Sign Out")))
+	      )
+	    )
 	  }
 	});
 
@@ -20030,7 +20110,7 @@
 	  },
 
 	  myAccount() {
-	    $('.my-account.modal').modal('show');
+	    $('.my-account.modal').modal({closable: false}).modal('show');
 	  },
 
 	  myWatchlist() {
