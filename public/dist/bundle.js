@@ -24812,26 +24812,23 @@
 	  },
 	  getInitialState: function getInitialState() {
 	    return {
-	      user: {},
 	      language: 'en'
 	    };
 	  },
 	  setUser: function setUser(user) {
+	    console.log("setting user state in app", user);
 	    this.setState({
 	      user: user
 	    });
 	  },
 	  render: function render() {
 
-	    if (!this.state.user && this.state.user.id) this.validateUser();
-
 	    return _react2.default.createElement(
 	      'div',
 	      null,
 	      _react2.default.createElement(_MyWatchlist2.default, null),
-	      _react2.default.createElement(_Nav2.default, { setLanguage: this.setLanguage, setUser: this.setUser, language: this.state.language, user: this.state.user }),
+	      _react2.default.createElement(_Nav2.default, { setLanguage: this.setLanguage, setUser: this.setUser, language: this.state.language }),
 	      this.props.children && _react2.default.cloneElement(this.props.children, {
-	        user: this.state.user,
 	        setUser: this.setUser,
 	        language: this.state.language
 	      }),
@@ -24840,11 +24837,12 @@
 	  },
 	  validateUser: function validateUser() {
 	    var token = localStorage.getItem('melody::authToken');
-	    if (token && token.length) {
-	      this.authenticateUser(token);
-	    } else {
-	      console.log("token is empty, user is not authenticated");
-	    }
+	    console.log("validating auth token", token);
+	    // if (token && token.length) {
+	    //   this.authenticateUser(token)
+	    // } else {
+	    //   console.log("token is empty, user is not authenticated")
+	    // }
 	  },
 	  authenticateUser: function authenticateUser(token) {
 	    if (token.length) {
@@ -24853,6 +24851,7 @@
 	          console.log("Login from Token errors", res.errors);
 	        }
 	        if (res.status && res.status == true && res.user) {
+	          console.log("authenticated user", res.user);
 	          this.setUser(res.user);
 	        }
 	      }.bind(this));
@@ -24892,7 +24891,7 @@
 	    return _react2.default.createElement(
 	      'div',
 	      null,
-	      _react2.default.createElement(_MyAccount2.default, { setUser: this.props.setUser, user: this.props.user }),
+	      _react2.default.createElement(_MyAccount2.default, { setUser: this.props.setUser }),
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'ui large top fixed hidden menu inverted' },
@@ -25173,7 +25172,7 @@
 	      });
 	    }, 500);
 	    var MODAL = this.login();
-	    if (this.state.user && this.state.user.id) {
+	    if (env.authenticated()) {
 	      MODAL = this.myAccount(this.state.user);
 	    }
 	    return _react2.default.createElement(
@@ -25609,14 +25608,14 @@
 	      }
 	      if (res.status && res.status == true && res.token) {
 	        $('.my-account.modal').modal('hide');
-	        this.setAuthToken(res.token);
-	        this.props.setUser(res.user);
+	        this.setAuthToken(res.token, res.authenticated);
 	      }
 	    }.bind(this));
 	  },
-	  setAuthToken: function setAuthToken(token) {
+	  setAuthToken: function setAuthToken(token, user) {
 	    if (token.length) {
 	      localStorage.setItem('melody::authToken', token);
+	      this.props.setUser(user);
 	    }
 	  }
 	});
@@ -25628,7 +25627,12 @@
 	"use strict";
 
 	module.exports = {
-	  "endpoint": "http://dgzn.io:8080"
+	  "endpoint": "http://dgzn.io:8080",
+	  "authenticated": function authenticated() {
+	    var token = localStorage.getItem('melody::authToken');
+	    if (!token || !token.length) return false;
+	    return true;
+	  }
 	};
 
 /***/ },

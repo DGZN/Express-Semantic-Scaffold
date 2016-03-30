@@ -14,27 +14,23 @@ export default React.createClass({
   },
   getInitialState() {
     return {
-      user: {}
-    , language: 'en'
+      language: 'en'
     }
   },
   setUser(user) {
+    console.log("setting user state in app", user)
     this.setState({
       user: user
     })
   },
   render() {
 
-    if ( ! this.state.user && this.state.user.id )
-      this.validateUser()
-
     return (
       <div>
         <MyWatchlist />
-        <Nav setLanguage={this.setLanguage} setUser={this.setUser} language={this.state.language} user={this.state.user} />
+        <Nav setLanguage={this.setLanguage} setUser={this.setUser} language={this.state.language}  />
         {this.props.children && React.cloneElement(this.props.children, {
-            user: this.state.user
-          , setUser: this.setUser
+            setUser: this.setUser
           , language: this.state.language
           })}
         <Footer />
@@ -44,11 +40,12 @@ export default React.createClass({
 
   validateUser() {
     var token = localStorage.getItem('melody::authToken');
-    if (token && token.length) {
-      this.authenticateUser(token)
-    } else {
-      console.log("token is empty, user is not authenticated")
-    }
+    console.log("validating auth token", token)
+    // if (token && token.length) {
+    //   this.authenticateUser(token)
+    // } else {
+    //   console.log("token is empty, user is not authenticated")
+    // }
   },
 
   authenticateUser(token) {
@@ -59,6 +56,7 @@ export default React.createClass({
           console.log("Login from Token errors", res.errors)
         }
         if (res.status && res.status == true && res.user) {
+          console.log("authenticated user", res.user)
           this.setUser(res.user)
         }
       }.bind(this))

@@ -9,7 +9,7 @@ export default React.createClass({
     var menu = this.languageMenu(this.props.language)
     return (
       <div>
-        <MyAccount setUser={this.props.setUser} user={this.props.user} />
+        <MyAccount setUser={this.props.setUser} />
         <div className="ui large top fixed hidden menu inverted">
           <div className="sidebar"></div>
           <div className="ui container nav">

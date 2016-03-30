@@ -35,7 +35,7 @@ export default React.createClass({
       });
     },500)
     var MODAL = this.login()
-    if ( this.state.user && this.state.user.id ) {
+    if (env.authenticated()) {
       MODAL = this.myAccount(this.state.user)
     }
     return (
@@ -231,15 +231,15 @@ export default React.createClass({
       }
       if (res.status && res.status == true && res.token) {
         $('.my-account.modal').modal('hide');
-        this.setAuthToken(res.token)
-        this.props.setUser(res.user)
+        this.setAuthToken(res.token, res.authenticated)
       }
     }.bind(this));
   },
 
-  setAuthToken(token) {
+  setAuthToken(token, user) {
     if (token.length) {
       localStorage.setItem('melody::authToken', token)
+      this.props.setUser(user)
     }
   }
 
