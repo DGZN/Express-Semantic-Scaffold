@@ -6,29 +6,29 @@ router.get('/', function(req, res, next) {
   res.render('index');
 });
 
-router.get('/movies', function(req, res, next) {
-  res.render('movies');
-});
+// router.get('/movies', function(req, res, next) {
+//   res.render('movies');
+// });
+//
+// router.get('/movies/:id', function(req, res, next) {
+//   res.render('movie', {
+//     data: {
+//       id: req.params.id
+//     }
+//   });
+// });
 
-router.get('/movies/:id', function(req, res, next) {
-  res.render('movie', {
-    data: {
-      id: req.params.id
-    }
-  });
-});
-
-router.get('/series', function(req, res, next) {
-  res.render('series');
-});
-
-router.get('/series/:id', function(req, res, next) {
-  res.render('season', {
-    data: {
-      id: req.params.id
-    }
-  });
-});
+// router.get('/series', function(req, res, next) {
+//   res.render('series');
+// });
+//
+// router.get('/series/:id', function(req, res, next) {
+//   res.render('season', {
+//     data: {
+//       id: req.params.id
+//     }
+//   });
+// });
 
 router.get('/season', function(req, res, next) {
   res.render('season');
@@ -46,29 +46,29 @@ router.get('/albums/:id', function(req, res, next) {
   });
 });
 
-router.get('/plays', function(req, res, next) {
-  res.render('plays');
-});
+// router.get('/plays', function(req, res, next) {
+//   res.render('plays');
+// });
+//
+// router.get('/plays/:id', function(req, res, next) {
+//   res.render('play', {
+//     data: {
+//       id: req.params.id
+//     }
+//   });
+// });
 
-router.get('/plays/:id', function(req, res, next) {
-  res.render('play', {
-    data: {
-      id: req.params.id
-    }
-  });
-});
-
-router.get('/collections', function(req, res, next) {
-  res.render('collections');
-});
-
-router.get('/collections/:id', function(req, res, next) {
-  res.render('collection', {
-    data: {
-      id: req.params.id
-    }
-  });
-});
+// router.get('/collections', function(req, res, next) {
+//   res.render('collections');
+// });
+//
+// router.get('/collections/:id', function(req, res, next) {
+//   res.render('collection', {
+//     data: {
+//       id: req.params.id
+//     }
+//   });
+// });
 
 router.get('/live', function(req, res, next) {
   res.render('live');

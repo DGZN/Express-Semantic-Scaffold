@@ -1,6 +1,3 @@
-const React = require('react');
-
-
 import React from 'react'
 
 import SeasonFilter from './SeasonFilter'
@@ -20,7 +17,7 @@ export default React.createClass({
   componentDidMount: function() {
     this.fetch = $.get(env.endpoint + '/v1/assets' +this.props.source, function (result) {
       this.setState({
-        series: JSON.parse(result)
+        series: result
       });
     }.bind(this));
   },

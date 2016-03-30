@@ -39,8 +39,17 @@
   font-weight: 100;
 }
 
-.account-settings input {
+.account-settings .input {
+  font-size: 1em !important;
+  display: block;
+  width: 90% !important;
   color: #f0f0f0;
+}
+
+.account-settings .ui.label {
+  color: #999;
+  background: rgba(0,0,0,0);
+  padding-left: 0rem !important;
 }
 
 .account-settings .ui.register.button {

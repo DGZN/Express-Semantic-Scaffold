@@ -1,10 +1,11 @@
-const React = require('react');
-const GridFilter = require('./gridFilter.js');
-const Column = require('./column.js')
+import React from 'react'
+
+import Filter from './Filter'
+import Column from './Column'
 
 const env = require('./env.js')
 
-const Grid = React.createClass({
+export default React.createClass({
 
   filter: function(filter) {
     this.setState({
@@ -28,6 +29,9 @@ const Grid = React.createClass({
 
   componentDidMount: function() {
     this.fetch = $.get(env.endpoint + '/v1/assets' +this.props.source, function (result) {
+      var result = this.props.sourceKey
+                 ? result[this.props.sourceKey]
+                 : result
       this.setState({
         collection: result
       });
@@ -48,10 +52,7 @@ const Grid = React.createClass({
   render() {
     var ROWS = []
     var COLUMNS = [];
-
     var collection = this.state.collection
-
-
     if (this.state.filter) {
       switch (this.state.filter) {
         case 'featured':
@@ -59,6 +60,9 @@ const Grid = React.createClass({
             return collection;
           var collection = this.state.featured.sort((a, b) => {
             return a.order - b.order;
+          })
+          collection.map((item) => {
+            console.log(item.order)
           })
           break;
         case 'a-z':
@@ -75,7 +79,6 @@ const Grid = React.createClass({
           break;
       }
     }
-
     collection.map((data, i) => {
       if (this.state.genre[this.props.language]) {
         if (data.genres) {
@@ -103,7 +106,7 @@ const Grid = React.createClass({
     }
     return (
       <div>
-        <GridFilter {...this.props} filter={this.filter} filterGenre={this.filterGenre} activeFilter={this.state.filter} activeGenre={this.state.genre} />
+        <Filter {...this.props} filter={this.filter} filterGenre={this.filterGenre} activeFilter={this.state.filter} activeGenre={this.state.genre} />
         <div className="ui vertical center container aligned grids">
           <div className="ui equal width grid container">
             {ROWS}
@@ -113,5 +116,3 @@ const Grid = React.createClass({
     );
   },
 });
-
-module.exports = Grid;

@@ -5,11 +5,10 @@
   "scripts": {
     "build:js": "webpack",
     "build": "npm run build:js",
-    "watch": "watch 'npm run build' ./public/js",
+    "watch": "watch 'npm run build' ./modules",
     "start": "node ./bin/www"
   },
   "dependencies": {
-    "babel-preset-react": "^6.5.0",
     "body-parser": "~1.13.2",
     "cookie-parser": "~1.3.5",
     "debug": "~2.2.0",
@@ -18,14 +17,20 @@
     "morgan": "~1.6.1",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
+    "react-router": "^2.0.0",
     "semantic-ui": "^2.1.8",
     "serve-favicon": "~2.3.0"
   },
   "devDependencies": {
+    "babel-core": "^6.5.1",
+    "babel-loader": "^6.2.2",
+    "babel-preset-es2015": "^6.5.0",
+    "babel-preset-react": "^6.5.0",
     "jsx-loader": "^0.13.2",
     "mongoose": "^4.4.4",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
+    "react-router": "^2.0.1",
     "watch": "^0.17.1"
   }
 }
