@@ -53,7 +53,8 @@ export default React.createClass({
           <div className="ui two column grid container">
             <div className="details sixteen wide tablet eight wide computer column centered" dangerouslySetInnerHTML={{__html:movie.player}}>
             </div>
-            <div className="details sixteen wide tablet eight wide computer column centered"><img src="/images/banner01.png" className="ui image"/>
+            <div className="details sixteen wide tablet eight wide computer column centered">
+              <img src="/images/banner01.png" className="ui image hidden"/>
               <h2>{movie.name}</h2>
               <h4>{movie.description}</h4>
               <div className="ui one column grid center">

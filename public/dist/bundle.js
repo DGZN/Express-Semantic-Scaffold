@@ -58,31 +58,35 @@
 
 	var _App2 = _interopRequireDefault(_App);
 
-	var _Music = __webpack_require__(222);
+	var _Logout = __webpack_require__(223);
+
+	var _Logout2 = _interopRequireDefault(_Logout);
+
+	var _Music = __webpack_require__(224);
 
 	var _Music2 = _interopRequireDefault(_Music);
 
-	var _Movie = __webpack_require__(227);
+	var _Movie = __webpack_require__(228);
 
 	var _Movie2 = _interopRequireDefault(_Movie);
 
-	var _Plays = __webpack_require__(232);
+	var _Plays = __webpack_require__(233);
 
 	var _Plays2 = _interopRequireDefault(_Plays);
 
-	var _Movies = __webpack_require__(233);
+	var _Movies = __webpack_require__(234);
 
 	var _Movies2 = _interopRequireDefault(_Movies);
 
-	var _Series = __webpack_require__(234);
+	var _Series = __webpack_require__(235);
 
 	var _Series2 = _interopRequireDefault(_Series);
 
-	var _Season = __webpack_require__(235);
+	var _Season = __webpack_require__(236);
 
 	var _Season2 = _interopRequireDefault(_Season);
 
-	var _Collections = __webpack_require__(240);
+	var _Collections = __webpack_require__(241);
 
 	var _Collections2 = _interopRequireDefault(_Collections);
 
@@ -93,14 +97,15 @@
 	  { history: _reactRouter.hashHistory },
 	  _react2.default.createElement(
 	    _reactRouter.Route,
-	    { path: '/', component: _App2.default, language: '123' },
+	    { path: '/', component: _App2.default },
 	    _react2.default.createElement(_reactRouter.Route, { path: '/movies', component: _Movies2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/movies/:id', component: _Movie2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/series', component: _Series2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/series/:id', component: _Season2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/music', component: _Music2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/plays', component: _Plays2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: '/collections', component: _Collections2.default })
+	    _react2.default.createElement(_reactRouter.Route, { path: '/collections', component: _Collections2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/sign-out', component: _Logout2.default })
 	  )
 	), document.getElementById('app'));
 
@@ -24786,19 +24791,20 @@
 
 	var _Nav2 = _interopRequireDefault(_Nav);
 
-	var _Footer = __webpack_require__(219);
+	var _Footer = __webpack_require__(220);
 
 	var _Footer2 = _interopRequireDefault(_Footer);
 
-	var _MyWatchlist = __webpack_require__(220);
+	var _MyWatchlist = __webpack_require__(221);
 
 	var _MyWatchlist2 = _interopRequireDefault(_MyWatchlist);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	var env = __webpack_require__(219);
+
 	exports.default = _react2.default.createClass({
 	  displayName: 'App',
-
 	  setLanguage: function setLanguage(lang) {
 	    this.setState({
 	      language: lang
@@ -24806,20 +24812,54 @@
 	  },
 	  getInitialState: function getInitialState() {
 	    return {
+	      user: {},
 	      language: 'en'
 	    };
 	  },
+	  setUser: function setUser(user) {
+	    this.setState({
+	      user: user
+	    });
+	  },
 	  render: function render() {
+
+	    if (!this.state.user && this.state.user.id) this.validateUser();
+
 	    return _react2.default.createElement(
 	      'div',
 	      null,
 	      _react2.default.createElement(_MyWatchlist2.default, null),
-	      _react2.default.createElement(_Nav2.default, { setLanguage: this.setLanguage, language: this.state.language }),
+	      _react2.default.createElement(_Nav2.default, { setLanguage: this.setLanguage, setUser: this.setUser, language: this.state.language, user: this.state.user }),
 	      this.props.children && _react2.default.cloneElement(this.props.children, {
+	        user: this.state.user,
+	        setUser: this.setUser,
 	        language: this.state.language
 	      }),
 	      _react2.default.createElement(_Footer2.default, null)
 	    );
+	  },
+	  validateUser: function validateUser() {
+	    var token = localStorage.getItem('melody::authToken');
+	    if (token && token.length) {
+	      this.authenticateUser(token);
+	    } else {
+	      console.log("token is empty, user is not authenticated");
+	    }
+	  },
+	  authenticateUser: function authenticateUser(token) {
+	    if (token.length) {
+	      $.post(env.endpoint + '/v1/users/auth/token/' + token, function (res) {
+	        if (res.errors) {
+	          console.log("Login from Token errors", res.errors);
+	        }
+	        if (res.status && res.status == true && res.user) {
+	          this.setUser(res.user);
+	        }
+	      }.bind(this));
+	    }
+	  },
+	  signOut: function signOut() {
+	    console.log("Logging out user");
 	  }
 	});
 
@@ -24852,7 +24892,7 @@
 	    return _react2.default.createElement(
 	      'div',
 	      null,
-	      _react2.default.createElement(_MyAccount2.default, { register: this.myAccount }),
+	      _react2.default.createElement(_MyAccount2.default, { setUser: this.props.setUser, user: this.props.user }),
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'ui large top fixed hidden menu inverted' },
@@ -25060,7 +25100,6 @@
 	    );
 	  },
 	  myAccount: function myAccount() {
-	    console.log("my account is opening");
 	    $('.my-account.modal').modal({
 	      closable: false
 	    }).modal('show');
@@ -25103,168 +25142,51 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	var env = __webpack_require__(219);
+
 	exports.default = _react2.default.createClass({
 	  displayName: 'MyAccount',
-	  render: function render() {
-	    $('.ui.register.button').on('click', function () {
-	      console.log('I was clicked');
+	  getInitialState: function getInitialState() {
+	    return {
+	      user: {}
+	    };
+	  },
+	  componentWillReceiveProps: function componentWillReceiveProps(props) {
+	    if (props.user && props.user.id) this.setState({
+	      user: props.user
 	    });
+	  },
+	  render: function render() {
+	    var self = this;
 	    setTimeout(function () {
-	      $('#register').submit(function (event) {
-	        console.log($(this).serialize());
+	      $('#register').off();
+	      $('#register').on('submit', function (event) {
 	        event.preventDefault();
+	        var user = $(this).serialize();
+	        self.newAccount(user);
+	      });
+	      $('#signin').off();
+	      $('#signin').on('submit', function (event) {
+	        event.preventDefault();
+	        var user = $(this).serialize();
+	        self.loginUser(user);
 	      });
 	    }, 500);
+	    var MODAL = this.login();
+	    if (this.state.user && this.state.user.id) {
+	      MODAL = this.myAccount(this.state.user);
+	    }
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'my-account modal' },
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'ui grid' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'two column row account-settings' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'twelve wide column' },
-	            _react2.default.createElement(
-	              'h3',
-	              null,
-	              'Register'
-	            ),
-	            _react2.default.createElement(
-	              'form',
-	              { name: 'register', id: 'register', method: 'post' },
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'ui grid' },
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'ui one column row' },
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'three wide computer eight wide tablet column' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'ui label' },
-	                      'Email Address'
-	                    ),
-	                    _react2.default.createElement('input', { className: 'ui massive input', type: 'text', name: 'emailAddress' })
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'ui two column row' },
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'three wide column' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'ui label' },
-	                      'First Name'
-	                    ),
-	                    _react2.default.createElement('input', { className: 'ui massive input', type: 'text', name: 'firstName' })
-	                  ),
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'three wide column' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'ui label' },
-	                      'Last Name'
-	                    ),
-	                    _react2.default.createElement('input', { className: 'ui massive input', type: 'text', name: 'lastName' })
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'ui two column row' },
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'three wide column' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'ui label' },
-	                      'Password'
-	                    ),
-	                    _react2.default.createElement('input', { className: 'ui massive input', type: 'password', name: 'password' })
-	                  ),
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'three wide column' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'ui label' },
-	                      'Confirm Password'
-	                    ),
-	                    _react2.default.createElement('input', { className: 'ui massive input', type: 'password', name: 'confirmPassword' })
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'ui one column row' },
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'eight wide column' },
-	                    _react2.default.createElement(
-	                      'a',
-	                      { onClick: this.myWatchlist },
-	                      _react2.default.createElement(
-	                        'button',
-	                        { className: 'ui register button', text: 'Register', title: 'Register' },
-	                        'Register'
-	                      )
-	                    )
-	                  )
-	                )
-	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'four wide column' },
-	            _react2.default.createElement(
-	              'a',
-	              { href: '#' },
-	              _react2.default.createElement(
-	                'h4',
-	                null,
-	                'Profile'
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'a',
-	              { href: '#' },
-	              _react2.default.createElement(
-	                'h4',
-	                null,
-	                'Notifications'
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'a',
-	              { href: '#' },
-	              _react2.default.createElement(
-	                'h4',
-	                null,
-	                'Settings'
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'a',
-	              { href: '#' },
-	              _react2.default.createElement(
-	                'h4',
-	                null,
-	                'Sign Out'
-	              )
-	            )
-	          )
-	        )
+	        MODAL
 	      )
 	    );
 	  },
-	  myAccount: function myAccount() {
+	  myAccount: function myAccount(user) {
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'two column row account-settings' },
@@ -25310,7 +25232,7 @@
 	              _react2.default.createElement(
 	                'div',
 	                { className: 'ui text' },
-	                'Keiichi'
+	                user.first_name
 	              )
 	            ),
 	            _react2.default.createElement(
@@ -25319,7 +25241,7 @@
 	              _react2.default.createElement(
 	                'div',
 	                { className: 'ui text' },
-	                'Lindley'
+	                user.last_name
 	              )
 	            )
 	          ),
@@ -25345,7 +25267,7 @@
 	              _react2.default.createElement(
 	                'div',
 	                { className: 'ui text' },
-	                'keiichi.lindley@gmail.com'
+	                user.email
 	              )
 	            )
 	          ),
@@ -25374,56 +25296,112 @@
 	                '*******'
 	              )
 	            )
-	          ),
+	          )
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'four wide column' },
+	        _react2.default.createElement(
+	          'a',
+	          { href: '#' },
+	          _react2.default.createElement(
+	            'h4',
+	            null,
+	            'Profile'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'a',
+	          { href: '#' },
+	          _react2.default.createElement(
+	            'h4',
+	            null,
+	            'Notifications'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'a',
+	          { href: '#' },
+	          _react2.default.createElement(
+	            'h4',
+	            null,
+	            'Settings'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: '/sign-out', className: 'item' },
+	          _react2.default.createElement(
+	            'h4',
+	            null,
+	            'Sign Out'
+	          )
+	        )
+	      )
+	    );
+	  },
+	  login: function login() {
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'two column row account-settings' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'twelve wide column' },
+	        _react2.default.createElement(
+	          'h3',
+	          null,
+	          'Sign In'
+	        ),
+	        _react2.default.createElement(
+	          'form',
+	          { name: 'signin', id: 'signin', method: 'post' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'ui one column row' },
+	            { className: 'ui grid' },
 	            _react2.default.createElement(
 	              'div',
-	              { className: 'three wide computer eight wide tablet column' },
+	              { className: 'ui one column row' },
 	              _react2.default.createElement(
 	                'div',
-	                { className: 'ui text' },
-	                'ZIP Code'
+	                { className: 'three wide computer eight wide tablet column' },
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'ui label' },
+	                  'Email Address'
+	                ),
+	                _react2.default.createElement('input', { className: 'ui massive input', type: 'text', name: 'email' })
 	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'ui one column row' },
+	            ),
 	            _react2.default.createElement(
 	              'div',
-	              { className: 'three wide computer eight wide tablet column' },
+	              { className: 'ui two column row' },
 	              _react2.default.createElement(
 	                'div',
-	                { className: 'ui text' },
-	                '80110'
+	                { className: 'three wide column' },
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'ui label' },
+	                  'Password'
+	                ),
+	                _react2.default.createElement('input', { className: 'ui massive input', type: 'password', name: 'password' })
 	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'ui one column row' },
+	            ),
 	            _react2.default.createElement(
 	              'div',
-	              { className: 'three wide computer eight wide tablet column' },
+	              { className: 'ui one column row' },
 	              _react2.default.createElement(
 	                'div',
-	                { className: 'ui text' },
-	                'Phone Number'
-	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'ui one column row' },
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'three wide computer eight wide tablet column' },
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'ui text' },
-	                '###-###-####'
+	                { className: 'three wide column' },
+	                _react2.default.createElement(
+	                  'a',
+	                  null,
+	                  _react2.default.createElement(
+	                    'button',
+	                    { className: 'ui sign-in button', text: 'Sign In', title: 'Sign In' },
+	                    'Sign In'
+	                  )
+	                )
 	              )
 	            )
 	          )
@@ -25460,8 +25438,8 @@
 	          )
 	        ),
 	        _react2.default.createElement(
-	          'a',
-	          { href: '#' },
+	          _reactRouter.Link,
+	          { to: '/sign-out', className: 'item' },
 	          _react2.default.createElement(
 	            'h4',
 	            null,
@@ -25484,80 +25462,88 @@
 	          'Register'
 	        ),
 	        _react2.default.createElement(
-	          'div',
-	          { className: 'ui grid' },
+	          'form',
+	          { name: 'register', id: 'register', method: 'post' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'ui one column row' },
+	            { className: 'ui grid' },
 	            _react2.default.createElement(
 	              'div',
-	              { className: 'three wide computer eight wide tablet column' },
+	              { className: 'ui one column row' },
 	              _react2.default.createElement(
 	                'div',
-	                { className: 'ui label' },
-	                'Email Address'
-	              ),
-	              _react2.default.createElement('input', { className: 'ui massive input', type: 'text', name: 'emailAddress' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'ui two column row' },
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'three wide column' },
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'ui label' },
-	                'First Name'
-	              ),
-	              _react2.default.createElement('input', { className: 'ui massive input', type: 'text', name: 'firstName' })
+	                { className: 'three wide computer eight wide tablet column' },
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'ui label' },
+	                  'Email Address'
+	                ),
+	                _react2.default.createElement('input', { className: 'ui massive input', type: 'text', name: 'email' })
+	              )
 	            ),
 	            _react2.default.createElement(
 	              'div',
-	              { className: 'three wide column' },
+	              { className: 'ui two column row' },
 	              _react2.default.createElement(
 	                'div',
-	                { className: 'ui label' },
-	                'Last Name'
+	                { className: 'three wide column' },
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'ui label' },
+	                  'First Name'
+	                ),
+	                _react2.default.createElement('input', { className: 'ui massive input', type: 'text', name: 'first_name' })
 	              ),
-	              _react2.default.createElement('input', { className: 'ui massive input', type: 'text', name: 'lastName' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'ui two column row' },
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'three wide column' },
 	              _react2.default.createElement(
 	                'div',
-	                { className: 'ui label' },
-	                'Password'
-	              ),
-	              _react2.default.createElement('input', { className: 'ui massive input', type: 'password', name: 'password' })
+	                { className: 'three wide column' },
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'ui label' },
+	                  'Last Name'
+	                ),
+	                _react2.default.createElement('input', { className: 'ui massive input', type: 'text', name: 'last_name' })
+	              )
 	            ),
 	            _react2.default.createElement(
 	              'div',
-	              { className: 'three wide column' },
+	              { className: 'ui two column row' },
 	              _react2.default.createElement(
 	                'div',
-	                { className: 'ui label' },
-	                'Confirm Password'
+	                { className: 'three wide column' },
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'ui label' },
+	                  'Password'
+	                ),
+	                _react2.default.createElement('input', { className: 'ui massive input', type: 'password', name: 'password' })
 	              ),
-	              _react2.default.createElement('input', { className: 'ui massive input', type: 'password', name: 'confirmPassword' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'ui one column row' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'three wide column' },
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'ui label' },
+	                  'Confirm Password'
+	                ),
+	                _react2.default.createElement('input', { className: 'ui massive input', type: 'password', name: 'password_confirmation' })
+	              )
+	            ),
 	            _react2.default.createElement(
 	              'div',
-	              { className: 'six wide column' },
+	              { className: 'ui one column row' },
 	              _react2.default.createElement(
-	                'button',
-	                { className: 'ui register button', text: 'Register', title: 'Register' },
-	                'Register'
+	                'div',
+	                { className: 'six wide column' },
+	                _react2.default.createElement(
+	                  'a',
+	                  null,
+	                  _react2.default.createElement(
+	                    'button',
+	                    { className: 'ui register button', text: 'Register', title: 'Register' },
+	                    'Register'
+	                  )
+	                )
 	              )
 	            )
 	          )
@@ -25605,16 +25591,48 @@
 	      )
 	    );
 	  },
-	  newAccount: function newAccount() {
-	    console.log("registering new account");
-	    var data = $('#register').serialize();
-	    console.log(data);
-	    console.log($('#register'));
+	  newAccount: function newAccount(user) {
+	    $.post(env.endpoint + '/v1/users', user, function (res) {
+	      if (res.errors) {
+	        console.log("Registstrion errors", res.errors);
+	      }
+	      if (res.status && res.status == true && res.user) {
+	        $('.my-account.modal').modal('hide');
+	        this.props.setUser(res.user);
+	      }
+	    }.bind(this));
+	  },
+	  loginUser: function loginUser(user) {
+	    $.post(env.endpoint + '/v1/users/auth', user, function (res) {
+	      if (res.errors) {
+	        console.log("Login errors", res.errors);
+	      }
+	      if (res.status && res.status == true && res.token) {
+	        $('.my-account.modal').modal('hide');
+	        this.setAuthToken(res.token);
+	        this.props.setUser(res.user);
+	      }
+	    }.bind(this));
+	  },
+	  setAuthToken: function setAuthToken(token) {
+	    if (token.length) {
+	      localStorage.setItem('melody::authToken', token);
+	    }
 	  }
 	});
 
 /***/ },
 /* 219 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	module.exports = {
+	  "endpoint": "http://dgzn.io:8080"
+	};
+
+/***/ },
+/* 220 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25744,7 +25762,7 @@
 	});
 
 /***/ },
-/* 220 */
+/* 221 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25757,7 +25775,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _WatchlistGrid = __webpack_require__(221);
+	var _WatchlistGrid = __webpack_require__(222);
 
 	var _WatchlistGrid2 = _interopRequireDefault(_WatchlistGrid);
 
@@ -25814,7 +25832,7 @@
 	});
 
 /***/ },
-/* 221 */
+/* 222 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25887,7 +25905,45 @@
 	});
 
 /***/ },
-/* 222 */
+/* 223 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(159);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var env = __webpack_require__(219);
+
+	exports.default = _react2.default.createClass({
+	  displayName: 'Logout',
+	  getInitialState: function getInitialState() {
+	    return {
+	      user: {}
+	    };
+	  },
+	  render: function render() {
+	    $('.my-account.modal').modal('hide');
+	    this.clearAuthToken();
+	    return _react2.default.createElement('div', null);
+	  },
+	  clearAuthToken: function clearAuthToken() {
+	    localStorage.setItem('melody::authToken', '');
+	    _reactRouter.browserHistory.push('/');
+	  }
+	});
+
+/***/ },
+/* 224 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25902,7 +25958,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Grid = __webpack_require__(223);
+	var _Grid = __webpack_require__(225);
 
 	var _Grid2 = _interopRequireDefault(_Grid);
 
@@ -25921,7 +25977,7 @@
 	});
 
 /***/ },
-/* 223 */
+/* 225 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25936,17 +25992,17 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Filter = __webpack_require__(224);
+	var _Filter = __webpack_require__(226);
 
 	var _Filter2 = _interopRequireDefault(_Filter);
 
-	var _Column = __webpack_require__(226);
+	var _Column = __webpack_require__(227);
 
 	var _Column2 = _interopRequireDefault(_Column);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var env = __webpack_require__(225);
+	var env = __webpack_require__(219);
 
 	exports.default = _react2.default.createClass({
 	  displayName: 'Grid',
@@ -26070,7 +26126,7 @@
 	});
 
 /***/ },
-/* 224 */
+/* 226 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26085,7 +26141,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var env = __webpack_require__(225);
+	var env = __webpack_require__(219);
 
 	exports.default = _react2.default.createClass({
 	  displayName: 'Filter',
@@ -26188,17 +26244,7 @@
 	});
 
 /***/ },
-/* 225 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	module.exports = {
-	  "endpoint": "http://dgzn.io:8080"
-	};
-
-/***/ },
-/* 226 */
+/* 227 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26271,7 +26317,7 @@
 	}
 
 /***/ },
-/* 227 */
+/* 228 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26286,7 +26332,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _VideoDetail = __webpack_require__(228);
+	var _VideoDetail = __webpack_require__(229);
 
 	var _VideoDetail2 = _interopRequireDefault(_VideoDetail);
 
@@ -26301,7 +26347,7 @@
 	});
 
 /***/ },
-/* 228 */
+/* 229 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26314,13 +26360,13 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Roles = __webpack_require__(229);
+	var _Roles = __webpack_require__(230);
 
 	var _Roles2 = _interopRequireDefault(_Roles);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var env = __webpack_require__(225);
+	var env = __webpack_require__(219);
 
 	exports.default = _react2.default.createClass({
 	  displayName: 'VideoDetail',
@@ -26382,7 +26428,7 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'details sixteen wide tablet eight wide computer column centered' },
-	            _react2.default.createElement('img', { src: '/images/banner01.png', className: 'ui image' }),
+	            _react2.default.createElement('img', { src: '/images/banner01.png', className: 'ui image hidden' }),
 	            _react2.default.createElement(
 	              'h2',
 	              null,
@@ -26470,7 +26516,7 @@
 	}
 
 /***/ },
-/* 229 */
+/* 230 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26485,7 +26531,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _People = __webpack_require__(230);
+	var _People = __webpack_require__(231);
 
 	var _People2 = _interopRequireDefault(_People);
 
@@ -26525,7 +26571,7 @@
 	});
 
 /***/ },
-/* 230 */
+/* 231 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26538,7 +26584,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Person = __webpack_require__(231);
+	var _Person = __webpack_require__(232);
 
 	var _Person2 = _interopRequireDefault(_Person);
 
@@ -26625,7 +26671,7 @@
 	}
 
 /***/ },
-/* 231 */
+/* 232 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26652,39 +26698,6 @@
 	});
 
 /***/ },
-/* 232 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _Grid = __webpack_require__(223);
-
-	var _Grid2 = _interopRequireDefault(_Grid);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = _react2.default.createClass({
-	  displayName: 'Plays',
-	  render: function render() {
-	    return _react2.default.createElement(_Grid2.default, _extends({}, this.props, {
-	      limit: '5',
-	      title: 'Plays',
-	      source: '/plays',
-	      href: '/plays/:id' }));
-	  }
-	});
-
-/***/ },
 /* 233 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -26700,21 +26713,20 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Grid = __webpack_require__(223);
+	var _Grid = __webpack_require__(225);
 
 	var _Grid2 = _interopRequireDefault(_Grid);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _react2.default.createClass({
-	  displayName: 'Movies',
+	  displayName: 'Plays',
 	  render: function render() {
 	    return _react2.default.createElement(_Grid2.default, _extends({}, this.props, {
 	      limit: '5',
-	      title: 'Movies',
-	      source: '/movies',
-	      href: '/movies/:id',
-	      featured: '/sets/Featuredmovies' }));
+	      title: 'Plays',
+	      source: '/plays',
+	      href: '/plays/:id' }));
 	  }
 	});
 
@@ -26734,20 +26746,21 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Grid = __webpack_require__(223);
+	var _Grid = __webpack_require__(225);
 
 	var _Grid2 = _interopRequireDefault(_Grid);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _react2.default.createClass({
-	  displayName: 'Series',
+	  displayName: 'Movies',
 	  render: function render() {
 	    return _react2.default.createElement(_Grid2.default, _extends({}, this.props, {
 	      limit: '5',
-	      title: 'Series',
-	      source: '/series',
-	      href: '/series/:id' }));
+	      title: 'Movies',
+	      source: '/movies',
+	      href: '/movies/:id',
+	      featured: '/sets/Featuredmovies' }));
 	  }
 	});
 
@@ -26767,7 +26780,40 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _SeasonDetail = __webpack_require__(236);
+	var _Grid = __webpack_require__(225);
+
+	var _Grid2 = _interopRequireDefault(_Grid);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	  displayName: 'Series',
+	  render: function render() {
+	    return _react2.default.createElement(_Grid2.default, _extends({}, this.props, {
+	      limit: '5',
+	      title: 'Series',
+	      source: '/series',
+	      href: '/series/:id' }));
+	  }
+	});
+
+/***/ },
+/* 236 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _SeasonDetail = __webpack_require__(237);
 
 	var _SeasonDetail2 = _interopRequireDefault(_SeasonDetail);
 
@@ -26782,7 +26828,7 @@
 	});
 
 /***/ },
-/* 236 */
+/* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26795,21 +26841,21 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _SeasonFilter = __webpack_require__(237);
+	var _SeasonFilter = __webpack_require__(238);
 
 	var _SeasonFilter2 = _interopRequireDefault(_SeasonFilter);
 
-	var _SeasonWatchlist = __webpack_require__(238);
+	var _SeasonWatchlist = __webpack_require__(239);
 
 	var _SeasonWatchlist2 = _interopRequireDefault(_SeasonWatchlist);
 
-	var _Roles = __webpack_require__(229);
+	var _Roles = __webpack_require__(230);
 
 	var _Roles2 = _interopRequireDefault(_Roles);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var env = __webpack_require__(225);
+	var env = __webpack_require__(219);
 
 	exports.default = _react2.default.createClass({
 	  displayName: 'SeasonDetail',
@@ -26957,7 +27003,7 @@
 	});
 
 /***/ },
-/* 237 */
+/* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27010,7 +27056,7 @@
 	});
 
 /***/ },
-/* 238 */
+/* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27027,7 +27073,7 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _VideoPlayer = __webpack_require__(239);
+	var _VideoPlayer = __webpack_require__(240);
 
 	var _VideoPlayer2 = _interopRequireDefault(_VideoPlayer);
 
@@ -27133,7 +27179,7 @@
 	}
 
 /***/ },
-/* 239 */
+/* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27204,7 +27250,7 @@
 	}
 
 /***/ },
-/* 240 */
+/* 241 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27219,7 +27265,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Grid = __webpack_require__(223);
+	var _Grid = __webpack_require__(225);
 
 	var _Grid2 = _interopRequireDefault(_Grid);
 

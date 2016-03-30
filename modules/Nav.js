@@ -9,7 +9,7 @@ export default React.createClass({
     var menu = this.languageMenu(this.props.language)
     return (
       <div>
-        <MyAccount register={this.myAccount} />
+        <MyAccount setUser={this.props.setUser} user={this.props.user} />
         <div className="ui large top fixed hidden menu inverted">
           <div className="sidebar"></div>
           <div className="ui container nav">
@@ -72,7 +72,6 @@ export default React.createClass({
   },
 
   myAccount() {
-    console.log("my account is opening");
     $('.my-account.modal').modal({
       closable: false
     }).modal('show');

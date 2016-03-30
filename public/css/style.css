@@ -2,10 +2,40 @@
   padding-bottom: 20px;
 }
 
+.hidden {
+  display: none;
+}
+
+
+
+
+/*::-webkit-scrollbar {
+    height: 12px;
+    width: 12px;
+    background: rgba(0,0,0,1);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #393812;
+    -webkit-border-radius: 1ex;
+    -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.75);
+}
+
+::-webkit-scrollbar-corner {
+    background: rgba(0,0,0,1);
+}*/
+
 .season-watchlist {
   max-height: 710px;
-  overflow: scroll;
+  /*overflow: scroll;*/
+  overflow-x:hidden;
   margin-bottom: 50px;
+}
+
+.season-watchlist::-webkit-scrollbar {
+    height: 12px;
+    width: 12px;
+    background: rgba(24,24,24,1);
 }
 
 #video-slide-out {
@@ -41,6 +71,7 @@
 
 .account-settings .input {
   font-size: 1em !important;
+  padding: 0.5em;
   display: block;
   width: 90% !important;
   color: #f0f0f0;
@@ -55,7 +86,13 @@
 .account-settings .ui.register.button {
   float: right;
   position: absolute;
-  right: 75px;
+  right: 43px;
+}
+
+.account-settings .ui.sign-in.button {
+  float: right;
+  position: absolute;
+  right: 43px;
 }
 
 .my-watchlist.modal {
