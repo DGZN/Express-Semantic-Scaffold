@@ -1,10 +1,25 @@
 import React       from 'react'
 
+
 import Nav         from './Nav'
 import Footer      from './Footer'
 import MyWatchlist from './MyWatchlist'
 
+import TodoStore from './stores/TodoStore';
+
 const env = require('./env.js')
+
+/**
+ * Retrieve the current TODO data from the TodoStore
+ */
+function getTodoState() {
+  return {
+    allTodos: TodoStore.getAll(),
+    areAllComplete: TodoStore.areAllComplete(),
+    language: 'en'
+  };
+}
+
 
 export default React.createClass({
   setLanguage(lang) {
@@ -13,58 +28,34 @@ export default React.createClass({
     })
   },
   getInitialState() {
-    return {
-      language: 'en'
-    }
+    return getTodoState();
   },
-  setUser(user) {
-    console.log("setting user state in app", user)
-    this.setState({
-      user: user
-    })
+  componentDidMount: function() {
+    TodoStore.addChangeListener(this._onChange);
   },
-  render() {
 
+  componentWillUnmount: function() {
+    TodoStore.removeChangeListener(this._onChange);
+  },
+
+  render() {
     return (
       <div>
         <MyWatchlist />
-        <Nav setLanguage={this.setLanguage} setUser={this.setUser} language={this.state.language}  />
-        {this.props.children && React.cloneElement(this.props.children, {
-            setUser: this.setUser
-          , language: this.state.language
-          })}
+        <Nav setLanguage={this.setLanguage} language={this.state.language}  />
+        {this.props.children && React.cloneElement(this.props.children,{
+          language: this.state.language
+        })}
         <Footer />
       </div>
     );
   },
 
-  validateUser() {
-    var token = localStorage.getItem('melody::authToken');
-    console.log("validating auth token", token)
-    // if (token && token.length) {
-    //   this.authenticateUser(token)
-    // } else {
-    //   console.log("token is empty, user is not authenticated")
-    // }
+  /**
+   * Event handler for 'change' events coming from the TodoStore
+   */
+  _onChange: function() {
+    this.setState(getTodoState());
   },
-
-  authenticateUser(token) {
-    if (token.length) {
-      $.post(env.endpoint + '/v1/users/auth/token/' + token,
-      function(res){
-        if (res.errors) {
-          console.log("Login from Token errors", res.errors)
-        }
-        if (res.status && res.status == true && res.user) {
-          console.log("authenticated user", res.user)
-          this.setUser(res.user)
-        }
-      }.bind(this))
-    }
-  },
-
-  signOut() {
-    console.log("Logging out user")
-  }
 
 });
