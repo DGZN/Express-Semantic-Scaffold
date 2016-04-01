@@ -6,7 +6,7 @@ import LoginActionCreators from '../actions/LoginActionCreators';
 export default React.createClass({
   render() {
     $('.my-account.modal').modal('hide', function(){
-      browserHistory.push('/')
+      //browserHistory.push('/')
     });
     return (<div></div>)
   },

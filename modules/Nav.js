@@ -1,4 +1,5 @@
 import React from 'react'
+import { render } from 'react-dom'
 
 import { Link } from 'react-router'
 
@@ -8,7 +9,7 @@ export default React.createClass({
   componentWillreceiveProps(props) {
     console.log("new props", props);
   },
-  
+
   render() {
     var menu = this.languageMenu(this.props.language)
     return (

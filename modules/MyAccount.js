@@ -27,9 +27,27 @@ export default React.createClass({
   },
 
   componentDidMount: function() {
-    //TodoStore.addChangeListener(this._onChange);
-    // this.changeListener = this._onLoginChange;
-    // LoginStore.addChangeListener(this.changeListener);
+    $('.my-account.modal').modal({
+      closable: false
+    }).modal('hide');
+    $('.account-settings').on('click', function(e){
+      if ($(e.target).data('link').length) {
+        switch ($(e.target).data('link')) {
+          case 'logout':
+            console.log("logging out")
+            $('.my-account.modal').modal('hide', function(){
+              LoginActionCreators.logoutUser();
+            });
+            break;
+          default:
+            console.log("something else was clicked")
+        }
+      }
+    })
+  },
+
+  componentWillUnmount() {
+    $('.my-account.modal').modal('hide');
   },
 
   _onLoginChange() {
@@ -37,10 +55,6 @@ export default React.createClass({
     //see https://facebook.github.io/react/docs/component-api.html
     let userLoggedInState = this._getLoginState();
     //this.setState(userLoggedInState);
-  },
-
-  handleClick(e) {
-    console.log("clicked", e, e.target);
   },
 
   render() {
@@ -92,19 +106,18 @@ export default React.createClass({
         var password = $('#password').val()
         LoginActionCreators.loginUser(email, password);
       });
-      $('#logout-link').on('click', function(){
-        console.log("I WAS CLICKED DAMN YOU!");
-        $('.my-account.modal').modal('hide', function(){
-          LoginActionCreators.logoutUser();
-        });
-      })
+      // $('#logout-link').on('click', function(){
+      //   console.log("I WAS CLICKED DAMN YOU!");
+      //   $('.my-account.modal').modal('hide', function(){
+      //     LoginActionCreators.logoutUser();
+      //   });
+      // })
     },500)
 
     return (
-
       <div className="my-account modal">
         <div className="ui grid">
-          <div className={"two column row account-settings " + signInDisplay}>
+          <div className="two column row account-settings ">
             <div className="twelve wide column">
               <h3>Sign In</h3>
               <form name="signin" id="signin" method="post" >
@@ -143,12 +156,12 @@ export default React.createClass({
               <a href="#">
                 <h4>Settings</h4>
               </a>
-              <a href="#" onClick={this.handleClick}>
+              <a href="#">
                 <h4>Sign Out</h4>
               </a>
             </div>
           </div>
-          <div className={"two column row account-settings " + profileDisplay}>
+          <div className="two column row account-settings ">
             <div className="twelve wide column">
               <h3>Profile</h3>
               <div className="ui grid">
@@ -162,10 +175,10 @@ export default React.createClass({
                 </div>
                 <div className="ui two column row">
                   <div className="three wide column">
-                    <div className="ui text">{user.first_name}</div>
+                    <div className="ui text"></div>
                   </div>
                   <div className="three wide column">
-                    <div className="ui text">{user.last_name}</div>
+                    <div className="ui text"></div>
                   </div>
                 </div>
                 <div className="ui one column row">
@@ -175,7 +188,7 @@ export default React.createClass({
                 </div>
                 <div className="ui one column row">
                   <div className="three wide computer eight wide tablet column">
-                    <div className="ui text">{user.email}</div>
+                    <div className="ui text"></div>
                   </div>
                 </div>
                 <div className="ui one column row">
@@ -200,13 +213,14 @@ export default React.createClass({
               <a href="#">
                 <h4>Settings</h4>
               </a>
-              <a href="#logout" id="logout-link" >
-                <h4 onClick={this.handleClick}>Sign Out</h4>
+              <a href="#">
+                <h4 data-link="logout">Sign Out</h4>
               </a>
             </div>
           </div>
         </div>
       </div>
+
     );
   },
 

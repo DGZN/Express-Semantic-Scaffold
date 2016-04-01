@@ -54,23 +54,26 @@ export default React.createClass({
     //get a local up-to-date record of the logged-in state
     //see https://facebook.github.io/react/docs/component-api.html
     let userLoggedInState = this._getLoginState();
-    this.setState(userLoggedInState);
+    $('.my-account.modal').modal('hide', function(){
+      this.setState(userLoggedInState);
 
-    //get any nextTransitionPath - NB it can only be got once then it self-nullifies
-    let transitionPath = '/';
-    browserHistory.push('/')
+      //get any nextTransitionPath - NB it can only be got once then it self-nullifies
+      let transitionPath = '/';
+      //browserHistory.push('/')
 
-    //trigger router change
-    console.log("&*&*&* App onLoginChange event: loggedIn=", userLoggedInState.userLoggedIn,
-      "nextTransitionPath=", transitionPath);
+      //trigger router change
+      console.log("&*&*&* App onLoginChange event: loggedIn=", userLoggedInState.userLoggedIn,
+        "nextTransitionPath=", transitionPath);
 
-    if(userLoggedInState.userLoggedIn){
-      console.log("user is logged in");
-      //router.transitionTo(transitionPath);
-    }else{
-      console.log("user is not logged in");
-      //router.transitionTo('/login');
-    }
+      if(userLoggedInState.userLoggedIn){
+        console.log("user is logged in");
+        //router.transitionTo(transitionPath);
+      }else{
+        console.log("user is not logged in");
+        //router.transitionTo('/login');
+      }
+    }.bind(this));
+
   },
 
   componentWillUnmount: function() {
