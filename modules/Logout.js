@@ -1,25 +1,16 @@
 import React       from 'react'
 import { browserHistory } from 'react-router'
 
-const env = require('./env.js')
+import LoginActionCreators from '../actions/LoginActionCreators';
 
 export default React.createClass({
-  getInitialState() {
-    return {
-      user: {}
-    }
-  },
   render() {
-    $('.my-account.modal').modal('hide');
-    this.clearAuthToken()
-    return (
-      <div></div>
-    );
+    $('.my-account.modal').modal('hide', function(){
+      browserHistory.push('/')
+    });
+    return (<div></div>)
   },
-
-  clearAuthToken() {
-    localStorage.setItem('melody::authToken', '');
-    browserHistory.push('/')
+  componentWillUnmount(){
+    LoginActionCreators.logoutUser();
   }
-
 });

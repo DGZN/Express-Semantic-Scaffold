@@ -22,7 +22,7 @@ render((
       <Route path="/music" component={Music} />
       <Route path="/plays" component={Plays} />
       <Route path="/collections" component={Collections} />
-      <Route path="/sign-out" component={Logout} />
+      <Route path="/logout" component={App} />
     </Route>
   </Router>
 ), document.getElementById('app'))

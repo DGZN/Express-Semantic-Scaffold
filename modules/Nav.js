@@ -5,11 +5,15 @@ import { Link } from 'react-router'
 import MyAccount   from './MyAccount'
 
 export default React.createClass({
+  componentWillreceiveProps(props) {
+    console.log("new props", props);
+  },
+  
   render() {
     var menu = this.languageMenu(this.props.language)
     return (
       <div>
-        <MyAccount setUser={this.props.setUser} />
+        <MyAccount setUser={this.props.setUser} {...this.props} />
         <div className="ui large top fixed hidden menu inverted">
           <div className="sidebar"></div>
           <div className="ui container nav">
