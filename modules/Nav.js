@@ -4,10 +4,18 @@ import { render } from 'react-dom'
 import { Link } from 'react-router'
 
 import MyAccount   from './MyAccount'
+import LoginActionCreators from '../actions/LoginActionCreators';
 
 export default React.createClass({
-  componentWillreceiveProps(props) {
-    console.log("new props", props);
+
+  getInitialState() {
+    return {
+      user: {}
+    }
+  },
+
+  componentWillReceiveProps(props) {
+    this.setState(props)
   },
 
   render() {
@@ -77,9 +85,41 @@ export default React.createClass({
   },
 
   myAccount() {
-    $('.my-account.modal').modal({
-      closable: false
-    }).modal('show');
+    if (this.state.user && this.state.user.id) {
+      $('#signin-form').hide()
+      $('#profile-form').show()
+    } else {
+      $('#profile-form').hide()
+      $('#signin-form').show()
+    }
+    setTimeout(function(){
+      $('.my-account.modal').modal({ closable: false}).modal('show');
+      $('.account-settings').on('click', function(e){
+        if ($(e.target).data('link')) {
+          switch ($(e.target).data('link')) {
+            case 'logout':
+              console.log("logging out")
+              LoginActionCreators.logoutUser();
+              break;
+            default:
+              console.log("something else was clicked")
+          }
+        }
+      })
+      $('#signin').off()
+      $('#signin').on('submit', function( event ) {
+        event.preventDefault();
+        var email = $('#email').val()
+        var password = $('#password').val()
+        LoginActionCreators.loginUser(email, password);
+      });
+      // $('#logout-link').on('click', function(){
+      //   console.log("I WAS CLICKED DAMN YOU!");
+      //   $('.my-account.modal').modal('hide', function(){
+      //     LoginActionCreators.logoutUser();
+      //   });
+      // })
+    },100)
   },
 
   myWatchlist() {

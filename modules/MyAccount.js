@@ -3,17 +3,11 @@ import { Link } from 'react-router'
 import Profile from './Profile'
 import Login from './Login'
 import LoginStore from '../stores/LoginStore';
-import LoginActionCreators from '../actions/LoginActionCreators';
 
 const env = require('./env.js')
 
 export default React.createClass({
-  _getLoginState() {
-    return {
-      user: LoginStore.user
-    , userLoggedIn: LoginStore.isLoggedIn()
-    };
-  },
+
   getInitialState(){
     return {
       email: ''
@@ -22,102 +16,11 @@ export default React.createClass({
     }
   },
 
-  componentWillReceiveProps(props) {
-      this.setState(props)
-  },
-
-  componentDidMount: function() {
-    $('.my-account.modal').modal({
-      closable: false
-    }).modal('hide');
-    $('.account-settings').on('click', function(e){
-      if ($(e.target).data('link').length) {
-        switch ($(e.target).data('link')) {
-          case 'logout':
-            console.log("logging out")
-            $('.my-account.modal').modal('hide', function(){
-              LoginActionCreators.logoutUser();
-            });
-            break;
-          default:
-            console.log("something else was clicked")
-        }
-      }
-    })
-  },
-
-  componentWillUnmount() {
-    $('.my-account.modal').modal('hide');
-  },
-
-  _onLoginChange() {
-    //get a local up-to-date record of the logged-in state
-    //see https://facebook.github.io/react/docs/component-api.html
-    let userLoggedInState = this._getLoginState();
-    //this.setState(userLoggedInState);
-  },
-
   render() {
-    var self = this;
-    // setTimeout(function() {
-    //   $('#register').off()
-    //   $('#register').on('submit', function( event ) {
-    //     event.preventDefault();
-    //     var user = $( this ).serialize();
-    //     self.newAccount(user)
-    //   });
-    //   $('#signin').off()
-    //   $('#signin').on('submit', function( event ) {
-    //     event.preventDefault();
-    //     console.log("logging in");
-    //     LoginActionCreators.loginUser(self.state.email, self.state.password);
-    //     // var user = $( this ).serialize();
-    //     // self.loginUser(user)
-    //   });
-    //   $('.ui.massive.input').off()
-    //   $('.ui.massive.input').on('keydown', function(e) {
-    //     var input = e.currentTarget;
-    //     self.setState({
-    //       [input.name]: input.value
-    //     })
-    //   })
-    // },500)
-    // var MODAL = this.login()
-    // if (env.authenticated()) {
-    //   MODAL = this.myAccount(this.state.user)
-    // }
-
-    var signInDisplay  = "block";
-    var profileDisplay = "block";
-
-    var user = this.state.user || {}
-
-
-    if (user && user.id) {
-      var signInDisplay  = "block";
-      var profileDisplay = "block";
-    }
-
-    setTimeout(function() {
-      $('#signin').off()
-      $('#signin').on('submit', function( event ) {
-        event.preventDefault();
-        var email = $('#email').val()
-        var password = $('#password').val()
-        LoginActionCreators.loginUser(email, password);
-      });
-      // $('#logout-link').on('click', function(){
-      //   console.log("I WAS CLICKED DAMN YOU!");
-      //   $('.my-account.modal').modal('hide', function(){
-      //     LoginActionCreators.logoutUser();
-      //   });
-      // })
-    },500)
-
     return (
       <div className="my-account modal">
         <div className="ui grid">
-          <div className="two column row account-settings ">
+          <div  id="signin-form" className="two column row account-settings ">
             <div className="twelve wide column">
               <h3>Sign In</h3>
               <form name="signin" id="signin" method="post" >
@@ -146,22 +49,8 @@ export default React.createClass({
                 </div>
               </form>
             </div>
-            <div className="four wide column">
-              <a href="#">
-                <h4>Profile</h4>
-              </a>
-              <a href="#">
-                <h4>Notifications</h4>
-              </a>
-              <a href="#">
-                <h4>Settings</h4>
-              </a>
-              <a href="#">
-                <h4>Sign Out</h4>
-              </a>
-            </div>
           </div>
-          <div className="two column row account-settings ">
+          <div id="profile-form" className="two column row account-settings ">
             <div className="twelve wide column">
               <h3>Profile</h3>
               <div className="ui grid">
@@ -224,89 +113,5 @@ export default React.createClass({
     );
   },
 
-  register() {
-    return (
-      <div className="two column row account-settings">
-        <div className="twelve wide column">
-          <h3>Register</h3>
-          <form name="register" id="register" method="post">
-            <div className="ui grid">
-              <div className="ui one column row">
-                <div className="three wide computer eight wide tablet column">
-                  <div className="ui label">Email Address</div>
-                  <input className="ui massive input" type="text" name="email" />
-                </div>
-              </div>
-              <div className="ui two column row">
-                <div className="three wide column">
-                  <div className="ui label">First Name</div>
-                  <input className="ui massive input"  type="text" name="first_name" />
-                </div>
-                <div className="three wide column">
-                  <div className="ui label">Last Name</div>
-                  <input className="ui massive input"  type="text" name="last_name" />
-                </div>
-              </div>
-              <div className="ui two column row">
-                <div className="three wide column">
-                  <div className="ui label">Password</div>
-                  <input className="ui massive input" type="password" name="password" />
-                </div>
-                <div className="three wide column">
-                  <div className="ui label">Confirm Password</div>
-                  <input className="ui massive input" type="password" name="password_confirmation" />
-                </div>
-              </div>
-              <div className="ui one column row">
-                <div className="six wide column">
-                <a>
-                  <button className="ui register button" text="Register" title="Register"   >
-                    Register
-                  </button>
-                </a>
-                </div>
-              </div>
-            </div>
-          </form>
-        </div>
-        <div className="four wide column"><a href="#">
-            <h4>Profile</h4></a><a href="#">
-            <h4>Notifications</h4></a><a href="#">
-            <h4>Settings</h4></a><a href="#">
-            <h4>Sign Out</h4></a></div>
-      </div>
-    )
-  },
-
-  newAccount(user) {
-    $.post(env.endpoint + '/v1/users', user, function (res) {
-      if (res.errors) {
-        console.log("Registstrion errors", res.errors)
-      }
-      if (res.status && res.status == true && res.user) {
-        $('.my-account.modal').modal('hide');
-        this.props.setUser(res.user)
-      }
-    }.bind(this));
-  },
-
-  loginUser(user) {
-    $.post(env.endpoint + '/v1/users/auth', user, function (res) {
-      if (res.errors) {
-        console.log("Login errors", res.errors)
-      }
-      if (res.status && res.status == true && res.token) {
-        $('.my-account.modal').modal('hide');
-        this.setAuthToken(res.token, res.authenticated)
-      }
-    }.bind(this));
-  },
-
-  setAuthToken(token, user) {
-    if (token.length) {
-      localStorage.setItem('melody::authToken', token)
-      this.props.setUser(user)
-    }
-  }
 
 })

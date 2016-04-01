@@ -3,6 +3,7 @@ import { render } from 'react-dom'
 import { Router, Route, hashHistory } from 'react-router'
 
 import App from './modules/App'
+import Home from './modules/Home'
 import Logout from './modules/Logout'
 import Music from './modules/Music'
 import Movie from './modules/Movie'
@@ -14,7 +15,8 @@ import Collections from './modules/Collections'
 
 render((
   <Router history={hashHistory}>
-    <Route path="/" component={App}>
+    <Route component={App}>
+      <Route path="/" component={Home} />
       <Route path="/movies" component={Movies} />
       <Route path="/movies/:id" component={Movie} />
       <Route path="/series" component={Series} />

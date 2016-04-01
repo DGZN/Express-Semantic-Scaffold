@@ -32,7 +32,8 @@ export default React.createClass({
   },
   _getLoginState() {
     return {
-      user: LoginStore.user
+      language: 'en'
+    , user: LoginStore.user
     , userLoggedIn: LoginStore.isLoggedIn()
     };
   },
@@ -59,7 +60,7 @@ export default React.createClass({
 
       //get any nextTransitionPath - NB it can only be got once then it self-nullifies
       let transitionPath = '/';
-      //browserHistory.push('/')
+      browserHistory.push('/')
 
       //trigger router change
       console.log("&*&*&* App onLoginChange event: loggedIn=", userLoggedInState.userLoggedIn,

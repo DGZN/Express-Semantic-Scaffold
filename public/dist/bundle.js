@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "eb7d00a4b6ca9d2abc20"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "18e82e64908342dc7fcf"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -586,35 +586,39 @@
 
 	var _App2 = _interopRequireDefault(_App);
 
-	var _Logout = __webpack_require__(242);
+	var _Home = __webpack_require__(242);
+
+	var _Home2 = _interopRequireDefault(_Home);
+
+	var _Logout = __webpack_require__(246);
 
 	var _Logout2 = _interopRequireDefault(_Logout);
 
-	var _Music = __webpack_require__(243);
+	var _Music = __webpack_require__(247);
 
 	var _Music2 = _interopRequireDefault(_Music);
 
-	var _Movie = __webpack_require__(247);
+	var _Movie = __webpack_require__(250);
 
 	var _Movie2 = _interopRequireDefault(_Movie);
 
-	var _Plays = __webpack_require__(252);
+	var _Plays = __webpack_require__(255);
 
 	var _Plays2 = _interopRequireDefault(_Plays);
 
-	var _Movies = __webpack_require__(253);
+	var _Movies = __webpack_require__(256);
 
 	var _Movies2 = _interopRequireDefault(_Movies);
 
-	var _Series = __webpack_require__(254);
+	var _Series = __webpack_require__(257);
 
 	var _Series2 = _interopRequireDefault(_Series);
 
-	var _Season = __webpack_require__(255);
+	var _Season = __webpack_require__(258);
 
 	var _Season2 = _interopRequireDefault(_Season);
 
-	var _Collections = __webpack_require__(260);
+	var _Collections = __webpack_require__(263);
 
 	var _Collections2 = _interopRequireDefault(_Collections);
 
@@ -625,7 +629,8 @@
 	  { history: _reactRouter.hashHistory },
 	  _react2.default.createElement(
 	    _reactRouter.Route,
-	    { path: '/', component: _App2.default },
+	    { component: _App2.default },
+	    _react2.default.createElement(_reactRouter.Route, { path: '/', component: _Home2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/movies', component: _Movies2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/movies/:id', component: _Movie2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/series', component: _Series2.default }),
@@ -25361,6 +25366,7 @@
 	  },
 	  _getLoginState: function _getLoginState() {
 	    return {
+	      language: 'en',
 	      user: _LoginStore2.default.user,
 	      userLoggedIn: _LoginStore2.default.isLoggedIn()
 	    };
@@ -25389,7 +25395,7 @@
 
 	      //get any nextTransitionPath - NB it can only be got once then it self-nullifies
 	      var transitionPath = '/';
-	      //browserHistory.push('/')
+	      _reactRouter.browserHistory.push('/');
 
 	      //trigger router change
 	      console.log("&*&*&* App onLoginChange event: loggedIn=", userLoggedInState.userLoggedIn, "nextTransitionPath=", transitionPath);
@@ -25466,12 +25472,21 @@
 
 	var _MyAccount2 = _interopRequireDefault(_MyAccount);
 
+	var _LoginActionCreators = __webpack_require__(221);
+
+	var _LoginActionCreators2 = _interopRequireDefault(_LoginActionCreators);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _react2.default.createClass({
 	  displayName: 'Nav',
-	  componentWillreceiveProps: function componentWillreceiveProps(props) {
-	    console.log("new props", props);
+	  getInitialState: function getInitialState() {
+	    return {
+	      user: {}
+	    };
+	  },
+	  componentWillReceiveProps: function componentWillReceiveProps(props) {
+	    this.setState(props);
 	  },
 	  render: function render() {
 	    var menu = this.languageMenu(this.props.language);
@@ -25686,9 +25701,41 @@
 	    );
 	  },
 	  myAccount: function myAccount() {
-	    $('.my-account.modal').modal({
-	      closable: false
-	    }).modal('show');
+	    if (this.state.user && this.state.user.id) {
+	      $('#signin-form').hide();
+	      $('#profile-form').show();
+	    } else {
+	      $('#profile-form').hide();
+	      $('#signin-form').show();
+	    }
+	    setTimeout(function () {
+	      $('.my-account.modal').modal({ closable: false }).modal('show');
+	      $('.account-settings').on('click', function (e) {
+	        if ($(e.target).data('link')) {
+	          switch ($(e.target).data('link')) {
+	            case 'logout':
+	              console.log("logging out");
+	              _LoginActionCreators2.default.logoutUser();
+	              break;
+	            default:
+	              console.log("something else was clicked");
+	          }
+	        }
+	      });
+	      $('#signin').off();
+	      $('#signin').on('submit', function (event) {
+	        event.preventDefault();
+	        var email = $('#email').val();
+	        var password = $('#password').val();
+	        _LoginActionCreators2.default.loginUser(email, password);
+	      });
+	      // $('#logout-link').on('click', function(){
+	      //   console.log("I WAS CLICKED DAMN YOU!");
+	      //   $('.my-account.modal').modal('hide', function(){
+	      //     LoginActionCreators.logoutUser();
+	      //   });
+	      // })
+	    }, 100);
 	  },
 	  myWatchlist: function myWatchlist() {
 	    $('.my-watchlist.modal').modal('show');
@@ -25738,22 +25785,12 @@
 
 	var _LoginStore2 = _interopRequireDefault(_LoginStore);
 
-	var _LoginActionCreators = __webpack_require__(221);
-
-	var _LoginActionCreators2 = _interopRequireDefault(_LoginActionCreators);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var env = __webpack_require__(238);
 
 	exports.default = _react2.default.createClass({
 	  displayName: 'MyAccount',
-	  _getLoginState: function _getLoginState() {
-	    return {
-	      user: _LoginStore2.default.user,
-	      userLoggedIn: _LoginStore2.default.isLoggedIn()
-	    };
-	  },
 	  getInitialState: function getInitialState() {
 	    return {
 	      email: '',
@@ -25761,96 +25798,7 @@
 	      user: this.props.user
 	    };
 	  },
-	  componentWillReceiveProps: function componentWillReceiveProps(props) {
-	    this.setState(props);
-	  },
-
-
-	  componentDidMount: function componentDidMount() {
-	    $('.my-account.modal').modal({
-	      closable: false
-	    }).modal('hide');
-	    $('.account-settings').on('click', function (e) {
-	      if ($(e.target).data('link').length) {
-	        switch ($(e.target).data('link')) {
-	          case 'logout':
-	            console.log("logging out");
-	            $('.my-account.modal').modal('hide', function () {
-	              _LoginActionCreators2.default.logoutUser();
-	            });
-	            break;
-	          default:
-	            console.log("something else was clicked");
-	        }
-	      }
-	    });
-	  },
-
-	  componentWillUnmount: function componentWillUnmount() {
-	    $('.my-account.modal').modal('hide');
-	  },
-	  _onLoginChange: function _onLoginChange() {
-	    //get a local up-to-date record of the logged-in state
-	    //see https://facebook.github.io/react/docs/component-api.html
-	    var userLoggedInState = this._getLoginState();
-	    //this.setState(userLoggedInState);
-	  },
 	  render: function render() {
-	    var self = this;
-	    // setTimeout(function() {
-	    //   $('#register').off()
-	    //   $('#register').on('submit', function( event ) {
-	    //     event.preventDefault();
-	    //     var user = $( this ).serialize();
-	    //     self.newAccount(user)
-	    //   });
-	    //   $('#signin').off()
-	    //   $('#signin').on('submit', function( event ) {
-	    //     event.preventDefault();
-	    //     console.log("logging in");
-	    //     LoginActionCreators.loginUser(self.state.email, self.state.password);
-	    //     // var user = $( this ).serialize();
-	    //     // self.loginUser(user)
-	    //   });
-	    //   $('.ui.massive.input').off()
-	    //   $('.ui.massive.input').on('keydown', function(e) {
-	    //     var input = e.currentTarget;
-	    //     self.setState({
-	    //       [input.name]: input.value
-	    //     })
-	    //   })
-	    // },500)
-	    // var MODAL = this.login()
-	    // if (env.authenticated()) {
-	    //   MODAL = this.myAccount(this.state.user)
-	    // }
-
-	    var signInDisplay = "block";
-	    var profileDisplay = "block";
-
-	    var user = this.state.user || {};
-
-	    if (user && user.id) {
-	      var signInDisplay = "block";
-	      var profileDisplay = "block";
-	    }
-
-	    setTimeout(function () {
-	      $('#signin').off();
-	      $('#signin').on('submit', function (event) {
-	        event.preventDefault();
-	        var email = $('#email').val();
-	        var password = $('#password').val();
-	        _LoginActionCreators2.default.loginUser(email, password);
-	      });
-	      // $('#logout-link').on('click', function(){
-	      //   console.log("I WAS CLICKED DAMN YOU!");
-	      //   $('.my-account.modal').modal('hide', function(){
-	      //     LoginActionCreators.logoutUser();
-	      //   });
-	      // })
-	    }, 500);
-
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'my-account modal' },
@@ -25859,7 +25807,7 @@
 	        { className: 'ui grid' },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'two column row account-settings ' },
+	          { id: 'signin-form', className: 'two column row account-settings ' },
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'twelve wide column' },
@@ -25921,51 +25869,11 @@
 	                )
 	              )
 	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'four wide column' },
-	            _react2.default.createElement(
-	              'a',
-	              { href: '#' },
-	              _react2.default.createElement(
-	                'h4',
-	                null,
-	                'Profile'
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'a',
-	              { href: '#' },
-	              _react2.default.createElement(
-	                'h4',
-	                null,
-	                'Notifications'
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'a',
-	              { href: '#' },
-	              _react2.default.createElement(
-	                'h4',
-	                null,
-	                'Settings'
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'a',
-	              { href: '#' },
-	              _react2.default.createElement(
-	                'h4',
-	                null,
-	                'Sign Out'
-	              )
-	            )
 	          )
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'two column row account-settings ' },
+	          { id: 'profile-form', className: 'two column row account-settings ' },
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'twelve wide column' },
@@ -26106,176 +26014,6 @@
 	        )
 	      )
 	    );
-	  },
-	  register: function register() {
-	    return _react2.default.createElement(
-	      'div',
-	      { className: 'two column row account-settings' },
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'twelve wide column' },
-	        _react2.default.createElement(
-	          'h3',
-	          null,
-	          'Register'
-	        ),
-	        _react2.default.createElement(
-	          'form',
-	          { name: 'register', id: 'register', method: 'post' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'ui grid' },
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'ui one column row' },
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'three wide computer eight wide tablet column' },
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'ui label' },
-	                  'Email Address'
-	                ),
-	                _react2.default.createElement('input', { className: 'ui massive input', type: 'text', name: 'email' })
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'ui two column row' },
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'three wide column' },
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'ui label' },
-	                  'First Name'
-	                ),
-	                _react2.default.createElement('input', { className: 'ui massive input', type: 'text', name: 'first_name' })
-	              ),
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'three wide column' },
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'ui label' },
-	                  'Last Name'
-	                ),
-	                _react2.default.createElement('input', { className: 'ui massive input', type: 'text', name: 'last_name' })
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'ui two column row' },
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'three wide column' },
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'ui label' },
-	                  'Password'
-	                ),
-	                _react2.default.createElement('input', { className: 'ui massive input', type: 'password', name: 'password' })
-	              ),
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'three wide column' },
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'ui label' },
-	                  'Confirm Password'
-	                ),
-	                _react2.default.createElement('input', { className: 'ui massive input', type: 'password', name: 'password_confirmation' })
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'ui one column row' },
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'six wide column' },
-	                _react2.default.createElement(
-	                  'a',
-	                  null,
-	                  _react2.default.createElement(
-	                    'button',
-	                    { className: 'ui register button', text: 'Register', title: 'Register' },
-	                    'Register'
-	                  )
-	                )
-	              )
-	            )
-	          )
-	        )
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'four wide column' },
-	        _react2.default.createElement(
-	          'a',
-	          { href: '#' },
-	          _react2.default.createElement(
-	            'h4',
-	            null,
-	            'Profile'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'a',
-	          { href: '#' },
-	          _react2.default.createElement(
-	            'h4',
-	            null,
-	            'Notifications'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'a',
-	          { href: '#' },
-	          _react2.default.createElement(
-	            'h4',
-	            null,
-	            'Settings'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'a',
-	          { href: '#' },
-	          _react2.default.createElement(
-	            'h4',
-	            null,
-	            'Sign Out'
-	          )
-	        )
-	      )
-	    );
-	  },
-	  newAccount: function newAccount(user) {
-	    $.post(env.endpoint + '/v1/users', user, function (res) {
-	      if (res.errors) {
-	        console.log("Registstrion errors", res.errors);
-	      }
-	      if (res.status && res.status == true && res.user) {
-	        $('.my-account.modal').modal('hide');
-	        this.props.setUser(res.user);
-	      }
-	    }.bind(this));
-	  },
-	  loginUser: function loginUser(user) {
-	    $.post(env.endpoint + '/v1/users/auth', user, function (res) {
-	      if (res.errors) {
-	        console.log("Login errors", res.errors);
-	      }
-	      if (res.status && res.status == true && res.token) {
-	        $('.my-account.modal').modal('hide');
-	        this.setAuthToken(res.token, res.authenticated);
-	      }
-	    }.bind(this));
-	  },
-	  setAuthToken: function setAuthToken(token, user) {
-	    if (token.length) {
-	      localStorage.setItem('melody::authToken', token);
-	      this.props.setUser(user);
-	    }
 	  }
 	});
 
@@ -33350,6 +33088,240 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _Carousel = __webpack_require__(243);
+
+	var _Carousel2 = _interopRequireDefault(_Carousel);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	  displayName: 'Home',
+	  getInitialState: function getInitialState() {
+	    return {
+	      language: 'en'
+	    };
+	  },
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'ui container hero' },
+	        _react2.default.createElement('div', { id: 'img', className: 'ui image hero' })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'ui vertical center container aligned grids' },
+	        _react2.default.createElement(_Carousel2.default, { title: 'Movies', source: '/movies', language: this.state.language, limit: '5', href: '/movies/:id' }),
+	        _react2.default.createElement(_Carousel2.default, { title: 'Series', source: '/series', language: this.state.language, limit: '5', href: '/series/:id' }),
+	        _react2.default.createElement(_Carousel2.default, { title: 'Plays', source: '/plays', language: this.state.language, limit: '5', href: '/plays/:id' })
+	      )
+	    );
+	  }
+	});
+
+/***/ },
+/* 243 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Row = __webpack_require__(244);
+
+	var _Row2 = _interopRequireDefault(_Row);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	  displayName: 'Carousel',
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'ui one column grid container' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'column header' },
+	          _react2.default.createElement(
+	            'a',
+	            { href: '/' + this.props.title },
+	            _react2.default.createElement(
+	              'h4',
+	              { className: 'ui header grid-title' },
+	              _react2.default.createElement('br', null),
+	              this.props.title,
+	              ' >'
+	            )
+	          )
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'ui equal width grid container' },
+	        _react2.default.createElement(_Row2.default, this.props)
+	      )
+	    );
+	  }
+	});
+
+/***/ },
+/* 244 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Column = __webpack_require__(245);
+
+	var _Column2 = _interopRequireDefault(_Column);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var env = __webpack_require__(238);
+
+	exports.default = _react2.default.createClass({
+	  displayName: 'Row',
+
+	  getInitialState: function getInitialState() {
+	    return {
+	      collection: []
+	    };
+	  },
+
+	  componentDidMount: function componentDidMount() {
+	    this.fetch = $.get(env.endpoint + '/v1/assets' + this.props.source, function (result) {
+	      this.setState({
+	        collection: result
+	      });
+	    }.bind(this));
+	  },
+
+	  componentWillUnmount: function componentWillUnmount() {
+	    this.fetch.abort();
+	  },
+
+	  render: function render() {
+	    var _this = this;
+
+	    console.log(this.state);
+	    var COLUMNS = [];
+	    this.state.collection.some(function (data, i) {
+	      COLUMNS.push(_react2.default.createElement(_Column2.default, { key: i, data: data, language: _this.props.language, href: _this.props.href }));
+	      return i === _this.props.limit - 1;
+	    });
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'row' },
+	      COLUMNS
+	    );
+	  }
+	});
+
+/***/ },
+/* 245 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(159);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	  displayName: 'Column',
+	  getInitialState: function getInitialState() {
+	    return {
+	      language: this.props.language ? this.props.language : 'en'
+	    };
+	  },
+	  componentWillReceiveProps: function componentWillReceiveProps(props) {
+	    this.setState({
+	      language: props.language ? props.language : 'en'
+	    });
+	  },
+	  render: function render() {
+	    if (this.props.data.ref) {
+	      var link = this.props.data.ref.link;
+	    } else {
+	      this.props.href ? link = generateLink(this.props) : link = this.props.href;
+	    }
+	    var thumb = '/images/melody/' + this.props.data.thumb.replace('M1', 'M11');
+	    if (this.props.thumbPath) {
+	      thumb = '/images/wireframe/16x9.png';
+	    }
+	    return _react2.default.createElement(
+	      _reactRouter.Link,
+	      { to: link || '#', className: 'image preview' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'image preview thumb', style: { "backgroundImage": 'url(' + thumb + ') !important' } },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'ui bottom attached label' },
+	          this.props.data.meta[this.state.language].name
+	        )
+	      )
+	    );
+	  },
+	  componentDidMount: function componentDidMount() {
+	    // console.log("Grid > Row > Column [Properties]", this.props)
+	  },
+	  fadeInImages: function fadeInImages() {}
+	});
+
+
+	function generateLink(props) {
+	  var link = props.href;
+	  var keys = props.href.match(/[:]\w+/g);
+	  keys.map(function (key) {
+	    var _key = key.replace(':', '');
+	    if (props.data[_key]) {
+	      link = link.replace(key, props.data[_key]);
+	    }
+	  });
+	  return link;
+	}
+
+/***/ },
+/* 246 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
 	var _reactRouter = __webpack_require__(159);
 
 	var _LoginActionCreators = __webpack_require__(221);
@@ -33372,7 +33344,7 @@
 	});
 
 /***/ },
-/* 243 */
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33387,7 +33359,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Grid = __webpack_require__(244);
+	var _Grid = __webpack_require__(248);
 
 	var _Grid2 = _interopRequireDefault(_Grid);
 
@@ -33406,7 +33378,7 @@
 	});
 
 /***/ },
-/* 244 */
+/* 248 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33421,11 +33393,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Filter = __webpack_require__(245);
+	var _Filter = __webpack_require__(249);
 
 	var _Filter2 = _interopRequireDefault(_Filter);
 
-	var _Column = __webpack_require__(246);
+	var _Column = __webpack_require__(245);
 
 	var _Column2 = _interopRequireDefault(_Column);
 
@@ -33555,7 +33527,7 @@
 	});
 
 /***/ },
-/* 245 */
+/* 249 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33673,80 +33645,7 @@
 	});
 
 /***/ },
-/* 246 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRouter = __webpack_require__(159);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = _react2.default.createClass({
-	  displayName: 'Column',
-	  getInitialState: function getInitialState() {
-	    return {
-	      language: this.props.language ? this.props.language : 'en'
-	    };
-	  },
-	  componentWillReceiveProps: function componentWillReceiveProps(props) {
-	    this.setState({
-	      language: props.language ? props.language : 'en'
-	    });
-	  },
-	  render: function render() {
-	    if (this.props.data.ref) {
-	      var link = this.props.data.ref.link;
-	    } else {
-	      this.props.href ? link = generateLink(this.props) : link = this.props.href;
-	    }
-	    var thumb = '/images/melody/' + this.props.data.thumb.replace('M1', 'M11');
-	    if (this.props.thumbPath) {
-	      thumb = '/images/wireframe/16x9.png';
-	    }
-	    return _react2.default.createElement(
-	      _reactRouter.Link,
-	      { to: link || '#', className: 'image preview' },
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'image preview thumb', style: { "backgroundImage": 'url(' + thumb + ') !important' } },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'ui bottom attached label' },
-	          this.props.data.meta[this.state.language].name
-	        )
-	      )
-	    );
-	  },
-	  componentDidMount: function componentDidMount() {
-	    // console.log("Grid > Row > Column [Properties]", this.props)
-	  },
-	  fadeInImages: function fadeInImages() {}
-	});
-
-
-	function generateLink(props) {
-	  var link = props.href;
-	  var keys = props.href.match(/[:]\w+/g);
-	  keys.map(function (key) {
-	    var _key = key.replace(':', '');
-	    if (props.data[_key]) {
-	      link = link.replace(key, props.data[_key]);
-	    }
-	  });
-	  return link;
-	}
-
-/***/ },
-/* 247 */
+/* 250 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33761,7 +33660,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _VideoDetail = __webpack_require__(248);
+	var _VideoDetail = __webpack_require__(251);
 
 	var _VideoDetail2 = _interopRequireDefault(_VideoDetail);
 
@@ -33776,7 +33675,7 @@
 	});
 
 /***/ },
-/* 248 */
+/* 251 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33789,7 +33688,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Roles = __webpack_require__(249);
+	var _Roles = __webpack_require__(252);
 
 	var _Roles2 = _interopRequireDefault(_Roles);
 
@@ -33945,7 +33844,7 @@
 	}
 
 /***/ },
-/* 249 */
+/* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33960,7 +33859,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _People = __webpack_require__(250);
+	var _People = __webpack_require__(253);
 
 	var _People2 = _interopRequireDefault(_People);
 
@@ -34000,7 +33899,7 @@
 	});
 
 /***/ },
-/* 250 */
+/* 253 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34013,7 +33912,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Person = __webpack_require__(251);
+	var _Person = __webpack_require__(254);
 
 	var _Person2 = _interopRequireDefault(_Person);
 
@@ -34100,7 +33999,7 @@
 	}
 
 /***/ },
-/* 251 */
+/* 254 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34127,7 +34026,7 @@
 	});
 
 /***/ },
-/* 252 */
+/* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34142,7 +34041,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Grid = __webpack_require__(244);
+	var _Grid = __webpack_require__(248);
 
 	var _Grid2 = _interopRequireDefault(_Grid);
 
@@ -34160,7 +34059,7 @@
 	});
 
 /***/ },
-/* 253 */
+/* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34175,7 +34074,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Grid = __webpack_require__(244);
+	var _Grid = __webpack_require__(248);
 
 	var _Grid2 = _interopRequireDefault(_Grid);
 
@@ -34194,7 +34093,7 @@
 	});
 
 /***/ },
-/* 254 */
+/* 257 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34209,7 +34108,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Grid = __webpack_require__(244);
+	var _Grid = __webpack_require__(248);
 
 	var _Grid2 = _interopRequireDefault(_Grid);
 
@@ -34227,7 +34126,7 @@
 	});
 
 /***/ },
-/* 255 */
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34242,7 +34141,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _SeasonDetail = __webpack_require__(256);
+	var _SeasonDetail = __webpack_require__(259);
 
 	var _SeasonDetail2 = _interopRequireDefault(_SeasonDetail);
 
@@ -34257,7 +34156,7 @@
 	});
 
 /***/ },
-/* 256 */
+/* 259 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34270,15 +34169,15 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _SeasonFilter = __webpack_require__(257);
+	var _SeasonFilter = __webpack_require__(260);
 
 	var _SeasonFilter2 = _interopRequireDefault(_SeasonFilter);
 
-	var _SeasonWatchlist = __webpack_require__(258);
+	var _SeasonWatchlist = __webpack_require__(261);
 
 	var _SeasonWatchlist2 = _interopRequireDefault(_SeasonWatchlist);
 
-	var _Roles = __webpack_require__(249);
+	var _Roles = __webpack_require__(252);
 
 	var _Roles2 = _interopRequireDefault(_Roles);
 
@@ -34432,7 +34331,7 @@
 	});
 
 /***/ },
-/* 257 */
+/* 260 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -34485,7 +34384,7 @@
 	});
 
 /***/ },
-/* 258 */
+/* 261 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34502,7 +34401,7 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _VideoPlayer = __webpack_require__(259);
+	var _VideoPlayer = __webpack_require__(262);
 
 	var _VideoPlayer2 = _interopRequireDefault(_VideoPlayer);
 
@@ -34608,7 +34507,7 @@
 	}
 
 /***/ },
-/* 259 */
+/* 262 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34679,7 +34578,7 @@
 	}
 
 /***/ },
-/* 260 */
+/* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34694,7 +34593,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Grid = __webpack_require__(244);
+	var _Grid = __webpack_require__(248);
 
 	var _Grid2 = _interopRequireDefault(_Grid);
 
