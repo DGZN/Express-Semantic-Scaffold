@@ -18,11 +18,21 @@ export default React.createClass({
           </div>
           <div className="ui grid container details">
             <div className="details sixteen wide tablet sixteen wide computer column centered" style={{height: "80px"}}>
+              <i className="ui reply big icon close-video-slideout" onClick={this.closeVideoSlideOut}></i>
             </div>
           </div>
         </div>
       </div>
     );
+  },
+
+  closeVideoSlideOut() {
+    $('#video-slide-out, .videoPlayer').velocity({
+      opacity: 0
+    }, 1500)
+    $('.season-detail').velocity({
+      opacity: "1"
+    }, 1840, "ease-in")
   },
 
   getPlayer: function(url){
@@ -34,7 +44,7 @@ export default React.createClass({
 });
 
 function YouTubePlayer(id){
-  return '<iframe width="98%" height="510" src="https://www.youtube.com/embed/'+id+'?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0"  allowfullscreen></iframe>'
+  return '<iframe width="98%" height="510" src="https://www.youtube.com/embed/'+id+'?rel=0&amp;controls=1&amp;showinfo=0" frameborder="0"  allowfullscreen></iframe>'
 }
 
 function BrightCovePlayer(id){

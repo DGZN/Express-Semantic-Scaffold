@@ -15,7 +15,84 @@
   opacity: 0;
 }
 
+.selectedChannel {
+  display: none;
+  opacity: 0;
+}
 
+.selectedChannel td:first-child {
+  font-weight: bold !important;
+  color: #231f20 !important;
+  background: #cEA401 !important;
+}
+
+#selectedChannelBlock {
+    position: absolute;
+    top: 181px;
+    width: 90.78%;
+    height: 200px;
+    background: #cEA401;
+    padding-bottom: 2rem;
+}
+
+#selectedChannelBlock td:not(:first-child) {
+    padding-left: 1em;
+    font-size: 1em;
+    background: #cEA401;
+}
+
+#selectedChannelBlock h3 {
+  padding-top: 0.9rem;
+  padding-left: 2rem;
+  color: #231f20;
+  text-transform: none;
+}
+
+#selectedChannelBlock .ui.image {
+  position: relative;
+  float: left;
+  max-width: 155px;
+  padding-top: 1.1rem;
+  padding-left: 1.5rem;
+}
+
+#selectedChannelBlock hr {
+  border: 0.8px solid #a8a779;
+  line-height: 1.1em;
+  width: 98%;
+  opacity: 0.4;
+}
+
+#selectedChannelBlock .blockDetails {
+  position: relative;
+  padding-top: 0.5rem;
+  padding-left: 1rem;
+  float: right;
+  width: 87%;
+}
+
+.blockDetails .title {
+  font-weight: bold;
+  color: #231f20;
+}
+
+.blockDetails .episodes {
+  font-size: 0.7em;
+  font-weight: bold;
+  display: block;
+}
+
+.blockDetails .time {
+  font-size: 0.9em;
+  font-weight: bold;
+  display: block;
+}
+
+.blockDetails .description {
+  font-size: 1em;
+  display: block;
+  max-width: 76%;
+}
 
 
 /*::-webkit-scrollbar {
@@ -58,6 +135,15 @@
   opacity: 1;
   z-index: 1;
 }
+
+.close-video-slideout {
+  float: right;
+  position: absolute;
+  right: 43px;
+  color: rgba(198,198,198, 1);
+  cursor: pointer;
+}
+
 
 .my-account.modal {
   position: absolute;
@@ -107,6 +193,12 @@
   float: right;
   position: absolute;
   right: 29px;
+}
+
+.account-settings .ui.sign-up.button {
+  float: right;
+  position: absolute;
+  right: 122px;
 }
 
 .my-watchlist.modal {
@@ -182,6 +274,7 @@
 .nav-header {
   min-height: 109px;
   padding-bottom: 2px;
+  z-index: 2;
 }
 
 @media only screen and (max-width: 700px) {
@@ -305,6 +398,7 @@ body.pushable>.pusher {
   min-height: 67px;
   background-color: rgba(66,66,66,1);
   padding-bottom: 0rem !important;
+  z-index: 999999999;
 }
 
 .page-hr {
@@ -755,6 +849,9 @@ body.pushable>.pusher {
   font-size: 0.8em;
 }
 
+.ui.schedule.table tbody {
+}
+
 .ui.schedule.table tr td:first-child {
   background: #57585a;
   width: 7rem;
@@ -769,6 +866,11 @@ body.pushable>.pusher {
   padding-left: 1em;
   font-size: 1em;
   background: #d7d7d9;
+  cursor: pointer;
+}
+
+.ui.schedule.table tr td:not(:first-child):hover {
+  background: #c7c7c7;
 }
 
 .ui.schedule.table thead tr:first-child>th:first-child {

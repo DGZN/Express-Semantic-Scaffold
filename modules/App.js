@@ -88,10 +88,12 @@ export default React.createClass({
         <MyWatchlist />
         <Nav
           user={this.state.user}
+          myAccount={this.myAccount}
           setLanguage={this.setLanguage}
           language={this.state.language}  />
         {this.props.children && React.cloneElement(this.props.children,{
           language: this.state.language
+        , myAccount: this.myAccount
         , isLoggedIn: this.state.userLoggedIn
         , user: this.state.user
         })}
@@ -105,6 +107,38 @@ export default React.createClass({
     LoginActionCreators.logoutUser();
   },
 
+  myAccount() {
+    if (this.state.user && this.state.user.id) {
+      $('#signin-form').hide()
+      $('#registraion-form').hide()
+      $('#profile-form').show()
+    } else {
+      $('#profile-form').hide()
+      $('#signin-form').show()
+      $('#registraion-form').hide()
+    }
+    setTimeout(function(){
+      $('.my-account.modal').modal({ closable: false}).modal('show');
+      $('.account-settings').on('click', function(e){
+        if ($(e.target).data('link')) {
+          switch ($(e.target).data('link')) {
+            case 'logout':
+              LoginActionCreators.logoutUser();
+              break;
+            default:
+              console.log("something else was clicked")
+          }
+        }
+      })
+      $('#signin').off()
+      $('#signin').on('submit', function( event ) {
+        event.preventDefault();
+        var email = $('#email').val()
+        var password = $('#password').val()
+        LoginActionCreators.loginUser(email, password);
+      });
+    },200)
+  },
 
 
   /**

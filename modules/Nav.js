@@ -35,7 +35,7 @@ export default React.createClass({
             <Link to="/plays" className="item">Plays</Link>
             <a className="item">Classics</a>
             <Link to="/collections" className="item">Collections</Link>
-            <a href="/live" className="item">Live TV</a>
+            <Link to="/livetv" className="item">Live</Link>
             <div className="ui category search item nav-search">
               <div className="ui transparent icon input">
                 <input type="text" placeholder="Search..." className="prompt"/><i className="search link icon"></i>
@@ -85,41 +85,7 @@ export default React.createClass({
   },
 
   myAccount() {
-    if (this.state.user && this.state.user.id) {
-      $('#signin-form').hide()
-      $('#profile-form').show()
-    } else {
-      $('#profile-form').hide()
-      $('#signin-form').show()
-    }
-    setTimeout(function(){
-      $('.my-account.modal').modal({ closable: false}).modal('show');
-      $('.account-settings').on('click', function(e){
-        if ($(e.target).data('link')) {
-          switch ($(e.target).data('link')) {
-            case 'logout':
-              console.log("logging out")
-              LoginActionCreators.logoutUser();
-              break;
-            default:
-              console.log("something else was clicked")
-          }
-        }
-      })
-      $('#signin').off()
-      $('#signin').on('submit', function( event ) {
-        event.preventDefault();
-        var email = $('#email').val()
-        var password = $('#password').val()
-        LoginActionCreators.loginUser(email, password);
-      });
-      // $('#logout-link').on('click', function(){
-      //   console.log("I WAS CLICKED DAMN YOU!");
-      //   $('.my-account.modal').modal('hide', function(){
-      //     LoginActionCreators.logoutUser();
-      //   });
-      // })
-    },100)
+    this.props.myAccount()
   },
 
   myWatchlist() {

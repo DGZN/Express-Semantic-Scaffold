@@ -8,10 +8,12 @@ import Logout from './modules/Logout'
 import Music from './modules/Music'
 import Movie from './modules/Movie'
 import Plays from './modules/Plays'
+import Play from './modules/Play'
 import Movies from './modules/Movies'
 import Series from './modules/Series'
 import Season from './modules/Season'
 import Collections from './modules/Collections'
+import LiveTV from './modules/LiveTV'
 
 render((
   <Router history={hashHistory}>
@@ -23,7 +25,9 @@ render((
       <Route path="/series/:id" component={Season} />
       <Route path="/music" component={Music} />
       <Route path="/plays" component={Plays} />
+      <Route path="/plays/:id" component={Play} />
       <Route path="/collections" component={Collections} />
+      <Route path="/livetv" component={LiveTV} />
       <Route path="/logout" component={App} />
     </Route>
   </Router>

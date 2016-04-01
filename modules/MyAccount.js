@@ -12,7 +12,37 @@ export default React.createClass({
     return {
       email: ''
     , password: ''
-    , user: this.props.user
+    , user: this.props.user || {
+      "first_name": ''
+    , "last_name": ''
+    , "email": ''
+    }
+    }
+  },
+
+  componentWillReceiveProps(props) {
+    // if (props.user && props.user.id) {
+    //   this.setState(props)
+    // } else {
+    //   this.setState({
+    //     user: {
+    //       "first_name": ''
+    //     , "last_name": ''
+    //     , "email": ''
+    //     }
+    //   })
+    // }
+  },
+
+  componentDidMount() {
+    if (this.props.user && this.props.user.id) {
+      $('#signin-form').hide()
+      $('#registraion-form').hide()
+      $('#profile-form').show()
+    } else {
+      $('#profile-form').hide()
+      $('#signin-form').show()
+      $('#registraion-form').hide()
     }
   },
 
@@ -40,7 +70,12 @@ export default React.createClass({
                   <div className="ui one column row">
                     <div className="three wide column">
                     <a>
-                      <button className="ui sign-in button" text="Sign In" title="Sign In"  >
+                      <button className="ui sign-up button" text="Sign In" title="Sign Up"  >
+                        Sign Up
+                      </button>
+                    </a>
+                    <a>
+                      <button className="ui blue sign-in button" text="Sign In" title="Sign In"  >
                         Sign In
                       </button>
                     </a>
@@ -64,10 +99,10 @@ export default React.createClass({
                 </div>
                 <div className="ui two column row">
                   <div className="three wide column">
-                    <div className="ui text"></div>
+                    <div className="ui text">{this.state.user.first_name || ''}</div>
                   </div>
                   <div className="three wide column">
-                    <div className="ui text"></div>
+                    <div className="ui text">{this.state.user.last_name || ''}</div>
                   </div>
                 </div>
                 <div className="ui one column row">
@@ -77,7 +112,7 @@ export default React.createClass({
                 </div>
                 <div className="ui one column row">
                   <div className="three wide computer eight wide tablet column">
-                    <div className="ui text"></div>
+                    <div className="ui text">{this.state.user.email || ''}</div>
                   </div>
                 </div>
                 <div className="ui one column row">
@@ -94,9 +129,6 @@ export default React.createClass({
             </div>
             <div className="four wide column">
               <a href="#">
-                <h4>Profile</h4>
-              </a>
-              <a href="#">
                 <h4>Notifications</h4>
               </a>
               <a href="#">
@@ -106,6 +138,64 @@ export default React.createClass({
                 <h4 data-link="logout">Sign Out</h4>
               </a>
             </div>
+          </div>
+          <div id="registraion-form" className="two column row account-settings">
+            <div className="twelve wide column">
+              <h3>Register</h3>
+              <div className="ui grid">
+                <div className="ui two column row">
+                  <div className="three wide computer five wide tablet column">
+                    <div className="ui text">First Name</div>
+                  </div>
+                  <div className="three wide computer five wide tablet column">
+                    <div className="ui text">Last Name</div>
+                  </div>
+                </div>
+                <div className="ui two column row">
+                  <div className="three wide computer five wide tablet column">
+
+                  </div>
+                  <div className="three wide computer five wide tablet column">
+
+                  </div>
+                </div>
+                <div className="ui one column row">
+                  <div className="five wide computer eight wide tablet column">
+                    <div className="ui text">Email Address</div>
+                  </div>
+                </div>
+                <div className="ui one column row">
+                  <div className="five wide computer eight wide tablet column">
+
+                  </div>
+                </div>
+                <div className="ui one column row">
+                  <div className="five wide computer eight wide tablet column">
+                    <div className="ui text">Password</div>
+                  </div>
+                </div>
+                <div className="ui one column row">
+                  <div className="five wide computer eight wide tablet column">
+                    <div className="ui text">*******</div>
+                  </div>
+                </div>
+                <div className="ui one column row">
+                  <div className="five wide computer eight wide tablet column">
+                    <div className="ui text">Confirm Password</div>
+                  </div>
+                </div>
+                <div className="ui one column row">
+                  <div className="five wide computer eight wide tablet column">
+                    <div className="ui text">*******</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="four wide column"><a href="#">
+                <h4>Profile</h4></a><a href="#">
+                <h4>Notifications</h4></a><a href="#">
+                <h4>Settings</h4></a><a href="#">
+                <h4>Sign Out</h4></a></div>
           </div>
         </div>
       </div>
