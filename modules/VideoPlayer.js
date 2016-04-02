@@ -29,10 +29,10 @@ export default React.createClass({
   closeVideoSlideOut() {
     $('#video-slide-out, .videoPlayer').velocity({
       opacity: 0
-    }, 1500)
+    }, 750)
     $('.season-detail').velocity({
       opacity: "1"
-    }, 1840, "ease-in")
+    }, 640, "ease-in")
   },
 
   getPlayer: function(url){

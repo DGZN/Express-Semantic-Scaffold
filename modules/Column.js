@@ -29,7 +29,7 @@ export default React.createClass({
       thumb = '/images/wireframe/16x9.png';
     }
     return (
-      <Link to={link || '#'} className="image preview">
+      <Link to={link || '#'} className="image preview" id={this.props.id}>
         <div className="image preview thumb" style={{"backgroundImage": 'url(' + thumb + ') !important'}}>
           <div className="ui bottom attached label">{this.props.data.meta[this.state.language].name}</div>
         </div>
