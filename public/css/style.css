@@ -1436,7 +1436,7 @@ ul.meta.values {
         -ms-transition: opacity 2.09s ease-in;
          -o-transition: opacity 2.09s ease-in;
             transition: opacity 2.09s ease-in;
-  opacity: 0.4;
+  opacity: 1;
 }
 
 .thumb-fadeIn {
@@ -1444,7 +1444,7 @@ ul.meta.values {
 }
 
 .carousel .image.preview .semi {
-  opacity: 0.1 !important;
+  /*opacity: 0.1 !important;*/
 }
 
 .carousel .image {

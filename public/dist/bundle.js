@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "a04c3d2251a1a2a5b99e"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "e511232f2bb383ba9879"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -33104,9 +33104,9 @@
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'ui vertical center container aligned grids carousel-container' },
-	        _react2.default.createElement(_Carousel2.default, { title: 'Movies', source: '/movies', language: this.state.language, limit: '15', href: '/movies/:id' }),
-	        _react2.default.createElement(_Carousel2.default, { title: 'Series', source: '/series', language: this.state.language, limit: '10', href: '/series/:id' }),
-	        _react2.default.createElement(_Carousel2.default, { title: 'Plays', source: '/plays', language: this.state.language, limit: '15', href: '/plays/:id' })
+	        _react2.default.createElement(_Carousel2.default, { title: 'Movies', source: '/movies', language: this.props.language, limit: '15', href: '/movies/:id' }),
+	        _react2.default.createElement(_Carousel2.default, { title: 'Series', source: '/series', language: this.props.language, limit: '10', href: '/series/:id' }),
+	        _react2.default.createElement(_Carousel2.default, { title: 'Plays', source: '/plays', language: this.props.language, limit: '15', href: '/plays/:id' })
 	      )
 	    );
 	  }
