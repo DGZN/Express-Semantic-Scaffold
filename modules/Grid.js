@@ -93,21 +93,32 @@ export default React.createClass({
         COLUMNS.push(<Column key={'col-'+data.id} data={data} {...this.props} />)
       }
       if (COLUMNS.length==this.props.limit) {
-        ROWS.push(<div className="row">
-          {COLUMNS}
-        </div>)
+        ROWS.push(
+          <div className="row">
+            {COLUMNS}
+          </div>
+        )
         COLUMNS = []
       }
     })
     if (COLUMNS.length) {
-      ROWS.push(<div className="row">
-      {COLUMNS}
-      </div>)
+      ROWS.push(
+        <div className="row">
+          {COLUMNS}
+        </div>
+      )
     }
+    setTimeout(function(){
+      $('.image.preview.thumb').each(function(i){
+        $(this).delay(i*i*1.1).velocity({
+          opacity: 1
+        }, 400)
+      })
+    },10)
     return (
       <div>
         <Filter {...this.props} filter={this.filter} filterGenre={this.filterGenre} activeFilter={this.state.filter} activeGenre={this.state.genre} />
-        <div className="ui vertical center container aligned grids">
+        <div className="ui vertical center container aligned grids large-container">
           <div className="ui equal width grid container">
             {ROWS}
           </div>

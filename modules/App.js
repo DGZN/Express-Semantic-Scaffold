@@ -42,7 +42,6 @@ export default React.createClass({
   },
 
   componentDidMount: function() {
-
     this.changeListener = this._onLoginChange;
     LoginStore.addChangeListener(this.changeListener);
   },
@@ -83,6 +82,7 @@ export default React.createClass({
   },
 
   render() {
+    
     return (
       <div>
         <MyWatchlist />

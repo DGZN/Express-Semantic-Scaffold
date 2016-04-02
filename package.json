@@ -39,6 +39,7 @@
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-router": "^2.0.1",
+    "react-slick": "^0.11.1",
     "tls": "0.0.1",
     "watch": "^0.17.1",
     "webpack": "^1.12.14"

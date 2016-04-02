@@ -101,6 +101,7 @@ const Grid = React.createClass({
       {COLUMNS}
       </div>)
     }
+
     return (
       <div>
         <GridFilter {...this.props} filter={this.filter} filterGenre={this.filterGenre} activeFilter={this.state.filter} activeGenre={this.state.genre} />

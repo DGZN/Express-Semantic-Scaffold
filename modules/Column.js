@@ -28,9 +28,11 @@ export default React.createClass({
     if (this.props.thumbPath) {
       thumb = '/images/wireframe/16x9.png';
     }
+    var id = this.props.id
+    var visible = this.props.className || ''
     return (
-      <Link to={link || '#'} className="image preview" id={this.props.id}>
-        <div className="image preview thumb" style={{"backgroundImage": 'url(' + thumb + ') !important'}}>
+      <Link to={link || '#'} className="image preview load" >
+        <div className={"image preview thumb " + visible} style={{"backgroundImage": 'url(' + thumb + ') !important'}} id={'col-'+id}>
           <div className="ui bottom attached label">{this.props.data.meta[this.state.language].name}</div>
         </div>
       </Link>
@@ -38,7 +40,7 @@ export default React.createClass({
   },
 
   componentDidMount() {
-    // console.log("Grid > Row > Column [Properties]", this.props)
+
   },
 
   fadeInImages() {

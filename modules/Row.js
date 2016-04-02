@@ -4,6 +4,7 @@ import Column from './Column'
 const env = require('./env.js')
 
 export default React.createClass({
+
   getInitialState: function() {
     return {
       left: 1
@@ -26,7 +27,7 @@ export default React.createClass({
   handleClick(row, e) {
     e.preventDefault()
     var duration = 75
-    var easing = 'easeOutSine'
+    var easing = 'easeOutQuart'
     var moveLeft = '-' + (parseInt(this.state.left) * 310)+ 'px'
     var left = this.state.left += 1
     if (left == 11) {
@@ -52,9 +53,16 @@ export default React.createClass({
     var COLUMNS = [];
     this.state.collection.some((data, i) => {
       var id = this.props.title + '-col' + (i + 1)
-      COLUMNS.push(<Column id={id} key={i} data={data} language={this.props.language} href={this.props.href} />)
+      COLUMNS.push(<Column id={id} key={i} data={data} language={this.props.language} href={this.props.href} className="shown" />)
       return i === this.props.limit - 1;
     })
+    // setTimeout(function(){
+    //   $('.image').each(function(i){
+    //     $(this).delay(i*i*1.8).velocity({
+    //       opacity: 1
+    //     })
+    //   })
+    // },500)
     return (
       <div className="row" id={this.props.title + '-row'}>
         {COLUMNS}
