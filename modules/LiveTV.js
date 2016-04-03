@@ -11,11 +11,51 @@ export default React.createClass({
 
   componentDidMount() {
     $('.schedule.table td').on('click', function(e){
-      $(e.target).parent().hide(1,function(){
-        $('.selectedChannel').show().velocity({
-          opacity: 1
-        })
-      })
+      var col = $(e.target).text()
+      if (col.length) {
+          var row = $(e.target).parent().data('row')
+          var thumb = $(e.target).parent().data('img')
+          var selectedChannel = '0px'
+          switch (row) {
+            case 2:
+              var top = '118px;'
+              break;
+            case 3:
+              var top = '182px;'
+              break;
+            case 4:
+              var top = '244px;'
+              break;
+            case 5:
+              var top = '307px;'
+              var selectedChannel = '-137px'
+              break;
+            case 6:
+              var top = '370px;'
+              var selectedChannel = '-137px'
+              break;
+            default:
+              var top = '56px'
+          }
+          $('#channel-content').velocity({
+            opacity: 0
+          }, 200, function(){
+            $('h3.title').html(col)
+            $('.blockDetails .title').html(col)
+            $('.selected-thumb').attr('src', '/images/melody/' + thumb)
+          }).delay(0).velocity({
+            opacity: 1
+          }, 160)
+
+          $('.selectedChannel').show(300).velocity({
+              top: top
+            , opacity: 1
+            , display: 'table-row !important'
+          }, 'easeOutBack', 600)
+          $('#selectedChannelBlock').velocity({
+            top: selectedChannel
+          }, 'easeOutCubic', 700)
+      }
     })
   },
 
@@ -133,7 +173,7 @@ export default React.createClass({
                 </thead>
                 <table className="ui schedule fixed table">
                   <tbody>
-                    <tr>
+                    <tr data-row="1" data-img="M21003.jpg">
                       <td>Logo</td>
                       <td>Hekayty Maa Elzaman</td>
                       <td></td>
@@ -142,9 +182,8 @@ export default React.createClass({
                       <td></td>
                       <td></td>
                       <td></td>
-                      <td></td>
                     </tr>
-                    <tr>
+                    <tr data-row="2" data-img="M21044.jpg">
                       <td>Logo</td>
                       <td>Darb Ellabana</td>
                       <td>Elketkat</td>
@@ -153,30 +192,30 @@ export default React.createClass({
                       <td>Entakhibo Dr Soliman</td>
                       <td></td>
                       <td>Gabarout Emraa</td>
-                      <td></td>
                     </tr>
                     <tr className="selectedChannel">
                       <td>Logo</td>
                       <td id="selectedChannelBlock">
-                        <h3>Zarf Sehy</h3>
-                        <hr/><img src="/images/melody/M22109.jpg" className="ui small image thumb"/>
-                        <div className="blockDetails">
-                          <div className="title">Zarf Sehy</div><span className="episodes">S2 | Ep7</span><span className="time">8:45pm - 10:45pm</span><span className="description">The film revolves around the figure of Omar ( Abdulaziz Karim ) . Tragedy begins life since he was a small child where he witnessed the exchange of fire between his father ( Mahmoud soldier ) and police forces , and despite the fact that his father left his home.</span>
+                        <div id="channel-content">
+                          <h3 className="title">Zarf Sehy</h3>
+                          <hr/><img src="/images/melody/M22109.jpg" className="ui small image thumb selected-thumb"/>
+                          <div className="blockDetails">
+                            <div className="title">Zarf Sehy</div><span className="episodes">S2 | Ep7</span><span className="time">8:45pm - 10:45pm</span><span className="description">The film revolves around the figure of Omar ( Abdulaziz Karim ) . Tragedy begins life since he was a small child where he witnessed the exchange of fire between his father ( Mahmoud soldier ) and police forces , and despite the fact that his father left his home.</span>
+                          </div>
                         </div>
                       </td>
                     </tr>
-                    <tr>
+                    <tr data-row="3" data-img="M21042.jpg">
                       <td>Logo</td>
-                      <td onClick={this.selectChannel}>Zarf Sehy</td>
+                      <td>Zarf Sehy</td>
                       <td></td>
                       <td></td>
                       <td>Wbelwaldyen Ehsanan</td>
                       <td></td>
                       <td></td>
                       <td></td>
-                      <td></td>
                     </tr>
-                    <tr>
+                    <tr data-row="4" data-img="M21043.jpg">
                       <td>Logo</td>
                       <td>Youm Maloush Lazma</td>
                       <td>Giran Elsaad</td>
@@ -185,9 +224,8 @@ export default React.createClass({
                       <td>Akher Alregal Almohtrameen</td>
                       <td></td>
                       <td>El Kelma Al Akhira</td>
-                      <td></td>
                     </tr>
-                    <tr>
+                    <tr data-row="5" data-img="M21038.jpg">
                       <td>Logo</td>
                       <td>Salama</td>
                       <td></td>
@@ -196,16 +234,14 @@ export default React.createClass({
                       <td></td>
                       <td></td>
                       <td></td>
-                      <td></td>
                     </tr>
-                    <tr>
+                    <tr data-row="6" data-img="M21003.jpg">
                       <td>Logo</td>
                       <td>Hekayty Maa Elzaman</td>
                       <td>Bahawat Akher Zaman</td>
                       <td>Aby Fouq Elshagara</td>
                       <td>Eltahady</td>
                       <td>Hob Fe Elzenzana</td>
-                      <td></td>
                       <td>Ragol Bemaana Elkalema</td>
                       <td></td>
                     </tr>

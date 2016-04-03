@@ -90,6 +90,9 @@
 .selectedChannel {
   display: none;
   opacity: 0;
+  position: absolute;
+  width: 100%;
+  top: 56px;
 }
 
 .selectedChannel td:first-child {
@@ -99,12 +102,12 @@
 }
 
 #selectedChannelBlock {
-    position: absolute;
-    top: 181px;
-    width: 90.78%;
-    height: 200px;
-    background: #cEA401;
-    padding-bottom: 2rem;
+  position: absolute;
+  top: 0px;
+  width: 55%;
+  left: 98px;
+  height: 200px;
+  background: #cEA401;
 }
 
 #selectedChannelBlock td:not(:first-child) {
@@ -140,7 +143,7 @@
   padding-top: 0.5rem;
   padding-left: 1rem;
   float: right;
-  width: 87%;
+  width: 79%;
 }
 
 .blockDetails .title {
@@ -163,7 +166,7 @@
 .blockDetails .description {
   font-size: 1em;
   display: block;
-  max-width: 76%;
+  max-width: 96%;
 }
 
 
@@ -218,7 +221,7 @@
 
 
 .my-account.modal {
-  position: absolute;
+  position: fixed;
   top: 0px;
   width: 100% !important;
   height: 1000px;
@@ -1419,7 +1422,7 @@ ul.meta.values {
   background-image: url('/images/wireframe/thumb_placeholder.png');
   background-color: rgba(24,24,24,1) !important;
   background-repeat: no-repeat;
-  /*opacity: 0.1;*/
+  opacity: 0.7;
 }
 
 .carousel .image.preview {
@@ -1468,7 +1471,7 @@ ul.meta.values {
         -ms-transition: opacity 2.09s ease-in;
          -o-transition: opacity 2.09s ease-in;
             transition: opacity 2.09s ease-in;
-  opacity: 0;
+  opacity: 0.1;
 }
 
 .shown {

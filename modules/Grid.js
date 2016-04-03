@@ -110,9 +110,9 @@ export default React.createClass({
     }
     setTimeout(function(){
       $('.image.preview.thumb').each(function(i){
-        $(this).delay(i*i*1.1).velocity({
+        $(this).delay(i*i*0.9).velocity({
           opacity: 1
-        }, 400)
+        }, 300)
       })
     },10)
     return (

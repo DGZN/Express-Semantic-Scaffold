@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "e511232f2bb383ba9879"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "c2c0ef62f5b6bba4ff68"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -33214,7 +33214,7 @@
 	    // <Row {...this.props} />
 	    var settings = {
 	      infinite: true,
-	      speed: 1200,
+	      speed: 1400,
 	      fade: false,
 	      slidesToShow: 5,
 	      slidesToScroll: 5,
@@ -35576,9 +35576,9 @@
 	    }
 	    setTimeout(function () {
 	      $('.image.preview.thumb').each(function (i) {
-	        $(this).delay(i * i * 1.1).velocity({
+	        $(this).delay(i * i * 0.9).velocity({
 	          opacity: 1
-	        }, 400);
+	        }, 300);
 	      });
 	    }, 10);
 	    return _react2.default.createElement(
@@ -36841,11 +36841,51 @@
 	  },
 	  componentDidMount: function componentDidMount() {
 	    $('.schedule.table td').on('click', function (e) {
-	      $(e.target).parent().hide(1, function () {
-	        $('.selectedChannel').show().velocity({
+	      var col = $(e.target).text();
+	      if (col.length) {
+	        var row = $(e.target).parent().data('row');
+	        var thumb = $(e.target).parent().data('img');
+	        var selectedChannel = '0px';
+	        switch (row) {
+	          case 2:
+	            var top = '118px;';
+	            break;
+	          case 3:
+	            var top = '182px;';
+	            break;
+	          case 4:
+	            var top = '244px;';
+	            break;
+	          case 5:
+	            var top = '307px;';
+	            var selectedChannel = '-137px';
+	            break;
+	          case 6:
+	            var top = '370px;';
+	            var selectedChannel = '-137px';
+	            break;
+	          default:
+	            var top = '56px';
+	        }
+	        $('#channel-content').velocity({
+	          opacity: 0
+	        }, 200, function () {
+	          $('h3.title').html(col);
+	          $('.blockDetails .title').html(col);
+	          $('.selected-thumb').attr('src', '/images/melody/' + thumb);
+	        }).delay(0).velocity({
 	          opacity: 1
-	        });
-	      });
+	        }, 160);
+
+	        $('.selectedChannel').show(300).velocity({
+	          top: top,
+	          opacity: 1,
+	          display: 'table-row !important'
+	        }, 'easeOutBack', 600);
+	        $('#selectedChannelBlock').velocity({
+	          top: selectedChannel
+	        }, 'easeOutCubic', 700);
+	      }
 	    });
 	  },
 	  componentWillUnmount: function componentWillUnmount() {
@@ -37310,7 +37350,7 @@
 	                  null,
 	                  _react2.default.createElement(
 	                    'tr',
-	                    null,
+	                    { 'data-row': '1', 'data-img': 'M21003.jpg' },
 	                    _react2.default.createElement(
 	                      'td',
 	                      null,
@@ -37330,12 +37370,11 @@
 	                    ),
 	                    _react2.default.createElement('td', null),
 	                    _react2.default.createElement('td', null),
-	                    _react2.default.createElement('td', null),
 	                    _react2.default.createElement('td', null)
 	                  ),
 	                  _react2.default.createElement(
 	                    'tr',
-	                    null,
+	                    { 'data-row': '2', 'data-img': 'M21044.jpg' },
 	                    _react2.default.createElement(
 	                      'td',
 	                      null,
@@ -37371,8 +37410,7 @@
 	                      'td',
 	                      null,
 	                      'Gabarout Emraa'
-	                    ),
-	                    _react2.default.createElement('td', null)
+	                    )
 	                  ),
 	                  _react2.default.createElement(
 	                    'tr',
@@ -37386,41 +37424,45 @@
 	                      'td',
 	                      { id: 'selectedChannelBlock' },
 	                      _react2.default.createElement(
-	                        'h3',
-	                        null,
-	                        'Zarf Sehy'
-	                      ),
-	                      _react2.default.createElement('hr', null),
-	                      _react2.default.createElement('img', { src: '/images/melody/M22109.jpg', className: 'ui small image thumb' }),
-	                      _react2.default.createElement(
 	                        'div',
-	                        { className: 'blockDetails' },
+	                        { id: 'channel-content' },
 	                        _react2.default.createElement(
-	                          'div',
+	                          'h3',
 	                          { className: 'title' },
 	                          'Zarf Sehy'
 	                        ),
+	                        _react2.default.createElement('hr', null),
+	                        _react2.default.createElement('img', { src: '/images/melody/M22109.jpg', className: 'ui small image thumb selected-thumb' }),
 	                        _react2.default.createElement(
-	                          'span',
-	                          { className: 'episodes' },
-	                          'S2 | Ep7'
-	                        ),
-	                        _react2.default.createElement(
-	                          'span',
-	                          { className: 'time' },
-	                          '8:45pm - 10:45pm'
-	                        ),
-	                        _react2.default.createElement(
-	                          'span',
-	                          { className: 'description' },
-	                          'The film revolves around the figure of Omar ( Abdulaziz Karim ) . Tragedy begins life since he was a small child where he witnessed the exchange of fire between his father ( Mahmoud soldier ) and police forces , and despite the fact that his father left his home.'
+	                          'div',
+	                          { className: 'blockDetails' },
+	                          _react2.default.createElement(
+	                            'div',
+	                            { className: 'title' },
+	                            'Zarf Sehy'
+	                          ),
+	                          _react2.default.createElement(
+	                            'span',
+	                            { className: 'episodes' },
+	                            'S2 | Ep7'
+	                          ),
+	                          _react2.default.createElement(
+	                            'span',
+	                            { className: 'time' },
+	                            '8:45pm - 10:45pm'
+	                          ),
+	                          _react2.default.createElement(
+	                            'span',
+	                            { className: 'description' },
+	                            'The film revolves around the figure of Omar ( Abdulaziz Karim ) . Tragedy begins life since he was a small child where he witnessed the exchange of fire between his father ( Mahmoud soldier ) and police forces , and despite the fact that his father left his home.'
+	                          )
 	                        )
 	                      )
 	                    )
 	                  ),
 	                  _react2.default.createElement(
 	                    'tr',
-	                    null,
+	                    { 'data-row': '3', 'data-img': 'M21042.jpg' },
 	                    _react2.default.createElement(
 	                      'td',
 	                      null,
@@ -37428,7 +37470,7 @@
 	                    ),
 	                    _react2.default.createElement(
 	                      'td',
-	                      { onClick: this.selectChannel },
+	                      null,
 	                      'Zarf Sehy'
 	                    ),
 	                    _react2.default.createElement('td', null),
@@ -37440,12 +37482,11 @@
 	                    ),
 	                    _react2.default.createElement('td', null),
 	                    _react2.default.createElement('td', null),
-	                    _react2.default.createElement('td', null),
 	                    _react2.default.createElement('td', null)
 	                  ),
 	                  _react2.default.createElement(
 	                    'tr',
-	                    null,
+	                    { 'data-row': '4', 'data-img': 'M21043.jpg' },
 	                    _react2.default.createElement(
 	                      'td',
 	                      null,
@@ -37481,12 +37522,11 @@
 	                      'td',
 	                      null,
 	                      'El Kelma Al Akhira'
-	                    ),
-	                    _react2.default.createElement('td', null)
+	                    )
 	                  ),
 	                  _react2.default.createElement(
 	                    'tr',
-	                    null,
+	                    { 'data-row': '5', 'data-img': 'M21038.jpg' },
 	                    _react2.default.createElement(
 	                      'td',
 	                      null,
@@ -37506,12 +37546,11 @@
 	                    ),
 	                    _react2.default.createElement('td', null),
 	                    _react2.default.createElement('td', null),
-	                    _react2.default.createElement('td', null),
 	                    _react2.default.createElement('td', null)
 	                  ),
 	                  _react2.default.createElement(
 	                    'tr',
-	                    null,
+	                    { 'data-row': '6', 'data-img': 'M21003.jpg' },
 	                    _react2.default.createElement(
 	                      'td',
 	                      null,
@@ -37542,7 +37581,6 @@
 	                      null,
 	                      'Hob Fe Elzenzana'
 	                    ),
-	                    _react2.default.createElement('td', null),
 	                    _react2.default.createElement(
 	                      'td',
 	                      null,

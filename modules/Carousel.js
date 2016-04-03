@@ -49,7 +49,7 @@ export default React.createClass({
     // <Row {...this.props} />
     var settings = {
       infinite: true,
-      speed: 1200,
+      speed: 1400,
       fade: false,
       slidesToShow: 5,
       slidesToScroll: 5,
