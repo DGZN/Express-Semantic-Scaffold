@@ -12,27 +12,17 @@ import LoginActionCreators from '../actions/LoginActionCreators';
 
 const env = require('./env.js')
 
-/**
- * Retrieve the current TODO data from the TodoStore
- */
-function getTodoState() {
-  return {
-    allTodos: TodoStore.getAll(),
-    areAllComplete: TodoStore.areAllComplete(),
-    language: 'en'
-  };
-}
-
-
 export default React.createClass({
-  setLanguage(lang) {
+  setLanguage(lang, align) {
     this.setState({
-      language: lang
+      align: align
+    , language: lang
     })
   },
   _getLoginState() {
     return {
       language: 'en'
+    , align: 'left'
     , user: LoginStore.user
     , userLoggedIn: LoginStore.isLoggedIn()
     };
@@ -77,14 +67,13 @@ export default React.createClass({
   },
 
   componentWillUnmount: function() {
-    //TodoStore.removeChangeListener(this._onChange);
     LoginStore.removeChangeListener(this.changeListener);
   },
 
   render() {
-    
+
     return (
-      <div>
+      <div style={{ 'textAlign': this.state.align}}>
         <MyWatchlist />
         <Nav
           user={this.state.user}
@@ -138,14 +127,6 @@ export default React.createClass({
         LoginActionCreators.loginUser(email, password);
       });
     },200)
-  },
-
-
-  /**
-   * Event handler for 'change' events coming from the TodoStore
-   */
-  _onChange: function() {
-    this.setState(getTodoState());
   },
 
 });

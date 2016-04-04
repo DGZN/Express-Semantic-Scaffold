@@ -6,18 +6,16 @@ export default React.createClass({
       <div className="ui inverted vertical footer stackable center aligned segment">
         <div className="ui middle aligned six column centered stackable grid footer container">
           <div className="row">
-            <div className="column middle aligned"><a className="link">
-                <h4>FAQ/Help</h4></a></div>
-            <div className="column middle aligned"><a className="link">
-                <h4>Jobs</h4></a></div>
-            <div className="column middle aligned"><a className="link">
-                <h4>Terms of Use</h4></a></div>
-            <div className="column middle aligned"><a className="link">
-                <h4>Privacy Policy</h4></a></div>
-            <div className="column middle aligned"><a className="link">
-                <h4>Copyright</h4></a></div>
-            <div className="column middle aligned"><a className="link">
-                <h4>Closed Captioning</h4></a></div>
+            <div className="column middle aligned">
+              <a className="link">
+                <h4>FAQ/Help</h4>
+              </a>
+            </div>
+            <div className="column middle aligned">
+              <a className="link">
+                <h4>Legal</h4>
+              </a>
+            </div>
           </div>
         </div>
         <div className="ui middle aligned one column centered stackable grid container">

@@ -1,5 +1,5 @@
 import React from 'react'
-
+import Slider from 'react-slick'
 import Carousel from './Carousel'
 
 export default React.createClass({
@@ -9,10 +9,25 @@ export default React.createClass({
     }
   },
   render() {
+    var settings = {
+      autoplay: true,
+      autoplaySpeed: 5000,
+      infinite: false,
+      speed: 900,
+      fade: false,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      easing: 'easeInOutCubic'
+    };
     return (
       <div>
         <div className="ui container hero">
-          <div id="img" className="ui image hero"></div>
+          <Slider {...settings}>
+            <div id="img" className="ui image hero"></div>
+            <div id="img" className="ui image hero"></div>
+            <div id="img" className="ui image hero"></div>
+            <div id="img" className="ui image hero"></div>
+          </Slider>
         </div>
         <div className="ui vertical center container aligned grids carousel-container">
           <Carousel title="Movies" source="/movies" language={this.props.language} limit="15" href="/movies/:id" />

@@ -110,11 +110,11 @@ export default React.createClass({
     }
     setTimeout(function(){
       $('.image.preview.thumb').each(function(i){
-        $(this).delay(i*i*0.9).velocity({
+        $(this).delay(i*i*0.05).velocity({
           opacity: 1
-        }, 300)
+        }, 20)
       })
-    },10)
+    },5)
     return (
       <div>
         <Filter {...this.props} filter={this.filter} filterGenre={this.filterGenre} activeFilter={this.state.filter} activeGenre={this.state.genre} />

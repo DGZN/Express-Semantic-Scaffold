@@ -49,13 +49,15 @@ export default React.createClass({
     // <Row {...this.props} />
     var settings = {
       infinite: true,
-      speed: 1400,
+      speed: 900,
       fade: false,
       slidesToShow: 5,
       slidesToScroll: 5,
-      easing: 'ease-in',
-      nextArrow: 'RightNavButton'
+      easing: 'easeInOutCubic',
+      nextArrow: 'RightNavButton',
+      variableWidth: true
     };
+    // responsive: [ { breakpoint: 550, settings: { slidesToShow: 1 } }, { breakpoint: 768, settings: { slidesToShow: 2 } }, { breakpoint: 1160, settings: { slidesToShow: 3 } }, { breakpoint: 1420, settings: { slidesToShow: 4 } }, { breakpoint: 1425, settings: { slidesToShow: 5 } }]
     var self = this;
     var ids = []
     var COLUMNS = [];

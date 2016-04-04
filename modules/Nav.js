@@ -53,7 +53,7 @@ export default React.createClass({
                     <i className="list layout icon"></i>
                     <span className="text">Watchlist</span>
                   </a>
-                  <a className="item" onClick={this.props.setLanguage.bind(null, menu.lang)}>
+                  <a className="item" onClick={this.props.setLanguage.bind(null, menu.lang, menu.align)}>
                     <i className="flag icon"></i>
                     <span className="text">{menu.name}</span>
                   </a>
@@ -98,12 +98,14 @@ export default React.createClass({
         return {
           name: 'English'
         , lang: 'en'
+        , align: 'left'
         }
         break;
       default:
         return {
           name: 'Arabic'
         , lang: 'ar'
+        , align: 'right'
         }
     }
   }

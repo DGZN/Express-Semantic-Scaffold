@@ -61,7 +61,7 @@ export default React.createClass({
                 <div className="row">
                   <div className="column tight">
                     <div className="movie-details"><span>{movie.duration}</span><span>{movie.productionYear}</span></div>
-                    <div className="movie-actions"><img src="/images/play-button.png" className="ui image"/><img src="/images/add-button.png" className="ui image"/><img src="/images/social-share-circle-icons.png" className="ui image social-share"/></div>
+                    <div className="movie-actions"><img src="/images/add-button.png" className="ui image"/><img src="/images/social-share-circle-icons.png" className="ui image social-share"/></div>
                   </div>
                 </div>
               </div>
