@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "80934c2d7147ed8bf43f"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "6d89b45e23828ddb21ef"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -25419,7 +25419,7 @@
 
 	    return _react2.default.createElement(
 	      'div',
-	      { style: { 'textAlign': this.state.align } },
+	      { style: { 'textAlign': this.state.align + ' !important' } },
 	      _react2.default.createElement(_MyWatchlist2.default, null),
 	      _react2.default.createElement(_Nav2.default, {
 	        user: this.state.user,
@@ -25428,6 +25428,7 @@
 	        language: this.state.language }),
 	      this.props.children && _react2.default.cloneElement(this.props.children, {
 	        language: this.state.language,
+	        textAlign: this.state.align,
 	        myAccount: this.myAccount,
 	        isLoggedIn: this.state.userLoggedIn,
 	        user: this.state.user
@@ -33220,6 +33221,8 @@
 	  value: true
 	});
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -33244,13 +33247,13 @@
 	  render: function render() {
 	    var settings = {
 	      autoplay: true,
-	      autoplaySpeed: 5000,
+	      autoplaySpeed: 9500,
 	      infinite: false,
-	      speed: 900,
+	      speed: 5000,
 	      fade: false,
 	      slidesToShow: 1,
 	      slidesToScroll: 1,
-	      easing: 'easeInOutCubic'
+	      easing: 'easeIn'
 	    };
 	    return _react2.default.createElement(
 	      'div',
@@ -33270,9 +33273,9 @@
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'ui vertical center container aligned grids carousel-container' },
-	        _react2.default.createElement(_Carousel2.default, { title: 'Movies', source: '/movies', language: this.props.language, limit: '15', href: '/movies/:id' }),
-	        _react2.default.createElement(_Carousel2.default, { title: 'Series', source: '/series', language: this.props.language, limit: '10', href: '/series/:id' }),
-	        _react2.default.createElement(_Carousel2.default, { title: 'Plays', source: '/plays', language: this.props.language, limit: '15', href: '/plays/:id' })
+	        _react2.default.createElement(_Carousel2.default, _extends({ title: 'Movies', source: '/movies', limit: '15', href: '/movies/:id' }, this.props)),
+	        _react2.default.createElement(_Carousel2.default, _extends({ title: 'Series', source: '/series', limit: '10', href: '/series/:id' }, this.props)),
+	        _react2.default.createElement(_Carousel2.default, _extends({ title: 'Plays', source: '/plays', limit: '15', href: '/plays/:id' }, this.props))
 	      )
 	    );
 	  }
@@ -35461,7 +35464,7 @@
 	      ),
 	      _react2.default.createElement(
 	        'div',
-	        { className: 'ui container carousel' },
+	        { className: 'ui container carousel', style: { 'textAlign': this.props.textAlign } },
 	        _react2.default.createElement(
 	          _reactSlick2.default,
 	          settings,
@@ -35758,7 +35761,7 @@
 	        { className: 'ui vertical center container aligned grids large-container' },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'ui equal width grid container' },
+	          { className: 'ui equal width grid container', style: { 'textAlign': this.props.textAlign } },
 	          ROWS
 	        )
 	      )
@@ -36762,16 +36765,16 @@
 	    this.props.episodes.map(function (episode, i) {
 	      ROWS.push(_react2.default.createElement(WatchlistRow, { key: 'watchlist-' + i, episode: episode, language: _this.props.language }));
 	    });
-	    setTimeout(function () {
-	      $('.season-watchlist').velocity("scroll", {
-	        duration: 600,
-	        easing: 'ease-in',
-	        container: $(".season-watchlist")
-	      });
-	      setTimeout(function () {
-	        $('.season-watchlist').animate({ scrollTop: 0 }, 2000);
-	      }, 2200);
-	    }, 1500);
+	    // setTimeout(function(){
+	    //   $('.season-watchlist').velocity("scroll", {
+	    //       duration: 600
+	    //     , easing: 'ease-in'
+	    //     , container: $(".season-watchlist")
+	    //   })
+	    //   setTimeout(function(){
+	    //     $('.season-watchlist').animate({ scrollTop: 0 }, 2000)
+	    //   }, 2200)
+	    // },1500)
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'ui stackable grid season-watchlist-container' },
@@ -36993,6 +36996,10 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _EPGuide = __webpack_require__(286);
+
+	var _EPGuide2 = _interopRequireDefault(_EPGuide);
+
 	var _Carousel = __webpack_require__(263);
 
 	var _Carousel2 = _interopRequireDefault(_Carousel);
@@ -37071,1222 +37078,1347 @@
 	        { className: 'ui container hero' },
 	        _react2.default.createElement('div', { id: 'img', className: 'ui image hero' })
 	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'ui container equal width channels grid pad-large' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'column' },
-	          _react2.default.createElement('img', { src: '/images/melody-logo.png', className: 'ui tiny image centered' }),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'ui bottom attached label' },
-	            'Melody Aflam'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'column' },
-	          _react2.default.createElement('img', { src: '/images/melody-logo.png', className: 'ui tiny image centered' }),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'ui bottom attached label' },
-	            'Melody Classic'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'column' },
-	          _react2.default.createElement('img', { src: '/images/melody-logo.png', className: 'ui tiny image centered' }),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'ui bottom attached label' },
-	            'Melody Drama'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'column' },
-	          _react2.default.createElement('img', { src: '/images/melody-logo.png', className: 'ui tiny image centered' }),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'ui bottom attached label' },
-	            'Melody Hits'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'column' },
-	          _react2.default.createElement('img', { src: '/images/melody-logo.png', className: 'ui tiny image centered' }),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'ui bottom attached label' },
-	            'Melody General'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'column' },
-	          _react2.default.createElement('img', { src: '/images/melody-logo.png', className: 'ui tiny image centered' }),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'ui bottom attached label' },
-	            'Melody Radio'
-	          )
-	        )
-	      ),
+	      _react2.default.createElement(_EPGuide2.default, null)
+	    );
+	  }
+	});
+
+/***/ },
+/* 286 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Channels = __webpack_require__(287);
+
+	var _Channels2 = _interopRequireDefault(_Channels);
+
+	var _Filter = __webpack_require__(288);
+
+	var _Filter2 = _interopRequireDefault(_Filter);
+
+	var _Schedule = __webpack_require__(289);
+
+	var _Schedule2 = _interopRequireDefault(_Schedule);
+
+	var _MobileSchedule = __webpack_require__(291);
+
+	var _MobileSchedule2 = _interopRequireDefault(_MobileSchedule);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	  displayName: 'EPGuide',
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(_Channels2.default, null),
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'ui vertical center container aligned grids' },
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'ui schedule grid container details pad-top-medium' },
+	          _react2.default.createElement(_Filter2.default, null),
+	          _react2.default.createElement(_Schedule2.default, null),
+	          _react2.default.createElement(_MobileSchedule2.default, null)
+	        )
+	      )
+	    );
+	  }
+	});
+
+/***/ },
+/* 287 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	  displayName: "Channels",
+	  render: function render() {
+	    return _react2.default.createElement(
+	      "div",
+	      { className: "ui container equal width channels grid pad-large" },
+	      _react2.default.createElement(
+	        "div",
+	        { className: "column" },
+	        _react2.default.createElement("img", { src: "/images/melody-logo.png", className: "ui tiny image centered" }),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "ui bottom attached label" },
+	          "Melody Aflam"
+	        )
+	      ),
+	      _react2.default.createElement(
+	        "div",
+	        { className: "column" },
+	        _react2.default.createElement("img", { src: "/images/melody-logo.png", className: "ui tiny image centered" }),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "ui bottom attached label" },
+	          "Melody Classic"
+	        )
+	      ),
+	      _react2.default.createElement(
+	        "div",
+	        { className: "column" },
+	        _react2.default.createElement("img", { src: "/images/melody-logo.png", className: "ui tiny image centered" }),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "ui bottom attached label" },
+	          "Melody Drama"
+	        )
+	      ),
+	      _react2.default.createElement(
+	        "div",
+	        { className: "column" },
+	        _react2.default.createElement("img", { src: "/images/melody-logo.png", className: "ui tiny image centered" }),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "ui bottom attached label" },
+	          "Melody Hits"
+	        )
+	      ),
+	      _react2.default.createElement(
+	        "div",
+	        { className: "column" },
+	        _react2.default.createElement("img", { src: "/images/melody-logo.png", className: "ui tiny image centered" }),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "ui bottom attached label" },
+	          "Melody General"
+	        )
+	      ),
+	      _react2.default.createElement(
+	        "div",
+	        { className: "column" },
+	        _react2.default.createElement("img", { src: "/images/melody-logo.png", className: "ui tiny image centered" }),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "ui bottom attached label" },
+	          "Melody Radio"
+	        )
+	      )
+	    );
+	  }
+	});
+
+/***/ },
+/* 288 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	  displayName: "Filter",
+	  render: function render() {
+	    return _react2.default.createElement(
+	      "div",
+	      { className: "two wide filter schedule-filter computer only column" },
+	      _react2.default.createElement(
+	        "h4",
+	        null,
+	        "TUE, MAY 23"
+	      ),
+	      _react2.default.createElement(
+	        "div",
+	        { id: "schedule-filter-dropdown", className: "ui simple dropdown item inverted" },
+	        "5pm",
+	        _react2.default.createElement("i", { className: "plus icon" }),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "menu" },
 	          _react2.default.createElement(
-	            'div',
-	            { className: 'two wide filter schedule-filter computer only column' },
+	            "a",
+	            { className: "item" },
+	            "1pm"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "1:30"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "2pm"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "2:30"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "3pm"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "3:30"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "4pm"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "4:30"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "5pm"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "5:30"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "6pm"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "6:30"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "7pm"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "7:30"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "8pm"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "8:30"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "9pm"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "9:30"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "10pm"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "10:30"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "11pm"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "11:30"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "Noon"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "12:30"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "1pm"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "1:30"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "2pm"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "2:30"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "3pm"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "3:30"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "4pm"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "4:30"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "5"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "5:30"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "6pm"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "6:30"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "7pm"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "7:30"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "8pm"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "8:30"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "9pm"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "9:30"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "10pm"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "10:30"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "11pm"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "11:30"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "Midnight"
+	          ),
+	          _react2.default.createElement(
+	            "a",
+	            { className: "item" },
+	            "12:30"
+	          )
+	        )
+	      ),
+	      _react2.default.createElement(
+	        "div",
+	        { className: "ui icon input inverted" },
+	        _react2.default.createElement("input", { type: "text", placeholder: "Search...", className: "prompt" }),
+	        _react2.default.createElement("i", { className: "search link icon" })
+	      ),
+	      _react2.default.createElement("div", { className: "results" })
+	    );
+	  }
+	});
+
+/***/ },
+/* 289 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _TimeBlockHead = __webpack_require__(290);
+
+	var _TimeBlockHead2 = _interopRequireDefault(_TimeBlockHead);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	  displayName: 'Schedule',
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'fourteen wide computer sixteen wide tablet column' },
+	      _react2.default.createElement(
+	        'table',
+	        { className: 'ui schedule celled fixed table' },
+	        _react2.default.createElement(_TimeBlockHead2.default, { right: this._moveRight }),
+	        _react2.default.createElement(
+	          'table',
+	          { className: 'ui schedule fixed table' },
+	          _react2.default.createElement(
+	            'tbody',
+	            null,
 	            _react2.default.createElement(
-	              'h4',
-	              null,
-	              'TUE, MAY 23'
+	              'tr',
+	              { 'data-row': '1', 'data-img': 'M21003.jpg' },
+	              _react2.default.createElement(
+	                'td',
+	                null,
+	                'Logo'
+	              ),
+	              _react2.default.createElement(
+	                'td',
+	                null,
+	                'Hekayty Maa Elzaman'
+	              ),
+	              _react2.default.createElement('td', null),
+	              _react2.default.createElement('td', null),
+	              _react2.default.createElement(
+	                'td',
+	                null,
+	                'Khaly Balak Men Zozo'
+	              ),
+	              _react2.default.createElement('td', null),
+	              _react2.default.createElement('td', null),
+	              _react2.default.createElement('td', null)
 	            ),
 	            _react2.default.createElement(
-	              'div',
-	              { id: 'schedule-filter-dropdown', className: 'ui simple dropdown item inverted' },
-	              '5pm',
-	              _react2.default.createElement('i', { className: 'plus icon' }),
+	              'tr',
+	              { 'data-row': '2', 'data-img': 'M21044.jpg' },
 	              _react2.default.createElement(
-	                'div',
-	                { className: 'menu' },
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '1pm'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '1:30'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '2pm'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '2:30'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '3pm'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '3:30'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '4pm'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '4:30'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '5pm'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '5:30'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '6pm'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '6:30'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '7pm'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '7:30'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '8pm'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '8:30'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '9pm'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '9:30'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '10pm'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '10:30'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '11pm'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '11:30'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  'Noon'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '12:30'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '1pm'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '1:30'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '2pm'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '2:30'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '3pm'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '3:30'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '4pm'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '4:30'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '5'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '5:30'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '6pm'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '6:30'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '7pm'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '7:30'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '8pm'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '8:30'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '9pm'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '9:30'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '10pm'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '10:30'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '11pm'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '11:30'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  'Midnight'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item' },
-	                  '12:30'
-	                )
+	                'td',
+	                null,
+	                'Logo'
+	              ),
+	              _react2.default.createElement(
+	                'td',
+	                null,
+	                'Darb Ellabana'
+	              ),
+	              _react2.default.createElement(
+	                'td',
+	                null,
+	                'Elketkat'
+	              ),
+	              _react2.default.createElement(
+	                'td',
+	                null,
+	                'Gabarout Emraa'
+	              ),
+	              _react2.default.createElement(
+	                'td',
+	                null,
+	                'Entakhibo Dr Soliman'
+	              ),
+	              _react2.default.createElement(
+	                'td',
+	                null,
+	                'Entakhibo Dr Soliman'
+	              ),
+	              _react2.default.createElement('td', null),
+	              _react2.default.createElement(
+	                'td',
+	                null,
+	                'Gabarout Emraa'
 	              )
 	            ),
 	            _react2.default.createElement(
-	              'div',
-	              { className: 'ui icon input inverted' },
-	              _react2.default.createElement('input', { type: 'text', placeholder: 'Search...', className: 'prompt' }),
-	              _react2.default.createElement('i', { className: 'search link icon' })
-	            ),
-	            _react2.default.createElement('div', { className: 'results' })
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'fourteen wide computer sixteen wide tablet column' },
-	            _react2.default.createElement(
-	              'table',
-	              { className: 'ui schedule celled fixed table' },
+	              'tr',
+	              { className: 'selectedChannel' },
 	              _react2.default.createElement(
-	                'thead',
+	                'td',
 	                null,
-	                _react2.default.createElement(
-	                  'tr',
-	                  null,
-	                  _react2.default.createElement(
-	                    'th',
-	                    null,
-	                    _react2.default.createElement(
-	                      'span',
-	                      { className: 'left-arrow' },
-	                      '˂'
-	                    ),
-	                    _react2.default.createElement(
-	                      'th',
-	                      null,
-	                      '5',
-	                      _react2.default.createElement(
-	                        'sub',
-	                        null,
-	                        'pm'
-	                      )
-	                    ),
-	                    _react2.default.createElement(
-	                      'th',
-	                      null,
-	                      '5',
-	                      _react2.default.createElement(
-	                        'sub',
-	                        { className: 'medium' },
-	                        ':30'
-	                      )
-	                    ),
-	                    _react2.default.createElement(
-	                      'th',
-	                      null,
-	                      '6',
-	                      _react2.default.createElement(
-	                        'sub',
-	                        null,
-	                        'pm'
-	                      )
-	                    ),
-	                    _react2.default.createElement(
-	                      'th',
-	                      null,
-	                      '6',
-	                      _react2.default.createElement(
-	                        'sub',
-	                        { className: 'medium' },
-	                        ':30'
-	                      )
-	                    ),
-	                    _react2.default.createElement(
-	                      'th',
-	                      null,
-	                      '7',
-	                      _react2.default.createElement(
-	                        'sub',
-	                        null,
-	                        'pm'
-	                      )
-	                    ),
-	                    _react2.default.createElement(
-	                      'th',
-	                      null,
-	                      '7',
-	                      _react2.default.createElement(
-	                        'sub',
-	                        { className: 'medium' },
-	                        ':30'
-	                      )
-	                    ),
-	                    _react2.default.createElement(
-	                      'th',
-	                      null,
-	                      '8',
-	                      _react2.default.createElement(
-	                        'sub',
-	                        null,
-	                        'pm'
-	                      )
-	                    ),
-	                    _react2.default.createElement(
-	                      'th',
-	                      null,
-	                      _react2.default.createElement(
-	                        'span',
-	                        { className: 'right-arrow' },
-	                        '˃'
-	                      )
-	                    )
-	                  )
-	                )
+	                'Logo'
 	              ),
 	              _react2.default.createElement(
-	                'table',
-	                { className: 'ui schedule fixed table' },
+	                'td',
+	                { id: 'selectedChannelBlock' },
 	                _react2.default.createElement(
-	                  'tbody',
-	                  null,
+	                  'div',
+	                  { id: 'channel-content' },
 	                  _react2.default.createElement(
-	                    'tr',
-	                    { 'data-row': '1', 'data-img': 'M21003.jpg' },
-	                    _react2.default.createElement(
-	                      'td',
-	                      null,
-	                      'Logo'
-	                    ),
-	                    _react2.default.createElement(
-	                      'td',
-	                      null,
-	                      'Hekayty Maa Elzaman'
-	                    ),
-	                    _react2.default.createElement('td', null),
-	                    _react2.default.createElement('td', null),
-	                    _react2.default.createElement(
-	                      'td',
-	                      null,
-	                      'Khaly Balak Men Zozo'
-	                    ),
-	                    _react2.default.createElement('td', null),
-	                    _react2.default.createElement('td', null),
-	                    _react2.default.createElement('td', null)
+	                    'h3',
+	                    { className: 'title' },
+	                    'Zarf Sehy'
 	                  ),
+	                  _react2.default.createElement('hr', null),
+	                  _react2.default.createElement('img', { src: '/images/melody/M22109.jpg', className: 'ui small image thumb selected-thumb' }),
 	                  _react2.default.createElement(
-	                    'tr',
-	                    { 'data-row': '2', 'data-img': 'M21044.jpg' },
+	                    'div',
+	                    { className: 'blockDetails' },
 	                    _react2.default.createElement(
-	                      'td',
-	                      null,
-	                      'Logo'
-	                    ),
-	                    _react2.default.createElement(
-	                      'td',
-	                      null,
-	                      'Darb Ellabana'
-	                    ),
-	                    _react2.default.createElement(
-	                      'td',
-	                      null,
-	                      'Elketkat'
-	                    ),
-	                    _react2.default.createElement(
-	                      'td',
-	                      null,
-	                      'Gabarout Emraa'
-	                    ),
-	                    _react2.default.createElement(
-	                      'td',
-	                      null,
-	                      'Entakhibo Dr Soliman'
-	                    ),
-	                    _react2.default.createElement(
-	                      'td',
-	                      null,
-	                      'Entakhibo Dr Soliman'
-	                    ),
-	                    _react2.default.createElement('td', null),
-	                    _react2.default.createElement(
-	                      'td',
-	                      null,
-	                      'Gabarout Emraa'
-	                    )
-	                  ),
-	                  _react2.default.createElement(
-	                    'tr',
-	                    { className: 'selectedChannel' },
-	                    _react2.default.createElement(
-	                      'td',
-	                      null,
-	                      'Logo'
-	                    ),
-	                    _react2.default.createElement(
-	                      'td',
-	                      { id: 'selectedChannelBlock' },
-	                      _react2.default.createElement(
-	                        'div',
-	                        { id: 'channel-content' },
-	                        _react2.default.createElement(
-	                          'h3',
-	                          { className: 'title' },
-	                          'Zarf Sehy'
-	                        ),
-	                        _react2.default.createElement('hr', null),
-	                        _react2.default.createElement('img', { src: '/images/melody/M22109.jpg', className: 'ui small image thumb selected-thumb' }),
-	                        _react2.default.createElement(
-	                          'div',
-	                          { className: 'blockDetails' },
-	                          _react2.default.createElement(
-	                            'div',
-	                            { className: 'title' },
-	                            'Zarf Sehy'
-	                          ),
-	                          _react2.default.createElement(
-	                            'span',
-	                            { className: 'episodes' },
-	                            'S2 | Ep7'
-	                          ),
-	                          _react2.default.createElement(
-	                            'span',
-	                            { className: 'time' },
-	                            '8:45pm - 10:45pm'
-	                          ),
-	                          _react2.default.createElement(
-	                            'span',
-	                            { className: 'description' },
-	                            'The film revolves around the figure of Omar ( Abdulaziz Karim ) . Tragedy begins life since he was a small child where he witnessed the exchange of fire between his father ( Mahmoud soldier ) and police forces , and despite the fact that his father left his home.'
-	                          )
-	                        )
-	                      )
-	                    )
-	                  ),
-	                  _react2.default.createElement(
-	                    'tr',
-	                    { 'data-row': '3', 'data-img': 'M21042.jpg' },
-	                    _react2.default.createElement(
-	                      'td',
-	                      null,
-	                      'Logo'
-	                    ),
-	                    _react2.default.createElement(
-	                      'td',
-	                      null,
+	                      'div',
+	                      { className: 'title' },
 	                      'Zarf Sehy'
 	                    ),
-	                    _react2.default.createElement('td', null),
-	                    _react2.default.createElement('td', null),
 	                    _react2.default.createElement(
-	                      'td',
-	                      null,
-	                      'Wbelwaldyen Ehsanan'
-	                    ),
-	                    _react2.default.createElement('td', null),
-	                    _react2.default.createElement('td', null),
-	                    _react2.default.createElement('td', null)
-	                  ),
-	                  _react2.default.createElement(
-	                    'tr',
-	                    { 'data-row': '4', 'data-img': 'M21043.jpg' },
-	                    _react2.default.createElement(
-	                      'td',
-	                      null,
-	                      'Logo'
+	                      'span',
+	                      { className: 'episodes' },
+	                      'S2 | Ep7'
 	                    ),
 	                    _react2.default.createElement(
-	                      'td',
-	                      null,
-	                      'Youm Maloush Lazma'
+	                      'span',
+	                      { className: 'time' },
+	                      '8:45pm - 10:45pm'
 	                    ),
 	                    _react2.default.createElement(
-	                      'td',
-	                      null,
-	                      'Giran Elsaad'
-	                    ),
-	                    _react2.default.createElement(
-	                      'td',
-	                      null,
-	                      'Wahda Be Wahda'
-	                    ),
-	                    _react2.default.createElement(
-	                      'td',
-	                      null,
-	                      'Man Oheb'
-	                    ),
-	                    _react2.default.createElement(
-	                      'td',
-	                      null,
-	                      'Akher Alregal Almohtrameen'
-	                    ),
-	                    _react2.default.createElement('td', null),
-	                    _react2.default.createElement(
-	                      'td',
-	                      null,
-	                      'El Kelma Al Akhira'
+	                      'span',
+	                      { className: 'description' },
+	                      'The film revolves around the figure of Omar ( Abdulaziz Karim ) . Tragedy begins life since he was a small child where he witnessed the exchange of fire between his father ( Mahmoud soldier ) and police forces , and despite the fact that his father left his home.'
 	                    )
-	                  ),
-	                  _react2.default.createElement(
-	                    'tr',
-	                    { 'data-row': '5', 'data-img': 'M21038.jpg' },
-	                    _react2.default.createElement(
-	                      'td',
-	                      null,
-	                      'Logo'
-	                    ),
-	                    _react2.default.createElement(
-	                      'td',
-	                      null,
-	                      'Salama'
-	                    ),
-	                    _react2.default.createElement('td', null),
-	                    _react2.default.createElement('td', null),
-	                    _react2.default.createElement(
-	                      'td',
-	                      null,
-	                      'Giran Elsaad'
-	                    ),
-	                    _react2.default.createElement('td', null),
-	                    _react2.default.createElement('td', null),
-	                    _react2.default.createElement('td', null)
-	                  ),
-	                  _react2.default.createElement(
-	                    'tr',
-	                    { 'data-row': '6', 'data-img': 'M21003.jpg' },
-	                    _react2.default.createElement(
-	                      'td',
-	                      null,
-	                      'Logo'
-	                    ),
-	                    _react2.default.createElement(
-	                      'td',
-	                      null,
-	                      'Hekayty Maa Elzaman'
-	                    ),
-	                    _react2.default.createElement(
-	                      'td',
-	                      null,
-	                      'Bahawat Akher Zaman'
-	                    ),
-	                    _react2.default.createElement(
-	                      'td',
-	                      null,
-	                      'Aby Fouq Elshagara'
-	                    ),
-	                    _react2.default.createElement(
-	                      'td',
-	                      null,
-	                      'Eltahady'
-	                    ),
-	                    _react2.default.createElement(
-	                      'td',
-	                      null,
-	                      'Hob Fe Elzenzana'
-	                    ),
-	                    _react2.default.createElement(
-	                      'td',
-	                      null,
-	                      'Ragol Bemaana Elkalema'
-	                    ),
-	                    _react2.default.createElement('td', null)
 	                  )
 	                )
 	              )
+	            ),
+	            _react2.default.createElement(
+	              'tr',
+	              { 'data-row': '3', 'data-img': 'M21042.jpg' },
+	              _react2.default.createElement(
+	                'td',
+	                null,
+	                'Logo'
+	              ),
+	              _react2.default.createElement(
+	                'td',
+	                null,
+	                'Zarf Sehy'
+	              ),
+	              _react2.default.createElement('td', null),
+	              _react2.default.createElement('td', null),
+	              _react2.default.createElement(
+	                'td',
+	                null,
+	                'Wbelwaldyen Ehsanan'
+	              ),
+	              _react2.default.createElement('td', null),
+	              _react2.default.createElement('td', null),
+	              _react2.default.createElement('td', null)
+	            ),
+	            _react2.default.createElement(
+	              'tr',
+	              { 'data-row': '4', 'data-img': 'M21043.jpg' },
+	              _react2.default.createElement(
+	                'td',
+	                null,
+	                'Logo'
+	              ),
+	              _react2.default.createElement(
+	                'td',
+	                null,
+	                'Youm Maloush Lazma'
+	              ),
+	              _react2.default.createElement(
+	                'td',
+	                null,
+	                'Giran Elsaad'
+	              ),
+	              _react2.default.createElement(
+	                'td',
+	                null,
+	                'Wahda Be Wahda'
+	              ),
+	              _react2.default.createElement(
+	                'td',
+	                null,
+	                'Man Oheb'
+	              ),
+	              _react2.default.createElement(
+	                'td',
+	                null,
+	                'Akher Alregal Almohtrameen'
+	              ),
+	              _react2.default.createElement('td', null),
+	              _react2.default.createElement(
+	                'td',
+	                null,
+	                'El Kelma Al Akhira'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'tr',
+	              { 'data-row': '5', 'data-img': 'M21038.jpg' },
+	              _react2.default.createElement(
+	                'td',
+	                null,
+	                'Logo'
+	              ),
+	              _react2.default.createElement(
+	                'td',
+	                null,
+	                'Salama'
+	              ),
+	              _react2.default.createElement('td', null),
+	              _react2.default.createElement('td', null),
+	              _react2.default.createElement(
+	                'td',
+	                null,
+	                'Giran Elsaad'
+	              ),
+	              _react2.default.createElement('td', null),
+	              _react2.default.createElement('td', null),
+	              _react2.default.createElement('td', null)
+	            ),
+	            _react2.default.createElement(
+	              'tr',
+	              { 'data-row': '6', 'data-img': 'M21003.jpg' },
+	              _react2.default.createElement(
+	                'td',
+	                null,
+	                'Logo'
+	              ),
+	              _react2.default.createElement(
+	                'td',
+	                null,
+	                'Hekayty Maa Elzaman'
+	              ),
+	              _react2.default.createElement(
+	                'td',
+	                null,
+	                'Bahawat Akher Zaman'
+	              ),
+	              _react2.default.createElement(
+	                'td',
+	                null,
+	                'Aby Fouq Elshagara'
+	              ),
+	              _react2.default.createElement(
+	                'td',
+	                null,
+	                'Eltahady'
+	              ),
+	              _react2.default.createElement(
+	                'td',
+	                null,
+	                'Hob Fe Elzenzana'
+	              ),
+	              _react2.default.createElement(
+	                'td',
+	                null,
+	                'Ragol Bemaana Elkalema'
+	              ),
+	              _react2.default.createElement('td', null)
 	            )
-	          ),
+	          )
+	        )
+	      )
+	    );
+	  }
+	});
+
+/***/ },
+/* 290 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	  displayName: 'TimeBlockHead',
+	  getInitialState: function getInitialState() {
+	    return {
+	      ampm: 'pm',
+	      startTime: '5'
+	    };
+	  },
+	  render: function render() {
+	    var startTime = this.state.startTime;
+	    var ampm = this.state.ampm;
+	    var count = 0;
+	    var increment = 0;
+	    var TIMES = ['<tr ><th ><span className="left-arrow">&#706;</span>'];
+	    TimeList.filter(function (time, i) {
+	      if (time == startTime + ampm) {
+	        increment = 1;
+	      }
+	      if (increment && count <= 5) {
+	        if (time.indexOf('pm')) ampm = 'pm';
+	        var time = time.replace(/am|pm/g, '');
+	        count++;
+	        if (time.indexOf(':') == -1) {
+	          TIMES.push('<th>' + time + '<sub>' + ampm + '</sub></th>');
+	        } else {
+	          var times = time.split(':');
+	          TIMES.push('<th>' + times[0] + '<sub class="medium">&#58;' + times[1] + '</sub></th>');
+	        }
+	      }
+	    });
+	    TIMES.push('<th><span class="right-arrow">&#707;</span></th></th></tr>');
+	    TIMES = TIMES.filter(function (n) {
+	      return n != '';
+	    });
+	    console.log("times", TIMES);
+	    var self = this;
+	    setTimeout(function () {
+	      $('.right-arrow').off();
+	      $('.right-arrow').on('click', function () {
+	        console.log("i was clicked!!!!!");
+	        var time = parseInt(self.state.startTime);
+	        if (time < 11) self.setState({
+	          startTime: parseInt(time) + 1
+	        }, function () {
+	          console.log("changed start time", self.state.startTime);
+	        });
+	      });
+	      $('.left-arrow').off();
+	      $('.left-arrow').on('click', function () {
+	        console.log("i was clicked!!!!!");
+	        var time = parseInt(self.state.startTime);
+	        if (time > 1) self.setState({
+	          startTime: parseInt(time) - 1
+	        }, function () {
+	          console.log("changed start time", self.state.startTime);
+	        });
+	      });
+	    }, 800);
+	    return _react2.default.createElement('thead', { dangerouslySetInnerHTML: { __html: TIMES } });
+	  }
+	});
+
+
+	var TimeList = ['1am', '1:30', '2am', '2:30', '3am', '3:30', '4am', '4:30', '5am', '5:30', '6am', '6:30', '7am', '7:30', '8am', '8:30', '9am', '9:30', '10am', '10:30', '11am', '11:30', 'Noon', '1pm', '1:30', '2pm', '2:30', '3pm', '3:30', '4pm', '4:30', '5pm', '5:30', '6pm', '7:30', '7pm', '8:30', '8pm', '9:30', '9pm', '9:30', '10pm', '10:30', '11pm', '11:30', 'Midnight'];
+
+/***/ },
+/* 291 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	  displayName: "MobileSchedule",
+	  render: function render() {
+	    return _react2.default.createElement(
+	      "div",
+	      { className: "sixteen wide tablet column schedule-mobile" },
+	      _react2.default.createElement(
+	        "div",
+	        { className: "ui top attached schedule tabular menu" },
+	        _react2.default.createElement(
+	          "a",
+	          { "data-tab": "first", className: "item active" },
+	          _react2.default.createElement("img", { src: "/images/wireframe/image.png", className: "ui tiny image centered" })
+	        ),
+	        _react2.default.createElement(
+	          "a",
+	          { "data-tab": "second", className: "item" },
+	          _react2.default.createElement("img", { src: "/images/wireframe/image.png", className: "ui tiny image centered" })
+	        ),
+	        _react2.default.createElement(
+	          "a",
+	          { "data-tab": "third", className: "item" },
+	          _react2.default.createElement("img", { src: "/images/wireframe/image.png", className: "ui tiny image centered" })
+	        ),
+	        _react2.default.createElement(
+	          "a",
+	          { "data-tab": "fourth", className: "item" },
+	          _react2.default.createElement("img", { src: "/images/wireframe/image.png", className: "ui tiny image centered" })
+	        ),
+	        _react2.default.createElement(
+	          "a",
+	          { "data-tab": "fifth", className: "item" },
+	          _react2.default.createElement("img", { src: "/images/wireframe/image.png", className: "ui tiny image centered" })
+	        ),
+	        _react2.default.createElement(
+	          "a",
+	          { "data-tab": "sixth", className: "item" },
+	          _react2.default.createElement("img", { src: "/images/wireframe/image.png", className: "ui tiny image centered" })
+	        )
+	      ),
+	      _react2.default.createElement(
+	        "div",
+	        { "data-tab": "first", className: "ui bottom attached schedule tab segment active" },
+	        _react2.default.createElement(
+	          "div",
+	          { className: "ui inverted segment" },
 	          _react2.default.createElement(
-	            'div',
-	            { className: 'sixteen wide tablet column schedule-mobile' },
+	            "div",
+	            { className: "ui inverted relaxed schedule divided list" },
 	            _react2.default.createElement(
-	              'div',
-	              { className: 'ui top attached schedule tabular menu' },
+	              "div",
+	              { className: "item" },
 	              _react2.default.createElement(
-	                'a',
-	                { 'data-tab': 'first', className: 'item active' },
-	                _react2.default.createElement('img', { src: '/images/wireframe/image.png', className: 'ui tiny image centered' })
+	                "div",
+	                { className: "header" },
+	                "5pm"
 	              ),
+	              "Khally Balak"
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "item" },
 	              _react2.default.createElement(
-	                'a',
-	                { 'data-tab': 'second', className: 'item' },
-	                _react2.default.createElement('img', { src: '/images/wireframe/image.png', className: 'ui tiny image centered' })
+	                "div",
+	                { className: "header" },
+	                "5:30"
 	              ),
+	              "Harim Karim"
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "item" },
 	              _react2.default.createElement(
-	                'a',
-	                { 'data-tab': 'third', className: 'item' },
-	                _react2.default.createElement('img', { src: '/images/wireframe/image.png', className: 'ui tiny image centered' })
+	                "div",
+	                { className: "header" },
+	                "6pm"
 	              ),
+	              "Zaki Chan"
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "item" },
 	              _react2.default.createElement(
-	                'a',
-	                { 'data-tab': 'fourth', className: 'item' },
-	                _react2.default.createElement('img', { src: '/images/wireframe/image.png', className: 'ui tiny image centered' })
+	                "div",
+	                { className: "header" },
+	                "6:30"
 	              ),
+	              "Keda Reda"
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "item" },
 	              _react2.default.createElement(
-	                'a',
-	                { 'data-tab': 'fifth', className: 'item' },
-	                _react2.default.createElement('img', { src: '/images/wireframe/image.png', className: 'ui tiny image centered' })
+	                "div",
+	                { className: "header" },
+	                "7pm"
 	              ),
-	              _react2.default.createElement(
-	                'a',
-	                { 'data-tab': 'sixth', className: 'item' },
-	                _react2.default.createElement('img', { src: '/images/wireframe/image.png', className: 'ui tiny image centered' })
-	              )
+	              "Wahed Sefr"
 	            ),
 	            _react2.default.createElement(
-	              'div',
-	              { 'data-tab': 'first', className: 'ui bottom attached schedule tab segment active' },
+	              "div",
+	              { className: "item" },
 	              _react2.default.createElement(
-	                'div',
-	                { className: 'ui inverted segment' },
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'ui inverted relaxed schedule divided list' },
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'item' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'header' },
-	                      '5pm'
-	                    ),
-	                    'Khally Balak'
-	                  ),
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'item' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'header' },
-	                      '5:30'
-	                    ),
-	                    'Harim Karim'
-	                  ),
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'item' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'header' },
-	                      '6pm'
-	                    ),
-	                    'Zaki Chan'
-	                  ),
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'item' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'header' },
-	                      '6:30'
-	                    ),
-	                    'Keda Reda'
-	                  ),
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'item' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'header' },
-	                      '7pm'
-	                    ),
-	                    'Wahed Sefr'
-	                  ),
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'item' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'header' },
-	                      '7:30'
-	                    ),
-	                    'Habib Saldo'
-	                  ),
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'item' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'header' },
-	                      '8pm'
-	                    ),
-	                    'Breem Harashi'
-	                  )
-	                )
-	              )
+	                "div",
+	                { className: "header" },
+	                "7:30"
+	              ),
+	              "Habib Saldo"
 	            ),
 	            _react2.default.createElement(
-	              'div',
-	              { 'data-tab': 'second', className: 'ui bottom attached tab segment' },
+	              "div",
+	              { className: "item" },
 	              _react2.default.createElement(
-	                'div',
-	                { className: 'ui inverted segment' },
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'ui inverted relaxed schedule divided list' },
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'item' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'header' },
-	                      '5pm'
-	                    ),
-	                    'Another Balak'
-	                  ),
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'item' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'header' },
-	                      '5:30'
-	                    ),
-	                    'Harim Name'
-	                  ),
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'item' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'header' },
-	                      '6pm'
-	                    ),
-	                    'Zaki Chan'
-	                  ),
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'item' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'header' },
-	                      '6:30'
-	                    ),
-	                    'Keda Reda'
-	                  ),
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'item' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'header' },
-	                      '7pm'
-	                    ),
-	                    'Wahed Sefr'
-	                  ),
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'item' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'header' },
-	                      '7:30'
-	                    ),
-	                    'Habib Saldo'
-	                  ),
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'item' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'header' },
-	                      '8pm'
-	                    ),
-	                    'Breem Harashi'
-	                  )
-	                )
-	              )
+	                "div",
+	                { className: "header" },
+	                "8pm"
+	              ),
+	              "Breem Harashi"
+	            )
+	          )
+	        )
+	      ),
+	      _react2.default.createElement(
+	        "div",
+	        { "data-tab": "second", className: "ui bottom attached tab segment" },
+	        _react2.default.createElement(
+	          "div",
+	          { className: "ui inverted segment" },
+	          _react2.default.createElement(
+	            "div",
+	            { className: "ui inverted relaxed schedule divided list" },
+	            _react2.default.createElement(
+	              "div",
+	              { className: "item" },
+	              _react2.default.createElement(
+	                "div",
+	                { className: "header" },
+	                "5pm"
+	              ),
+	              "Another Balak"
 	            ),
 	            _react2.default.createElement(
-	              'div',
-	              { 'data-tab': 'third', className: 'ui bottom attached tab segment' },
+	              "div",
+	              { className: "item" },
 	              _react2.default.createElement(
-	                'div',
-	                { className: 'ui inverted segment' },
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'ui inverted relaxed schedule divided list' },
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'item' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'header' },
-	                      '5pm'
-	                    ),
-	                    'Third Balak'
-	                  ),
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'item' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'header' },
-	                      '5:30'
-	                    ),
-	                    'Name Karim'
-	                  ),
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'item' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'header' },
-	                      '6pm'
-	                    ),
-	                    'Zaki Chan'
-	                  ),
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'item' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'header' },
-	                      '6:30'
-	                    ),
-	                    'Keda Reda'
-	                  ),
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'item' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'header' },
-	                      '7pm'
-	                    ),
-	                    'Wahed Sefr'
-	                  ),
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'item' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'header' },
-	                      '7:30'
-	                    ),
-	                    'Habib Saldo'
-	                  ),
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'item' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'header' },
-	                      '8pm'
-	                    ),
-	                    'Breem Harashi'
-	                  )
-	                )
-	              )
+	                "div",
+	                { className: "header" },
+	                "5:30"
+	              ),
+	              "Harim Name"
 	            ),
 	            _react2.default.createElement(
-	              'div',
-	              { 'data-tab': 'fourth', className: 'ui bottom attached tab segment' },
+	              "div",
+	              { className: "item" },
 	              _react2.default.createElement(
-	                'div',
-	                { className: 'ui inverted segment' },
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'ui inverted relaxed schedule divided list' },
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'item' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'header' },
-	                      '5pm'
-	                    ),
-	                    'And yet'
-	                  ),
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'item' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'header' },
-	                      '5:30'
-	                    ),
-	                    'another name'
-	                  ),
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'item' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'header' },
-	                      '6pm'
-	                    ),
-	                    'Zaki Chan'
-	                  ),
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'item' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'header' },
-	                      '6:30'
-	                    ),
-	                    'Keda Reda'
-	                  ),
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'item' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'header' },
-	                      '7pm'
-	                    ),
-	                    'Wahed Sefr'
-	                  ),
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'item' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'header' },
-	                      '7:30'
-	                    ),
-	                    'Habib Saldo'
-	                  ),
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'item' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'header' },
-	                      '8pm'
-	                    ),
-	                    'Breem Harashi'
-	                  )
-	                )
-	              )
+	                "div",
+	                { className: "header" },
+	                "6pm"
+	              ),
+	              "Zaki Chan"
 	            ),
 	            _react2.default.createElement(
-	              'div',
-	              { 'data-tab': 'fifth', className: 'ui bottom attached tab segment' },
+	              "div",
+	              { className: "item" },
 	              _react2.default.createElement(
-	                'div',
-	                { className: 'ui inverted segment' },
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'ui inverted relaxed schedule divided list' },
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'item' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'header' },
-	                      '5pm'
-	                    ),
-	                    'Khally Balak'
-	                  ),
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'item' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'header' },
-	                      '5:30'
-	                    ),
-	                    'Harim Karim'
-	                  ),
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'item' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'header' },
-	                      '6pm'
-	                    ),
-	                    'Zaki Chan'
-	                  ),
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'item' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'header' },
-	                      '6:30'
-	                    ),
-	                    'Keda Reda'
-	                  ),
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'item' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'header' },
-	                      '7pm'
-	                    ),
-	                    'Wahed Sefr'
-	                  ),
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'item' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'header' },
-	                      '7:30'
-	                    ),
-	                    'Habib Saldo'
-	                  ),
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'item' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'header' },
-	                      '8pm'
-	                    ),
-	                    'Breem Harashi'
-	                  )
-	                )
-	              )
+	                "div",
+	                { className: "header" },
+	                "6:30"
+	              ),
+	              "Keda Reda"
 	            ),
 	            _react2.default.createElement(
-	              'div',
-	              { 'data-tab': 'sixth', className: 'ui bottom attached tab segment' },
+	              "div",
+	              { className: "item" },
 	              _react2.default.createElement(
-	                'div',
-	                { className: 'ui inverted segment' },
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'ui inverted relaxed schedule divided list' },
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'item' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'header' },
-	                      '5pm'
-	                    ),
-	                    'still Balak'
-	                  ),
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'item' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'header' },
-	                      '5:30'
-	                    ),
-	                    'Harim more'
-	                  ),
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'item' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'header' },
-	                      '6pm'
-	                    ),
-	                    'Zaki Chan'
-	                  ),
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'item' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'header' },
-	                      '6:30'
-	                    ),
-	                    'Keda Reda'
-	                  ),
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'item' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'header' },
-	                      '7pm'
-	                    ),
-	                    'Wahed Sefr'
-	                  ),
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'item' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'header' },
-	                      '7:30'
-	                    ),
-	                    'Habib Saldo'
-	                  ),
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'item' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'header' },
-	                      '8pm'
-	                    ),
-	                    'Breem Harashi'
-	                  )
-	                )
-	              )
+	                "div",
+	                { className: "header" },
+	                "7pm"
+	              ),
+	              "Wahed Sefr"
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "item" },
+	              _react2.default.createElement(
+	                "div",
+	                { className: "header" },
+	                "7:30"
+	              ),
+	              "Habib Saldo"
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "item" },
+	              _react2.default.createElement(
+	                "div",
+	                { className: "header" },
+	                "8pm"
+	              ),
+	              "Breem Harashi"
+	            )
+	          )
+	        )
+	      ),
+	      _react2.default.createElement(
+	        "div",
+	        { "data-tab": "third", className: "ui bottom attached tab segment" },
+	        _react2.default.createElement(
+	          "div",
+	          { className: "ui inverted segment" },
+	          _react2.default.createElement(
+	            "div",
+	            { className: "ui inverted relaxed schedule divided list" },
+	            _react2.default.createElement(
+	              "div",
+	              { className: "item" },
+	              _react2.default.createElement(
+	                "div",
+	                { className: "header" },
+	                "5pm"
+	              ),
+	              "Third Balak"
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "item" },
+	              _react2.default.createElement(
+	                "div",
+	                { className: "header" },
+	                "5:30"
+	              ),
+	              "Name Karim"
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "item" },
+	              _react2.default.createElement(
+	                "div",
+	                { className: "header" },
+	                "6pm"
+	              ),
+	              "Zaki Chan"
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "item" },
+	              _react2.default.createElement(
+	                "div",
+	                { className: "header" },
+	                "6:30"
+	              ),
+	              "Keda Reda"
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "item" },
+	              _react2.default.createElement(
+	                "div",
+	                { className: "header" },
+	                "7pm"
+	              ),
+	              "Wahed Sefr"
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "item" },
+	              _react2.default.createElement(
+	                "div",
+	                { className: "header" },
+	                "7:30"
+	              ),
+	              "Habib Saldo"
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "item" },
+	              _react2.default.createElement(
+	                "div",
+	                { className: "header" },
+	                "8pm"
+	              ),
+	              "Breem Harashi"
+	            )
+	          )
+	        )
+	      ),
+	      _react2.default.createElement(
+	        "div",
+	        { "data-tab": "fourth", className: "ui bottom attached tab segment" },
+	        _react2.default.createElement(
+	          "div",
+	          { className: "ui inverted segment" },
+	          _react2.default.createElement(
+	            "div",
+	            { className: "ui inverted relaxed schedule divided list" },
+	            _react2.default.createElement(
+	              "div",
+	              { className: "item" },
+	              _react2.default.createElement(
+	                "div",
+	                { className: "header" },
+	                "5pm"
+	              ),
+	              "And yet"
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "item" },
+	              _react2.default.createElement(
+	                "div",
+	                { className: "header" },
+	                "5:30"
+	              ),
+	              "another name"
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "item" },
+	              _react2.default.createElement(
+	                "div",
+	                { className: "header" },
+	                "6pm"
+	              ),
+	              "Zaki Chan"
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "item" },
+	              _react2.default.createElement(
+	                "div",
+	                { className: "header" },
+	                "6:30"
+	              ),
+	              "Keda Reda"
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "item" },
+	              _react2.default.createElement(
+	                "div",
+	                { className: "header" },
+	                "7pm"
+	              ),
+	              "Wahed Sefr"
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "item" },
+	              _react2.default.createElement(
+	                "div",
+	                { className: "header" },
+	                "7:30"
+	              ),
+	              "Habib Saldo"
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "item" },
+	              _react2.default.createElement(
+	                "div",
+	                { className: "header" },
+	                "8pm"
+	              ),
+	              "Breem Harashi"
+	            )
+	          )
+	        )
+	      ),
+	      _react2.default.createElement(
+	        "div",
+	        { "data-tab": "fifth", className: "ui bottom attached tab segment" },
+	        _react2.default.createElement(
+	          "div",
+	          { className: "ui inverted segment" },
+	          _react2.default.createElement(
+	            "div",
+	            { className: "ui inverted relaxed schedule divided list" },
+	            _react2.default.createElement(
+	              "div",
+	              { className: "item" },
+	              _react2.default.createElement(
+	                "div",
+	                { className: "header" },
+	                "5pm"
+	              ),
+	              "Khally Balak"
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "item" },
+	              _react2.default.createElement(
+	                "div",
+	                { className: "header" },
+	                "5:30"
+	              ),
+	              "Harim Karim"
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "item" },
+	              _react2.default.createElement(
+	                "div",
+	                { className: "header" },
+	                "6pm"
+	              ),
+	              "Zaki Chan"
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "item" },
+	              _react2.default.createElement(
+	                "div",
+	                { className: "header" },
+	                "6:30"
+	              ),
+	              "Keda Reda"
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "item" },
+	              _react2.default.createElement(
+	                "div",
+	                { className: "header" },
+	                "7pm"
+	              ),
+	              "Wahed Sefr"
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "item" },
+	              _react2.default.createElement(
+	                "div",
+	                { className: "header" },
+	                "7:30"
+	              ),
+	              "Habib Saldo"
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "item" },
+	              _react2.default.createElement(
+	                "div",
+	                { className: "header" },
+	                "8pm"
+	              ),
+	              "Breem Harashi"
+	            )
+	          )
+	        )
+	      ),
+	      _react2.default.createElement(
+	        "div",
+	        { "data-tab": "sixth", className: "ui bottom attached tab segment" },
+	        _react2.default.createElement(
+	          "div",
+	          { className: "ui inverted segment" },
+	          _react2.default.createElement(
+	            "div",
+	            { className: "ui inverted relaxed schedule divided list" },
+	            _react2.default.createElement(
+	              "div",
+	              { className: "item" },
+	              _react2.default.createElement(
+	                "div",
+	                { className: "header" },
+	                "5pm"
+	              ),
+	              "still Balak"
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "item" },
+	              _react2.default.createElement(
+	                "div",
+	                { className: "header" },
+	                "5:30"
+	              ),
+	              "Harim more"
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "item" },
+	              _react2.default.createElement(
+	                "div",
+	                { className: "header" },
+	                "6pm"
+	              ),
+	              "Zaki Chan"
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "item" },
+	              _react2.default.createElement(
+	                "div",
+	                { className: "header" },
+	                "6:30"
+	              ),
+	              "Keda Reda"
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "item" },
+	              _react2.default.createElement(
+	                "div",
+	                { className: "header" },
+	                "7pm"
+	              ),
+	              "Wahed Sefr"
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "item" },
+	              _react2.default.createElement(
+	                "div",
+	                { className: "header" },
+	                "7:30"
+	              ),
+	              "Habib Saldo"
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "item" },
+	              _react2.default.createElement(
+	                "div",
+	                { className: "header" },
+	                "8pm"
+	              ),
+	              "Breem Harashi"
 	            )
 	          )
 	        )

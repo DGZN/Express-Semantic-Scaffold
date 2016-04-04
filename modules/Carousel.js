@@ -100,7 +100,7 @@ export default React.createClass({
             </Link>
          </div>
         </div>
-        <div className="ui container carousel">
+        <div className="ui container carousel" style={{ 'textAlign': this.props.textAlign }}>
           <Slider {...settings}>
             {COLUMNS}
           </Slider>

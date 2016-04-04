@@ -73,7 +73,7 @@ export default React.createClass({
   render() {
 
     return (
-      <div style={{ 'textAlign': this.state.align}}>
+      <div style={{ 'textAlign': this.state.align + ' !important'}}>
         <MyWatchlist />
         <Nav
           user={this.state.user}
@@ -82,6 +82,7 @@ export default React.createClass({
           language={this.state.language}  />
         {this.props.children && React.cloneElement(this.props.children,{
           language: this.state.language
+        , textAlign: this.state.align
         , myAccount: this.myAccount
         , isLoggedIn: this.state.userLoggedIn
         , user: this.state.user

@@ -119,7 +119,7 @@ export default React.createClass({
       <div>
         <Filter {...this.props} filter={this.filter} filterGenre={this.filterGenre} activeFilter={this.state.filter} activeGenre={this.state.genre} />
         <div className="ui vertical center container aligned grids large-container">
-          <div className="ui equal width grid container">
+          <div className="ui equal width grid container"  style={{ 'textAlign': this.props.textAlign }}>
             {ROWS}
           </div>
         </div>

@@ -11,13 +11,13 @@ export default React.createClass({
   render() {
     var settings = {
       autoplay: true,
-      autoplaySpeed: 5000,
+      autoplaySpeed: 9500,
       infinite: false,
-      speed: 900,
+      speed: 5000,
       fade: false,
       slidesToShow: 1,
       slidesToScroll: 1,
-      easing: 'easeInOutCubic'
+      easing: 'easeIn'
     };
     return (
       <div>
@@ -29,10 +29,10 @@ export default React.createClass({
             <div id="img" className="ui image hero"></div>
           </Slider>
         </div>
-        <div className="ui vertical center container aligned grids carousel-container">
-          <Carousel title="Movies" source="/movies" language={this.props.language} limit="15" href="/movies/:id" />
-          <Carousel title="Series" source="/series" language={this.props.language} limit="10" href="/series/:id" />
-          <Carousel title="Plays"  source="/plays" language={this.props.language}  limit="15" href="/plays/:id" />
+        <div className="ui vertical center container aligned grids carousel-container" >
+          <Carousel title="Movies" source="/movies" limit="15" href="/movies/:id"  {...this.props} />
+          <Carousel title="Series" source="/series" limit="10" href="/series/:id" {...this.props}  />
+          <Carousel title="Plays"  source="/plays"  limit="15" href="/plays/:id" {...this.props}   />
         </div>
       </div>
     );

@@ -851,11 +851,13 @@ body.pushable>.pusher {
   position: relative;
   padding-right: 1em;
   float: right;
+  cursor: pointer;
 }
 
 .ui.schedule.table .right-arrow {
   position: relative;
   float: right;
+  cursor: pointer;
 }
 
 .schedule-mobile {
@@ -1465,7 +1467,7 @@ ul.meta.values {
   background-image: url('/images/wireframe/thumb_placeholder.png');
   background-color: rgba(24,24,24,1) !important;
   background-repeat: no-repeat;
-  opacity: 0.7;
+  opacity: 0.4;
 }
 
 .carousel .image.preview {
@@ -1478,11 +1480,11 @@ ul.meta.values {
   background-image: url('/images/wireframe/thumb_placeholder.png');
   background-color: rgba(24,24,24,1) !important;
   background-repeat: no-repeat;
-  -webkit-transition:   opacity 0.2s ease-in;
-       -moz-transition: opacity 0.2s ease-in;
-        -ms-transition: opacity 0.2s ease-in;
-         -o-transition: opacity 0.2s ease-in;
-            transition: opacity 0.2s ease-in;
+  -webkit-transition:   opacity 1.2s ease-in;
+       -moz-transition: opacity 1.2s ease-in;
+        -ms-transition: opacity 1.2s ease-in;
+         -o-transition: opacity 1.2s ease-in;
+            transition: opacity 1.2s ease-in;
   opacity: 1;
 }
 

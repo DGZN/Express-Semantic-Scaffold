@@ -11,16 +11,16 @@ export default React.createClass({
     this.props.episodes.map((episode, i) => {
       ROWS.push(<WatchlistRow key={'watchlist-'+i} episode={episode} language={this.props.language} />)
     })
-    setTimeout(function(){
-      $('.season-watchlist').velocity("scroll", {
-          duration: 600
-        , easing: 'ease-in'
-        , container: $(".season-watchlist")
-      })
-      setTimeout(function(){
-        $('.season-watchlist').animate({ scrollTop: 0 }, 2000)
-      }, 2200)
-    },1500)
+    // setTimeout(function(){
+    //   $('.season-watchlist').velocity("scroll", {
+    //       duration: 600
+    //     , easing: 'ease-in'
+    //     , container: $(".season-watchlist")
+    //   })
+    //   setTimeout(function(){
+    //     $('.season-watchlist').animate({ scrollTop: 0 }, 2000)
+    //   }, 2200)
+    // },1500)
     return (
       <div className="ui stackable grid season-watchlist-container">
         {ROWS}
