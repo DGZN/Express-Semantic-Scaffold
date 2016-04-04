@@ -39,22 +39,22 @@ export default React.createClass({
           }
           $('#channel-content').velocity({
             opacity: 0
-          }, 200, function(){
+          }, 250, function(){
             $('h3.title').html(col)
             $('.blockDetails .title').html(col)
             $('.selected-thumb').attr('src', '/images/melody/' + thumb)
           }).delay(0).velocity({
             opacity: 1
-          }, 160)
+          }, 260)
 
           $('.selectedChannel').show(300).velocity({
               top: top
             , opacity: 1
             , display: 'table-row !important'
-          }, 'easeOutBack', 600)
+          }, 'easeOutBack', 400)
           $('#selectedChannelBlock').velocity({
             top: selectedChannel
-          }, 'easeOutCubic', 700)
+          }, 'easeOutCubic', 500)
       }
     })
   },

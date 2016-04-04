@@ -108,6 +108,10 @@
   left: 98px;
   height: 200px;
   background: #cEA401;
+  border-right: 0.1px solid rgba(0,0,0,.4);
+  border-bottom: 0.1px solid rgba(0,0,0,.4);
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 4px;
 }
 
 #selectedChannelBlock td:not(:first-child) {
