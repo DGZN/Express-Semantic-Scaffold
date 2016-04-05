@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "6d89b45e23828ddb21ef"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "2072e55a1cf6d6b64d04"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -33247,13 +33247,13 @@
 	  render: function render() {
 	    var settings = {
 	      autoplay: true,
-	      autoplaySpeed: 9500,
+	      autoplaySpeed: 7500,
 	      infinite: false,
-	      speed: 5000,
-	      fade: false,
+	      speed: 1300,
+	      fade: true,
 	      slidesToShow: 1,
 	      slidesToScroll: 1,
-	      easing: 'easeIn'
+	      easing: 'easeInOut'
 	    };
 	    return _react2.default.createElement(
 	      'div',
@@ -33264,10 +33264,10 @@
 	        _react2.default.createElement(
 	          _reactSlick2.default,
 	          settings,
-	          _react2.default.createElement('div', { id: 'img', className: 'ui image hero' }),
-	          _react2.default.createElement('div', { id: 'img', className: 'ui image hero' }),
-	          _react2.default.createElement('div', { id: 'img', className: 'ui image hero' }),
-	          _react2.default.createElement('div', { id: 'img', className: 'ui image hero' })
+	          _react2.default.createElement('div', { id: 'img', className: 'ui image hero hero1' }),
+	          _react2.default.createElement('div', { id: 'img', className: 'ui image hero hero2' }),
+	          _react2.default.createElement('div', { id: 'img', className: 'ui image hero hero3' }),
+	          _react2.default.createElement('div', { id: 'img', className: 'ui image hero hero4' })
 	        )
 	      ),
 	      _react2.default.createElement(
@@ -35326,8 +35326,31 @@
 
 	var env = __webpack_require__(238);
 
-	var RightNavButton = function (_React$Component) {
-	  _inherits(RightNavButton, _React$Component);
+	var LeftNavButton = function (_React$Component) {
+	  _inherits(LeftNavButton, _React$Component);
+
+	  function LeftNavButton() {
+	    _classCallCheck(this, LeftNavButton);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(LeftNavButton).apply(this, arguments));
+	  }
+
+	  _createClass(LeftNavButton, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'button',
+	        _extends({ className: 'carousel-left-arrow' }, this.props),
+	        'Next'
+	      );
+	    }
+	  }]);
+
+	  return LeftNavButton;
+	}(_react2.default.Component);
+
+	var RightNavButton = function (_React$Component2) {
+	  _inherits(RightNavButton, _React$Component2);
 
 	  function RightNavButton() {
 	    _classCallCheck(this, RightNavButton);
@@ -35336,23 +35359,11 @@
 	  }
 
 	  _createClass(RightNavButton, [{
-	    key: 'handleClick',
-	    value: function handleClick(e) {
-	      console.log("clicked");
-	      // setTimeout(function(){
-	      //   ids.map((id, i) => {
-	      //     $(id).delay((i*i) * 2.5).velocity({
-	      //       opacity: 1
-	      //     })
-	      //   })
-	      // },100)
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'button',
-	        _extends({ className: 'carousel-right-arrow' }, this.props, { onClick: this.handleClick }),
+	        _extends({ className: 'carousel-right-arrow' }, this.props),
 	        'Next'
 	      );
 	    }
@@ -35385,7 +35396,7 @@
 	  },
 
 	  render: function render() {
-	    var _this2 = this;
+	    var _this3 = this;
 
 	    // <Row {...this.props} />
 	    var settings = {
@@ -35395,6 +35406,7 @@
 	      slidesToShow: 5,
 	      slidesToScroll: 5,
 	      easing: 'easeInOutCubic',
+	      prevArrow: 'LeftNavButton',
 	      nextArrow: 'RightNavButton',
 	      variableWidth: true
 	    };
@@ -35403,18 +35415,23 @@
 	    var ids = [];
 	    var COLUMNS = [];
 	    this.state.collection.some(function (data, i) {
-	      var id = _this2.props.title + '-col' + (i + 1);
+	      var id = _this3.props.title + '-col' + (i + 1);
 	      var thumb = '/images/melody/' + data.thumb.replace('M1', 'M11');
 	      if (self.thumbPath) {
 	        thumb = '/images/wireframe/16x9.png';
+	      }
+	      if (data.ref) {
+	        var link = data.ref.link;
+	      } else {
+	        self.props.href ? link = generateLink(self.props.href, data) : link = self.props.href;
 	      }
 	      ids.push('#' + id);
 	      COLUMNS.push(_react2.default.createElement(
 	        'div',
 	        null,
 	        _react2.default.createElement(
-	          'a',
-	          { className: 'carousel image preview', id: id },
+	          _reactRouter.Link,
+	          { to: link || '#', className: 'carousel image preview', id: id },
 	          _react2.default.createElement(
 	            'div',
 	            { className: ' image ', style: { "backgroundImage": 'url(' + thumb + ') !important' } },
@@ -35426,7 +35443,7 @@
 	          )
 	        )
 	      ));
-	      return i === _this2.props.limit - 1;
+	      return i === _this3.props.limit - 1;
 	    });
 	    var delay = 10;
 	    setTimeout(function () {
@@ -35474,6 +35491,19 @@
 	    );
 	  }
 	});
+
+
+	function generateLink(href, props) {
+	  var link = href;
+	  var keys = href.match(/[:]\w+/g);
+	  keys.map(function (key) {
+	    var _key = key.replace(':', '');
+	    if (props[_key]) {
+	      link = link.replace(key, props[_key]);
+	    }
+	  });
+	  return link;
+	}
 
 /***/ },
 /* 264 */
@@ -35747,11 +35777,11 @@
 	    }
 	    setTimeout(function () {
 	      $('.image.preview.thumb').each(function (i) {
-	        $(this).delay(i * i * 0.05).velocity({
+	        $(this).delay(i * i * 0.9).velocity({
 	          opacity: 1
-	        }, 20);
+	        }, 0);
 	      });
-	    }, 5);
+	    }, 0);
 	    return _react2.default.createElement(
 	      'div',
 	      null,
@@ -35949,6 +35979,7 @@
 
 
 	function generateLink(props) {
+	  console.log("link", link, 'keys', keys, 'props', props);
 	  var link = props.href;
 	  var keys = props.href.match(/[:]\w+/g);
 	  keys.map(function (key) {
@@ -35985,7 +36016,8 @@
 	exports.default = _react2.default.createClass({
 	  displayName: 'Movie',
 	  render: function render() {
-	    if (!this.props.user) this.props.myAccount();
+	    // if (!this.props.user)
+	    //   this.props.myAccount()
 	    var source = '/movies/' + this.props.params.id;
 	    return _react2.default.createElement(_VideoDetail2.default, _extends({}, this.props, { source: source }));
 	  }
@@ -36399,7 +36431,8 @@
 	exports.default = _react2.default.createClass({
 	  displayName: 'Play',
 	  render: function render() {
-	    if (!this.props.user) this.props.myAccount();
+	    // if (!this.props.user)
+	    //   this.props.myAccount()
 	    var source = '/plays/' + this.props.params.id;
 	    return _react2.default.createElement(_VideoDetail2.default, _extends({}, this.props, { source: source }));
 	  }
@@ -36497,7 +36530,8 @@
 	exports.default = _react2.default.createClass({
 	  displayName: 'Season',
 	  render: function render() {
-	    if (!this.props.user) this.props.myAccount();
+	    // if (!this.props.user)
+	    //   this.props.myAccount()
 	    var source = '/series/' + this.props.params.id;
 	    return _react2.default.createElement(_SeasonDetail2.default, _extends({}, this.props, { source: source }));
 	  }
@@ -36603,7 +36637,7 @@
 	        { className: 'ui vertical center container aligned grids' },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'ui two column grid container details pad-top-medium' },
+	          { className: 'ui two column grid container details pad-top-medium', style: { overflow: 'hidden' } },
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'details six wide computer only column centered season-watchlist' },
@@ -36823,15 +36857,15 @@
 	    var episode = this.props.episode;
 	    var language = this.props.language;
 
-	    $('#video-slide-out, .videoPlayer').animate({
+	    $('#video-slide-out, .videoPlayer').velocity({
 	      opacity: 0
-	    }, function () {
+	    }, 200, function () {
 	      _reactDom2.default.render(_react2.default.createElement(_VideoPlayer2.default, { video: episode, language: language }), document.getElementById('video-slide-out'));
 	    });
 
 	    $('.season-detail').velocity({
 	      opacity: "0"
-	    }, 740, "ease-out");
+	    }, 300, "ease-out");
 
 	    $('#video-slide-out').velocity({
 	      "left": "0%",
@@ -36841,15 +36875,14 @@
 	      "display": "block",
 	      "opacity": "0",
 	      "z-index": "1"
-	    }, 300, "easeOutQuart").velocity({
-	      top: "-4.5%",
+	    }, 200, "ease-in").velocity({
+	      top: '-45px',
 	      opacity: "1"
-	    }, 1500, "easeOutQuart");
+	    }, 300, "easeIn");
 
 	    $('.videoPlayer').velocity({
-	      top: "-4.5%",
 	      opacity: "1"
-	    }, 1500, "easeOutQuart");
+	    }, 400, "easeOutQuart");
 	  }
 	});
 
@@ -36916,10 +36949,10 @@
 	  closeVideoSlideOut: function closeVideoSlideOut() {
 	    $('#video-slide-out, .videoPlayer').velocity({
 	      opacity: 0
-	    }, 750);
+	    }, 300, "ease-in");
 	    $('.season-detail').velocity({
 	      opacity: "1"
-	    }, 640, "ease-in");
+	    }, 300, "ease-in");
 	  },
 
 
@@ -36931,7 +36964,7 @@
 
 
 	function YouTubePlayer(id) {
-	  return '<iframe width="98%" height="510" src="https://www.youtube.com/embed/' + id + '?rel=0&amp;controls=1&amp;showinfo=0" frameborder="0"  allowfullscreen></iframe>';
+	  return '<iframe width="98%" height="500" src="https://www.youtube.com/embed/' + id + '?rel=0&amp;controls=1&amp;showinfo=0" frameborder="0"  allowfullscreen></iframe>';
 	}
 
 	function BrightCovePlayer(id) {
@@ -36995,6 +37028,10 @@
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _reactSlick = __webpack_require__(243);
+
+	var _reactSlick2 = _interopRequireDefault(_reactSlick);
 
 	var _EPGuide = __webpack_require__(286);
 
@@ -37069,14 +37106,30 @@
 	    console.log("channel selected", e.target);
 	  },
 	  render: function render() {
-
+	    var settings = {
+	      autoplay: true,
+	      autoplaySpeed: 7500,
+	      infinite: false,
+	      speed: 1300,
+	      fade: true,
+	      slidesToShow: 1,
+	      slidesToScroll: 1,
+	      easing: 'easeInOut'
+	    };
 	    return _react2.default.createElement(
 	      'div',
 	      null,
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'ui container hero' },
-	        _react2.default.createElement('div', { id: 'img', className: 'ui image hero' })
+	        _react2.default.createElement(
+	          _reactSlick2.default,
+	          settings,
+	          _react2.default.createElement('div', { id: 'img', className: 'ui image hero hero1' }),
+	          _react2.default.createElement('div', { id: 'img', className: 'ui image hero hero2' }),
+	          _react2.default.createElement('div', { id: 'img', className: 'ui image hero hero3' }),
+	          _react2.default.createElement('div', { id: 'img', className: 'ui image hero hero4' })
+	        )
 	      ),
 	      _react2.default.createElement(_EPGuide2.default, null)
 	    );
@@ -37819,32 +37872,31 @@
 	    };
 	  },
 	  render: function render() {
-	    var startTime = this.state.startTime;
-	    var ampm = this.state.ampm;
-	    var count = 0;
-	    var increment = 0;
-	    var TIMES = ['<tr ><th ><span className="left-arrow">&#706;</span>'];
-	    TimeList.filter(function (time, i) {
-	      if (time == startTime + ampm) {
-	        increment = 1;
-	      }
-	      if (increment && count <= 5) {
-	        if (time.indexOf('pm')) ampm = 'pm';
-	        var time = time.replace(/am|pm/g, '');
-	        count++;
-	        if (time.indexOf(':') == -1) {
-	          TIMES.push('<th>' + time + '<sub>' + ampm + '</sub></th>');
-	        } else {
-	          var times = time.split(':');
-	          TIMES.push('<th>' + times[0] + '<sub class="medium">&#58;' + times[1] + '</sub></th>');
-	        }
-	      }
-	    });
-	    TIMES.push('<th><span class="right-arrow">&#707;</span></th></th></tr>');
-	    TIMES = TIMES.filter(function (n) {
-	      return n != '';
-	    });
-	    console.log("times", TIMES);
+	    // var startTime = this.state.startTime
+	    // var ampm = this.state.ampm
+	    // var count = 0;
+	    // var increment = 0;
+	    // var TIMES = ['<tr ><th ><span className="left-arrow">&#706;</span>']
+	    // TimeList.filter((time, i) => {
+	    //   if (time == startTime + ampm) {
+	    //     increment = 1;
+	    //   }
+	    //   if (increment && count <= 5) {
+	    //     if (time.indexOf('pm'))
+	    //       ampm = 'pm'
+	    //     var time = time.replace(/am|pm/g,'')
+	    //     count++;
+	    //     if (time.indexOf(':')==-1) {
+	    //       TIMES.push('<th>' + time + '<sub>' + ampm + '</sub></th>')
+	    //     } else {
+	    //       var times = time.split(':')
+	    //       TIMES.push('<th>' + times[0] + '<sub class="medium">&#58;' + times[1] + '</sub></th>')
+	    //     }
+	    //   }
+	    // })
+	    // TIMES.push('<th><span class="right-arrow">&#707;</span></th></th></tr>')
+	    // TIMES = TIMES.filter((n) => true);
+	    // console.log("times", TIMES)
 	    var self = this;
 	    setTimeout(function () {
 	      $('.right-arrow').off();
@@ -37868,10 +37920,111 @@
 	        });
 	      });
 	    }, 800);
-	    return _react2.default.createElement('thead', { dangerouslySetInnerHTML: { __html: TIMES } });
+	    return _react2.default.createElement(
+	      'thead',
+	      null,
+	      _react2.default.createElement(
+	        'tr',
+	        null,
+	        _react2.default.createElement(
+	          'th',
+	          null,
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'left-arrow' },
+	            '˂'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'th',
+	          null,
+	          '5',
+	          _react2.default.createElement(
+	            'sub',
+	            { 'class': 'medium' },
+	            'pm'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'th',
+	          null,
+	          '5',
+	          _react2.default.createElement(
+	            'sub',
+	            { 'class': 'medium' },
+	            ':30'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'th',
+	          null,
+	          '6',
+	          _react2.default.createElement(
+	            'sub',
+	            { 'class': 'medium' },
+	            'pm'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'th',
+	          null,
+	          '6',
+	          _react2.default.createElement(
+	            'sub',
+	            { 'class': 'medium' },
+	            ':30'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'th',
+	          null,
+	          '7',
+	          _react2.default.createElement(
+	            'sub',
+	            { 'class': 'medium' },
+	            'pm'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'th',
+	          null,
+	          '7',
+	          _react2.default.createElement(
+	            'sub',
+	            { 'class': 'medium' },
+	            ':30'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'th',
+	          null,
+	          '8',
+	          _react2.default.createElement(
+	            'sub',
+	            { 'class': 'medium' },
+	            'pm'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'th',
+	          null,
+	          _react2.default.createElement(
+	            'span',
+	            { 'class': 'right-arrow' },
+	            '˃'
+	          )
+	        )
+	      )
+	    );
 	  }
 	});
 
+	/*
+	    <tr ><th ><span className="left-arrow">&#706;</span>
+	    <th>' + times[0] + '<sub class="medium">&#58;' + times[1] + '</sub></th>
+	    <th>' + times[0] + '<sub class="medium">&#58;' + times[1] + '</sub></th>
+	    <th><span class="right-arrow">&#707;</span></th></th></tr>
+	*/
 
 	var TimeList = ['1am', '1:30', '2am', '2:30', '3am', '3:30', '4am', '4:30', '5am', '5:30', '6am', '6:30', '7am', '7:30', '8am', '8:30', '9am', '9:30', '10am', '10:30', '11am', '11:30', 'Noon', '1pm', '1:30', '2pm', '2:30', '3pm', '3:30', '4pm', '4:30', '5pm', '5:30', '6pm', '7:30', '7pm', '8:30', '8pm', '9:30', '9pm', '9:30', '10pm', '10:30', '11pm', '11:30', 'Midnight'];
 

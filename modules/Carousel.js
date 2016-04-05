@@ -6,6 +6,13 @@ import { Link } from 'react-router'
 
 const env = require('./env.js')
 
+class LeftNavButton extends React.Component {
+  render() {
+    return (<button className="carousel-left-arrow" {...this.props}>Next</button>)
+  }
+}
+
+
 class RightNavButton extends React.Component {
   render() {
     return (<button className="carousel-right-arrow" {...this.props}>Next</button>)
@@ -42,6 +49,7 @@ export default React.createClass({
       slidesToShow: 5,
       slidesToScroll: 5,
       easing: 'easeInOutCubic',
+      prevArrow: 'LeftNavButton',
       nextArrow: 'RightNavButton',
       variableWidth: true
     };
