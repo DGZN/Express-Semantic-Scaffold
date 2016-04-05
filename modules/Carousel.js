@@ -59,7 +59,7 @@ export default React.createClass({
         var link = data.ref.link
       } else {
         self.props.href
-          ? link = generateLink(data)
+          ? link = generateLink(self.props.href, data)
           : link = self.props.href;
       }
       ids.push('#'+id)
@@ -108,14 +108,13 @@ export default React.createClass({
   }
 });
 
-function generateLink(props){
-  return console.log("href", props.href)
-  var link = props.href;
-  var keys = props.href.match(/[:]\w+/g);
+function generateLink(href, props){
+  var link = href;
+  var keys = href.match(/[:]\w+/g);
   keys.map((key) => {
     var _key = key.replace(':','')
-    if (props.data[_key]) {
-      link = link.replace(key, props.data[_key])
+    if (props[_key]) {
+      link = link.replace(key, props[_key])
     }
   })
   return link;
