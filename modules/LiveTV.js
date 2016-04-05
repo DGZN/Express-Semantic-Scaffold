@@ -1,5 +1,5 @@
 import React from 'react'
-
+import Slider from 'react-slick'
 import EPGuide from './EPGuide/'
 import Carousel from './Carousel'
 
@@ -69,11 +69,25 @@ export default React.createClass({
   },
 
   render() {
-
+    var settings = {
+      autoplay: true,
+      autoplaySpeed: 7500,
+      infinite: false,
+      speed: 1300,
+      fade: true,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      easing: 'easeInOut'
+    };
     return (
       <div>
         <div className="ui container hero">
-          <div id="img" className="ui image hero"></div>
+          <Slider {...settings}>
+            <div id="img" className="ui image hero hero1"></div>
+            <div id="img" className="ui image hero hero2"></div>
+            <div id="img" className="ui image hero hero3"></div>
+            <div id="img" className="ui image hero hero4"></div>
+          </Slider>
         </div>
         <EPGuide />
       </div>
