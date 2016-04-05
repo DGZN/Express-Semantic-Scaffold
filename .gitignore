@@ -1,3 +1,3 @@
 node_modules
 public/images/melody
-bundle.js
+public/dist/bundle.js
