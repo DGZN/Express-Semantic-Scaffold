@@ -109,6 +109,7 @@ export default React.createClass({
 });
 
 function generateLink(props){
+  return console.log("href", props.href)
   var link = props.href;
   var keys = props.href.match(/[:]\w+/g);
   keys.map((key) => {
