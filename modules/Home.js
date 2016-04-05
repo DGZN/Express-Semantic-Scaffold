@@ -26,7 +26,7 @@ export default React.createClass({
             <div id="img" className="ui image hero hero1"></div>
             <div id="img" className="ui image hero hero2"></div>
             <div id="img" className="ui image hero hero3"></div>
-            <div id="img" className="ui image hero"></div>
+            <div id="img" className="ui image hero hero4"></div>
           </Slider>
         </div>
         <div className="ui vertical center container aligned grids carousel-container" >

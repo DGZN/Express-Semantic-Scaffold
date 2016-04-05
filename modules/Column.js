@@ -49,6 +49,7 @@ export default React.createClass({
 });
 
 function generateLink(props){
+  console.log("link", link, 'keys', keys, 'props', props)
   var link = props.href;
   var keys = props.href.match(/[:]\w+/g);
   keys.map((key) => {

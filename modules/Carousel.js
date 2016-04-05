@@ -7,20 +7,8 @@ import { Link } from 'react-router'
 const env = require('./env.js')
 
 class RightNavButton extends React.Component {
-
-  handleClick(e) {
-    console.log("clicked");
-    // setTimeout(function(){
-    //   ids.map((id, i) => {
-    //     $(id).delay((i*i) * 2.5).velocity({
-    //       opacity: 1
-    //     })
-    //   })
-    // },100)
-  }
-
   render() {
-    return (<button className="carousel-right-arrow" {...this.props} onClick={this.handleClick}>Next</button>)
+    return (<button className="carousel-right-arrow" {...this.props}>Next</button>)
   }
 }
 
@@ -67,16 +55,26 @@ export default React.createClass({
       if (self.thumbPath) {
         thumb = '/images/wireframe/16x9.png';
       }
+      if (data.ref) {
+        var link = data.ref.link
+      } else {
+        self.props.href
+          ? link = generateLink(data)
+          : link = self.props.href;
+      }
       ids.push('#'+id)
-      COLUMNS.push(<div>
-        <a className="carousel image preview" id={id}>
+      COLUMNS.push(
+      <div>
+        <Link to={link || '#'} className="carousel image preview"  id={id}>
           <div className=" image " style={{"backgroundImage": 'url(' + thumb + ') !important'}} >
             <div className="ui bottom attached label">
               {data.meta[self.props.language].name}
             </div>
           </div>
-        </a>
-      </div>)
+        </Link>
+      </div>
+      )
+      ;
       return i === this.props.limit - 1;
     })
     var delay = 10;
@@ -109,3 +107,15 @@ export default React.createClass({
     );
   }
 });
+
+function generateLink(props){
+  var link = props.href;
+  var keys = props.href.match(/[:]\w+/g);
+  keys.map((key) => {
+    var _key = key.replace(':','')
+    if (props.data[_key]) {
+      link = link.replace(key, props.data[_key])
+    }
+  })
+  return link;
+}

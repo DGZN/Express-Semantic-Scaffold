@@ -790,6 +790,13 @@ body.pushable>.pusher {
   background-repeat: no-repeat;
 }
 
+.hero4 {
+  background-image: url('/images/Melody-logo-slider4.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 @media only screen and (max-width: 1200px) {
   .image.hero {
     min-height: 400px;
