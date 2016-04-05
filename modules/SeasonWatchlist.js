@@ -82,15 +82,14 @@ const WatchlistRow = React.createClass({
       , "display": "block"
       , "opacity": "0"
       , "z-index": "1"
-    }, 300, "easeOutQuart").velocity({
-        top: "-4.5%"
+    }, 300, "ease-in").velocity({
+        top: '-45px'
       , opacity: "1"
-    } , 1500, "easeOutQuart")
+    } , 500, "easeIn")
 
     $('.videoPlayer').velocity({
-        top: "-4.5%"
-      , opacity: "1"
-    }, 1500, "easeOutQuart")
+        opacity: "1"
+    }, 700, "easeOutQuart")
 
   }
 })

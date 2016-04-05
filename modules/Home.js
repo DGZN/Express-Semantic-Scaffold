@@ -11,13 +11,13 @@ export default React.createClass({
   render() {
     var settings = {
       autoplay: true,
-      autoplaySpeed: 9500,
+      autoplaySpeed: 7500,
       infinite: false,
-      speed: 5000,
+      speed: 1300,
       fade: false,
       slidesToShow: 1,
       slidesToScroll: 1,
-      easing: 'easeIn'
+      easing: 'easeInOut'
     };
     return (
       <div>

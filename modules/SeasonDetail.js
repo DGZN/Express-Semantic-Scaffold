@@ -67,7 +67,7 @@ export default React.createClass({
           <SeasonFilter title={series.name} seasons={series.seasons} />
         </div>
         <div className="ui vertical center container aligned grids">
-          <div className="ui two column grid container details pad-top-medium">
+          <div className="ui two column grid container details pad-top-medium" style={{ overflow: 'hidden' }} >
             <div className="details six wide computer only column centered season-watchlist">
               <SeasonWatchlist language={this.props.language} episodes={series.episodes} />
             </div>

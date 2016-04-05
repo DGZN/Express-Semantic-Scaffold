@@ -44,7 +44,7 @@ export default React.createClass({
 });
 
 function YouTubePlayer(id){
-  return '<iframe width="98%" height="510" src="https://www.youtube.com/embed/'+id+'?rel=0&amp;controls=1&amp;showinfo=0" frameborder="0"  allowfullscreen></iframe>'
+  return '<iframe width="98%" height="500" src="https://www.youtube.com/embed/'+id+'?rel=0&amp;controls=1&amp;showinfo=0" frameborder="0"  allowfullscreen></iframe>'
 }
 
 function BrightCovePlayer(id){
