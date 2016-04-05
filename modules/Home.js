@@ -14,7 +14,7 @@ export default React.createClass({
       autoplaySpeed: 7500,
       infinite: false,
       speed: 1300,
-      fade: false,
+      fade: true,
       slidesToShow: 1,
       slidesToScroll: 1,
       easing: 'easeInOut'
@@ -23,9 +23,9 @@ export default React.createClass({
       <div>
         <div className="ui container hero">
           <Slider {...settings}>
-            <div id="img" className="ui image hero"></div>
-            <div id="img" className="ui image hero"></div>
-            <div id="img" className="ui image hero"></div>
+            <div id="img" className="ui image hero hero1"></div>
+            <div id="img" className="ui image hero hero2"></div>
+            <div id="img" className="ui image hero hero3"></div>
             <div id="img" className="ui image hero"></div>
           </Slider>
         </div>

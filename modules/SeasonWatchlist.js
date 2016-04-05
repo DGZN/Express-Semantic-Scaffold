@@ -61,9 +61,9 @@ const WatchlistRow = React.createClass({
     const episode = this.props.episode;
     const language = this.props.language;
 
-    $('#video-slide-out, .videoPlayer').animate({
+    $('#video-slide-out, .videoPlayer').velocity({
       opacity: 0
-    }, function(){
+    }, 200, function(){
       ReactDOM.render(
         <VideoPlayer video={episode} language={language} />,
         document.getElementById('video-slide-out')
@@ -72,7 +72,7 @@ const WatchlistRow = React.createClass({
 
     $('.season-detail').velocity({
       opacity: "0"
-    }, 740, "ease-out")
+    }, 300, "ease-out")
 
     $('#video-slide-out').velocity({
         "left": "0%"
@@ -82,14 +82,14 @@ const WatchlistRow = React.createClass({
       , "display": "block"
       , "opacity": "0"
       , "z-index": "1"
-    }, 300, "ease-in").velocity({
+    }, 200, "ease-in").velocity({
         top: '-45px'
       , opacity: "1"
-    } , 500, "easeIn")
+    } , 300, "easeIn")
 
     $('.videoPlayer').velocity({
         opacity: "1"
-    }, 700, "easeOutQuart")
+    }, 400, "easeOutQuart")
 
   }
 })

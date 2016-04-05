@@ -767,6 +767,23 @@ body.pushable>.pusher {
   display: block;
   width: 100%;
   min-height: 533px;
+}
+
+.hero1 {
+  background-image: url('/images/Melody-logo-slider.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.hero2 {
+  background-image: url('/images/Melody-logo-slider2.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.hero3 {
   background-image: url('/images/Melody-logo-slider3.jpg');
   background-position: center;
   background-size: cover;
