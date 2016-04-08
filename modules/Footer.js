@@ -3,7 +3,7 @@ import React       from 'react'
 export default React.createClass({
   render() {
     return (
-      <div className="ui inverted vertical footer stackable center aligned segment">
+      <div className="ui inverted vertical footer stackable center aligned segment" id="footer">
         <div className="ui middle aligned six column centered stackable grid footer container">
           <div className="row">
             <div className="column middle aligned">

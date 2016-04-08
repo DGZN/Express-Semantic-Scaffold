@@ -18,6 +18,10 @@ body {
   opacity: 0 !important;
 }
 
+.hidden-thumb {
+  opacity: 0 !important; 
+}
+
 .carousel {
   width: calc(1502px + 2rem)!important;
   margin-top: 1rem;

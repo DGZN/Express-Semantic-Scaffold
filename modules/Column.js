@@ -28,12 +28,27 @@ export default React.createClass({
     if (this.props.thumbPath) {
       thumb = '/images/wireframe/16x9.png';
     }
-    var id = this.props.id
+    var id = this.props.data.id
     var visible = this.props.className || ''
+    var hrefCSS = 'image preview load '
+    var thumbCSS = 'image preview thumb '
+    var labelCSS = 'ui bottom attached label '
+    // if (this.props.hidden) {
+    //   hrefCSS+='hidden-thumb'
+    //   thumbCSS+='hidden-thumb'
+    //   labelCSS='hidden-thumb hidden'
+    // }
+    var reset = 0;
+    var delay = this.props.delay || 100;
+    setTimeout(function(){
+      $('#col-'+id).velocity({
+        opacity: 1
+      }, 0)
+    }, delay)
     return (
-      <Link to={link || '#'} className="image preview load" >
-        <div className={"image preview thumb " + visible} style={{"backgroundImage": 'url(' + thumb + ') !important'}} id={'col-'+id}>
-          <div className="ui bottom attached label">{this.props.data.meta[this.state.language].name}</div>
+      <Link to={link || '#'} className={hrefCSS} >
+        <div className={thumbCSS} style={{"backgroundImage": 'url(' + thumb + ') !important'}} id={'col-'+id}>
+          <div className={labelCSS}>{this.props.data.meta[this.state.language].name}</div>
         </div>
       </Link>
     );
@@ -49,7 +64,6 @@ export default React.createClass({
 });
 
 function generateLink(props){
-  console.log("link", link, 'keys', keys, 'props', props)
   var link = props.href;
   var keys = props.href.match(/[:]\w+/g);
   keys.map((key) => {
