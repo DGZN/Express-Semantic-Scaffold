@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "9d13e432cee741f9457b"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "23642e41d9dd7f07b561"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -25384,6 +25384,7 @@
 	  componentDidMount: function componentDidMount() {
 	    this.changeListener = this._onLoginChange;
 	    _LoginStore2.default.addChangeListener(this.changeListener);
+	    // jQuery.scrollSpeed(100, 400);
 	  },
 
 	  /*
@@ -25630,30 +25631,29 @@
 	      _react2.default.createElement(
 	        'div',
 	        { id: 'nav-sidebar', className: 'ui right vertical sidebar menu' },
-	        ' ',
 	        _react2.default.createElement(
-	          'a',
-	          { href: '/', className: 'item' },
+	          _reactRouter.Link,
+	          { to: '/', className: 'item' },
 	          'Home'
 	        ),
 	        _react2.default.createElement(
-	          'a',
-	          { href: '/movies', className: 'item' },
+	          _reactRouter.Link,
+	          { to: '/movies', className: 'item' },
 	          'Movies'
 	        ),
 	        _react2.default.createElement(
-	          'a',
-	          { href: '/series', className: 'item' },
+	          _reactRouter.Link,
+	          { to: '/series', className: 'item' },
 	          'Series'
 	        ),
 	        _react2.default.createElement(
-	          'a',
-	          { href: '/music', className: 'item' },
+	          _reactRouter.Link,
+	          { to: '/music', className: 'item' },
 	          'Music'
 	        ),
 	        _react2.default.createElement(
-	          'a',
-	          { href: '/plays', className: 'item' },
+	          _reactRouter.Link,
+	          { to: '/plays', className: 'item' },
 	          'Plays'
 	        ),
 	        _react2.default.createElement(
@@ -25662,14 +25662,14 @@
 	          'Classics'
 	        ),
 	        _react2.default.createElement(
-	          'a',
-	          { className: 'item' },
+	          _reactRouter.Link,
+	          { to: '/collections', className: 'item' },
 	          'Collections'
 	        ),
 	        _react2.default.createElement(
-	          'a',
-	          { href: '/live', className: 'item' },
-	          'Live TV'
+	          _reactRouter.Link,
+	          { to: '/livetv', className: 'item' },
+	          'Live'
 	        ),
 	        _react2.default.createElement(
 	          'div',
@@ -36542,7 +36542,7 @@
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'season-detail' },
-	              _react2.default.createElement('img', { src: series.thumb, className: 'ui huge image pad-right-small' }),
+	              _react2.default.createElement('img', { src: series.thumb, className: 'ui huge image' }),
 	              _react2.default.createElement(
 	                'h1',
 	                null,
@@ -37760,58 +37760,68 @@
 	  getInitialState: function getInitialState() {
 	    return {
 	      ampm: 'pm',
-	      startTime: '5'
+	      cue: 33
 	    };
 	  },
 	  render: function render() {
-	    // var startTime = this.state.startTime
-	    // var ampm = this.state.ampm
-	    // var count = 0;
-	    // var increment = 0;
-	    // var TIMES = ['<tr ><th ><span className="left-arrow">&#706;</span>']
-	    // TimeList.filter((time, i) => {
-	    //   if (time == startTime + ampm) {
-	    //     increment = 1;
-	    //   }
-	    //   if (increment && count <= 5) {
-	    //     if (time.indexOf('pm'))
-	    //       ampm = 'pm'
-	    //     var time = time.replace(/am|pm/g,'')
-	    //     count++;
-	    //     if (time.indexOf(':')==-1) {
-	    //       TIMES.push('<th>' + time + '<sub>' + ampm + '</sub></th>')
-	    //     } else {
-	    //       var times = time.split(':')
-	    //       TIMES.push('<th>' + times[0] + '<sub class="medium">&#58;' + times[1] + '</sub></th>')
-	    //     }
-	    //   }
-	    // })
-	    // TIMES.push('<th><span class="right-arrow">&#707;</span></th></th></tr>')
-	    // TIMES = TIMES.filter((n) => true);
-	    // console.log("times", TIMES)
 	    var self = this;
 	    setTimeout(function () {
 	      $('.right-arrow').off();
 	      $('.right-arrow').on('click', function () {
-	        console.log("i was clicked!!!!!");
-	        var time = parseInt(self.state.startTime);
-	        if (time < 11) self.setState({
-	          startTime: parseInt(time) + 1
-	        }, function () {
-	          console.log("changed start time", self.state.startTime);
+	        var time = parseInt(self.state.cue);
+	        if (time >= 48) time = -1;
+	        self.setState({
+	          cue: parseInt(time) + 1
 	        });
 	      });
 	      $('.left-arrow').off();
 	      $('.left-arrow').on('click', function () {
-	        console.log("i was clicked!!!!!");
-	        var time = parseInt(self.state.startTime);
-	        if (time > 1) self.setState({
-	          startTime: parseInt(time) - 1
-	        }, function () {
-	          console.log("changed start time", self.state.startTime);
+	        var time = parseInt(self.state.cue);
+	        if (time <= 0) time = 1;
+	        self.setState({
+	          cue: parseInt(time) - 1
 	        });
 	      });
 	    }, 800);
+	    var cues = TimeList;
+	    var index = self.state.cue - 1;
+	    var CUEPOINTS = [];
+	    cues.some(function (cue, i) {
+	      if (i >= index + 8) return false;
+	      if (i >= index) {
+	        if (cue.indexOf(':') >= 0) {
+	          var time = cue.split(':');
+	          CUEPOINTS.push(_react2.default.createElement(
+	            'th',
+	            null,
+	            time[0],
+	            _react2.default.createElement(
+	              'sub',
+	              { className: 'medium' },
+	              ':30'
+	            )
+	          ));
+	        } else {
+	          if (cue.indexOf('am') >= 0) {
+	            var time = cue.split('am');
+	          }
+	          if (cue.indexOf('pm') >= 0) {
+	            var time = cue.split('pm');
+	          }
+	          CUEPOINTS.push(_react2.default.createElement(
+	            'th',
+	            null,
+	            time[0],
+	            _react2.default.createElement(
+	              'sub',
+	              { className: 'medium' },
+	              cue.replace(time[0], '')
+	            )
+	          ));
+	        }
+	      }
+	    });
+	    console.log("cuepoints", CUEPOINTS);
 	    return _react2.default.createElement(
 	      'thead',
 	      null,
@@ -37827,82 +37837,13 @@
 	            '˂'
 	          )
 	        ),
-	        _react2.default.createElement(
-	          'th',
-	          null,
-	          '5',
-	          _react2.default.createElement(
-	            'sub',
-	            { 'class': 'medium' },
-	            'pm'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'th',
-	          null,
-	          '5',
-	          _react2.default.createElement(
-	            'sub',
-	            { 'class': 'medium' },
-	            ':30'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'th',
-	          null,
-	          '6',
-	          _react2.default.createElement(
-	            'sub',
-	            { 'class': 'medium' },
-	            'pm'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'th',
-	          null,
-	          '6',
-	          _react2.default.createElement(
-	            'sub',
-	            { 'class': 'medium' },
-	            ':30'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'th',
-	          null,
-	          '7',
-	          _react2.default.createElement(
-	            'sub',
-	            { 'class': 'medium' },
-	            'pm'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'th',
-	          null,
-	          '7',
-	          _react2.default.createElement(
-	            'sub',
-	            { 'class': 'medium' },
-	            ':30'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'th',
-	          null,
-	          '8',
-	          _react2.default.createElement(
-	            'sub',
-	            { 'class': 'medium' },
-	            'pm'
-	          )
-	        ),
+	        CUEPOINTS,
 	        _react2.default.createElement(
 	          'th',
 	          null,
 	          _react2.default.createElement(
 	            'span',
-	            { 'class': 'right-arrow' },
+	            { className: 'right-arrow' },
 	            '˃'
 	          )
 	        )
@@ -37916,9 +37857,34 @@
 	    <th>' + times[0] + '<sub class="medium">&#58;' + times[1] + '</sub></th>
 	    <th>' + times[0] + '<sub class="medium">&#58;' + times[1] + '</sub></th>
 	    <th><span class="right-arrow">&#707;</span></th></th></tr>
+
+	    /// -- Working ---
+
+	    <th>
+	      {cues[0]}<sub className="medium">pm</sub>
+	    </th>
+	    <th>
+	      {cues[1]}<sub className="medium">&#58;30</sub>
+	    </th>
+	    <th>
+	      {cues[2]}<sub className="medium">pm</sub>
+	    </th>
+	    <th>
+	      {cues[3]}<sub className="medium">&#58;30</sub>
+	    </th>
+	    <th>
+	      {cues[4]}<sub className="medium">pm</sub>
+	    </th>
+	    <th>
+	      {cues[5]}<sub className="medium">&#58;30</sub>
+	    </th>
+	    <th>
+	      {cues[6]}<sub className="medium">pm</sub>
+	    </th>
+
 	*/
 
-	var TimeList = ['1am', '1:30', '2am', '2:30', '3am', '3:30', '4am', '4:30', '5am', '5:30', '6am', '6:30', '7am', '7:30', '8am', '8:30', '9am', '9:30', '10am', '10:30', '11am', '11:30', 'Noon', '1pm', '1:30', '2pm', '2:30', '3pm', '3:30', '4pm', '4:30', '5pm', '5:30', '6pm', '7:30', '7pm', '8:30', '8pm', '9:30', '9pm', '9:30', '10pm', '10:30', '11pm', '11:30', 'Midnight'];
+	var TimeList = ['1am', '1:30', '2am', '2:30', '3am', '3:30', '4am', '4:30', '5am', '5:30', '6am', '6:30', '7am', '7:30', '8am', '8:30', '9am', '9:30', '10am', '10:30', '11am', '11:30', '12', '12:30', '1pm', '1:30', '2pm', '2:30', '3pm', '3:30', '4pm', '4:30', '5pm', '5:30', '6pm', '6:30', '7pm', '7:30', '8pm', '8:30', '9pm', '9:30', '10pm', '10:30', '11pm', '11:30', '12'];
 
 /***/ },
 /* 291 */

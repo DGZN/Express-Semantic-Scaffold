@@ -4,89 +4,66 @@ export default React.createClass({
   getInitialState() {
     return {
       ampm: 'pm'
-    , startTime: '5'
+    , cue: 33
     }
   },
   render() {
-    // var startTime = this.state.startTime
-    // var ampm = this.state.ampm
-    // var count = 0;
-    // var increment = 0;
-    // var TIMES = ['<tr ><th ><span className="left-arrow">&#706;</span>']
-    // TimeList.filter((time, i) => {
-    //   if (time == startTime + ampm) {
-    //     increment = 1;
-    //   }
-    //   if (increment && count <= 5) {
-    //     if (time.indexOf('pm'))
-    //       ampm = 'pm'
-    //     var time = time.replace(/am|pm/g,'')
-    //     count++;
-    //     if (time.indexOf(':')==-1) {
-    //       TIMES.push('<th>' + time + '<sub>' + ampm + '</sub></th>')
-    //     } else {
-    //       var times = time.split(':')
-    //       TIMES.push('<th>' + times[0] + '<sub class="medium">&#58;' + times[1] + '</sub></th>')
-    //     }
-    //   }
-    // })
-    // TIMES.push('<th><span class="right-arrow">&#707;</span></th></th></tr>')
-    // TIMES = TIMES.filter((n) => true);
-    // console.log("times", TIMES)
     var self = this;
     setTimeout(function(){
       $('.right-arrow').off()
       $('.right-arrow').on('click', function(){
-        console.log("i was clicked!!!!!")
-        var time = parseInt(self.state.startTime)
-        if (time < 11)
+        var time = parseInt(self.state.cue)
+        if (time >= 48)
+          time = -1
           self.setState({
-            startTime: parseInt(time) + 1
-          }, function(){
-            console.log("changed start time", self.state.startTime)
+            cue: parseInt(time) + 1
           })
       })
       $('.left-arrow').off()
       $('.left-arrow').on('click', function(){
-        console.log("i was clicked!!!!!")
-        var time = parseInt(self.state.startTime)
-        if (time > 1)
-          self.setState({
-            startTime: parseInt(time) - 1
-          }, function(){
-            console.log("changed start time", self.state.startTime)
-          })
+        var time = parseInt(self.state.cue)
+        if (time <= 0)
+          time = 1;
+        self.setState({
+          cue: parseInt(time) - 1
+        })
       })
     },800)
+    var cues = TimeList;
+    var index = (self.state.cue-1)
+    var CUEPOINTS = []
+    cues.some((cue, i) => {
+      if (i >= (index + 8))
+        return false;
+      if (i >= index) {
+        if (cue.indexOf(':')>=0) {
+          var time = cue.split(':')
+          CUEPOINTS.push(<th>
+            {time[0]}<sub className="medium">&#58;30</sub>
+            </th>)
+          } else {
+            if (cue.indexOf('am')>=0) {
+              var time = cue.split('am')
+            }
+            if (cue.indexOf('pm')>=0) {
+              var time = cue.split('pm')
+            }
+            CUEPOINTS.push(<th>
+              {time[0]}<sub className="medium">{cue.replace(time[0], '')}</sub>
+              </th>)
+            }
+      }
+    })
+    console.log("cuepoints", CUEPOINTS);
     return (
       <thead>
         <tr >
           <th>
             <span className="left-arrow">&#706;</span>
           </th>
+          {CUEPOINTS}
           <th>
-            5<sub class="medium">pm</sub>
-          </th>
-          <th>
-            5<sub class="medium">&#58;30</sub>
-          </th>
-          <th>
-            6<sub class="medium">pm</sub>
-          </th>
-          <th>
-            6<sub class="medium">&#58;30</sub>
-          </th>
-          <th>
-            7<sub class="medium">pm</sub>
-          </th>
-          <th>
-            7<sub class="medium">&#58;30</sub>
-          </th>
-          <th>
-            8<sub class="medium">pm</sub>
-          </th>
-          <th>
-            <span class="right-arrow">&#707;</span>
+            <span className="right-arrow">&#707;</span>
           </th>
         </tr>
       </thead>
@@ -99,6 +76,31 @@ export default React.createClass({
     <th>' + times[0] + '<sub class="medium">&#58;' + times[1] + '</sub></th>
     <th>' + times[0] + '<sub class="medium">&#58;' + times[1] + '</sub></th>
     <th><span class="right-arrow">&#707;</span></th></th></tr>
+
+    /// -- Working ---
+
+    <th>
+      {cues[0]}<sub className="medium">pm</sub>
+    </th>
+    <th>
+      {cues[1]}<sub className="medium">&#58;30</sub>
+    </th>
+    <th>
+      {cues[2]}<sub className="medium">pm</sub>
+    </th>
+    <th>
+      {cues[3]}<sub className="medium">&#58;30</sub>
+    </th>
+    <th>
+      {cues[4]}<sub className="medium">pm</sub>
+    </th>
+    <th>
+      {cues[5]}<sub className="medium">&#58;30</sub>
+    </th>
+    <th>
+      {cues[6]}<sub className="medium">pm</sub>
+    </th>
+
 */
 
-const TimeList = ['1am','1:30','2am','2:30','3am','3:30','4am','4:30','5am','5:30','6am','6:30','7am','7:30','8am','8:30','9am','9:30','10am','10:30','11am','11:30','Noon','1pm','1:30','2pm','2:30','3pm','3:30','4pm','4:30','5pm','5:30','6pm','7:30','7pm','8:30','8pm','9:30','9pm','9:30','10pm','10:30','11pm','11:30','Midnight']
+const TimeList = ['1am','1:30','2am','2:30','3am','3:30','4am','4:30','5am','5:30','6am','6:30','7am','7:30','8am','8:30','9am','9:30','10am','10:30','11am','11:30','12', '12:30', '1pm','1:30','2pm','2:30','3pm','3:30','4pm','4:30','5pm','5:30','6pm', '6:30', '7pm','7:30','8pm','8:30','9pm','9:30','10pm','10:30','11pm','11:30','12']

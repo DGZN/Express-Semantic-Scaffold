@@ -62,7 +62,15 @@ export default React.createClass({
             </div>
           </div>
         </div>
-        <div id="nav-sidebar" className="ui right vertical sidebar menu"> <a href="/" className="item">Home</a><a href="/movies" className="item">Movies</a><a href="/series" className="item">Series</a><a href="/music" className="item">Music</a><a href="/plays" className="item">Plays</a><a className="item">Classics</a><a className="item">Collections</a><a href="/live" className="item">Live TV</a>
+        <div id="nav-sidebar" className="ui right vertical sidebar menu">
+          <Link to="/" className="item">Home</Link>
+          <Link to="/movies" className="item">Movies</Link>
+          <Link to="/series" className="item">Series</Link>
+          <Link to="/music" className="item">Music</Link>
+          <Link to="/plays" className="item">Plays</Link>
+          <a className="item">Classics</a>
+          <Link to="/collections" className="item">Collections</Link>
+          <Link to="/livetv" className="item">Live</Link>
           <div className="ui category search item">
             <div className="ui transparent icon input">
               <input type="text" placeholder="Search..." className="prompt"/><i className="search link icon"></i>

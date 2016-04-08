@@ -34,6 +34,7 @@ export default React.createClass({
   componentDidMount: function() {
     this.changeListener = this._onLoginChange;
     LoginStore.addChangeListener(this.changeListener);
+    // jQuery.scrollSpeed(100, 400);
   },
 
   /*

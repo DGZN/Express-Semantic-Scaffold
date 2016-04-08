@@ -74,7 +74,7 @@ export default React.createClass({
             <div className="details sixteen wide tablet seven wide computer column centered">
               <div id="video-slide-out"></div>
               <div className="season-detail">
-                <img src={series.thumb} className="ui huge image pad-right-small"/>
+                <img src={series.thumb} className="ui huge image"/>
                 <h1>{series.name}</h1>
                 <h3>{series.seriesText}</h3>
                 <h4 className="pad-right-medium">{series.description}</h4>

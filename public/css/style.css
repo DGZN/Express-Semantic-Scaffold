@@ -19,7 +19,7 @@ body {
 }
 
 .hidden-thumb {
-  opacity: 0 !important; 
+  opacity: 0 !important;
 }
 
 .carousel {
@@ -587,6 +587,12 @@ body.pushable>.pusher {
   z-index: 999999999;
 }
 
+@media only screen and (max-width: 700px) {
+  .row.subnav {
+    min-height: 45px !important;
+  }
+}
+
 .page-hr {
   position: relative;
   margin: 0 auto;
@@ -624,9 +630,9 @@ body.pushable>.pusher {
 }
 
 @media only screen and (max-width: 400px) {
-  .row.subnav {
+  /*.row.subnav {
     height: 55px;
-  }
+  }*/
   .row.subnav span.title {
     font-size: 0.8em;
     font-weight: 200;
@@ -1414,10 +1420,10 @@ ul.meta {
 
 @media only screen and (max-width: 900px) {
   .meta.tight {
-    padding-left: 1rem !important;
+    padding-left: 0rem !important;
   }
   .meta.values {
-    padding-left: 3.4rem !important;
+    /*padding-left: 3.4rem !important;*/
   }
 }
 
@@ -1478,6 +1484,15 @@ ul.meta.values {
 @media only screen and (max-width: 767px) {
   .ui.stackable.grid>.column.grid>.column, .ui.stackable.grid>.column.row>.column, .ui.stackable.grid>.column:not(.row), .ui.stackable.grid>.row>.column, .ui.stackable.grid>.row>.wide.column, .ui.stackable.grid>.wide.column {
     padding: 0!important;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .ui.grid>.stackable.stackable.row>.column, .ui.stackable.grid>.column.grid>.column, .ui.stackable.grid>.column.row>.column, .ui.stackable.grid>.column:not(.row), .ui.stackable.grid>.row>.column, .ui.stackable.grid>.row>.wide.column, .ui.stackable.grid>.wide.column {
+    width: auto !important;
+    margin: 0!important;
+    box-shadow: none!important;
+    padding: 1rem!important;
   }
 }
 
