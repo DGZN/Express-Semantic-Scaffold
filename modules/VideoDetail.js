@@ -49,7 +49,7 @@ export default React.createClass({
     }
     return (
       <div className="ui vertical center container aligned grids pad-top-medium">
-        <div className="ui vertical center container aligned grids pad-top-medium">
+        <div className="ui vertical center container aligned grids pad-top-medium" style={{ 'textAlign': this.props.textAlign }}>
           <div className="ui two column grid container">
             <div className="details sixteen wide tablet eight wide computer column centered" dangerouslySetInnerHTML={{__html:movie.player}}>
             </div>

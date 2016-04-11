@@ -14,7 +14,6 @@ export default {
 
   signup: (user) => {
     let promise = AuthService.signup(user);
-    console.log("signing up user", user);
     dispatchAsync(promise, {
       request: ActionTypes.REQUEST_LOGIN_USER,
       success: ActionTypes.REQUEST_LOGIN_USER_SUCCESS,

@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "a09a11a5ea270a99e837"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "5d19a211591590f29229"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -36273,7 +36273,7 @@
 	      { className: 'ui vertical center container aligned grids pad-top-medium' },
 	      _react2.default.createElement(
 	        'div',
-	        { className: 'ui vertical center container aligned grids pad-top-medium' },
+	        { className: 'ui vertical center container aligned grids pad-top-medium', style: { 'textAlign': this.props.textAlign } },
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'ui two column grid container' },
@@ -36875,7 +36875,7 @@
 	      ),
 	      _react2.default.createElement(
 	        'div',
-	        { className: 'ui vertical center container aligned grids' },
+	        { className: 'ui vertical center container aligned grids', style: { 'textAlign': this.props.textAlign } },
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'ui two column grid container details pad-top-medium', style: { overflow: 'hidden' } },
