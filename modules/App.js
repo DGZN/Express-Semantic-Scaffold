@@ -80,6 +80,7 @@ export default React.createClass({
           user={this.state.user}
           myAccount={this.myAccount}
           register={this.register}
+          closeModal={this.closeModal}
           setLanguage={this.setLanguage}
           language={this.state.language}  />
         {this.props.children && React.cloneElement(this.props.children,{
@@ -138,6 +139,12 @@ export default React.createClass({
       user[prop.name] = prop.value
     })
     LoginActionCreators.signup(user);
+  },
+
+  closeModal() {
+    $('.my-account.modal').modal('hide', function(){
+      console.log("modal closed")
+    })
   }
 
 });

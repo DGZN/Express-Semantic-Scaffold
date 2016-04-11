@@ -46,12 +46,22 @@ export default React.createClass({
         self.props.register($('#signup').serializeArray())
       });
     })
+    $('#close-modal').off()
+    $('#close-modal').on('click', function(e){
+      e.preventDefault()
+      return self.props.closeModal()
+    })
   },
 
   render() {
     return (
       <div className="my-account modal">
         <div className="ui grid">
+          <div id="close-modal"   onClick={this.closeModal}>
+            <a href="#">
+              <i className="ui remove big icon close-modal"></i>
+            </a>
+          </div>
           <div  id="signin-form" className="two column row account-settings ">
             <div className="twelve wide column">
               <h3>Sign In</h3>
@@ -194,7 +204,7 @@ export default React.createClass({
       </div>
 
     );
-  },
+  }
 
 
 })

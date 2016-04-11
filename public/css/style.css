@@ -18,6 +18,15 @@ body {
   opacity: 0 !important;
 }
 
+.close-modal {
+  position: absolute;
+  display: block;
+  font-size: 18px;
+  color: #999;
+  right: 5rem;
+  cursor: pointer;
+}
+
 .hidden-thumb {
   opacity: 0 !important;
 }
