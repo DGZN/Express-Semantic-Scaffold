@@ -20,24 +20,15 @@ class AuthService {
     });
   }
 
-  signup(email, password, extra) {
+  signup(user) {
     return new bluebird( (resolve, reject) => {
-      request.post(
-        {
-          url: SIGNUP_URL,
-          body: {email, password, extra},
-          json: true
-        },
-        (err, response, body) => {
-          if(err){
-            return reject(err);
-          }
-          if(response.statusCode >= 400){
-            return reject(body);
-          }
-          return resolve(body);
-        }
-      );
+      $.post('http://dgzn.io:8080/v1/users', user)
+      .done(function(data) {
+        return resolve(data)
+      })
+      .fail(function(err) {
+        return reject(err.statusText)
+      });
     });
   }
 

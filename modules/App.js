@@ -79,6 +79,7 @@ export default React.createClass({
         <Nav
           user={this.state.user}
           myAccount={this.myAccount}
+          register={this.register}
           setLanguage={this.setLanguage}
           language={this.state.language}  />
         {this.props.children && React.cloneElement(this.props.children,{
@@ -130,5 +131,13 @@ export default React.createClass({
       });
     },200)
   },
+
+  register(data) {
+    var user = {}
+    data.map((prop) => {
+      user[prop.name] = prop.value
+    })
+    LoginActionCreators.signup(user);
+  }
 
 });

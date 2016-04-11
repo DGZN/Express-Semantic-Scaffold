@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "23642e41d9dd7f07b561"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "abe5b0df9220e4eeb519"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -25429,6 +25429,7 @@
 	      _react2.default.createElement(_Nav2.default, {
 	        user: this.state.user,
 	        myAccount: this.myAccount,
+	        register: this.register,
 	        setLanguage: this.setLanguage,
 	        language: this.state.language }),
 	      this.props.children && _react2.default.cloneElement(this.props.children, {
@@ -25476,6 +25477,13 @@
 	        _LoginActionCreators2.default.loginUser(email, password);
 	      });
 	    }, 200);
+	  },
+	  register: function register(data) {
+	    var user = {};
+	    data.map(function (prop) {
+	      user[prop.name] = prop.value;
+	    });
+	    _LoginActionCreators2.default.signup(user);
 	  }
 	});
 
@@ -25800,20 +25808,8 @@
 	      }
 	    };
 	  },
-	  componentWillReceiveProps: function componentWillReceiveProps(props) {
-	    // if (props.user && props.user.id) {
-	    //   this.setState(props)
-	    // } else {
-	    //   this.setState({
-	    //     user: {
-	    //       "first_name": ''
-	    //     , "last_name": ''
-	    //     , "email": ''
-	    //     }
-	    //   })
-	    // }
-	  },
 	  componentDidMount: function componentDidMount() {
+	    var self = this;
 	    if (this.props.user && this.props.user.id) {
 	      $('#signin-form').hide();
 	      $('#registraion-form').hide();
@@ -25823,6 +25819,21 @@
 	      $('#signin-form').show();
 	      $('#registraion-form').hide();
 	    }
+	    $('.ui.sign-up.button').on('click', function (e) {
+	      e.preventDefault();
+	      $('#signin-form').hide(100);
+	      $('#registraion-form').show(200);
+	      $('#signup').off();
+	      $('#signup').on('submit', function (event) {
+	        event.preventDefault();
+	        var first_name = $('#first_name').val();
+	        var last_name = $('#last_name').val();
+	        var email = $('#email').val();
+	        var password = $('#password').val();
+	        var password_confirmation = $('#password').val();
+	        self.props.register($('#signup').serializeArray());
+	      });
+	    });
 	  },
 	  render: function render() {
 	    return _react2.default.createElement(
@@ -25887,7 +25898,7 @@
 	                      null,
 	                      _react2.default.createElement(
 	                        'button',
-	                        { className: 'ui sign-up button', text: 'Sign In', title: 'Sign Up' },
+	                        { className: 'ui sign-up button', text: 'Sign Up', title: 'Sign Up' },
 	                        'Sign Up'
 	                      )
 	                    ),
@@ -26062,103 +26073,88 @@
 	              'Register'
 	            ),
 	            _react2.default.createElement(
-	              'div',
-	              { className: 'ui grid' },
+	              'form',
+	              { name: 'signup', id: 'signup', method: 'post' },
 	              _react2.default.createElement(
 	                'div',
-	                { className: 'ui two column row' },
+	                { className: 'ui grid' },
 	                _react2.default.createElement(
 	                  'div',
-	                  { className: 'three wide computer five wide tablet column' },
+	                  { className: 'ui two column row' },
 	                  _react2.default.createElement(
 	                    'div',
-	                    { className: 'ui text' },
-	                    'First Name'
+	                    { className: 'three wide computer five wide tablet column' },
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'ui label' },
+	                      'First Name'
+	                    ),
+	                    _react2.default.createElement('input', { className: 'ui massive input', type: 'text', name: 'first_name', id: 'first_name' })
+	                  ),
+	                  _react2.default.createElement(
+	                    'div',
+	                    { className: 'three wide computer five wide tablet column' },
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'ui label' },
+	                      'Last Name'
+	                    ),
+	                    _react2.default.createElement('input', { className: 'ui massive input', type: 'text', name: 'last_name', id: 'last_name' })
 	                  )
 	                ),
 	                _react2.default.createElement(
 	                  'div',
-	                  { className: 'three wide computer five wide tablet column' },
+	                  { className: 'ui one column row' },
 	                  _react2.default.createElement(
 	                    'div',
-	                    { className: 'ui text' },
-	                    'Last Name'
+	                    { className: 'six wide computer eight wide tablet column' },
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'ui label' },
+	                      'Email Address'
+	                    ),
+	                    _react2.default.createElement('input', { className: 'ui massive input', type: 'text', name: 'email', id: 'email' })
 	                  )
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'ui two column row' },
-	                _react2.default.createElement('div', { className: 'three wide computer five wide tablet column' }),
-	                _react2.default.createElement('div', { className: 'three wide computer five wide tablet column' })
-	              ),
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'ui one column row' },
+	                ),
 	                _react2.default.createElement(
 	                  'div',
-	                  { className: 'five wide computer eight wide tablet column' },
+	                  { className: 'ui two column row' },
 	                  _react2.default.createElement(
 	                    'div',
-	                    { className: 'ui text' },
-	                    'Email Address'
+	                    { className: 'three wide computer eight wide tablet column' },
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'ui label' },
+	                      'Password'
+	                    ),
+	                    _react2.default.createElement('input', { className: 'ui massive input', type: 'password', name: 'password', id: 'password' })
+	                  ),
+	                  _react2.default.createElement(
+	                    'div',
+	                    { className: 'three wide computer eight wide tablet column' },
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'ui label' },
+	                      'Password Confirmation'
+	                    ),
+	                    _react2.default.createElement('input', { className: 'ui massive input', type: 'password', name: 'password_confirmation', id: 'password_confirmation' })
 	                  )
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'ui one column row' },
-	                _react2.default.createElement('div', { className: 'five wide computer eight wide tablet column' })
-	              ),
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'ui one column row' },
+	                ),
 	                _react2.default.createElement(
 	                  'div',
-	                  { className: 'five wide computer eight wide tablet column' },
+	                  { className: 'ui one column row' },
 	                  _react2.default.createElement(
 	                    'div',
-	                    { className: 'ui text' },
-	                    'Password'
-	                  )
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'ui one column row' },
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'five wide computer eight wide tablet column' },
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'ui text' },
-	                    '*******'
-	                  )
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'ui one column row' },
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'five wide computer eight wide tablet column' },
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'ui text' },
-	                    'Confirm Password'
-	                  )
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'ui one column row' },
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'five wide computer eight wide tablet column' },
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'ui text' },
-	                    '*******'
+	                    { className: 'six wide column' },
+	                    _react2.default.createElement(
+	                      'a',
+	                      null,
+	                      _react2.default.createElement(
+	                        'button',
+	                        { className: 'ui sign-up-submit button', text: 'Sign Up', title: 'Sign Up' },
+	                        'Sign Up'
+	                      )
+	                    )
 	                  )
 	                )
 	              )
@@ -26609,13 +26605,14 @@
 	    }, { email: email, password: password });
 	  },
 
-	  signup: function signup(email, password, extra) {
-	    var promise = _AuthService2.default.signup(email, password, extra);
+	  signup: function signup(user) {
+	    var promise = _AuthService2.default.signup(user);
+	    console.log("signing up user", user);
 	    (0, _AppDispatcher.dispatchAsync)(promise, {
 	      request: _ActionTypes2.default.REQUEST_LOGIN_USER,
 	      success: _ActionTypes2.default.REQUEST_LOGIN_USER_SUCCESS,
 	      failure: _ActionTypes2.default.REQUEST_LOGIN_USER_ERROR
-	    }, { email: email, password: password, extra: extra });
+	    }, { user: user });
 	  },
 
 	  logoutUser: function logoutUser() {
@@ -27154,20 +27151,12 @@
 	    }
 	  }, {
 	    key: 'signup',
-	    value: function signup(email, password, extra) {
+	    value: function signup(user) {
 	      return new _bluebird2.default(function (resolve, reject) {
-	        request.post({
-	          url: _AppConstants.SIGNUP_URL,
-	          body: { email: email, password: password, extra: extra },
-	          json: true
-	        }, function (err, response, body) {
-	          if (err) {
-	            return reject(err);
-	          }
-	          if (response.statusCode >= 400) {
-	            return reject(body);
-	          }
-	          return resolve(body);
+	        $.post('http://dgzn.io:8080/v1/users', user).done(function (data) {
+	          return resolve(data);
+	        }).fail(function (err) {
+	          return reject(err.statusText);
 	        });
 	      });
 	    }
@@ -37777,7 +37766,7 @@
 	      $('.left-arrow').off();
 	      $('.left-arrow').on('click', function () {
 	        var time = parseInt(self.state.cue);
-	        if (time <= 0) time = 1;
+	        if (time <= -1) time = 0;
 	        self.setState({
 	          cue: parseInt(time) - 1
 	        });

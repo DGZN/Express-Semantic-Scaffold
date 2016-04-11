@@ -12,13 +12,14 @@ export default {
     }, { email, password });
   },
 
-  signup: (email, password, extra) => {
-    let promise = AuthService.signup(email, password, extra);
+  signup: (user) => {
+    let promise = AuthService.signup(user);
+    console.log("signing up user", user);
     dispatchAsync(promise, {
       request: ActionTypes.REQUEST_LOGIN_USER,
       success: ActionTypes.REQUEST_LOGIN_USER_SUCCESS,
       failure: ActionTypes.REQUEST_LOGIN_USER_ERROR
-    }, { email, password, extra });
+    }, { user });
   },
 
   logoutUser: () => {

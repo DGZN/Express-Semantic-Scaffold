@@ -22,8 +22,8 @@ export default React.createClass({
       $('.left-arrow').off()
       $('.left-arrow').on('click', function(){
         var time = parseInt(self.state.cue)
-        if (time <= 0)
-          time = 1;
+        if (time <= -1)
+          time = 0;
         self.setState({
           cue: parseInt(time) - 1
         })
