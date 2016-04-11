@@ -33,7 +33,7 @@ export default React.createClass({
             <Link to="/series" className="item">Series</Link>
             <Link to="/music" className="item">Music</Link>
             <Link to="/plays" className="item">Plays</Link>
-            <a className="item">Classics</a>
+            <Link to="/classics" className="item">Classics</Link>
             <Link to="/collections" className="item">Collections</Link>
             <Link to="/livetv" className="item">Live</Link>
             <div className="ui category search item nav-search">

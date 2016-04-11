@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "a213809824b1964d1b7c"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "a09a11a5ea270a99e837"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -610,23 +610,31 @@
 
 	var _Play2 = _interopRequireDefault(_Play);
 
-	var _Movies = __webpack_require__(277);
+	var _Classics = __webpack_require__(277);
+
+	var _Classics2 = _interopRequireDefault(_Classics);
+
+	var _Classic = __webpack_require__(278);
+
+	var _Classic2 = _interopRequireDefault(_Classic);
+
+	var _Movies = __webpack_require__(279);
 
 	var _Movies2 = _interopRequireDefault(_Movies);
 
-	var _Series = __webpack_require__(278);
+	var _Series = __webpack_require__(280);
 
 	var _Series2 = _interopRequireDefault(_Series);
 
-	var _Season = __webpack_require__(279);
+	var _Season = __webpack_require__(281);
 
 	var _Season2 = _interopRequireDefault(_Season);
 
-	var _Collections = __webpack_require__(284);
+	var _Collections = __webpack_require__(286);
 
 	var _Collections2 = _interopRequireDefault(_Collections);
 
-	var _LiveTV = __webpack_require__(285);
+	var _LiveTV = __webpack_require__(287);
 
 	var _LiveTV2 = _interopRequireDefault(_LiveTV);
 
@@ -646,6 +654,8 @@
 	    _react2.default.createElement(_reactRouter.Route, { path: '/music', component: _Music2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/plays', component: _Plays2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/plays/:id', component: _Play2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/classics', component: _Classics2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/classics/:id', component: _Classics2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/collections', component: _Collections2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/livetv', component: _LiveTV2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/logout', component: _App2.default })
@@ -25568,8 +25578,8 @@
 	            'Plays'
 	          ),
 	          _react2.default.createElement(
-	            'a',
-	            { className: 'item' },
+	            _reactRouter.Link,
+	            { to: '/classics', className: 'item' },
 	            'Classics'
 	          ),
 	          _react2.default.createElement(
@@ -36627,6 +36637,71 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _react2.default.createClass({
+	  displayName: 'Classics',
+	  render: function render() {
+	    return _react2.default.createElement(_Grid2.default, _extends({}, this.props, {
+	      limit: '5',
+	      title: 'Classics',
+	      source: '/classics',
+	      href: '/classics/:id' }));
+	  }
+	});
+
+/***/ },
+/* 278 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _VideoDetail = __webpack_require__(271);
+
+	var _VideoDetail2 = _interopRequireDefault(_VideoDetail);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	  displayName: 'Classic',
+	  render: function render() {
+	    // if (!this.props.user)
+	    //   this.props.myAccount()
+	    var source = '/classics/' + this.props.params.id;
+	    return _react2.default.createElement(_VideoDetail2.default, _extends({}, this.props, { source: source }));
+	  }
+	});
+
+/***/ },
+/* 279 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Grid = __webpack_require__(267);
+
+	var _Grid2 = _interopRequireDefault(_Grid);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
 	  displayName: 'Movies',
 	  render: function render() {
 	    return _react2.default.createElement(_Grid2.default, _extends({}, this.props, {
@@ -36639,7 +36714,7 @@
 	});
 
 /***/ },
-/* 278 */
+/* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36672,7 +36747,7 @@
 	});
 
 /***/ },
-/* 279 */
+/* 281 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36687,7 +36762,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _SeasonDetail = __webpack_require__(280);
+	var _SeasonDetail = __webpack_require__(282);
 
 	var _SeasonDetail2 = _interopRequireDefault(_SeasonDetail);
 
@@ -36704,7 +36779,7 @@
 	});
 
 /***/ },
-/* 280 */
+/* 282 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36717,11 +36792,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _SeasonFilter = __webpack_require__(281);
+	var _SeasonFilter = __webpack_require__(283);
 
 	var _SeasonFilter2 = _interopRequireDefault(_SeasonFilter);
 
-	var _SeasonWatchlist = __webpack_require__(282);
+	var _SeasonWatchlist = __webpack_require__(284);
 
 	var _SeasonWatchlist2 = _interopRequireDefault(_SeasonWatchlist);
 
@@ -36879,7 +36954,7 @@
 	});
 
 /***/ },
-/* 281 */
+/* 283 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -36932,7 +37007,7 @@
 	});
 
 /***/ },
-/* 282 */
+/* 284 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36949,7 +37024,7 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _VideoPlayer = __webpack_require__(283);
+	var _VideoPlayer = __webpack_require__(285);
 
 	var _VideoPlayer2 = _interopRequireDefault(_VideoPlayer);
 
@@ -37065,7 +37140,7 @@
 	}
 
 /***/ },
-/* 283 */
+/* 285 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37148,7 +37223,7 @@
 	}
 
 /***/ },
-/* 284 */
+/* 286 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37182,7 +37257,7 @@
 	});
 
 /***/ },
-/* 285 */
+/* 287 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37199,7 +37274,7 @@
 
 	var _reactSlick2 = _interopRequireDefault(_reactSlick);
 
-	var _EPGuide = __webpack_require__(286);
+	var _EPGuide = __webpack_require__(288);
 
 	var _EPGuide2 = _interopRequireDefault(_EPGuide);
 
@@ -37303,7 +37378,7 @@
 	});
 
 /***/ },
-/* 286 */
+/* 288 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37316,19 +37391,19 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Channels = __webpack_require__(287);
+	var _Channels = __webpack_require__(289);
 
 	var _Channels2 = _interopRequireDefault(_Channels);
 
-	var _Filter = __webpack_require__(288);
+	var _Filter = __webpack_require__(290);
 
 	var _Filter2 = _interopRequireDefault(_Filter);
 
-	var _Schedule = __webpack_require__(289);
+	var _Schedule = __webpack_require__(291);
 
 	var _Schedule2 = _interopRequireDefault(_Schedule);
 
-	var _MobileSchedule = __webpack_require__(291);
+	var _MobileSchedule = __webpack_require__(293);
 
 	var _MobileSchedule2 = _interopRequireDefault(_MobileSchedule);
 
@@ -37357,7 +37432,7 @@
 	});
 
 /***/ },
-/* 287 */
+/* 289 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -37443,7 +37518,7 @@
 	});
 
 /***/ },
-/* 288 */
+/* 290 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -37731,7 +37806,7 @@
 	});
 
 /***/ },
-/* 289 */
+/* 291 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37744,7 +37819,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _TimeBlockHead = __webpack_require__(290);
+	var _TimeBlockHead = __webpack_require__(292);
 
 	var _TimeBlockHead2 = _interopRequireDefault(_TimeBlockHead);
 
@@ -38014,7 +38089,7 @@
 	});
 
 /***/ },
-/* 290 */
+/* 292 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38161,7 +38236,7 @@
 	var TimeList = ['1am', '1:30', '2am', '2:30', '3am', '3:30', '4am', '4:30', '5am', '5:30', '6am', '6:30', '7am', '7:30', '8am', '8:30', '9am', '9:30', '10am', '10:30', '11am', '11:30', '12', '12:30', '1pm', '1:30', '2pm', '2:30', '3pm', '3:30', '4pm', '4:30', '5pm', '5:30', '6pm', '6:30', '7pm', '7:30', '8pm', '8:30', '9pm', '9:30', '10pm', '10:30', '11pm', '11:30', '12'];
 
 /***/ },
-/* 291 */
+/* 293 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
