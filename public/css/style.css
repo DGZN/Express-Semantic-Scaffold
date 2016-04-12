@@ -18,6 +18,15 @@ body {
   opacity: 0 !important;
 }
 
+#selectedChannelBlock .ui.image.schedule-play {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  margin-top: 1rem;
+  margin-right: 2rem;
+  width: 5rem;
+}
+
 .close-modal {
   position: absolute;
   display: block;
@@ -350,6 +359,20 @@ body {
   display: none;
   text-align: left;
   margin-top: 100px !important;
+  overflow-x: hidden;
+}
+
+.live-player-modal.modal {
+  position: absolute;
+  top: 0px !important;
+  width: 100% !important;
+  height: 1000px;
+  background-color: rgba(0,0,0,.55);
+  left: 0;
+  display: none;
+  text-align: left;
+  margin-top: 0px !important;
+  overflow-x: hidden;
 }
 
 .my-account .account-settings {

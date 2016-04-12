@@ -2,6 +2,22 @@ import React       from 'react'
 import TimeBlockHead from './TimeBlockHead'
 
 export default React.createClass({
+  play() {
+    $('.live-player-modal.modal').modal('show');
+    setTimeout(function(){
+      jwplayer("live-player").setup({
+      	height: '95%',
+      	width: '95%',
+        sources: [
+          { 'file': "http://38.96.148.118/MelodyAflam/smil:aflam.smil/playlist.m3u8"}
+        ],
+        rtmp: {
+          'bufferlength': 25
+        }
+      });
+    })
+  },
+
   render() {
     return (
       <div className="fourteen wide computer sixteen wide tablet column">
@@ -34,6 +50,7 @@ export default React.createClass({
                 <td id="selectedChannelBlock">
                   <div id="channel-content">
                     <h3 className="title">Zarf Sehy</h3>
+                    <img src="/images/play-button.png" className="ui image schedule-play" onClick={this.play} />
                     <hr/><img src="/images/melody/M22109.jpg" className="ui small image thumb selected-thumb"/>
                     <div className="blockDetails">
                       <div className="title">Zarf Sehy</div><span className="episodes">S2 | Ep7</span><span className="time">8:45pm - 10:45pm</span><span className="description">The film revolves around the figure of Omar ( Abdulaziz Karim ) . Tragedy begins life since he was a small child where he witnessed the exchange of fire between his father ( Mahmoud soldier ) and police forces , and despite the fact that his father left his home.</span>
