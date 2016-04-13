@@ -1332,6 +1332,7 @@ body.pushable>.pusher {
 }
 
 .movie-actions img {
+  cursor: pointer;
   position: relative;
   float: left;
   margin: 0 20px 30px 0;

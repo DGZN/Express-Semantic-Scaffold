@@ -72,7 +72,7 @@ export default React.createClass({
       }
       ids.push('#'+id)
       COLUMNS.push(
-      <div>
+      <div key={'carousel-col-'+Math.random()}>
         <Link to={link || '#'} className="carousel image preview"  id={id}>
           <div className=" image " style={{"backgroundImage": 'url(' + thumb + ') !important'}} >
             <div className="ui bottom attached label">
@@ -98,7 +98,7 @@ export default React.createClass({
       })
     },100)
     return (
-      <div>
+      <div key={'carousel-'+Math.random()}>
         <div className="ui one column equal width grid container">
          <div className="column header">
             <Link to={'/'+this.props.title.toLowerCase()} className="item">

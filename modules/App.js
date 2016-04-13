@@ -1,6 +1,6 @@
 import React       from 'react'
 import { browserHistory } from 'react-router'
-
+import appHistory from '../app_history'
 
 import Nav         from './Nav'
 import Footer      from './Footer'
@@ -34,7 +34,7 @@ export default React.createClass({
   componentDidMount: function() {
     this.changeListener = this._onLoginChange;
     LoginStore.addChangeListener(this.changeListener);
-    // jQuery.scrollSpeed(100, 400);
+    browserHistory.push('/')
   },
 
   /*
@@ -75,7 +75,7 @@ export default React.createClass({
 
     return (
       <div style={{ 'textAlign': this.state.align + ' !important'}}>
-        <MyWatchlist />
+        <MyWatchlist user={this.state.user} language={this.state.language} textAlign={this.state.align} {...this.props} linkFromModal={this.linkFromModal} />
         <Nav
           user={this.state.user}
           myAccount={this.myAccount}
@@ -145,6 +145,19 @@ export default React.createClass({
     $('.my-account.modal').modal('hide', function(){
       console.log("modal closed")
     })
+  },
+
+  linkFromModal(link) {
+    console.log("linking from modal", link)
+    if (link) {
+      $('.my-watchlist.modal').modal('hide', function(){
+        let transitionPath = '/movies/2';
+        //browserHistory.push('/movies/2')
+        setTimeout(function(){
+          appHistory.replace('/movies/2')
+        }, 500)
+      })
+    }
   }
 
 });

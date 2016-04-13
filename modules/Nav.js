@@ -97,7 +97,7 @@ export default React.createClass({
   },
 
   myWatchlist() {
-    $('.my-watchlist.modal').modal('show');
+    $('.my-watchlist.modal').modal({ closable: false}).modal('show')
   },
 
   languageMenu(language) {

@@ -1,5 +1,6 @@
 import React from 'react'
-
+import { Router } from 'react-router'
+import { browserHistory } from 'react-router'
 import { Link } from 'react-router'
 
 export default React.createClass({
@@ -16,6 +17,12 @@ export default React.createClass({
     })
   },
 
+  WatchlistColumnClick(e, col) {
+    e.preventDefault()
+    console.log("watchlist column clicked")
+    console.log($(e), 'target', e.target, '$', $(e.target), 'column', col)
+  },
+
   render() {
     if (this.props.data.ref) {
       var link = this.props.data.ref.link
@@ -28,39 +35,33 @@ export default React.createClass({
     if (this.props.thumbPath) {
       thumb = '/images/wireframe/16x9.png';
     }
+    var self = this;
     var id = this.props.data.id
     var visible = this.props.className || ''
     var hrefCSS = 'image preview load '
     var thumbCSS = 'image preview thumb '
     var labelCSS = 'ui bottom attached label '
-    // if (this.props.hidden) {
-    //   hrefCSS+='hidden-thumb'
-    //   thumbCSS+='hidden-thumb'
-    //   labelCSS='hidden-thumb hidden'
-    // }
     var reset = 0;
     var delay = this.props.delay || 100;
     setTimeout(function(){
-      $('#col-'+id).velocity({
+      $('#col-watchlist-'+id).velocity({
         opacity: 1
-      }, 0)
+      }, 0).on('click', function(e){
+        e.preventDefault()
+        self.props.linkFromModal($(e.target).data('link'))
+      })
     }, delay)
     return (
-      <Link to={link || '#'} className={hrefCSS} key={'#col-link-'+id+Math.random()} >
-        <div className={thumbCSS} style={{"backgroundImage": 'url(' + thumb + ') !important'}} id={'col-'+id}>
+      <a href="#" className={hrefCSS} key={'col-watchlist-link-'+id} >
+        <div className={thumbCSS} style={{"backgroundImage": 'url(' + thumb + ') !important'}} id={'col-watchlist-'+id} data-link={link} onClick={this.WatchlistColumnClick}>
           <div className={labelCSS}>{this.props.data.meta[this.state.language].name}</div>
         </div>
-      </Link>
+      </a>
     );
   },
 
-  componentDidMount() {
 
-  },
 
-  fadeInImages() {
-
-  }
 });
 
 function generateLink(props){

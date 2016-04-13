@@ -1,6 +1,7 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { Router, Route, hashHistory } from 'react-router'
+import appHistory from './app_history'
 
 import App from './modules/App'
 import Home from './modules/Home'

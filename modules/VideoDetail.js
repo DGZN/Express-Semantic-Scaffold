@@ -61,7 +61,10 @@ export default React.createClass({
                 <div className="row">
                   <div className="column tight">
                     <div className="movie-details"><span>{movie.duration}</span><span>{movie.productionYear}</span></div>
-                    <div className="movie-actions"><img src="/images/add-button.png" className="ui image"/><img src="/images/social-share-circle-icons.png" className="ui image social-share"/></div>
+                    <div className="movie-actions">
+                      <img src="/images/add-button.png" className="ui image" onClick={this.addToWatchlist}/>
+                      <img src="/images/social-share-circle-icons.png" className="ui image social-share"/>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -83,6 +86,16 @@ export default React.createClass({
       return YouTubePlayer(url.split('v=')[1])
     if (url.indexOf('bctid'))
       return BrightCovePlayer(url.split('&bctid=')[1])
+  },
+
+  addToWatchlist() {
+    if ( ! this.state.movie.uuid || ! this.props.user )
+      return;
+    $.post(env.endpoint + '/v1/users/' +this.props.user.id + '/watchlist', {
+      uuid: this.state.movie.uuid
+    }, function (result) {
+      console.log("result from adding to watchlist", result)
+    }.bind(this))
   }
 });
 
