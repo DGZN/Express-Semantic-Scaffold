@@ -62,7 +62,7 @@ export default React.createClass({
                   <div className="column tight">
                     <div className="movie-details"><span>{movie.duration}</span><span>{movie.productionYear}</span></div>
                     <div className="movie-actions">
-                      <img src="/images/add-button.png" className="ui image" onClick={this.addToWatchlist}/>
+                      <img src="/images/add-button.png" className="ui image addToWatchlist" onClick={this.addToWatchlist}/>
                       <img src="/images/social-share-circle-icons.png" className="ui image social-share"/>
                     </div>
                   </div>
@@ -81,7 +81,6 @@ export default React.createClass({
   },
 
   getPlayer: function(url){
-    console.log("getting player url", url)
     if (url.indexOf('youtube')>=0)
       return YouTubePlayer(url.split('v=')[1])
     if (url.indexOf('bctid'))
@@ -91,11 +90,12 @@ export default React.createClass({
   addToWatchlist(e) {
     if ( ! this.state.movie.uuid || ! this.props.user )
       return;
+    $('.addToWatchlist').velocity({
+      opacity: 0
+    }, 250)
     $.post(env.endpoint + '/v1/users/' +this.props.user.id + '/watchlist', {
       uuid: this.state.movie.uuid
     }, function (result) {
-      console.log("result from adding to watchlist", result)
-      $(e.target).hid()
     }.bind(this))
   }
 });
@@ -105,7 +105,6 @@ function YouTubePlayer(id){
 }
 
 function BrightCovePlayer(id){
-    console.log("BrightcoveID", id)
     return ('<object id="flashObj" width="98%" height="407" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,47,0"> \
       <param name="movie" value="http://c.brightcove.com/services/viewer/federated_f9?isVid=1&isUI=1" />                                                                                                          \
       <param name="bgcolor" value="#FFFFFF" />                                                                                                                                                                    \

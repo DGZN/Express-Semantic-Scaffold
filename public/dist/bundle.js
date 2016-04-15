@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "23e8dc64fbb9a0044dc8"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "e3808a4affa313f2734a"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -602,47 +602,55 @@
 
 	var _Music2 = _interopRequireDefault(_Music);
 
-	var _Movie = __webpack_require__(276);
+	var _Album = __webpack_require__(276);
+
+	var _Album2 = _interopRequireDefault(_Album);
+
+	var _Movie = __webpack_require__(284);
 
 	var _Movie2 = _interopRequireDefault(_Movie);
 
-	var _Plays = __webpack_require__(281);
+	var _Plays = __webpack_require__(286);
 
 	var _Plays2 = _interopRequireDefault(_Plays);
 
-	var _Play = __webpack_require__(282);
+	var _Play = __webpack_require__(287);
 
 	var _Play2 = _interopRequireDefault(_Play);
 
-	var _Classics = __webpack_require__(283);
+	var _Classics = __webpack_require__(288);
 
 	var _Classics2 = _interopRequireDefault(_Classics);
 
-	var _Classic = __webpack_require__(284);
+	var _Classic = __webpack_require__(289);
 
 	var _Classic2 = _interopRequireDefault(_Classic);
 
-	var _Movies = __webpack_require__(285);
+	var _Movies = __webpack_require__(290);
 
 	var _Movies2 = _interopRequireDefault(_Movies);
 
-	var _Series = __webpack_require__(286);
+	var _Series = __webpack_require__(291);
 
 	var _Series2 = _interopRequireDefault(_Series);
 
-	var _Season = __webpack_require__(287);
+	var _Season = __webpack_require__(292);
 
 	var _Season2 = _interopRequireDefault(_Season);
 
-	var _Collections = __webpack_require__(292);
+	var _Collections = __webpack_require__(294);
 
 	var _Collections2 = _interopRequireDefault(_Collections);
 
-	var _LiveTV = __webpack_require__(293);
+	var _Collection = __webpack_require__(295);
+
+	var _Collection2 = _interopRequireDefault(_Collection);
+
+	var _LiveTV = __webpack_require__(296);
 
 	var _LiveTV2 = _interopRequireDefault(_LiveTV);
 
-	var _Watchlist = __webpack_require__(300);
+	var _Watchlist = __webpack_require__(303);
 
 	var _Watchlist2 = _interopRequireDefault(_Watchlist);
 
@@ -661,10 +669,12 @@
 	    _react2.default.createElement(_reactRouter.Route, { path: '/series', component: _Series2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/series/:id', component: _Season2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/music', component: _Music2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/albums/:id', component: _Album2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/plays', component: _Plays2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/plays/:id', component: _Play2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/classics', component: _Classics2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/collections', component: _Collections2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/collections/:id', component: _Collection2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/livetv', component: _LiveTV2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/logout', component: _App2.default })
 	  )
@@ -36593,19 +36603,19 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _VideoDetail = __webpack_require__(277);
+	var _AlbumDetail = __webpack_require__(277);
 
-	var _VideoDetail2 = _interopRequireDefault(_VideoDetail);
+	var _AlbumDetail2 = _interopRequireDefault(_AlbumDetail);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _react2.default.createClass({
-	  displayName: 'Movie',
+	  displayName: 'Album',
 	  render: function render() {
 	    // if (!this.props.user)
 	    //   this.props.myAccount()
-	    var source = '/movies/' + this.props.params.id;
-	    return _react2.default.createElement(_VideoDetail2.default, _extends({}, this.props, { source: source }));
+	    var source = '/albums/' + this.props.params.id;
+	    return _react2.default.createElement(_AlbumDetail2.default, _extends({}, this.props, { source: source }));
 	  }
 	});
 
@@ -36623,604 +36633,15 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Roles = __webpack_require__(278);
-
-	var _Roles2 = _interopRequireDefault(_Roles);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var env = __webpack_require__(243);
-
-	exports.default = _react2.default.createClass({
-	  displayName: 'VideoDetail',
-
-	  getInitialState: function getInitialState() {
-	    return {
-	      movie: ''
-	    };
-	  },
-
-	  componentDidMount: function componentDidMount() {
-	    this.fetch = $.get(env.endpoint + '/v1/assets' + this.props.source, function (result) {
-	      this.setState({
-	        movie: result
-	      });
-	    }.bind(this));
-	  },
-
-	  componentWillUnmount: function componentWillUnmount() {
-	    this.fetch.abort();
-	  },
-
-	  render: function render() {
-	    var _this = this;
-
-	    var movie = {
-	      name: '',
-	      description: '',
-	      productionYear: 'Produced ' + this.state.movie['production_year'],
-	      duration: 0,
-	      player: ''
-	    };
-	    if (this.state.movie) {
-	      var _roles = this.state.movie.roles;
-	      var roles = [];
-	      this.state.movie.people.map(function (person) {
-	        roles[_roles[person.role].meta[_this.props.language].name] = roles[_roles[person.role].meta[_this.props.language].name] || [];
-	        roles[_roles[person.role].meta[_this.props.language].name].push(person);
-	      });
-	      var movie = {
-	        name: this.state.movie.meta[this.props.language].name,
-	        description: this.state.movie.meta[this.props.language].description,
-	        productionYear: 'Produced ' + this.state.movie['production_year'],
-	        duration: Math.floor(this.state.movie.duration / 60) + ' min',
-	        player: this.getPlayer(this.state.movie['video_url']),
-	        roles: roles
-	      };
-	    }
-	    return _react2.default.createElement(
-	      'div',
-	      { className: 'ui vertical center container aligned grids pad-top-medium' },
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'ui vertical center container aligned grids pad-top-medium', style: { 'textAlign': this.props.textAlign } },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'ui two column grid container' },
-	          _react2.default.createElement('div', { className: 'details sixteen wide tablet eight wide computer column centered', dangerouslySetInnerHTML: { __html: movie.player } }),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'details sixteen wide tablet eight wide computer column centered' },
-	            _react2.default.createElement('img', { src: '/images/banner01.png', className: 'ui image hidden' }),
-	            _react2.default.createElement(
-	              'h2',
-	              null,
-	              movie.name
-	            ),
-	            _react2.default.createElement(
-	              'h4',
-	              null,
-	              movie.description
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'ui one column grid center' },
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'row' },
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'column tight' },
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'movie-details' },
-	                    _react2.default.createElement(
-	                      'span',
-	                      null,
-	                      movie.duration
-	                    ),
-	                    _react2.default.createElement(
-	                      'span',
-	                      null,
-	                      movie.productionYear
-	                    )
-	                  ),
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'movie-actions' },
-	                    _react2.default.createElement('img', { src: '/images/add-button.png', className: 'ui image', onClick: this.addToWatchlist }),
-	                    _react2.default.createElement('img', { src: '/images/social-share-circle-icons.png', className: 'ui image social-share' })
-	                  )
-	                )
-	              )
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'ui grid container details' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'details sixteen wide tablet sixteen wide computer column centered' },
-	            _react2.default.createElement(_Roles2.default, { roles: movie.roles, language: this.props.language })
-	          )
-	        )
-	      )
-	    );
-	  },
-
-
-	  getPlayer: function getPlayer(url) {
-	    console.log("getting player url", url);
-	    if (url.indexOf('youtube') >= 0) return YouTubePlayer(url.split('v=')[1]);
-	    if (url.indexOf('bctid')) return BrightCovePlayer(url.split('&bctid=')[1]);
-	  },
-
-	  addToWatchlist: function addToWatchlist(e) {
-	    if (!this.state.movie.uuid || !this.props.user) return;
-	    $.post(env.endpoint + '/v1/users/' + this.props.user.id + '/watchlist', {
-	      uuid: this.state.movie.uuid
-	    }, function (result) {
-	      console.log("result from adding to watchlist", result);
-	      $(e.target).hid();
-	    }.bind(this));
-	  }
-	});
-
-
-	function YouTubePlayer(id) {
-	  return '<iframe width="98%" height="407" src="https://www.youtube.com/embed/' + id + '?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>';
-	}
-
-	function BrightCovePlayer(id) {
-	  console.log("BrightcoveID", id);
-	  return '<object id="flashObj" width="98%" height="407" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,47,0"> \
-	      <param name="movie" value="http://c.brightcove.com/services/viewer/federated_f9?isVid=1&isUI=1" />                                                                                                          \
-	      <param name="bgcolor" value="#FFFFFF" />                                                                                                                                                                    \
-	      <param name="flashVars" value="videoId=' + id + '&playerID=3815086849001&playerKey=AQ~~,AAADd9u4__E~,fHl6JWluMnctnUR7lsNevXxKfibpHuew&domain=embed&dynamicStreaming=true" />                             \
-	      <param name="base" value="http://admin.brightcove.com" />                                                                                                                                                   \
-	      <param name="seamlesstabbing" value="false" /> \
-	      <param name="allowFullScreen" value="true" /> \
-	      <param name="swLiveConnect" value="true" /> \
-	      <param name="allowScriptAccess" value="always" /> \
-	      <embed src="http://c.brightcove.com/services/viewer/federated_f9?isVid=1&isUI=1" bgcolor="#FFFFFF"  flashVars="videoId=' + id + '&playerID=3815086849001&playerKey=AQ~~,AAADd9u4__E~,fHl6JWluMnctnUR7lsNevXxKfibpHuew&domain=embed&dynamicStreaming=true" base="http://admin.brightcove.com" name="flashObj" width="98%" height="407" seamlesstabbing="false" type="application/x-shockwave-flash" allowFullScreen="true" allowScriptAccess="always" swLiveConnect="true" pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"> \
-	    </embed></object>';
-	}
-
-/***/ },
-/* 278 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _People = __webpack_require__(279);
-
-	var _People2 = _interopRequireDefault(_People);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = _react2.default.createClass({
-	  displayName: 'Roles',
-
-
-	  getInitialState: function getInitialState() {
-	    return {
-	      roles: []
-	    };
-	  },
-
-	  componentWillReceiveProps: function componentWillReceiveProps(props) {
-	    this.setState({
-	      roles: props['roles'] || [],
-	      people: []
-	    });
-	  },
-
-	  render: function render() {
-	    var PEOPLE = this.state.people;
-	    if (this.state.roles) {
-	      var PEOPLE = [];
-	      for (var role in this.state.roles) {
-	        PEOPLE.push(_react2.default.createElement(_People2.default, _extends({ key: role, title: role, people: this.state.roles[role], language: this.props.language }, this.props)));
-	      }
-	    }
-	    return _react2.default.createElement(
-	      'div',
-	      { className: 'ui three column grid container stackable' },
-	      PEOPLE
-	    );
-	  }
-	});
-
-/***/ },
-/* 279 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _Person = __webpack_require__(280);
-
-	var _Person2 = _interopRequireDefault(_Person);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = _react2.default.createClass({
-	  displayName: 'People',
-
-	  getInitialState: function getInitialState() {
-	    return {
-	      title: this.props.title,
-	      people: this.props.people || []
-	    };
-	  },
-
-	  render: function render() {
-	    var _this = this;
-
-	    var people = [];
-	    var colWidth = this.props.colWidth ? this.props.colWidth : 'three';
-	    this.state.people.map(function (person, i) {
-	      people.push(_react2.default.createElement(_Person2.default, { key: i, name: person.meta[_this.props.language]["first_name"] + ' ' + person.meta[_this.props.language]["last_name"] }));
-	    });
-	    var className = 'cast ' + colWidth + ' wide computer five wide tablet column tight';
-	    return _react2.default.createElement(
-	      'div',
-	      { className: className },
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'ui top attached label detailHeading' },
-	        this.state.title
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'ui grid' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'row' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'pad-top-medium column tight' },
-	            _react2.default.createElement(
-	              'ul',
-	              { className: 'meta values tight' },
-	              people
-	            )
-	          )
-	        )
-	      )
-	    );
-	  }
-	});
-
-
-	function getChararcters() {
-	  return _react2.default.createElement(
-	    'div',
-	    { className: 'pad-top-medium column tight' },
-	    _react2.default.createElement(
-	      'ul',
-	      { className: 'meta tight' },
-	      _react2.default.createElement(
-	        'li',
-	        null,
-	        'Alex'
-	      ),
-	      _react2.default.createElement(
-	        'li',
-	        null,
-	        'Noma'
-	      ),
-	      _react2.default.createElement(
-	        'li',
-	        null,
-	        'Alex'
-	      ),
-	      _react2.default.createElement(
-	        'li',
-	        null,
-	        'Noma'
-	      )
-	    )
-	  );
-	}
-
-/***/ },
-/* 280 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = _react2.default.createClass({
-	  displayName: 'Person',
-	  render: function render() {
-	    return _react2.default.createElement(
-	      'li',
-	      null,
-	      this.props.name
-	    );
-	  }
-	});
-
-/***/ },
-/* 281 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _Grid = __webpack_require__(274);
-
-	var _Grid2 = _interopRequireDefault(_Grid);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = _react2.default.createClass({
-	  displayName: 'Plays',
-	  render: function render() {
-	    return _react2.default.createElement(_Grid2.default, _extends({}, this.props, {
-	      limit: '5',
-	      title: 'Plays',
-	      source: '/plays',
-	      href: '/plays/:id' }));
-	  }
-	});
-
-/***/ },
-/* 282 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _VideoDetail = __webpack_require__(277);
-
-	var _VideoDetail2 = _interopRequireDefault(_VideoDetail);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = _react2.default.createClass({
-	  displayName: 'Play',
-	  render: function render() {
-	    // if (!this.props.user)
-	    //   this.props.myAccount()
-	    var source = '/plays/' + this.props.params.id;
-	    return _react2.default.createElement(_VideoDetail2.default, _extends({}, this.props, { source: source }));
-	  }
-	});
-
-/***/ },
-/* 283 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _Grid = __webpack_require__(274);
-
-	var _Grid2 = _interopRequireDefault(_Grid);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = _react2.default.createClass({
-	  displayName: 'Classics',
-	  render: function render() {
-	    return _react2.default.createElement(_Grid2.default, _extends({}, this.props, {
-	      limit: '5',
-	      title: 'Classics',
-	      source: '/classics',
-	      href: '/classics/:id' }));
-	  }
-	});
-
-/***/ },
-/* 284 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _VideoDetail = __webpack_require__(277);
-
-	var _VideoDetail2 = _interopRequireDefault(_VideoDetail);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = _react2.default.createClass({
-	  displayName: 'Classic',
-	  render: function render() {
-	    // if (!this.props.user)
-	    //   this.props.myAccount()
-	    var source = '/classics/' + this.props.params.id;
-	    return _react2.default.createElement(_VideoDetail2.default, _extends({}, this.props, { source: source }));
-	  }
-	});
-
-/***/ },
-/* 285 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _Grid = __webpack_require__(274);
-
-	var _Grid2 = _interopRequireDefault(_Grid);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = _react2.default.createClass({
-	  displayName: 'Movies',
-	  render: function render() {
-	    return _react2.default.createElement(_Grid2.default, _extends({}, this.props, {
-	      limit: '5',
-	      title: 'Movies',
-	      source: '/movies',
-	      href: '/movies/:id',
-	      featured: '/sets/Featuredmovies' }));
-	  }
-	});
-
-/***/ },
-/* 286 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _Grid = __webpack_require__(274);
-
-	var _Grid2 = _interopRequireDefault(_Grid);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = _react2.default.createClass({
-	  displayName: 'Series',
-	  render: function render() {
-	    return _react2.default.createElement(_Grid2.default, _extends({}, this.props, {
-	      limit: '5',
-	      title: 'Series',
-	      source: '/series',
-	      href: '/series/:id' }));
-	  }
-	});
-
-/***/ },
-/* 287 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _SeasonDetail = __webpack_require__(288);
-
-	var _SeasonDetail2 = _interopRequireDefault(_SeasonDetail);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = _react2.default.createClass({
-	  displayName: 'Season',
-	  render: function render() {
-	    // if (!this.props.user)
-	    //   this.props.myAccount()
-	    var source = '/series/' + this.props.params.id;
-	    return _react2.default.createElement(_SeasonDetail2.default, _extends({}, this.props, { source: source }));
-	  }
-	});
-
-/***/ },
-/* 288 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _SeasonFilter = __webpack_require__(289);
+	var _SeasonFilter = __webpack_require__(278);
 
 	var _SeasonFilter2 = _interopRequireDefault(_SeasonFilter);
 
-	var _SeasonWatchlist = __webpack_require__(290);
+	var _SeasonWatchlist = __webpack_require__(279);
 
 	var _SeasonWatchlist2 = _interopRequireDefault(_SeasonWatchlist);
 
-	var _Roles = __webpack_require__(278);
+	var _Roles = __webpack_require__(281);
 
 	var _Roles2 = _interopRequireDefault(_Roles);
 
@@ -37229,7 +36650,7 @@
 	var env = __webpack_require__(243);
 
 	exports.default = _react2.default.createClass({
-	  displayName: 'SeasonDetail',
+	  displayName: 'AlbumDetail',
 
 
 	  getInitialState: function getInitialState() {
@@ -37241,7 +36662,7 @@
 	  componentDidMount: function componentDidMount() {
 	    this.fetch = $.get(env.endpoint + '/v1/assets' + this.props.source, function (result) {
 	      this.setState({
-	        series: result
+	        album: result
 	      });
 	    }.bind(this));
 	  },
@@ -37250,44 +36671,38 @@
 	    this.fetch.abort();
 	  },
 
-	  addToWatchlist: function addToWatchlist() {
+	  addToWatchlist: function addToWatchlist(e) {
 	    if (!this.state.series.uuid || !this.props.user) return;
+	    $('.addToWatchlist').velocity({
+	      opacity: 0
+	    }, 250);
 	    $.post(env.endpoint + '/v1/users/' + this.props.user.id + '/watchlist', {
 	      uuid: this.state.series.uuid
-	    }, function (result) {
-	      console.log("result from adding to watchlist", result);
-	    }.bind(this));
+	    }, function (result) {}.bind(this));
 	  },
 	  render: function render() {
 	    var _this = this;
 
-	    var series = {
+	    var album = {
 	      name: '',
 	      description: '',
-	      thumb: '/images/wireframe/16x9.png',
-	      seasonText: 'Season 1',
-	      productionYear: '',
-	      duration: 0,
-	      seasons: [],
-	      episodes: []
+	      albumText: 'Album 1',
+	      songs: [],
+	      thumb: ''
 	    };
-	    if (this.state.series) {
-	      var _roles = this.state.series.seasons[0].roles;
+	    if (this.state.album) {
+	      var _roles = this.state.album.songs[0].roles;
 	      var roles = [];
-	      this.state.series.seasons[0].people.map(function (person) {
+	      this.state.album.songs[0].people.map(function (person) {
 	        roles[_roles[person.role].meta[_this.props.language].name] = roles[_roles[person.role].meta[_this.props.language].name] || [];
 	        roles[_roles[person.role].meta[_this.props.language].name].push(person);
 	      });
-	      var series = {
-	        name: this.state.series.meta[this.props.language].name,
-	        description: this.state.series.meta[this.props.language].description,
-	        thumb: '/images/melody/' + this.state.series.thumb.replace('M1', 'M11'),
-	        seasonText: 'Season 1',
-	        productionYear: 'Released ' + this.state.series['production_year'],
-	        duration: Math.floor(this.state.series.seasons[0].episodes[0].duration / 60) + ' min',
-	        seasons: this.state.series.seasons,
-	        episodes: this.state.series.seasons[0].episodes,
-	        roles: roles
+	      var album = {
+	        name: this.state.album.meta.en.name,
+	        description: this.state.album.meta.en.description,
+	        albumText: 'Album 1',
+	        songs: this.state.album.songs,
+	        thumb: '/images/melody/' + this.state.album.songs[0].thumb.replace('M1', 'M11')
 	      };
 	    }
 	    setTimeout(function () {
@@ -37296,11 +36711,7 @@
 	    return _react2.default.createElement(
 	      'div',
 	      null,
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'ui container grids' },
-	        _react2.default.createElement(_SeasonFilter2.default, { title: series.name, seasons: series.seasons })
-	      ),
+	      _react2.default.createElement('div', { className: 'ui container grids' }),
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'ui vertical center container aligned grids', style: { 'textAlign': this.props.textAlign } },
@@ -37310,7 +36721,7 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'details six wide computer only column centered season-watchlist' },
-	            _react2.default.createElement(_SeasonWatchlist2.default, { language: this.props.language, episodes: series.episodes })
+	            _react2.default.createElement(_SeasonWatchlist2.default, { language: this.props.language, episodes: album.songs })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -37319,21 +36730,21 @@
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'season-detail' },
-	              _react2.default.createElement('img', { src: series.thumb, className: 'ui huge image' }),
+	              _react2.default.createElement('img', { src: album.thumb, className: 'ui huge image' }),
 	              _react2.default.createElement(
 	                'h1',
 	                null,
-	                series.name
+	                album.name
 	              ),
 	              _react2.default.createElement(
 	                'h3',
 	                null,
-	                series.seriesText
+	                album.seriesText
 	              ),
 	              _react2.default.createElement(
 	                'h4',
 	                { className: 'pad-right-medium' },
-	                series.description
+	                album.description
 	              ),
 	              _react2.default.createElement(
 	                'div',
@@ -37350,18 +36761,18 @@
 	                      _react2.default.createElement(
 	                        'span',
 	                        null,
-	                        series.duration
+	                        album.duration
 	                      ),
 	                      _react2.default.createElement(
 	                        'span',
 	                        null,
-	                        series.productionYear
+	                        album.productionYear
 	                      )
 	                    ),
 	                    _react2.default.createElement(
 	                      'div',
 	                      { className: 'movie-actions' },
-	                      _react2.default.createElement('img', { src: '/images/add-button.png', className: 'ui image', onClick: this.addToWatchlist }),
+	                      _react2.default.createElement('img', { src: '/images/add-button.png', className: 'ui image addToWatchlist', onClick: this.addToWatchlist }),
 	                      _react2.default.createElement('img', { src: '/images/social-share-circle-icons.png', className: 'ui image social-share' })
 	                    )
 	                  )
@@ -37372,7 +36783,7 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'details sixteen wide tablet three wide computer column centered season-detail' },
-	            _react2.default.createElement(_Roles2.default, { roles: series.roles, language: this.props.language, colWidth: 'sixteen' })
+	            _react2.default.createElement(_Roles2.default, { roles: album.roles, language: this.props.language, colWidth: 'sixteen' })
 	          )
 	        )
 	      )
@@ -37381,7 +36792,7 @@
 	});
 
 /***/ },
-/* 289 */
+/* 278 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -37434,7 +36845,7 @@
 	});
 
 /***/ },
-/* 290 */
+/* 279 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37451,7 +36862,7 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _VideoPlayer = __webpack_require__(291);
+	var _VideoPlayer = __webpack_require__(280);
 
 	var _VideoPlayer2 = _interopRequireDefault(_VideoPlayer);
 
@@ -37567,7 +36978,7 @@
 	}
 
 /***/ },
-/* 291 */
+/* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37650,7 +37061,809 @@
 	}
 
 /***/ },
+/* 281 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _People = __webpack_require__(282);
+
+	var _People2 = _interopRequireDefault(_People);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	  displayName: 'Roles',
+
+
+	  getInitialState: function getInitialState() {
+	    return {
+	      roles: []
+	    };
+	  },
+
+	  componentWillReceiveProps: function componentWillReceiveProps(props) {
+	    this.setState({
+	      roles: props['roles'] || [],
+	      people: []
+	    });
+	  },
+
+	  render: function render() {
+	    var PEOPLE = this.state.people;
+	    if (this.state.roles) {
+	      var PEOPLE = [];
+	      for (var role in this.state.roles) {
+	        PEOPLE.push(_react2.default.createElement(_People2.default, _extends({ key: role, title: role, people: this.state.roles[role], language: this.props.language }, this.props)));
+	      }
+	    }
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'ui three column grid container stackable' },
+	      PEOPLE
+	    );
+	  }
+	});
+
+/***/ },
+/* 282 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Person = __webpack_require__(283);
+
+	var _Person2 = _interopRequireDefault(_Person);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	  displayName: 'People',
+
+	  getInitialState: function getInitialState() {
+	    return {
+	      title: this.props.title,
+	      people: this.props.people || []
+	    };
+	  },
+
+	  render: function render() {
+	    var _this = this;
+
+	    var people = [];
+	    var colWidth = this.props.colWidth ? this.props.colWidth : 'three';
+	    this.state.people.map(function (person, i) {
+	      people.push(_react2.default.createElement(_Person2.default, { key: i, name: person.meta[_this.props.language]["first_name"] + ' ' + person.meta[_this.props.language]["last_name"] }));
+	    });
+	    var className = 'cast ' + colWidth + ' wide computer five wide tablet column tight';
+	    return _react2.default.createElement(
+	      'div',
+	      { className: className },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'ui top attached label detailHeading' },
+	        this.state.title
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'ui grid' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'row' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'pad-top-medium column tight' },
+	            _react2.default.createElement(
+	              'ul',
+	              { className: 'meta values tight' },
+	              people
+	            )
+	          )
+	        )
+	      )
+	    );
+	  }
+	});
+
+
+	function getChararcters() {
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'pad-top-medium column tight' },
+	    _react2.default.createElement(
+	      'ul',
+	      { className: 'meta tight' },
+	      _react2.default.createElement(
+	        'li',
+	        null,
+	        'Alex'
+	      ),
+	      _react2.default.createElement(
+	        'li',
+	        null,
+	        'Noma'
+	      ),
+	      _react2.default.createElement(
+	        'li',
+	        null,
+	        'Alex'
+	      ),
+	      _react2.default.createElement(
+	        'li',
+	        null,
+	        'Noma'
+	      )
+	    )
+	  );
+	}
+
+/***/ },
+/* 283 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	  displayName: 'Person',
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'li',
+	      null,
+	      this.props.name
+	    );
+	  }
+	});
+
+/***/ },
+/* 284 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _VideoDetail = __webpack_require__(285);
+
+	var _VideoDetail2 = _interopRequireDefault(_VideoDetail);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	  displayName: 'Movie',
+	  render: function render() {
+	    // if (!this.props.user)
+	    //   this.props.myAccount()
+	    var source = '/movies/' + this.props.params.id;
+	    return _react2.default.createElement(_VideoDetail2.default, _extends({}, this.props, { source: source }));
+	  }
+	});
+
+/***/ },
+/* 285 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Roles = __webpack_require__(281);
+
+	var _Roles2 = _interopRequireDefault(_Roles);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var env = __webpack_require__(243);
+
+	exports.default = _react2.default.createClass({
+	  displayName: 'VideoDetail',
+
+	  getInitialState: function getInitialState() {
+	    return {
+	      movie: ''
+	    };
+	  },
+
+	  componentDidMount: function componentDidMount() {
+	    this.fetch = $.get(env.endpoint + '/v1/assets' + this.props.source, function (result) {
+	      this.setState({
+	        movie: result
+	      });
+	    }.bind(this));
+	  },
+
+	  componentWillUnmount: function componentWillUnmount() {
+	    this.fetch.abort();
+	  },
+
+	  render: function render() {
+	    var _this = this;
+
+	    var movie = {
+	      name: '',
+	      description: '',
+	      productionYear: 'Produced ' + this.state.movie['production_year'],
+	      duration: 0,
+	      player: ''
+	    };
+	    if (this.state.movie) {
+	      var _roles = this.state.movie.roles;
+	      var roles = [];
+	      this.state.movie.people.map(function (person) {
+	        roles[_roles[person.role].meta[_this.props.language].name] = roles[_roles[person.role].meta[_this.props.language].name] || [];
+	        roles[_roles[person.role].meta[_this.props.language].name].push(person);
+	      });
+	      var movie = {
+	        name: this.state.movie.meta[this.props.language].name,
+	        description: this.state.movie.meta[this.props.language].description,
+	        productionYear: 'Produced ' + this.state.movie['production_year'],
+	        duration: Math.floor(this.state.movie.duration / 60) + ' min',
+	        player: this.getPlayer(this.state.movie['video_url']),
+	        roles: roles
+	      };
+	    }
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'ui vertical center container aligned grids pad-top-medium' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'ui vertical center container aligned grids pad-top-medium', style: { 'textAlign': this.props.textAlign } },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'ui two column grid container' },
+	          _react2.default.createElement('div', { className: 'details sixteen wide tablet eight wide computer column centered', dangerouslySetInnerHTML: { __html: movie.player } }),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'details sixteen wide tablet eight wide computer column centered' },
+	            _react2.default.createElement('img', { src: '/images/banner01.png', className: 'ui image hidden' }),
+	            _react2.default.createElement(
+	              'h2',
+	              null,
+	              movie.name
+	            ),
+	            _react2.default.createElement(
+	              'h4',
+	              null,
+	              movie.description
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'ui one column grid center' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'row' },
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'column tight' },
+	                  _react2.default.createElement(
+	                    'div',
+	                    { className: 'movie-details' },
+	                    _react2.default.createElement(
+	                      'span',
+	                      null,
+	                      movie.duration
+	                    ),
+	                    _react2.default.createElement(
+	                      'span',
+	                      null,
+	                      movie.productionYear
+	                    )
+	                  ),
+	                  _react2.default.createElement(
+	                    'div',
+	                    { className: 'movie-actions' },
+	                    _react2.default.createElement('img', { src: '/images/add-button.png', className: 'ui image addToWatchlist', onClick: this.addToWatchlist }),
+	                    _react2.default.createElement('img', { src: '/images/social-share-circle-icons.png', className: 'ui image social-share' })
+	                  )
+	                )
+	              )
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'ui grid container details' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'details sixteen wide tablet sixteen wide computer column centered' },
+	            _react2.default.createElement(_Roles2.default, { roles: movie.roles, language: this.props.language })
+	          )
+	        )
+	      )
+	    );
+	  },
+
+
+	  getPlayer: function getPlayer(url) {
+	    if (url.indexOf('youtube') >= 0) return YouTubePlayer(url.split('v=')[1]);
+	    if (url.indexOf('bctid')) return BrightCovePlayer(url.split('&bctid=')[1]);
+	  },
+
+	  addToWatchlist: function addToWatchlist(e) {
+	    if (!this.state.movie.uuid || !this.props.user) return;
+	    $('.addToWatchlist').velocity({
+	      opacity: 0
+	    }, 250);
+	    $.post(env.endpoint + '/v1/users/' + this.props.user.id + '/watchlist', {
+	      uuid: this.state.movie.uuid
+	    }, function (result) {}.bind(this));
+	  }
+	});
+
+
+	function YouTubePlayer(id) {
+	  return '<iframe width="98%" height="407" src="https://www.youtube.com/embed/' + id + '?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>';
+	}
+
+	function BrightCovePlayer(id) {
+	  return '<object id="flashObj" width="98%" height="407" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,47,0"> \
+	      <param name="movie" value="http://c.brightcove.com/services/viewer/federated_f9?isVid=1&isUI=1" />                                                                                                          \
+	      <param name="bgcolor" value="#FFFFFF" />                                                                                                                                                                    \
+	      <param name="flashVars" value="videoId=' + id + '&playerID=3815086849001&playerKey=AQ~~,AAADd9u4__E~,fHl6JWluMnctnUR7lsNevXxKfibpHuew&domain=embed&dynamicStreaming=true" />                             \
+	      <param name="base" value="http://admin.brightcove.com" />                                                                                                                                                   \
+	      <param name="seamlesstabbing" value="false" /> \
+	      <param name="allowFullScreen" value="true" /> \
+	      <param name="swLiveConnect" value="true" /> \
+	      <param name="allowScriptAccess" value="always" /> \
+	      <embed src="http://c.brightcove.com/services/viewer/federated_f9?isVid=1&isUI=1" bgcolor="#FFFFFF"  flashVars="videoId=' + id + '&playerID=3815086849001&playerKey=AQ~~,AAADd9u4__E~,fHl6JWluMnctnUR7lsNevXxKfibpHuew&domain=embed&dynamicStreaming=true" base="http://admin.brightcove.com" name="flashObj" width="98%" height="407" seamlesstabbing="false" type="application/x-shockwave-flash" allowFullScreen="true" allowScriptAccess="always" swLiveConnect="true" pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"> \
+	    </embed></object>';
+	}
+
+/***/ },
+/* 286 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Grid = __webpack_require__(274);
+
+	var _Grid2 = _interopRequireDefault(_Grid);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	  displayName: 'Plays',
+	  render: function render() {
+	    return _react2.default.createElement(_Grid2.default, _extends({}, this.props, {
+	      limit: '5',
+	      title: 'Plays',
+	      source: '/plays',
+	      href: '/plays/:id' }));
+	  }
+	});
+
+/***/ },
+/* 287 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _VideoDetail = __webpack_require__(285);
+
+	var _VideoDetail2 = _interopRequireDefault(_VideoDetail);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	  displayName: 'Play',
+	  render: function render() {
+	    // if (!this.props.user)
+	    //   this.props.myAccount()
+	    var source = '/plays/' + this.props.params.id;
+	    return _react2.default.createElement(_VideoDetail2.default, _extends({}, this.props, { source: source }));
+	  }
+	});
+
+/***/ },
+/* 288 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Grid = __webpack_require__(274);
+
+	var _Grid2 = _interopRequireDefault(_Grid);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	  displayName: 'Classics',
+	  render: function render() {
+	    return _react2.default.createElement(_Grid2.default, _extends({}, this.props, {
+	      limit: '5',
+	      title: 'Classics',
+	      source: '/classics',
+	      href: '/classics/:id' }));
+	  }
+	});
+
+/***/ },
+/* 289 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _VideoDetail = __webpack_require__(285);
+
+	var _VideoDetail2 = _interopRequireDefault(_VideoDetail);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	  displayName: 'Classic',
+	  render: function render() {
+	    // if (!this.props.user)
+	    //   this.props.myAccount()
+	    var source = '/classics/' + this.props.params.id;
+	    return _react2.default.createElement(_VideoDetail2.default, _extends({}, this.props, { source: source }));
+	  }
+	});
+
+/***/ },
+/* 290 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Grid = __webpack_require__(274);
+
+	var _Grid2 = _interopRequireDefault(_Grid);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	  displayName: 'Movies',
+	  render: function render() {
+	    return _react2.default.createElement(_Grid2.default, _extends({}, this.props, {
+	      limit: '5',
+	      title: 'Movies',
+	      source: '/movies',
+	      href: '/movies/:id',
+	      featured: '/sets/Featuredmovies' }));
+	  }
+	});
+
+/***/ },
+/* 291 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Grid = __webpack_require__(274);
+
+	var _Grid2 = _interopRequireDefault(_Grid);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	  displayName: 'Series',
+	  render: function render() {
+	    return _react2.default.createElement(_Grid2.default, _extends({}, this.props, {
+	      limit: '5',
+	      title: 'Series',
+	      source: '/series',
+	      href: '/series/:id' }));
+	  }
+	});
+
+/***/ },
 /* 292 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _SeasonDetail = __webpack_require__(293);
+
+	var _SeasonDetail2 = _interopRequireDefault(_SeasonDetail);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	  displayName: 'Season',
+	  render: function render() {
+	    // if (!this.props.user)
+	    //   this.props.myAccount()
+	    var source = '/series/' + this.props.params.id;
+	    return _react2.default.createElement(_SeasonDetail2.default, _extends({}, this.props, { source: source }));
+	  }
+	});
+
+/***/ },
+/* 293 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _SeasonFilter = __webpack_require__(278);
+
+	var _SeasonFilter2 = _interopRequireDefault(_SeasonFilter);
+
+	var _SeasonWatchlist = __webpack_require__(279);
+
+	var _SeasonWatchlist2 = _interopRequireDefault(_SeasonWatchlist);
+
+	var _Roles = __webpack_require__(281);
+
+	var _Roles2 = _interopRequireDefault(_Roles);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var env = __webpack_require__(243);
+
+	exports.default = _react2.default.createClass({
+	  displayName: 'SeasonDetail',
+
+
+	  getInitialState: function getInitialState() {
+	    return {
+	      series: ''
+	    };
+	  },
+
+	  componentDidMount: function componentDidMount() {
+	    this.fetch = $.get(env.endpoint + '/v1/assets' + this.props.source, function (result) {
+	      this.setState({
+	        series: result
+	      });
+	    }.bind(this));
+	  },
+
+	  componentWillUnmount: function componentWillUnmount() {
+	    this.fetch.abort();
+	  },
+
+	  addToWatchlist: function addToWatchlist(e) {
+	    if (!this.state.series.uuid || !this.props.user) return;
+	    $('.addToWatchlist').velocity({
+	      opacity: 0
+	    }, 250);
+	    $.post(env.endpoint + '/v1/users/' + this.props.user.id + '/watchlist', {
+	      uuid: this.state.series.uuid
+	    }, function (result) {}.bind(this));
+	  },
+	  render: function render() {
+	    var _this = this;
+
+	    var series = {
+	      name: '',
+	      description: '',
+	      thumb: '/images/wireframe/16x9.png',
+	      seasonText: 'Season 1',
+	      productionYear: '',
+	      duration: 0,
+	      seasons: [],
+	      episodes: []
+	    };
+	    if (this.state.series) {
+	      var _roles = this.state.series.seasons[0].roles;
+	      var roles = [];
+	      this.state.series.seasons[0].people.map(function (person) {
+	        roles[_roles[person.role].meta[_this.props.language].name] = roles[_roles[person.role].meta[_this.props.language].name] || [];
+	        roles[_roles[person.role].meta[_this.props.language].name].push(person);
+	      });
+	      var series = {
+	        name: this.state.series.meta[this.props.language].name,
+	        description: this.state.series.meta[this.props.language].description,
+	        thumb: '/images/melody/' + this.state.series.thumb.replace('M1', 'M11'),
+	        seasonText: 'Season 1',
+	        productionYear: 'Released ' + this.state.series['production_year'],
+	        duration: Math.floor(this.state.series.seasons[0].episodes[0].duration / 60) + ' min',
+	        seasons: this.state.series.seasons,
+	        episodes: this.state.series.seasons[0].episodes,
+	        roles: roles
+	      };
+	    }
+	    setTimeout(function () {
+	      $('#watchlist-sidebar').sidebar('attach events', '.watchlist.item');
+	    }, 1000);
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'ui container grids' },
+	        _react2.default.createElement(_SeasonFilter2.default, { title: series.name, seasons: series.seasons })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'ui vertical center container aligned grids', style: { 'textAlign': this.props.textAlign } },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'ui two column grid container details pad-top-medium', style: { overflow: 'hidden' } },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'details six wide computer only column centered season-watchlist' },
+	            _react2.default.createElement(_SeasonWatchlist2.default, { language: this.props.language, episodes: series.episodes })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'details sixteen wide tablet seven wide computer column centered' },
+	            _react2.default.createElement('div', { id: 'video-slide-out' }),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'season-detail' },
+	              _react2.default.createElement('img', { src: series.thumb, className: 'ui huge image' }),
+	              _react2.default.createElement(
+	                'h1',
+	                null,
+	                series.name
+	              ),
+	              _react2.default.createElement(
+	                'h3',
+	                null,
+	                series.seriesText
+	              ),
+	              _react2.default.createElement(
+	                'h4',
+	                { className: 'pad-right-medium' },
+	                series.description
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'ui one column grid center' },
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'row' },
+	                  _react2.default.createElement(
+	                    'div',
+	                    { className: 'column tight' },
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'movie-details' },
+	                      _react2.default.createElement(
+	                        'span',
+	                        null,
+	                        series.duration
+	                      ),
+	                      _react2.default.createElement(
+	                        'span',
+	                        null,
+	                        series.productionYear
+	                      )
+	                    ),
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'movie-actions' },
+	                      _react2.default.createElement('img', { src: '/images/add-button.png', className: 'ui image addToWatchlist', onClick: this.addToWatchlist }),
+	                      _react2.default.createElement('img', { src: '/images/social-share-circle-icons.png', className: 'ui image social-share' })
+	                    )
+	                  )
+	                )
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'details sixteen wide tablet three wide computer column centered season-detail' },
+	            _react2.default.createElement(_Roles2.default, { roles: series.roles, language: this.props.language, colWidth: 'sixteen' })
+	          )
+	        )
+	      )
+	    );
+	  }
+	});
+
+/***/ },
+/* 294 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37684,7 +37897,41 @@
 	});
 
 /***/ },
-/* 293 */
+/* 295 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Grid = __webpack_require__(274);
+
+	var _Grid2 = _interopRequireDefault(_Grid);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	  displayName: 'Collection',
+	  render: function render() {
+	    var source = '/sets/' + this.props.params.id;
+	    return _react2.default.createElement(_Grid2.default, _extends({}, this.props, {
+	      limit: '5',
+	      title: 'Collections',
+	      sourceKey: 'assets',
+	      source: source }));
+	  }
+	});
+
+/***/ },
+/* 296 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37701,7 +37948,7 @@
 
 	var _reactSlick2 = _interopRequireDefault(_reactSlick);
 
-	var _EPGuide = __webpack_require__(294);
+	var _EPGuide = __webpack_require__(297);
 
 	var _EPGuide2 = _interopRequireDefault(_EPGuide);
 
@@ -37805,7 +38052,7 @@
 	});
 
 /***/ },
-/* 294 */
+/* 297 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37818,19 +38065,19 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Channels = __webpack_require__(295);
+	var _Channels = __webpack_require__(298);
 
 	var _Channels2 = _interopRequireDefault(_Channels);
 
-	var _Filter = __webpack_require__(296);
+	var _Filter = __webpack_require__(299);
 
 	var _Filter2 = _interopRequireDefault(_Filter);
 
-	var _Schedule = __webpack_require__(297);
+	var _Schedule = __webpack_require__(300);
 
 	var _Schedule2 = _interopRequireDefault(_Schedule);
 
-	var _MobileSchedule = __webpack_require__(299);
+	var _MobileSchedule = __webpack_require__(302);
 
 	var _MobileSchedule2 = _interopRequireDefault(_MobileSchedule);
 
@@ -37864,7 +38111,7 @@
 	});
 
 /***/ },
-/* 295 */
+/* 298 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -37950,7 +38197,7 @@
 	});
 
 /***/ },
-/* 296 */
+/* 299 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -38238,7 +38485,7 @@
 	});
 
 /***/ },
-/* 297 */
+/* 300 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38251,7 +38498,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _TimeBlockHead = __webpack_require__(298);
+	var _TimeBlockHead = __webpack_require__(301);
 
 	var _TimeBlockHead2 = _interopRequireDefault(_TimeBlockHead);
 
@@ -38535,7 +38782,7 @@
 	});
 
 /***/ },
-/* 298 */
+/* 301 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38682,7 +38929,7 @@
 	var TimeList = ['1am', '1:30', '2am', '2:30', '3am', '3:30', '4am', '4:30', '5am', '5:30', '6am', '6:30', '7am', '7:30', '8am', '8:30', '9am', '9:30', '10am', '10:30', '11am', '11:30', '12', '12:30', '1pm', '1:30', '2pm', '2:30', '3pm', '3:30', '4pm', '4:30', '5pm', '5:30', '6pm', '6:30', '7pm', '7:30', '8pm', '8:30', '9pm', '9:30', '10pm', '10:30', '11pm', '11:30', '12'];
 
 /***/ },
-/* 299 */
+/* 302 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -39234,7 +39481,7 @@
 	});
 
 /***/ },
-/* 300 */
+/* 303 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
