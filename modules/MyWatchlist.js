@@ -6,7 +6,7 @@ export default React.createClass({
 
   render() {
     return (
-      <div className="my-watchlist modal">
+      <div className="my-watchlist ui modal">
         <div className="ui grid">
           <div className="two column row account-settings">
             <div className="twelve wide column">

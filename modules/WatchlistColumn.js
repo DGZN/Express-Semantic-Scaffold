@@ -46,17 +46,14 @@ export default React.createClass({
     setTimeout(function(){
       $('#col-watchlist-'+id).velocity({
         opacity: 1
-      }, 0).on('click', function(e){
-        e.preventDefault()
-        self.props.linkFromModal($(e.target).data('link'))
-      })
+      }, 0)
     }, delay)
     return (
-      <a href="#" className={hrefCSS} key={'col-watchlist-link-'+id} >
-        <div className={thumbCSS} style={{"backgroundImage": 'url(' + thumb + ') !important'}} id={'col-watchlist-'+id} data-link={link} onClick={this.WatchlistColumnClick}>
+      <Link to={link || '#'} className={hrefCSS} key={'col-watchlist-link-'+id+Math.random()} >
+        <div className={thumbCSS} style={{"backgroundImage": 'url(' + thumb + ') !important'}} id={'col-watchlist-'+id} data-link={link} >
           <div className={labelCSS}>{this.props.data.meta[this.state.language].name}</div>
         </div>
-      </a>
+      </Link>
     );
   },
 

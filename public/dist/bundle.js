@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "d4811508f09f622c6192"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "09cdc91ed5ae1261beb2"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -590,15 +590,15 @@
 
 	var _App2 = _interopRequireDefault(_App);
 
-	var _Home = __webpack_require__(248);
+	var _Home = __webpack_require__(249);
 
 	var _Home2 = _interopRequireDefault(_Home);
 
-	var _Logout = __webpack_require__(271);
+	var _Logout = __webpack_require__(272);
 
 	var _Logout2 = _interopRequireDefault(_Logout);
 
-	var _Music = __webpack_require__(272);
+	var _Music = __webpack_require__(273);
 
 	var _Music2 = _interopRequireDefault(_Music);
 
@@ -642,6 +642,10 @@
 
 	var _LiveTV2 = _interopRequireDefault(_LiveTV);
 
+	var _Watchlist = __webpack_require__(300);
+
+	var _Watchlist2 = _interopRequireDefault(_Watchlist);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	(0, _reactDom.render)(_react2.default.createElement(
@@ -651,6 +655,7 @@
 	    _reactRouter.Route,
 	    { component: _App2.default },
 	    _react2.default.createElement(_reactRouter.Route, { path: '/', component: _Home2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/watchlist', component: _Watchlist2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/movies', component: _Movies2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/movies/:id', component: _Movie2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/series', component: _Series2.default }),
@@ -25593,8 +25598,6 @@
 	  value: true
 	});
 
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -25653,7 +25656,7 @@
 	  componentDidMount: function componentDidMount() {
 	    this.changeListener = this._onLoginChange;
 	    _LoginStore2.default.addChangeListener(this.changeListener);
-	    _reactRouter.browserHistory.push('/');
+	    _reactRouter.browserHistory.replace('/');
 	  },
 
 	  /*
@@ -25694,7 +25697,6 @@
 	    return _react2.default.createElement(
 	      'div',
 	      { style: { 'textAlign': this.state.align + ' !important' } },
-	      _react2.default.createElement(_MyWatchlist2.default, _extends({ user: this.state.user, language: this.state.language, textAlign: this.state.align }, this.props, { linkFromModal: this.linkFromModal })),
 	      _react2.default.createElement(_Nav2.default, {
 	        user: this.state.user,
 	        myAccount: this.myAccount,
@@ -25899,8 +25901,8 @@
 	                  )
 	                ),
 	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item', onClick: this.myWatchlist },
+	                  _reactRouter.Link,
+	                  { to: '/watchlist', className: 'item' },
 	                  _react2.default.createElement('i', { className: 'list layout icon' }),
 	                  _react2.default.createElement(
 	                    'span',
@@ -33388,7 +33390,7 @@
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
-	      { className: 'my-watchlist modal' },
+	      { className: 'my-watchlist ui modal' },
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'ui grid' },
@@ -33449,7 +33451,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _WatchlistColumn = __webpack_require__(247);
+	var _Filter = __webpack_require__(247);
+
+	var _Filter2 = _interopRequireDefault(_Filter);
+
+	var _WatchlistColumn = __webpack_require__(248);
 
 	var _WatchlistColumn2 = _interopRequireDefault(_WatchlistColumn);
 
@@ -33464,6 +33470,8 @@
 	  getInitialState: function getInitialState() {
 	    return {
 	      page: 0,
+	      genre: '',
+	      activeGenre: '',
 	      collection: [],
 	      rows: this.props.rows || 1
 	    };
@@ -33477,6 +33485,18 @@
 	        });
 	      }.bind(this));
 	    }
+	  },
+
+	  filter: function filter(_filter) {
+	    this.setState({
+	      filter: _filter
+	    });
+	  },
+
+	  filterGenre: function filterGenre(genre) {
+	    this.setState({
+	      genre: ''
+	    });
 	  },
 
 	  render: function render() {
@@ -33507,11 +33527,16 @@
 	    }
 	    return _react2.default.createElement(
 	      'div',
-	      { className: 'ui vertical center container details my-watchlist grids', key: 'watchlist-gridv' },
+	      null,
+	      _react2.default.createElement(_Filter2.default, _extends({}, this.props, { filter: this.filter, filterGenre: this.filterGenre, activeFilter: this.state.filter, activeGenre: this.state.genre })),
 	      _react2.default.createElement(
 	        'div',
-	        { className: 'ui equal width grid container', style: { 'textAlign': this.props.textAlign }, id: 'rows' },
-	        ROWS
+	        { className: 'ui vertical center container aligned grids large-container' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'ui equal width grid container', style: { 'textAlign': this.props.textAlign }, id: 'rows' },
+	          ROWS
+	        )
 	      )
 	    );
 	  }
@@ -33519,6 +33544,124 @@
 
 /***/ },
 /* 247 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var env = __webpack_require__(243);
+
+	exports.default = _react2.default.createClass({
+	  displayName: 'Filter',
+
+
+	  getInitialState: function getInitialState() {
+	    return {
+	      filter: '',
+	      genres: []
+	    };
+	  },
+
+	  componentDidMount: function componentDidMount() {
+	    this.fetch = $.get(env.endpoint + '/v1/assets/sets/Genres', function (genres) {
+	      this.setState({
+	        genres: genres['sets']
+	      });
+	    }.bind(this));
+	  },
+
+	  componentWillUnmount: function componentWillUnmount() {
+	    this.fetch.abort();
+	  },
+
+	  render: function render() {
+	    var _this = this;
+
+	    var title = this.props.activeGenre[this.props.language] ? this.props.activeGenre[this.props.language].name : 'Genres';
+	    var GENRES = [];
+	    this.state.genres.map(function (genre, i) {
+	      if (genre.meta[_this.props.language]) {
+	        var name = genre.meta[_this.props.language].name;
+	        GENRES.push(_react2.default.createElement(
+	          'a',
+	          {
+	            className: 'item',
+	            key: i * Math.random(9, 99),
+	            onClick: _this.props.filterGenre.bind(null, genre.meta) },
+	          ' ',
+	          name
+	        ));
+	      }
+	    });
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'ui container grids pad-bottom-medium' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'row subnav' },
+	        _react2.default.createElement(
+	          'span',
+	          { className: 'title' },
+	          this.props.title
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { id: 'seasons-dropdown', className: 'ui simple dropdown item inverted' },
+	          title,
+	          ' ',
+	          _react2.default.createElement('i', { className: 'plus icon' }),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'menu' },
+	            GENRES
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { id: 'seasons-dropdown', className: 'ui simple dropdown item inverted' },
+	          'SORT BY ',
+	          _react2.default.createElement('i', { className: 'plus icon' }),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'menu' },
+	            _react2.default.createElement(
+	              'a',
+	              { className: 'item', onClick: this.props.filter.bind(null, 'featured') },
+	              'FEATURED'
+	            ),
+	            _react2.default.createElement(
+	              'a',
+	              { className: 'item', onClick: this.props.filter.bind(null, 'a-z') },
+	              'A -Z'
+	            ),
+	            _react2.default.createElement(
+	              'a',
+	              { className: 'item', onClick: this.props.filter.bind(null, 'new') },
+	              'JUST ADDED'
+	            ),
+	            _react2.default.createElement(
+	              'a',
+	              { className: 'item', onClick: this.props.filter.bind(null, 'top') },
+	              'TOP'
+	            )
+	          )
+	        )
+	      )
+	    );
+	  }
+	});
+
+/***/ },
+/* 248 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33573,17 +33716,14 @@
 	    setTimeout(function () {
 	      $('#col-watchlist-' + id).velocity({
 	        opacity: 1
-	      }, 0).on('click', function (e) {
-	        e.preventDefault();
-	        self.props.linkFromModal($(e.target).data('link'));
-	      });
+	      }, 0);
 	    }, delay);
 	    return _react2.default.createElement(
-	      'a',
-	      { href: '#', className: hrefCSS, key: 'col-watchlist-link-' + id },
+	      _reactRouter.Link,
+	      { to: link || '#', className: hrefCSS, key: 'col-watchlist-link-' + id + Math.random() },
 	      _react2.default.createElement(
 	        'div',
-	        { className: thumbCSS, style: { "backgroundImage": 'url(' + thumb + ') !important' }, id: 'col-watchlist-' + id, 'data-link': link, onClick: this.WatchlistColumnClick },
+	        { className: thumbCSS, style: { "backgroundImage": 'url(' + thumb + ') !important' }, id: 'col-watchlist-' + id, 'data-link': link },
 	        _react2.default.createElement(
 	          'div',
 	          { className: labelCSS },
@@ -33608,7 +33748,7 @@
 	}
 
 /***/ },
-/* 248 */
+/* 249 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33623,11 +33763,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactSlick = __webpack_require__(249);
+	var _reactSlick = __webpack_require__(250);
 
 	var _reactSlick2 = _interopRequireDefault(_reactSlick);
 
-	var _Carousel = __webpack_require__(269);
+	var _Carousel = __webpack_require__(270);
 
 	var _Carousel2 = _interopRequireDefault(_Carousel);
 
@@ -33678,15 +33818,15 @@
 	});
 
 /***/ },
-/* 249 */
+/* 250 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	module.exports = __webpack_require__(250);
+	module.exports = __webpack_require__(251);
 
 /***/ },
-/* 250 */
+/* 251 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33697,21 +33837,21 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _innerSlider = __webpack_require__(251);
+	var _innerSlider = __webpack_require__(252);
 
-	var _objectAssign = __webpack_require__(257);
+	var _objectAssign = __webpack_require__(258);
 
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
-	var _json2mq = __webpack_require__(264);
+	var _json2mq = __webpack_require__(265);
 
 	var _json2mq2 = _interopRequireDefault(_json2mq);
 
-	var _reactResponsiveMixin = __webpack_require__(266);
+	var _reactResponsiveMixin = __webpack_require__(267);
 
 	var _reactResponsiveMixin2 = _interopRequireDefault(_reactResponsiveMixin);
 
-	var _defaultProps = __webpack_require__(259);
+	var _defaultProps = __webpack_require__(260);
 
 	var _defaultProps2 = _interopRequireDefault(_defaultProps);
 
@@ -33788,7 +33928,7 @@
 	module.exports = Slider;
 
 /***/ },
-/* 251 */
+/* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33805,31 +33945,31 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _mixinsEventHandlers = __webpack_require__(252);
+	var _mixinsEventHandlers = __webpack_require__(253);
 
 	var _mixinsEventHandlers2 = _interopRequireDefault(_mixinsEventHandlers);
 
-	var _mixinsHelpers = __webpack_require__(255);
+	var _mixinsHelpers = __webpack_require__(256);
 
 	var _mixinsHelpers2 = _interopRequireDefault(_mixinsHelpers);
 
-	var _initialState = __webpack_require__(258);
+	var _initialState = __webpack_require__(259);
 
 	var _initialState2 = _interopRequireDefault(_initialState);
 
-	var _defaultProps = __webpack_require__(259);
+	var _defaultProps = __webpack_require__(260);
 
 	var _defaultProps2 = _interopRequireDefault(_defaultProps);
 
-	var _classnames = __webpack_require__(260);
+	var _classnames = __webpack_require__(261);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
-	var _track = __webpack_require__(261);
+	var _track = __webpack_require__(262);
 
-	var _dots = __webpack_require__(262);
+	var _dots = __webpack_require__(263);
 
-	var _arrows = __webpack_require__(263);
+	var _arrows = __webpack_require__(264);
 
 	var InnerSlider = _react2['default'].createClass({
 	  displayName: 'InnerSlider',
@@ -33982,7 +34122,7 @@
 	exports.InnerSlider = InnerSlider;
 
 /***/ },
-/* 252 */
+/* 253 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33992,13 +34132,13 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _trackHelper = __webpack_require__(253);
+	var _trackHelper = __webpack_require__(254);
 
-	var _helpers = __webpack_require__(255);
+	var _helpers = __webpack_require__(256);
 
 	var _helpers2 = _interopRequireDefault(_helpers);
 
-	var _objectAssign = __webpack_require__(257);
+	var _objectAssign = __webpack_require__(258);
 
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
@@ -34171,7 +34311,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 253 */
+/* 254 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34181,7 +34321,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _ReactDOM = __webpack_require__(254);
+	var _ReactDOM = __webpack_require__(255);
 
 	var _ReactDOM2 = _interopRequireDefault(_ReactDOM);
 
@@ -34297,7 +34437,7 @@
 	exports.getTrackLeft = getTrackLeft;
 
 /***/ },
-/* 254 */
+/* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34322,7 +34462,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 255 */
+/* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34337,17 +34477,17 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _ReactDOM = __webpack_require__(254);
+	var _ReactDOM = __webpack_require__(255);
 
 	var _ReactDOM2 = _interopRequireDefault(_ReactDOM);
 
-	var _reactLibReactTransitionEvents = __webpack_require__(256);
+	var _reactLibReactTransitionEvents = __webpack_require__(257);
 
 	var _reactLibReactTransitionEvents2 = _interopRequireDefault(_reactLibReactTransitionEvents);
 
-	var _trackHelper = __webpack_require__(253);
+	var _trackHelper = __webpack_require__(254);
 
-	var _objectAssign = __webpack_require__(257);
+	var _objectAssign = __webpack_require__(258);
 
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
@@ -34623,7 +34763,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 256 */
+/* 257 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -34737,7 +34877,7 @@
 	module.exports = ReactTransitionEvents;
 
 /***/ },
-/* 257 */
+/* 258 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -34769,7 +34909,7 @@
 
 
 /***/ },
-/* 258 */
+/* 259 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -34819,7 +34959,7 @@
 	module.exports = initialState;
 
 /***/ },
-/* 259 */
+/* 260 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -34872,7 +35012,7 @@
 	module.exports = defaultProps;
 
 /***/ },
-/* 260 */
+/* 261 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -34926,7 +35066,7 @@
 
 
 /***/ },
-/* 261 */
+/* 262 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34941,11 +35081,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _objectAssign = __webpack_require__(257);
+	var _objectAssign = __webpack_require__(258);
 
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
-	var _classnames = __webpack_require__(260);
+	var _classnames = __webpack_require__(261);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -35074,7 +35214,7 @@
 	exports.Track = Track;
 
 /***/ },
-/* 262 */
+/* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -35089,7 +35229,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _classnames = __webpack_require__(260);
+	var _classnames = __webpack_require__(261);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -35153,7 +35293,7 @@
 	exports.Dots = Dots;
 
 /***/ },
-/* 263 */
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -35170,7 +35310,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _classnames = __webpack_require__(260);
+	var _classnames = __webpack_require__(261);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -35270,10 +35410,10 @@
 	exports.NextArrow = NextArrow;
 
 /***/ },
-/* 264 */
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var camel2hyphen = __webpack_require__(265);
+	var camel2hyphen = __webpack_require__(266);
 
 	var isDimension = function (feature) {
 	  var re = /[height|width]$/;
@@ -35326,7 +35466,7 @@
 	module.exports = json2mq;
 
 /***/ },
-/* 265 */
+/* 266 */
 /***/ function(module, exports) {
 
 	var camel2hyphen = function (str) {
@@ -35340,12 +35480,12 @@
 	module.exports = camel2hyphen;
 
 /***/ },
-/* 266 */
+/* 267 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var canUseDOM = __webpack_require__(267);
-	var enquire = canUseDOM && __webpack_require__(268);
-	var json2mq = __webpack_require__(264);
+	var canUseDOM = __webpack_require__(268);
+	var enquire = canUseDOM && __webpack_require__(269);
+	var json2mq = __webpack_require__(265);
 
 	var ResponsiveMixin = {
 	  media: function (query, handler) {
@@ -35375,7 +35515,7 @@
 	module.exports = ResponsiveMixin;
 
 /***/ },
-/* 267 */
+/* 268 */
 /***/ function(module, exports) {
 
 	var canUseDOM = !!(
@@ -35387,7 +35527,7 @@
 	module.exports = canUseDOM;
 
 /***/ },
-/* 268 */
+/* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -35685,7 +35825,7 @@
 	}));
 
 /***/ },
-/* 269 */
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -35702,11 +35842,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _CarouselColumn = __webpack_require__(270);
+	var _CarouselColumn = __webpack_require__(271);
 
 	var _CarouselColumn2 = _interopRequireDefault(_CarouselColumn);
 
-	var _reactSlick = __webpack_require__(249);
+	var _reactSlick = __webpack_require__(250);
 
 	var _reactSlick2 = _interopRequireDefault(_reactSlick);
 
@@ -35902,7 +36042,7 @@
 	}
 
 /***/ },
-/* 270 */
+/* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -35971,7 +36111,7 @@
 	}
 
 /***/ },
-/* 271 */
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36006,7 +36146,7 @@
 	});
 
 /***/ },
-/* 272 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36021,7 +36161,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Grid = __webpack_require__(273);
+	var _Grid = __webpack_require__(274);
 
 	var _Grid2 = _interopRequireDefault(_Grid);
 
@@ -36040,7 +36180,7 @@
 	});
 
 /***/ },
-/* 273 */
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36055,7 +36195,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Filter = __webpack_require__(274);
+	var _Filter = __webpack_require__(247);
 
 	var _Filter2 = _interopRequireDefault(_Filter);
 
@@ -36332,124 +36472,6 @@
 	          'div',
 	          { className: 'ui equal width grid container', style: { 'textAlign': this.props.textAlign }, id: 'rows' },
 	          ROWS
-	        )
-	      )
-	    );
-	  }
-	});
-
-/***/ },
-/* 274 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var env = __webpack_require__(243);
-
-	exports.default = _react2.default.createClass({
-	  displayName: 'Filter',
-
-
-	  getInitialState: function getInitialState() {
-	    return {
-	      filter: '',
-	      genres: []
-	    };
-	  },
-
-	  componentDidMount: function componentDidMount() {
-	    this.fetch = $.get(env.endpoint + '/v1/assets/sets/Genres', function (genres) {
-	      this.setState({
-	        genres: genres['sets']
-	      });
-	    }.bind(this));
-	  },
-
-	  componentWillUnmount: function componentWillUnmount() {
-	    this.fetch.abort();
-	  },
-
-	  render: function render() {
-	    var _this = this;
-
-	    var title = this.props.activeGenre[this.props.language] ? this.props.activeGenre[this.props.language].name : 'Genres';
-	    var GENRES = [];
-	    this.state.genres.map(function (genre, i) {
-	      if (genre.meta[_this.props.language]) {
-	        var name = genre.meta[_this.props.language].name;
-	        GENRES.push(_react2.default.createElement(
-	          'a',
-	          {
-	            className: 'item',
-	            key: i * Math.random(9, 99),
-	            onClick: _this.props.filterGenre.bind(null, genre.meta) },
-	          ' ',
-	          name
-	        ));
-	      }
-	    });
-	    return _react2.default.createElement(
-	      'div',
-	      { className: 'ui container grids pad-bottom-medium' },
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'row subnav' },
-	        _react2.default.createElement(
-	          'span',
-	          { className: 'title' },
-	          this.props.title
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { id: 'seasons-dropdown', className: 'ui simple dropdown item inverted' },
-	          title,
-	          ' ',
-	          _react2.default.createElement('i', { className: 'plus icon' }),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'menu' },
-	            GENRES
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { id: 'seasons-dropdown', className: 'ui simple dropdown item inverted' },
-	          'SORT BY ',
-	          _react2.default.createElement('i', { className: 'plus icon' }),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'menu' },
-	            _react2.default.createElement(
-	              'a',
-	              { className: 'item', onClick: this.props.filter.bind(null, 'featured') },
-	              'FEATURED'
-	            ),
-	            _react2.default.createElement(
-	              'a',
-	              { className: 'item', onClick: this.props.filter.bind(null, 'a-z') },
-	              'A -Z'
-	            ),
-	            _react2.default.createElement(
-	              'a',
-	              { className: 'item', onClick: this.props.filter.bind(null, 'new') },
-	              'JUST ADDED'
-	            ),
-	            _react2.default.createElement(
-	              'a',
-	              { className: 'item', onClick: this.props.filter.bind(null, 'top') },
-	              'TOP'
-	            )
-	          )
 	        )
 	      )
 	    );
@@ -36951,7 +36973,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Grid = __webpack_require__(273);
+	var _Grid = __webpack_require__(274);
 
 	var _Grid2 = _interopRequireDefault(_Grid);
 
@@ -37016,7 +37038,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Grid = __webpack_require__(273);
+	var _Grid = __webpack_require__(274);
 
 	var _Grid2 = _interopRequireDefault(_Grid);
 
@@ -37081,7 +37103,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Grid = __webpack_require__(273);
+	var _Grid = __webpack_require__(274);
 
 	var _Grid2 = _interopRequireDefault(_Grid);
 
@@ -37115,7 +37137,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Grid = __webpack_require__(273);
+	var _Grid = __webpack_require__(274);
 
 	var _Grid2 = _interopRequireDefault(_Grid);
 
@@ -37624,7 +37646,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Grid = __webpack_require__(273);
+	var _Grid = __webpack_require__(274);
 
 	var _Grid2 = _interopRequireDefault(_Grid);
 
@@ -37656,7 +37678,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactSlick = __webpack_require__(249);
+	var _reactSlick = __webpack_require__(250);
 
 	var _reactSlick2 = _interopRequireDefault(_reactSlick);
 
@@ -37664,7 +37686,7 @@
 
 	var _EPGuide2 = _interopRequireDefault(_EPGuide);
 
-	var _Carousel = __webpack_require__(269);
+	var _Carousel = __webpack_require__(270);
 
 	var _Carousel2 = _interopRequireDefault(_Carousel);
 
@@ -39189,6 +39211,37 @@
 	        )
 	      )
 	    );
+	  }
+	});
+
+/***/ },
+/* 300 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _WatchlistGrid = __webpack_require__(246);
+
+	var _WatchlistGrid2 = _interopRequireDefault(_WatchlistGrid);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	  displayName: 'Watchlist',
+	  render: function render() {
+	    return _react2.default.createElement(_WatchlistGrid2.default, _extends({}, this.props, {
+	      limit: '5',
+	      title: 'Watchlist' }));
 	  }
 	});
 

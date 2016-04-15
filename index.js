@@ -17,11 +17,13 @@ import Series from './modules/Series'
 import Season from './modules/Season'
 import Collections from './modules/Collections'
 import LiveTV from './modules/LiveTV'
+import Watchlist from './modules/Watchlist'
 
 render((
   <Router history={hashHistory}>
     <Route component={App}>
       <Route path="/" component={Home} />
+      <Route path="/watchlist" component={Watchlist} />
       <Route path="/movies" component={Movies} />
       <Route path="/movies/:id" component={Movie} />
       <Route path="/series" component={Series} />

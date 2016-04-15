@@ -6,6 +6,8 @@ import Nav         from './Nav'
 import Footer      from './Footer'
 import MyWatchlist from './MyWatchlist'
 
+import { Link } from 'react-router'
+
 import LoginStore from '../stores/LoginStore';
 import LoginActionCreators from '../actions/LoginActionCreators';
 
@@ -34,7 +36,7 @@ export default React.createClass({
   componentDidMount: function() {
     this.changeListener = this._onLoginChange;
     LoginStore.addChangeListener(this.changeListener);
-    browserHistory.push('/')
+    browserHistory.replace('/')
   },
 
   /*
@@ -75,7 +77,6 @@ export default React.createClass({
 
     return (
       <div style={{ 'textAlign': this.state.align + ' !important'}}>
-        <MyWatchlist user={this.state.user} language={this.state.language} textAlign={this.state.align} {...this.props} linkFromModal={this.linkFromModal} />
         <Nav
           user={this.state.user}
           myAccount={this.myAccount}

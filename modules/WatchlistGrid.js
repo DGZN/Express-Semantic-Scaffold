@@ -1,4 +1,5 @@
 import React from 'react'
+import Filter from './Filter'
 import WatchlistColumn from './WatchlistColumn'
 
 const env = require('./env.js')
@@ -8,6 +9,8 @@ export default React.createClass({
   getInitialState: function() {
     return {
       page: 0
+    , genre: ''
+    , activeGenre: ''
     , collection: []
     , rows: this.props.rows || 1
     };
@@ -21,6 +24,18 @@ export default React.createClass({
         });
       }.bind(this));
     }
+  },
+
+  filter: function(filter) {
+    this.setState({
+      filter: filter
+    })
+  },
+
+  filterGenre: function(genre) {
+    this.setState({
+      genre: ''
+    })
   },
 
   render() {
@@ -49,9 +64,12 @@ export default React.createClass({
       )
     }
     return (
-      <div className="ui vertical center container details my-watchlist grids" key="watchlist-gridv">
-        <div className="ui equal width grid container"  style={{ 'textAlign': this.props.textAlign }} id="rows">
-          {ROWS}
+      <div>
+        <Filter {...this.props} filter={this.filter} filterGenre={this.filterGenre} activeFilter={this.state.filter} activeGenre={this.state.genre} />
+        <div className="ui vertical center container aligned grids large-container">
+          <div className="ui equal width grid container"  style={{ 'textAlign': this.props.textAlign }} id="rows">
+            {ROWS}
+          </div>
         </div>
       </div>
     );

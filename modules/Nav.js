@@ -49,10 +49,10 @@ export default React.createClass({
                     <i className="user icon"></i>
                     <span className="text">My Account</span>
                   </a>
-                  <a className="item" onClick={this.myWatchlist}>
+                  <Link to="/watchlist" className="item">
                     <i className="list layout icon"></i>
                     <span className="text">Watchlist</span>
-                  </a>
+                  </Link>
                   <a className="item" onClick={this.props.setLanguage.bind(null, menu.lang, menu.align)}>
                     <i className="flag icon"></i>
                     <span className="text">{menu.name}</span>
