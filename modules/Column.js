@@ -40,11 +40,6 @@ export default React.createClass({
     // }
     var reset = 0;
     var delay = this.props.delay || 100;
-    setTimeout(function(){
-      $('#col-'+id).velocity({
-        opacity: 1
-      }, 0)
-    }, delay)
     return (
       <Link to={link || '#'} className={hrefCSS} key={'#col-link-'+id+Math.random()} >
         <div className={thumbCSS} style={{"backgroundImage": 'url(' + thumb + ') !important'}} id={'col-'+id}>

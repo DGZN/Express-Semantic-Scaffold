@@ -1336,6 +1336,12 @@ body.pushable>.pusher {
   position: relative;
   float: left;
   margin: 0 20px 30px 0;
+  opacity: 0.4;
+  z-index: 2;
+}
+
+.movie-actions img:hover {
+  opacity: 1;
 }
 
 .movie-actions .social-share {

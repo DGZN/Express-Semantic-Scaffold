@@ -26,6 +26,16 @@ export default React.createClass({
     this.fetch.abort();
   },
 
+  addToWatchlist() {
+    if ( ! this.state.series.uuid || ! this.props.user )
+      return;
+    $.post(env.endpoint + '/v1/users/' +this.props.user.id + '/watchlist', {
+      uuid: this.state.series.uuid
+    }, function (result) {
+      console.log("result from adding to watchlist", result)
+    }.bind(this))
+  },
+
   render() {
     var series = {
       name: ''
@@ -85,8 +95,7 @@ export default React.createClass({
                         <span>{series.duration}</span><span>{series.productionYear}</span>
                       </div>
                       <div className="movie-actions">
-                        <img src="/images/play-button.png" className="ui image"/>
-                        <img src="/images/add-button.png" className="ui image"/>
+                        <img src="/images/add-button.png" className="ui image" onClick={this.addToWatchlist}/>
                         <img src="/images/social-share-circle-icons.png" className="ui image social-share"/>
                       </div>
                     </div>

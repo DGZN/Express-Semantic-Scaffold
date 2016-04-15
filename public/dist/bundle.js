@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "09cdc91ed5ae1261beb2"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "23e8dc64fbb9a0044dc8"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -664,7 +664,6 @@
 	    _react2.default.createElement(_reactRouter.Route, { path: '/plays', component: _Plays2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/plays/:id', component: _Play2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/classics', component: _Classics2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: '/classics/:id', component: _Classics2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/collections', component: _Collections2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/livetv', component: _LiveTV2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/logout', component: _App2.default })
@@ -25642,6 +25641,7 @@
 	  },
 	  _getLoginState: function _getLoginState() {
 	    return {
+	      page: 0,
 	      language: 'en',
 	      align: 'left',
 	      user: _LoginStore2.default.user,
@@ -25657,6 +25657,141 @@
 	    this.changeListener = this._onLoginChange;
 	    _LoginStore2.default.addChangeListener(this.changeListener);
 	    _reactRouter.browserHistory.replace('/');
+	    var self = this;
+	    $(window).off('scroll');
+	    $(window).on('scroll', function () {
+	      if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+	        var page = self.state.page;
+	        var top = document.body.scrollTop;
+	        if (top < 1) top = document.documentElement.scrollTop;
+	        console.log("current top", top);
+	        if (top > 21300 && page < 22) {
+	          return self.setState({
+	            page: 22
+	          });
+	        }
+	        if (top > 20300 && page < 24) {
+	          return self.setState({
+	            page: 24
+	          });
+	        }
+	        if (top > 19300 && page < 23) {
+	          return self.setState({
+	            page: 23
+	          });
+	        }
+	        if (top > 19300 && page < 22) {
+	          return self.setState({
+	            page: 22
+	          });
+	        }
+	        if (top > 18300 && page < 21) {
+	          return self.setState({
+	            page: 21
+	          });
+	        }
+	        if (top > 17300 && page < 20) {
+	          return self.setState({
+	            page: 20
+	          });
+	        }
+	        if (top > 16300 && page < 19) {
+	          return self.setState({
+	            page: 19
+	          });
+	        }
+	        if (top > 15300 && page < 18) {
+	          return self.setState({
+	            page: 18
+	          });
+	        }
+	        if (top > 14300 && page < 17) {
+	          return self.setState({
+	            page: 17
+	          });
+	        }
+	        if (top > 13200 && page < 16) {
+	          return self.setState({
+	            page: 16
+	          });
+	        }
+	        if (top > 12300 && page < 15) {
+	          return self.setState({
+	            page: 15
+	          });
+	        }
+	        if (top > 11300 && page < 14) {
+	          return self.setState({
+	            page: 14
+	          });
+	        }
+	        if (top > 10000 && page < 13) {
+	          return self.setState({
+	            page: 13
+	          });
+	        }
+	        if (top > 9300 && page < 12) {
+	          return self.setState({
+	            page: 12
+	          });
+	        }
+	        if (top > 8000 && page < 11) {
+	          return self.setState({
+	            page: 11
+	          });
+	        }
+	        if (top > 7000 && page < 10) {
+	          return self.setState({
+	            page: 10
+	          });
+	        }
+	        if (top > 6100 && page < 9) {
+	          return self.setState({
+	            page: 9
+	          });
+	        }
+	        if (top > 5200 && page < 8) {
+	          return self.setState({
+	            page: 8
+	          });
+	        }
+	        if (top > 4300 && page < 7) {
+	          return self.setState({
+	            page: 7
+	          });
+	        }
+	        if (top > 3400 && page < 6) {
+	          return self.setState({
+	            page: 6
+	          });
+	        }
+	        if (top > 2500 && page < 5) {
+	          return self.setState({
+	            page: 5
+	          });
+	        }
+	        if (top > 1700 && page < 4) {
+	          return self.setState({
+	            page: 4
+	          });
+	        }
+	        if (top > 900 && page < 3) {
+	          return self.setState({
+	            page: 3
+	          });
+	        }
+	        if (top > 250 && page < 2) {
+	          return self.setState({
+	            page: 2
+	          });
+	        }
+	        if (top > 200 && page < 1) {
+	          return self.setState({
+	            page: 1
+	          });
+	        }
+	      }
+	    });
 	  },
 
 	  /*
@@ -25705,6 +25840,7 @@
 	        setLanguage: this.setLanguage,
 	        language: this.state.language }),
 	      this.props.children && _react2.default.cloneElement(this.props.children, {
+	        page: this.state.page,
 	        language: this.state.language,
 	        textAlign: this.state.align,
 	        myAccount: this.myAccount,
@@ -33771,6 +33907,10 @@
 
 	var _Carousel2 = _interopRequireDefault(_Carousel);
 
+	var _reactDom = __webpack_require__(158);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _react2.default.createClass({
@@ -33780,12 +33920,16 @@
 	      language: 'en'
 	    };
 	  },
+	  componentWillUnmount: function componentWillUnmount() {
+	    console.log("unmounting");
+	  },
 	  render: function render() {
 	    var settings = {
 	      autoplay: true,
 	      autoplaySpeed: 7500,
 	      infinite: false,
 	      speed: 1300,
+	      useCSS: false,
 	      fade: true,
 	      slidesToShow: 1,
 	      slidesToScroll: 1,
@@ -33793,7 +33937,7 @@
 	    };
 	    return _react2.default.createElement(
 	      'div',
-	      null,
+	      { id: 'home-app' },
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'ui container hero' },
@@ -35939,6 +36083,7 @@
 	      infinite: true,
 	      speed: 900,
 	      fade: false,
+	      useCSS: false,
 	      slidesToShow: 5,
 	      slidesToScroll: 5,
 	      easing: 'easeInOutCubic',
@@ -36233,6 +36378,7 @@
 	  },
 
 	  componentDidMount: function componentDidMount() {
+	    var self = this;
 	    this.fetch = $.get(env.endpoint + '/v1/assets' + this.props.source, function (result) {
 	      var result = this.props.sourceKey ? result[this.props.sourceKey] : result;
 	      this.setState({
@@ -36240,153 +36386,18 @@
 	      });
 	    }.bind(this));
 	    if (this.props.featured) {
-	      this.fetchFeatured = $.get(env.endpoint + '/v1/assets' + this.props.featured, function (featured) {
+	      self.fetchFeatured = $.get(env.endpoint + '/v1/assets' + this.props.featured, function (featured) {
 	        this.setState({
 	          featured: featured['assets']
 	        });
 	      }.bind(this));
-	    }
-	    window.onscroll = function () {
-	      myFunction();
-	    };
-	    var self = this;
-	    function myFunction() {
-	      if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
-	        var page = self.state.page;
-	        var top = document.body.scrollTop;
-	        if (top < 1) top = document.documentElement.scrollTop;
-	        console.log("current top", top);
-	        if (top > 21300 && page < 22) {
-	          return self.setState({
-	            page: 22
-	          });
-	        }
-	        if (top > 20300 && page < 24) {
-	          return self.setState({
-	            page: 24
-	          });
-	        }
-	        if (top > 19300 && page < 23) {
-	          return self.setState({
-	            page: 23
-	          });
-	        }
-	        if (top > 19300 && page < 22) {
-	          return self.setState({
-	            page: 22
-	          });
-	        }
-	        if (top > 18300 && page < 21) {
-	          return self.setState({
-	            page: 21
-	          });
-	        }
-	        if (top > 17300 && page < 20) {
-	          return self.setState({
-	            page: 20
-	          });
-	        }
-	        if (top > 16300 && page < 19) {
-	          return self.setState({
-	            page: 19
-	          });
-	        }
-	        if (top > 15300 && page < 18) {
-	          return self.setState({
-	            page: 18
-	          });
-	        }
-	        if (top > 14300 && page < 17) {
-	          return self.setState({
-	            page: 17
-	          });
-	        }
-	        if (top > 13200 && page < 16) {
-	          return self.setState({
-	            page: 16
-	          });
-	        }
-	        if (top > 12300 && page < 15) {
-	          return self.setState({
-	            page: 15
-	          });
-	        }
-	        if (top > 11300 && page < 14) {
-	          return self.setState({
-	            page: 14
-	          });
-	        }
-	        if (top > 10000 && page < 13) {
-	          return self.setState({
-	            page: 13
-	          });
-	        }
-	        if (top > 9300 && page < 12) {
-	          return self.setState({
-	            page: 12
-	          });
-	        }
-	        if (top > 8000 && page < 11) {
-	          return self.setState({
-	            page: 11
-	          });
-	        }
-	        if (top > 7000 && page < 10) {
-	          return self.setState({
-	            page: 10
-	          });
-	        }
-	        if (top > 6100 && page < 9) {
-	          return self.setState({
-	            page: 9
-	          });
-	        }
-	        if (top > 5200 && page < 8) {
-	          return self.setState({
-	            page: 8
-	          });
-	        }
-	        if (top > 4300 && page < 7) {
-	          return self.setState({
-	            page: 7
-	          });
-	        }
-	        if (top > 3400 && page < 6) {
-	          return self.setState({
-	            page: 6
-	          });
-	        }
-	        if (top > 2500 && page < 5) {
-	          return self.setState({
-	            page: 5
-	          });
-	        }
-	        if (top > 1700 && page < 4) {
-	          return self.setState({
-	            page: 4
-	          });
-	        }
-	        if (top > 900 && page < 3) {
-	          return self.setState({
-	            page: 3
-	          });
-	        }
-	        if (top > 250 && page < 2) {
-	          return self.setState({
-	            page: 2
-	          });
-	        }
-	        if (top > 200 && page < 1) {
-	          return self.setState({
-	            page: 1
-	          });
-	        }
-	      }
+	      console.log('');
 	    }
 	  },
 
 	  componentWillUnmount: function componentWillUnmount() {
 	    this.fetch.abort();
+	    if (this.props.fetchFeatured) this.fetchFeatured.abort();
 	  },
 
 	  render: function render() {
@@ -36421,13 +36432,13 @@
 	      }
 	    }
 	    var perPage = 25;
-	    var startIndex = this.state.page;
+	    var startIndex = this.props.page;
 	    if (startIndex > 0) {
 	      perPage = startIndex * perPage;
 	    }
 	    var delay = 0;
 	    var collection = collection.slice(0, perPage);
-	    console.log("Page", this.state.page);
+	    console.log("Page", this.props.page);
 	    collection.map(function (data, i) {
 	      var delay = delay + i * i * 0.9;
 	      if (delay > 1000) delay = 0;
@@ -36448,7 +36459,7 @@
 	      if (COLUMNS.length == _this.props.limit) {
 	        ROWS.push(_react2.default.createElement(
 	          'div',
-	          { className: 'row' },
+	          { className: 'row', key: Math.random() },
 	          COLUMNS
 	        ));
 	        COLUMNS = [];
@@ -36457,10 +36468,15 @@
 	    if (COLUMNS.length) {
 	      ROWS.push(_react2.default.createElement(
 	        'div',
-	        { className: 'row' },
+	        { className: 'row', key: Math.random() },
 	        COLUMNS
 	      ));
 	    }
+	    setTimeout(function () {
+	      $('.image.preview .thumb').velocity({
+	        opacity: 1
+	      }, 0);
+	    }, delay);
 	    return _react2.default.createElement(
 	      'div',
 	      null,
@@ -36530,11 +36546,6 @@
 	    // }
 	    var reset = 0;
 	    var delay = this.props.delay || 100;
-	    setTimeout(function () {
-	      $('#col-' + id).velocity({
-	        opacity: 1
-	      }, 0);
-	    }, delay);
 	    return _react2.default.createElement(
 	      _reactRouter.Link,
 	      { to: link || '#', className: hrefCSS, key: '#col-link-' + id + Math.random() },
@@ -36745,12 +36756,13 @@
 	    if (url.indexOf('bctid')) return BrightCovePlayer(url.split('&bctid=')[1]);
 	  },
 
-	  addToWatchlist: function addToWatchlist() {
+	  addToWatchlist: function addToWatchlist(e) {
 	    if (!this.state.movie.uuid || !this.props.user) return;
 	    $.post(env.endpoint + '/v1/users/' + this.props.user.id + '/watchlist', {
 	      uuid: this.state.movie.uuid
 	    }, function (result) {
 	      console.log("result from adding to watchlist", result);
+	      $(e.target).hid();
 	    }.bind(this));
 	  }
 	});
@@ -37238,6 +37250,14 @@
 	    this.fetch.abort();
 	  },
 
+	  addToWatchlist: function addToWatchlist() {
+	    if (!this.state.series.uuid || !this.props.user) return;
+	    $.post(env.endpoint + '/v1/users/' + this.props.user.id + '/watchlist', {
+	      uuid: this.state.series.uuid
+	    }, function (result) {
+	      console.log("result from adding to watchlist", result);
+	    }.bind(this));
+	  },
 	  render: function render() {
 	    var _this = this;
 
@@ -37341,8 +37361,7 @@
 	                    _react2.default.createElement(
 	                      'div',
 	                      { className: 'movie-actions' },
-	                      _react2.default.createElement('img', { src: '/images/play-button.png', className: 'ui image' }),
-	                      _react2.default.createElement('img', { src: '/images/add-button.png', className: 'ui image' }),
+	                      _react2.default.createElement('img', { src: '/images/add-button.png', className: 'ui image', onClick: this.addToWatchlist }),
 	                      _react2.default.createElement('img', { src: '/images/social-share-circle-icons.png', className: 'ui image social-share' })
 	                    )
 	                  )

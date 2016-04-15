@@ -46,6 +46,7 @@ export default React.createClass({
       infinite: true,
       speed: 900,
       fade: false,
+      useCSS: false,
       slidesToShow: 5,
       slidesToScroll: 5,
       easing: 'easeInOutCubic',

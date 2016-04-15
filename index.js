@@ -32,7 +32,6 @@ render((
       <Route path="/plays" component={Plays} />
       <Route path="/plays/:id" component={Play} />
       <Route path="/classics" component={Classics} />
-      <Route path="/classics/:id" component={Classics} />
       <Route path="/collections" component={Collections} />
       <Route path="/livetv" component={LiveTV} />
       <Route path="/logout" component={App} />

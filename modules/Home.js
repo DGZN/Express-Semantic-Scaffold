@@ -1,6 +1,7 @@
 import React from 'react'
 import Slider from 'react-slick'
 import Carousel from './Carousel'
+import ReactDOM from 'react-dom'
 
 export default React.createClass({
   getInitialState() {
@@ -8,19 +9,25 @@ export default React.createClass({
       language: 'en'
     }
   },
+
+  componentWillUnmount() {
+    console.log("unmounting")
+  },
+
   render() {
     var settings = {
       autoplay: true,
       autoplaySpeed: 7500,
       infinite: false,
       speed: 1300,
+      useCSS: false,
       fade: true,
       slidesToShow: 1,
       slidesToScroll: 1,
       easing: 'easeInOut'
     };
     return (
-      <div>
+      <div id="home-app">
         <div className="ui container hero">
           <Slider {...settings}>
             <div id="img" className="ui image hero hero1"></div>

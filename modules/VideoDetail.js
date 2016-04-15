@@ -88,13 +88,14 @@ export default React.createClass({
       return BrightCovePlayer(url.split('&bctid=')[1])
   },
 
-  addToWatchlist() {
+  addToWatchlist(e) {
     if ( ! this.state.movie.uuid || ! this.props.user )
       return;
     $.post(env.endpoint + '/v1/users/' +this.props.user.id + '/watchlist', {
       uuid: this.state.movie.uuid
     }, function (result) {
       console.log("result from adding to watchlist", result)
+      $(e.target).hid()
     }.bind(this))
   }
 });
