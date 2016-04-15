@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "e3808a4affa313f2734a"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "e49d9ef66d411333ce7a"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -36329,7 +36329,6 @@
 	      limit: '5',
 	      title: 'Music',
 	      source: '/albums',
-	      thumbPath: 'songs',
 	      href: '/albums/:id' }));
 	  }
 	});

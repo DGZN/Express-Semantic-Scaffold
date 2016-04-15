@@ -10,7 +10,6 @@ export default React.createClass({
         limit="5"
         title="Music"
         source="/albums"
-        thumbPath="songs"
         href="/albums/:id" />
     );
   }
