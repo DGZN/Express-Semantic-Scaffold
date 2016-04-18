@@ -162,12 +162,12 @@ export default React.createClass({
             page: 3
           })
         }
-        if (top > 250 && page < 2) {
+        if (top > 200 && page < 2) {
           return self.setState({
             page: 2
           })
         }
-        if (top > 200 && page < 1) {
+        if (top > 150 && page < 1) {
           return self.setState({
             page: 1
           })
@@ -211,7 +211,7 @@ export default React.createClass({
   },
 
   render() {
-
+    $('.watchlist.item.left.aligned').hide()
     return (
       <div style={{ 'textAlign': this.state.align + ' !important'}}>
         <Nav

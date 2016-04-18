@@ -21,8 +21,8 @@ export default React.createClass({
       <div className={className}>
         <div className="ui top attached label detailHeading">{this.state.title}</div>
         <div className="ui grid">
-          <div className="row">
-            <div className="pad-top-medium column tight">
+          <div className="row cast">
+            <div className="pad-top-medium column">
               <ul className="meta values tight">
                 {people}
               </ul>

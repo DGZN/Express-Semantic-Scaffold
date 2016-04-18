@@ -90,10 +90,9 @@ export default React.createClass({
     var delay = 0;
     var collection = collection.slice(0, perPage);
     console.log("Page", this.props.page);
+    var delay = 100;
     collection.map((data, i) => {
-      var delay = delay + (i*i*0.9);
-      if (delay > 1000)
-        delay = 0;
+      delay += i*1
       if (this.state.genre[this.props.language]) {
         if (data.genres) {
           data.genres.some((genre) => {
@@ -125,11 +124,6 @@ export default React.createClass({
         </div>
       )
     }
-    setTimeout(function(){
-      $('.image.preview .thumb').velocity({
-        opacity: 1
-      }, 0)
-    }, delay)
     return (
       <div>
         <Filter {...this.props} filter={this.filter} filterGenre={this.filterGenre} activeFilter={this.state.filter} activeGenre={this.state.genre} />

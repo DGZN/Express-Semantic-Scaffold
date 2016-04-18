@@ -83,9 +83,70 @@ export default React.createClass({
               <h6 >Arabic</h6>
             </a>
         </div>
+        <div id="watchlist-sidebar" className="ui left vertical sidebar inverted menu">
+          <div id="seasons-dropdown-filter" className="ui simple dropdown menu inverted">
+            SEASON 1
+            <i className="plus icon"></i>
+            <div className="menu">
+              <a className="item">SEASON 2</a>
+              <a className="item">SEASON 3</a>
+              <a className="item">SEASON 4</a>
+              <a className="item">SEASON 5</a>
+              <a className="item">SEASON 6</a>
+            </div>
+          </div>
+          <a className="item">
+            <i className="play tiny icon watchlist-button no-margin"></i>
+            <i className="plus tiny icon watchlist-button"></i>
+            <span>Ep 12</span>
+            <div className="watchlist-pct">75%</div>
+          </a>
+          <a className="item">
+            <i className="play tiny icon watchlist-button no-margin"></i>
+            <i className="plus tiny icon watchlist-button"></i><span>Ep 13</span>
+            <div className="watchlist-pct">30%</div>
+          </a>
+          <a className="item">
+            <i className="play tiny icon watchlist-button no-margin"></i>
+            <i className="plus tiny icon watchlist-button"></i><span>Ep 14</span>
+            <div className="watchlist-pct">100%</div>
+          </a>
+          <a className="item">
+            <i className="play tiny icon watchlist-button no-margin"></i>
+            <i className="plus tiny icon watchlist-button"></i><span>Ep 15</span>
+            <div className="watchlist-pct">0%</div>
+          </a>
+          <a className="item">
+            <i className="play tiny icon watchlist-button no-margin"></i>
+            <i className="plus tiny icon watchlist-button"></i><span>Ep 16</span>
+            <div className="watchlist-pct"></div>
+          </a>
+          <a className="item">
+            <i className="play tiny icon watchlist-button no-margin"></i>
+            <i className="plus tiny icon watchlist-button"></i><span>Ep 17</span>
+            <div className="watchlist-pct"></div>
+          </a>
+          <a className="item">
+            <i className="play tiny icon watchlist-button no-margin"></i>
+            <i className="plus tiny icon watchlist-button"></i><span>Ep 18</span>
+            <div className="watchlist-pct"></div>
+          </a>
+          <a className="item">
+            <i className="play tiny icon watchlist-button no-margin"></i>
+            <i className="plus tiny icon watchlist-button"></i><span>Ep 19</span>
+            <div className="watchlist-pct"></div>
+          </a>
+        </div>
         <div className="ui inverted vertical masthead center aligned">
           <div className="ui container nav-header pad-bottom-tiny">
-            <div className="ui large secondary inverted pointing menu"><a className="toc item right aligned"><i className="sidebar icon"></i></a></div>
+            <div className="ui large secondary inverted pointing menu">
+              <a className="watchlist item left aligned">
+                <i className="list layout icon"></i>
+              </a>
+              <a className="toc item right aligned">
+                <i className="sidebar icon"></i>
+              </a>
+            </div>
           </div>
         </div>
       </div>

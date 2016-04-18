@@ -1,7 +1,7 @@
 import React from 'react'
 
 import SeasonFilter from './SeasonFilter'
-import SeasonWatchlist from './SeasonWatchlist'
+import AlbumWatchlist from './AlbumWatchlist'
 import Roles from './Roles'
 
 const env = require('./env.js')
@@ -27,13 +27,13 @@ export default React.createClass({
   },
 
   addToWatchlist(e) {
-    if ( ! this.state.series.uuid || ! this.props.user )
+    if ( ! this.state.album.uuid || ! this.props.user )
       return;
     $('.addToWatchlist').velocity({
       opacity: 0
     }, 250)
     $.post(env.endpoint + '/v1/users/' +this.props.user.id + '/watchlist', {
-      uuid: this.state.series.uuid
+      uuid: this.state.album.uuid
     }, function (result) {
 
     }.bind(this))
@@ -74,7 +74,7 @@ export default React.createClass({
         <div className="ui vertical center container aligned grids" style={{ 'textAlign': this.props.textAlign }} >
           <div className="ui two column grid container details pad-top-medium" style={{ overflow: 'hidden' }} >
             <div className="details six wide computer only column centered season-watchlist">
-              <SeasonWatchlist language={this.props.language} episodes={album.songs} />
+              <AlbumWatchlist language={this.props.language} episodes={album.songs} />
 
             </div>
             <div className="details sixteen wide tablet seven wide computer column centered">
@@ -82,14 +82,9 @@ export default React.createClass({
               <div className="season-detail">
                 <img src={album.thumb} className="ui huge image"/>
                 <h1>{album.name}</h1>
-                <h3>{album.seriesText}</h3>
-                <h4 className="pad-right-medium">{album.description}</h4>
                 <div className="ui one column grid center">
                   <div className="row">
                     <div className="column tight">
-                      <div className="movie-details">
-                        <span>{album.duration}</span><span>{album.productionYear}</span>
-                      </div>
                       <div className="movie-actions">
                         <img src="/images/add-button.png" className="ui image addToWatchlist" onClick={this.addToWatchlist}/>
                         <img src="/images/social-share-circle-icons.png" className="ui image social-share"/>

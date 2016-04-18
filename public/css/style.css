@@ -6,6 +6,17 @@ body {
   padding-bottom: 20px;
 }
 
+@media only screen and (max-width: 480px) {
+  .ui.grid>* {
+    padding-left: 0rem !important;
+    padding-right: 0rem !important;
+  }
+}
+
+.watchlist.item.left.aligned {
+  display: none;
+}
+
 .slick-slider {
   margin-bottom: 0px;
 }
@@ -328,11 +339,18 @@ body {
     background: rgba(24,24,24,1);
 }
 
+.videoPlayer {
+  max-width: 90%;
+  height: auto;
+  min-height: 500px;
+  overflow: hidden;
+}
+
 #video-slide-out {
   top: -12%;
   left: 0%;
   position: absolute;
-  width: 1000px;
+  width: auto;
   height: 100%;
   margin-top: 0.7rem;
   display: block;
@@ -625,6 +643,12 @@ body.pushable>.pusher {
   }
 }
 
+@media only screen and (max-width: 500px) {
+  .row.subnav {
+    min-height: 55px !important;
+  }
+}
+
 .page-hr {
   position: relative;
   margin: 0 auto;
@@ -657,7 +681,15 @@ body.pushable>.pusher {
   .row.subnav span.title {
     font-size: 1em;
     font-weight: 300;
-    line-height: 4.5em;
+    line-height: 3.5em;
+  }
+}
+
+@media only screen and (max-width: 777px) {
+  .row.subnav span.title {
+    font-size: 1em;
+    font-weight: 300;
+    line-height: 3em;
   }
 }
 
@@ -668,7 +700,13 @@ body.pushable>.pusher {
   .row.subnav span.title {
     font-size: 0.8em;
     font-weight: 200;
-    line-height: 3.2rem;
+    line-height: 3.5rem;
+  }
+
+  .row.subnav span.title.small {
+    font-size: 0.8em;
+    font-weight: 200;
+    line-height: 2.4rem;
   }
 }
 
@@ -695,6 +733,18 @@ body.pushable>.pusher {
   text-indent: .6rem;
   border-radius: 0rem !important;
   background: #2d2d2d;
+}
+
+@media only screen and (max-width: 900px) {
+  #seasons-dropdown .menu {
+    width: 180px;
+    font-size: .9em;
+    letter-spacing: .1em;
+    line-height: 0.9rem;
+    text-indent: .6rem;
+    border-radius: 0rem !important;
+    background: #2d2d2d;
+  }
 }
 
 #seasons-dropdown .menu .item {
@@ -857,6 +907,17 @@ body.pushable>.pusher {
   letter-spacing: .1em;
   font-weight: 200;
   background: #100e0f;
+}
+
+@media only screen and (max-width: 996px) {
+  .row.subnav .ui.simple.dropdown {
+    width: 180px;
+    height: 35px;
+    margin-top: 0.8rem;
+    margin-right: 2rem;
+    padding: .65rem 0 0 1.1rem;
+    font-size: .9em;
+  }
 }
 
 @media only screen (max-width: 530px) {
@@ -1181,7 +1242,7 @@ body.pushable>.pusher {
   margin-left: -1rem !important;
 }
 
-.grids .row:not(.subnav):not(.watchlist):not(.my-account) {
+.grids .row:not(.subnav):not(.watchlist):not(.my-account):not(.cast) {
   padding-left: 1rem !important;
   height: 220px;
   overflow: hidden;
@@ -1403,7 +1464,7 @@ body.pushable>.pusher {
   width: 100%;
 }
 
-@media only screen and (max-width: 1250px) {
+@media only screen and (max-width: 1270px) {
   .watchlist-button {
     padding-right: 0.4rem;
     font-size: 0.8rem;
@@ -1463,6 +1524,12 @@ ul.meta {
   }
   .meta.values {
     /*padding-left: 3.4rem !important;*/
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .meta.values {
+    padding-left: 0rem !important;
   }
 }
 
@@ -1618,7 +1685,7 @@ ul.meta.values {
   /*background-image: url('/images/wireframe/thumb_placeholder.png');*/
   background-color: rgba(24,24,24,1) !important;
   background-repeat: no-repeat;
-  opacity: 0.4;
+  opacity: 1;
 }
 
 .carousel .image.preview {
@@ -1669,7 +1736,7 @@ ul.meta.values {
         -ms-transition: opacity 0.3s ease-in;
          -o-transition: opacity 0.3s ease-in;
             transition: opacity 0.3s ease-in;
-  opacity: 0.1;
+  opacity: 1;
 }
 
 .shown {
@@ -1794,7 +1861,7 @@ ul.meta.values {
 
 @media only screen and (max-width: 480px) {
   .grids .column {
-    padding-right: 2.5rem !important;
+    /*padding-right: 2.5rem !important;*/
   }
   .grids .column.mobile.tablet.computer.only {
     display: none;

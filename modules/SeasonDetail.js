@@ -30,8 +30,10 @@ export default React.createClass({
     if ( ! this.state.series.uuid || ! this.props.user )
       return;
     $('.addToWatchlist').velocity({
+      translateZ: 0,
+      rotateZ: "45deg",
       opacity: 0
-    }, 250)
+    }, 500)
     $.post(env.endpoint + '/v1/users/' +this.props.user.id + '/watchlist', {
       uuid: this.state.series.uuid
     }, function (result) {
@@ -70,10 +72,12 @@ export default React.createClass({
       }
     }
     setTimeout(function(){
-      $('#watchlist-sidebar')
+      $('.watchlist.item.left.aligned').show(250, function(){
+        $('#watchlist-sidebar')
         .sidebar('attach events', '.watchlist.item')
-      ;
-    }, 1000)
+        ;
+      })
+    }, 100)
     return (
       <div>
         <div className="ui container grids">

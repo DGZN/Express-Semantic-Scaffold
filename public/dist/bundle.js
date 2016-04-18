@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "e49d9ef66d411333ce7a"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "c1edcd1e7ecb28e86153"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -638,19 +638,19 @@
 
 	var _Season2 = _interopRequireDefault(_Season);
 
-	var _Collections = __webpack_require__(294);
+	var _Collections = __webpack_require__(295);
 
 	var _Collections2 = _interopRequireDefault(_Collections);
 
-	var _Collection = __webpack_require__(295);
+	var _Collection = __webpack_require__(296);
 
 	var _Collection2 = _interopRequireDefault(_Collection);
 
-	var _LiveTV = __webpack_require__(296);
+	var _LiveTV = __webpack_require__(297);
 
 	var _LiveTV2 = _interopRequireDefault(_LiveTV);
 
-	var _Watchlist = __webpack_require__(303);
+	var _Watchlist = __webpack_require__(304);
 
 	var _Watchlist2 = _interopRequireDefault(_Watchlist);
 
@@ -673,6 +673,7 @@
 	    _react2.default.createElement(_reactRouter.Route, { path: '/plays', component: _Plays2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/plays/:id', component: _Play2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/classics', component: _Classics2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/classics/:id', component: _Movie2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/collections', component: _Collections2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/collections/:id', component: _Collection2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/livetv', component: _LiveTV2.default }),
@@ -25790,12 +25791,12 @@
 	            page: 3
 	          });
 	        }
-	        if (top > 250 && page < 2) {
+	        if (top > 200 && page < 2) {
 	          return self.setState({
 	            page: 2
 	          });
 	        }
-	        if (top > 200 && page < 1) {
+	        if (top > 150 && page < 1) {
 	          return self.setState({
 	            page: 1
 	          });
@@ -25838,7 +25839,7 @@
 	  },
 
 	  render: function render() {
-
+	    $('.watchlist.item.left.aligned').hide();
 	    return _react2.default.createElement(
 	      'div',
 	      { style: { 'textAlign': this.state.align + ' !important' } },
@@ -26156,6 +26157,157 @@
 	      ),
 	      _react2.default.createElement(
 	        'div',
+	        { id: 'watchlist-sidebar', className: 'ui left vertical sidebar inverted menu' },
+	        _react2.default.createElement(
+	          'div',
+	          { id: 'seasons-dropdown-filter', className: 'ui simple dropdown menu inverted' },
+	          'SEASON 1',
+	          _react2.default.createElement('i', { className: 'plus icon' }),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'menu' },
+	            _react2.default.createElement(
+	              'a',
+	              { className: 'item' },
+	              'SEASON 2'
+	            ),
+	            _react2.default.createElement(
+	              'a',
+	              { className: 'item' },
+	              'SEASON 3'
+	            ),
+	            _react2.default.createElement(
+	              'a',
+	              { className: 'item' },
+	              'SEASON 4'
+	            ),
+	            _react2.default.createElement(
+	              'a',
+	              { className: 'item' },
+	              'SEASON 5'
+	            ),
+	            _react2.default.createElement(
+	              'a',
+	              { className: 'item' },
+	              'SEASON 6'
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'a',
+	          { className: 'item' },
+	          _react2.default.createElement('i', { className: 'play tiny icon watchlist-button no-margin' }),
+	          _react2.default.createElement('i', { className: 'plus tiny icon watchlist-button' }),
+	          _react2.default.createElement(
+	            'span',
+	            null,
+	            'Ep 12'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'watchlist-pct' },
+	            '75%'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'a',
+	          { className: 'item' },
+	          _react2.default.createElement('i', { className: 'play tiny icon watchlist-button no-margin' }),
+	          _react2.default.createElement('i', { className: 'plus tiny icon watchlist-button' }),
+	          _react2.default.createElement(
+	            'span',
+	            null,
+	            'Ep 13'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'watchlist-pct' },
+	            '30%'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'a',
+	          { className: 'item' },
+	          _react2.default.createElement('i', { className: 'play tiny icon watchlist-button no-margin' }),
+	          _react2.default.createElement('i', { className: 'plus tiny icon watchlist-button' }),
+	          _react2.default.createElement(
+	            'span',
+	            null,
+	            'Ep 14'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'watchlist-pct' },
+	            '100%'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'a',
+	          { className: 'item' },
+	          _react2.default.createElement('i', { className: 'play tiny icon watchlist-button no-margin' }),
+	          _react2.default.createElement('i', { className: 'plus tiny icon watchlist-button' }),
+	          _react2.default.createElement(
+	            'span',
+	            null,
+	            'Ep 15'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'watchlist-pct' },
+	            '0%'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'a',
+	          { className: 'item' },
+	          _react2.default.createElement('i', { className: 'play tiny icon watchlist-button no-margin' }),
+	          _react2.default.createElement('i', { className: 'plus tiny icon watchlist-button' }),
+	          _react2.default.createElement(
+	            'span',
+	            null,
+	            'Ep 16'
+	          ),
+	          _react2.default.createElement('div', { className: 'watchlist-pct' })
+	        ),
+	        _react2.default.createElement(
+	          'a',
+	          { className: 'item' },
+	          _react2.default.createElement('i', { className: 'play tiny icon watchlist-button no-margin' }),
+	          _react2.default.createElement('i', { className: 'plus tiny icon watchlist-button' }),
+	          _react2.default.createElement(
+	            'span',
+	            null,
+	            'Ep 17'
+	          ),
+	          _react2.default.createElement('div', { className: 'watchlist-pct' })
+	        ),
+	        _react2.default.createElement(
+	          'a',
+	          { className: 'item' },
+	          _react2.default.createElement('i', { className: 'play tiny icon watchlist-button no-margin' }),
+	          _react2.default.createElement('i', { className: 'plus tiny icon watchlist-button' }),
+	          _react2.default.createElement(
+	            'span',
+	            null,
+	            'Ep 18'
+	          ),
+	          _react2.default.createElement('div', { className: 'watchlist-pct' })
+	        ),
+	        _react2.default.createElement(
+	          'a',
+	          { className: 'item' },
+	          _react2.default.createElement('i', { className: 'play tiny icon watchlist-button no-margin' }),
+	          _react2.default.createElement('i', { className: 'plus tiny icon watchlist-button' }),
+	          _react2.default.createElement(
+	            'span',
+	            null,
+	            'Ep 19'
+	          ),
+	          _react2.default.createElement('div', { className: 'watchlist-pct' })
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'div',
 	        { className: 'ui inverted vertical masthead center aligned' },
 	        _react2.default.createElement(
 	          'div',
@@ -26163,6 +26315,11 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'ui large secondary inverted pointing menu' },
+	            _react2.default.createElement(
+	              'a',
+	              { className: 'watchlist item left aligned' },
+	              _react2.default.createElement('i', { className: 'list layout icon' })
+	            ),
 	            _react2.default.createElement(
 	              'a',
 	              { className: 'toc item right aligned' },
@@ -33939,8 +34096,8 @@
 	      autoplaySpeed: 7500,
 	      infinite: false,
 	      speed: 1300,
-	      useCSS: false,
-	      fade: true,
+	      useCSS: true,
+	      fade: false,
 	      slidesToShow: 1,
 	      slidesToScroll: 1,
 	      easing: 'easeInOut'
@@ -36329,6 +36486,7 @@
 	      limit: '5',
 	      title: 'Music',
 	      source: '/albums',
+	      thumbPath: 'songThumb',
 	      href: '/albums/:id' }));
 	  }
 	});
@@ -36448,9 +36606,9 @@
 	    var delay = 0;
 	    var collection = collection.slice(0, perPage);
 	    console.log("Page", this.props.page);
+	    var delay = 100;
 	    collection.map(function (data, i) {
-	      var delay = delay + i * i * 0.9;
-	      if (delay > 1000) delay = 0;
+	      delay += i * 1;
 	      if (_this.state.genre[_this.props.language]) {
 	        if (data.genres) {
 	          data.genres.some(function (genre) {
@@ -36481,11 +36639,6 @@
 	        COLUMNS
 	      ));
 	    }
-	    setTimeout(function () {
-	      $('.image.preview .thumb').velocity({
-	        opacity: 1
-	      }, 0);
-	    }, delay);
 	    return _react2.default.createElement(
 	      'div',
 	      null,
@@ -36541,7 +36694,7 @@
 	    }
 	    var thumb = '/images/melody/' + this.props.data.thumb.replace('M1', 'M11');
 	    if (this.props.thumbPath) {
-	      thumb = '/images/wireframe/16x9.png';
+	      thumb = '/images/melody/' + this.props.data[this.props.thumbPath];
 	    }
 	    var id = this.props.data.id;
 	    var visible = this.props.className || '';
@@ -36555,6 +36708,11 @@
 	    // }
 	    var reset = 0;
 	    var delay = this.props.delay || 100;
+	    // setTimeout(function(){
+	    //   $('#'+'col-'+id).velocity({
+	    //     opacity: 1
+	    //   }, 10)
+	    // }, 100)
 	    return _react2.default.createElement(
 	      _reactRouter.Link,
 	      { to: link || '#', className: hrefCSS, key: '#col-link-' + id + Math.random() },
@@ -36636,9 +36794,9 @@
 
 	var _SeasonFilter2 = _interopRequireDefault(_SeasonFilter);
 
-	var _SeasonWatchlist = __webpack_require__(279);
+	var _AlbumWatchlist = __webpack_require__(279);
 
-	var _SeasonWatchlist2 = _interopRequireDefault(_SeasonWatchlist);
+	var _AlbumWatchlist2 = _interopRequireDefault(_AlbumWatchlist);
 
 	var _Roles = __webpack_require__(281);
 
@@ -36671,12 +36829,12 @@
 	  },
 
 	  addToWatchlist: function addToWatchlist(e) {
-	    if (!this.state.series.uuid || !this.props.user) return;
+	    if (!this.state.album.uuid || !this.props.user) return;
 	    $('.addToWatchlist').velocity({
 	      opacity: 0
 	    }, 250);
 	    $.post(env.endpoint + '/v1/users/' + this.props.user.id + '/watchlist', {
-	      uuid: this.state.series.uuid
+	      uuid: this.state.album.uuid
 	    }, function (result) {}.bind(this));
 	  },
 	  render: function render() {
@@ -36720,7 +36878,7 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'details six wide computer only column centered season-watchlist' },
-	            _react2.default.createElement(_SeasonWatchlist2.default, { language: this.props.language, episodes: album.songs })
+	            _react2.default.createElement(_AlbumWatchlist2.default, { language: this.props.language, episodes: album.songs })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -36736,16 +36894,6 @@
 	                album.name
 	              ),
 	              _react2.default.createElement(
-	                'h3',
-	                null,
-	                album.seriesText
-	              ),
-	              _react2.default.createElement(
-	                'h4',
-	                { className: 'pad-right-medium' },
-	                album.description
-	              ),
-	              _react2.default.createElement(
 	                'div',
 	                { className: 'ui one column grid center' },
 	                _react2.default.createElement(
@@ -36754,20 +36902,6 @@
 	                  _react2.default.createElement(
 	                    'div',
 	                    { className: 'column tight' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'movie-details' },
-	                      _react2.default.createElement(
-	                        'span',
-	                        null,
-	                        album.duration
-	                      ),
-	                      _react2.default.createElement(
-	                        'span',
-	                        null,
-	                        album.productionYear
-	                      )
-	                    ),
 	                    _react2.default.createElement(
 	                      'div',
 	                      { className: 'movie-actions' },
@@ -36823,7 +36957,7 @@
 	      { className: "row subnav" },
 	      _react2.default.createElement(
 	        "span",
-	        { className: "title" },
+	        { className: "title small" },
 	        "Series ",
 	        this.props.title,
 	        " season 1"
@@ -36868,14 +37002,14 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _react2.default.createClass({
-	  displayName: 'SeasonWatchlist',
+	  displayName: 'AlbumWatchlist',
 	  render: function render() {
 	    var _this = this;
 
 	    var ROWS = [];
 	    if (!this.props.episodes) return _react2.default.createElement('div', { className: 'row watchlist' });
 	    this.props.episodes.map(function (episode, i) {
-	      ROWS.push(_react2.default.createElement(WatchlistRow, { key: 'watchlist-' + i, episode: episode, language: _this.props.language }));
+	      ROWS.push(_react2.default.createElement(WatchlistRow, { key: 'watchlist-' + i, episode: episode, track: i + 1, language: _this.props.language }));
 	    });
 	    // setTimeout(function(){
 	    //   $('.season-watchlist').velocity("scroll", {
@@ -36914,8 +37048,8 @@
 	        _react2.default.createElement(
 	          'span',
 	          { className: 'watchlist-button' },
-	          'Ep ',
-	          this.props.episode.episode_number
+	          'Track ',
+	          this.props.track
 	        )
 	      ),
 	      _react2.default.createElement(
@@ -37026,7 +37160,8 @@
 	  },
 	  closeVideoSlideOut: function closeVideoSlideOut() {
 	    $('#video-slide-out, .videoPlayer').velocity({
-	      opacity: 0
+	      opacity: 0,
+	      width: '100%'
 	    }, 300, "ease-in");
 	    $('.season-detail').velocity({
 	      opacity: "1"
@@ -37042,11 +37177,11 @@
 
 
 	function YouTubePlayer(id) {
-	  return '<iframe width="98%" height="500" src="https://www.youtube.com/embed/' + id + '?rel=0&amp;controls=1&amp;showinfo=0" frameborder="0"  allowfullscreen></iframe>';
+	  return '<iframe width="100%" height="500" src="https://www.youtube.com/embed/' + id + '?rel=0&amp;controls=1&amp;showinfo=0" frameborder="0"  allowfullscreen></iframe>';
 	}
 
 	function BrightCovePlayer(id) {
-	  return '<object id="flashObj" width="98%" height="407" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,47,0"> \
+	  return '<object id="flashObj" width="auto" height="407" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,47,0"> \
 	      <param name="movie" value="http://c.brightcove.com/services/viewer/federated_f9?isVid=1&isUI=1" />                                                                                                          \
 	      <param name="bgcolor" value="#FFFFFF" />                                                                                                                                                                    \
 	      <param name="flashVars" value="videoId=' + id + '&playerID=3815086849001&playerKey=AQ~~,AAADd9u4__E~,fHl6JWluMnctnUR7lsNevXxKfibpHuew&domain=embed&dynamicStreaming=true" />                             \
@@ -37055,7 +37190,7 @@
 	      <param name="allowFullScreen" value="true" /> \
 	      <param name="swLiveConnect" value="true" /> \
 	      <param name="allowScriptAccess" value="always" /> \
-	      <embed src="http://c.brightcove.com/services/viewer/federated_f9?isVid=1&isUI=1" bgcolor="#FFFFFF"  flashVars="videoId=' + id + '&playerID=3815086849001&playerKey=AQ~~,AAADd9u4__E~,fHl6JWluMnctnUR7lsNevXxKfibpHuew&domain=embed&dynamicStreaming=true" base="http://admin.brightcove.com" name="flashObj" width="98%" height="407" seamlesstabbing="false" type="application/x-shockwave-flash" allowFullScreen="true" allowScriptAccess="always" swLiveConnect="true" pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"> \
+	      <embed src="http://c.brightcove.com/services/viewer/federated_f9?isVid=1&isUI=1" bgcolor="#FFFFFF"  flashVars="videoId=' + id + '&playerID=3815086849001&playerKey=AQ~~,AAADd9u4__E~,fHl6JWluMnctnUR7lsNevXxKfibpHuew&domain=embed&dynamicStreaming=true" base="http://admin.brightcove.com" name="flashObj" width="auto" height="407" seamlesstabbing="false" type="application/x-shockwave-flash" allowFullScreen="true" allowScriptAccess="always" swLiveConnect="true" pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"> \
 	    </embed></object>';
 	}
 
@@ -37166,10 +37301,10 @@
 	        { className: 'ui grid' },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'row' },
+	          { className: 'row cast' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'pad-top-medium column tight' },
+	            { className: 'pad-top-medium column' },
 	            _react2.default.createElement(
 	              'ul',
 	              { className: 'meta values tight' },
@@ -37696,7 +37831,7 @@
 
 	var _SeasonFilter2 = _interopRequireDefault(_SeasonFilter);
 
-	var _SeasonWatchlist = __webpack_require__(279);
+	var _SeasonWatchlist = __webpack_require__(294);
 
 	var _SeasonWatchlist2 = _interopRequireDefault(_SeasonWatchlist);
 
@@ -37733,8 +37868,10 @@
 	  addToWatchlist: function addToWatchlist(e) {
 	    if (!this.state.series.uuid || !this.props.user) return;
 	    $('.addToWatchlist').velocity({
+	      translateZ: 0,
+	      rotateZ: "45deg",
 	      opacity: 0
-	    }, 250);
+	    }, 500);
 	    $.post(env.endpoint + '/v1/users/' + this.props.user.id + '/watchlist', {
 	      uuid: this.state.series.uuid
 	    }, function (result) {}.bind(this));
@@ -37772,8 +37909,10 @@
 	      };
 	    }
 	    setTimeout(function () {
-	      $('#watchlist-sidebar').sidebar('attach events', '.watchlist.item');
-	    }, 1000);
+	      $('.watchlist.item.left.aligned').show(250, function () {
+	        $('#watchlist-sidebar').sidebar('attach events', '.watchlist.item');
+	      });
+	    }, 100);
 	    return _react2.default.createElement(
 	      'div',
 	      null,
@@ -37871,6 +38010,139 @@
 	  value: true
 	});
 
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(158);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var _VideoPlayer = __webpack_require__(280);
+
+	var _VideoPlayer2 = _interopRequireDefault(_VideoPlayer);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	  displayName: 'SeasonWatchlist',
+	  render: function render() {
+	    var _this = this;
+
+	    var ROWS = [];
+	    if (!this.props.episodes) return _react2.default.createElement('div', { className: 'row watchlist' });
+	    this.props.episodes.map(function (episode, i) {
+	      ROWS.push(_react2.default.createElement(WatchlistRow, { key: 'watchlist-' + i, episode: episode, language: _this.props.language }));
+	    });
+	    // setTimeout(function(){
+	    //   $('.season-watchlist').velocity("scroll", {
+	    //       duration: 600
+	    //     , easing: 'ease-in'
+	    //     , container: $(".season-watchlist")
+	    //   })
+	    //   setTimeout(function(){
+	    //     $('.season-watchlist').animate({ scrollTop: 0 }, 2000)
+	    //   }, 2200)
+	    // },1500)
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'ui stackable grid season-watchlist-container' },
+	      ROWS
+	    );
+	  },
+
+	  componentDidMount: function componentDidMount() {
+	    console.log("Grid > Row > Watchlist [Properties]", this.props);
+	  }
+	});
+
+
+	var WatchlistRow = _react2.default.createClass({
+	  displayName: 'WatchlistRow',
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'row watchlist' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'sixteen wide tablet four wide computer column tight-right' },
+	        _react2.default.createElement('i', { className: 'play large icon watchlist-button tight', onClick: this.playEpisode }),
+	        _react2.default.createElement('i', { className: 'plus icon watchlist-button' }),
+	        _react2.default.createElement(
+	          'span',
+	          { className: 'watchlist-button' },
+	          'Ep ',
+	          this.props.episode.episode_number
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'sixteen wide tablet eleven wide computer column tight-left' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'ui progress watchlist small error episode' },
+	          _react2.default.createElement('div', { className: 'bar' })
+	        )
+	      )
+	    );
+	  },
+	  componentDidMount: function componentDidMount() {},
+	  playEpisode: function playEpisode() {
+
+	    var episode = this.props.episode;
+	    var language = this.props.language;
+
+	    $('#video-slide-out, .videoPlayer').velocity({
+	      opacity: 0
+	    }, 200, function () {
+	      _reactDom2.default.render(_react2.default.createElement(_VideoPlayer2.default, { video: episode, language: language }), document.getElementById('video-slide-out'));
+	    });
+
+	    $('.season-detail').velocity({
+	      opacity: "0"
+	    }, 300, "ease-out");
+
+	    $('#video-slide-out').velocity({
+	      "left": "0%",
+	      "position": "absolute",
+	      "width": "1000px",
+	      "height": "100%",
+	      "display": "block",
+	      "opacity": "0",
+	      "z-index": "1"
+	    }, 200, "ease-in").velocity({
+	      top: '-45px',
+	      opacity: "1"
+	    }, 300, "easeIn");
+
+	    $('.videoPlayer').velocity({
+	      opacity: "1"
+	    }, 400, "easeOutQuart");
+	  }
+	});
+
+	function generateLink(props) {
+	  var link = props.href;
+	  var keys = props.href.match(/[:]\w+/g);
+	  keys.map(function (key) {
+	    var _key = key.replace(':', '');
+	    if (props.data[_key]) {
+	      link = link.replace(key, props.data[_key]);
+	    }
+	  });
+	  return link;
+	}
+
+/***/ },
+/* 295 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 	var _react = __webpack_require__(1);
@@ -37896,7 +38168,7 @@
 	});
 
 /***/ },
-/* 295 */
+/* 296 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37930,7 +38202,7 @@
 	});
 
 /***/ },
-/* 296 */
+/* 297 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37947,7 +38219,7 @@
 
 	var _reactSlick2 = _interopRequireDefault(_reactSlick);
 
-	var _EPGuide = __webpack_require__(297);
+	var _EPGuide = __webpack_require__(298);
 
 	var _EPGuide2 = _interopRequireDefault(_EPGuide);
 
@@ -38025,7 +38297,8 @@
 	      autoplaySpeed: 7500,
 	      infinite: false,
 	      speed: 1300,
-	      fade: true,
+	      useCSS: true,
+	      fade: false,
 	      slidesToShow: 1,
 	      slidesToScroll: 1,
 	      easing: 'easeInOut'
@@ -38051,7 +38324,7 @@
 	});
 
 /***/ },
-/* 297 */
+/* 298 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38064,19 +38337,19 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Channels = __webpack_require__(298);
+	var _Channels = __webpack_require__(299);
 
 	var _Channels2 = _interopRequireDefault(_Channels);
 
-	var _Filter = __webpack_require__(299);
+	var _Filter = __webpack_require__(300);
 
 	var _Filter2 = _interopRequireDefault(_Filter);
 
-	var _Schedule = __webpack_require__(300);
+	var _Schedule = __webpack_require__(301);
 
 	var _Schedule2 = _interopRequireDefault(_Schedule);
 
-	var _MobileSchedule = __webpack_require__(302);
+	var _MobileSchedule = __webpack_require__(303);
 
 	var _MobileSchedule2 = _interopRequireDefault(_MobileSchedule);
 
@@ -38110,7 +38383,7 @@
 	});
 
 /***/ },
-/* 298 */
+/* 299 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -38196,7 +38469,7 @@
 	});
 
 /***/ },
-/* 299 */
+/* 300 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -38484,7 +38757,7 @@
 	});
 
 /***/ },
-/* 300 */
+/* 301 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38497,7 +38770,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _TimeBlockHead = __webpack_require__(301);
+	var _TimeBlockHead = __webpack_require__(302);
 
 	var _TimeBlockHead2 = _interopRequireDefault(_TimeBlockHead);
 
@@ -38781,7 +39054,7 @@
 	});
 
 /***/ },
-/* 301 */
+/* 302 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38928,7 +39201,7 @@
 	var TimeList = ['1am', '1:30', '2am', '2:30', '3am', '3:30', '4am', '4:30', '5am', '5:30', '6am', '6:30', '7am', '7:30', '8am', '8:30', '9am', '9:30', '10am', '10:30', '11am', '11:30', '12', '12:30', '1pm', '1:30', '2pm', '2:30', '3pm', '3:30', '4pm', '4:30', '5pm', '5:30', '6pm', '6:30', '7pm', '7:30', '8pm', '8:30', '9pm', '9:30', '10pm', '10:30', '11pm', '11:30', '12'];
 
 /***/ },
-/* 302 */
+/* 303 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -39480,7 +39753,7 @@
 	});
 
 /***/ },
-/* 303 */
+/* 304 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

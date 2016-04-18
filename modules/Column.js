@@ -26,7 +26,7 @@ export default React.createClass({
     }
     var thumb = '/images/melody/' + this.props.data.thumb.replace('M1','M11');
     if (this.props.thumbPath) {
-      thumb = '/images/wireframe/16x9.png';
+      thumb = '/images/melody/' + this.props.data[this.props.thumbPath];
     }
     var id = this.props.data.id
     var visible = this.props.className || ''
@@ -40,6 +40,11 @@ export default React.createClass({
     // }
     var reset = 0;
     var delay = this.props.delay || 100;
+    // setTimeout(function(){
+    //   $('#'+'col-'+id).velocity({
+    //     opacity: 1
+    //   }, 10)
+    // }, 100)
     return (
       <Link to={link || '#'} className={hrefCSS} key={'#col-link-'+id+Math.random()} >
         <div className={thumbCSS} style={{"backgroundImage": 'url(' + thumb + ') !important'}} id={'col-'+id}>

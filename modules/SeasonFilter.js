@@ -8,7 +8,7 @@ export default React.createClass({
     })
     return (
       <div className="row subnav">
-        <span className="title">Series {this.props.title} season 1</span>
+        <span className="title small">Series {this.props.title} season 1</span>
         <div id="seasons-dropdown" className="ui simple dropdown item inverted">
           SEASON 1
           <i className="plus icon"></i>
