@@ -30,8 +30,6 @@ export default React.createClass({
     if ( ! this.state.series.uuid || ! this.props.user )
       return;
     $('.addToWatchlist').velocity({
-      translateZ: 0,
-      rotateZ: "45deg",
       opacity: 0
     }, 500)
     $.post(env.endpoint + '/v1/users/' +this.props.user.id + '/watchlist', {

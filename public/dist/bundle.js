@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "c1edcd1e7ecb28e86153"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "63ce4de9a2ad7daa476c"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -37868,8 +37868,6 @@
 	  addToWatchlist: function addToWatchlist(e) {
 	    if (!this.state.series.uuid || !this.props.user) return;
 	    $('.addToWatchlist').velocity({
-	      translateZ: 0,
-	      rotateZ: "45deg",
 	      opacity: 0
 	    }, 500);
 	    $.post(env.endpoint + '/v1/users/' + this.props.user.id + '/watchlist', {
