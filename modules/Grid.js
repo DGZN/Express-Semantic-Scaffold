@@ -116,12 +116,14 @@ export default React.createClass({
         )
         COLUMNS = []
       }
-      data.genres.map((genre) => {
-        if (_inGenres.indexOf(genre.meta.en.name) == -1) {
-          _inGenres.push(genre.meta.en.name)
-          genres.push(genre)
-        }
-      })
+      if (data.genres) {
+        data.genres.map((genre) => {
+          if (_inGenres.indexOf(genre.meta.en.name) == -1) {
+            _inGenres.push(genre.meta.en.name)
+            genres.push(genre)
+          }
+        })
+      }
     })
     if (COLUMNS.length) {
       ROWS.push(
