@@ -20,7 +20,7 @@ export default React.createClass({
       autoplaySpeed: 7500,
       infinite: false,
       speed: 1300,
-      useCSS: true,
+      useCSS: false,
       fade: false,
       slidesToShow: 1,
       slidesToScroll: 1,

@@ -13,18 +13,21 @@ import LoginActionCreators from '../actions/LoginActionCreators';
 
 
 const env = require('./env.js')
+const localized = require('./localized.js')
 
 export default React.createClass({
   setLanguage(lang, align) {
     this.setState({
       align: align
+    , local: this.localized(localized, 'ar')
     , language: lang
     })
   },
   _getLoginState() {
     return {
       page: 0
-    , language: 'en'
+    , language: 'ar'
+    , local: this.localized(localized, 'ar')
     , align: 'left'
     , user: LoginStore.user
     , userLoggedIn: LoginStore.isLoggedIn()
@@ -212,6 +215,7 @@ export default React.createClass({
 
   render() {
     $('.watchlist.item.left.aligned').hide()
+    var local = this.localized(localized, this.state.language)
     return (
       <div style={{ 'textAlign': this.state.align + ' !important'}}>
         <Nav
@@ -220,10 +224,12 @@ export default React.createClass({
           register={this.register}
           closeModal={this.closeModal}
           setLanguage={this.setLanguage}
+          local={local}
           language={this.state.language}  />
         {this.props.children && React.cloneElement(this.props.children,{
           page: this.state.page
         , language: this.state.language
+        , local: local
         , textAlign: this.state.align
         , myAccount: this.myAccount
         , isLoggedIn: this.state.userLoggedIn
@@ -282,12 +288,10 @@ export default React.createClass({
 
   closeModal() {
     $('.my-account.modal').modal('hide', function(){
-      console.log("modal closed")
     })
   },
 
   linkFromModal(link) {
-    console.log("linking from modal", link)
     if (link) {
       $('.my-watchlist.modal').modal('hide', function(){
         let transitionPath = '/movies/2';
@@ -297,6 +301,14 @@ export default React.createClass({
         }, 500)
       })
     }
+  },
+
+  localized(text, language) {
+    var meta = {}
+    for (var key in text) {
+      meta[key] = text[key][language]
+    }
+    return meta;
   }
 
 });

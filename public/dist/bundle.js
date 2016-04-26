@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "63ce4de9a2ad7daa476c"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "fe013c0c0be832e1c0f5"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -590,67 +590,67 @@
 
 	var _App2 = _interopRequireDefault(_App);
 
-	var _Home = __webpack_require__(249);
+	var _Home = __webpack_require__(250);
 
 	var _Home2 = _interopRequireDefault(_Home);
 
-	var _Logout = __webpack_require__(272);
+	var _Logout = __webpack_require__(273);
 
 	var _Logout2 = _interopRequireDefault(_Logout);
 
-	var _Music = __webpack_require__(273);
+	var _Music = __webpack_require__(274);
 
 	var _Music2 = _interopRequireDefault(_Music);
 
-	var _Album = __webpack_require__(276);
+	var _Album = __webpack_require__(277);
 
 	var _Album2 = _interopRequireDefault(_Album);
 
-	var _Movie = __webpack_require__(284);
+	var _Movie = __webpack_require__(285);
 
 	var _Movie2 = _interopRequireDefault(_Movie);
 
-	var _Plays = __webpack_require__(286);
+	var _Plays = __webpack_require__(287);
 
 	var _Plays2 = _interopRequireDefault(_Plays);
 
-	var _Play = __webpack_require__(287);
+	var _Play = __webpack_require__(288);
 
 	var _Play2 = _interopRequireDefault(_Play);
 
-	var _Classics = __webpack_require__(288);
+	var _Classics = __webpack_require__(289);
 
 	var _Classics2 = _interopRequireDefault(_Classics);
 
-	var _Classic = __webpack_require__(289);
+	var _Classic = __webpack_require__(290);
 
 	var _Classic2 = _interopRequireDefault(_Classic);
 
-	var _Movies = __webpack_require__(290);
+	var _Movies = __webpack_require__(291);
 
 	var _Movies2 = _interopRequireDefault(_Movies);
 
-	var _Series = __webpack_require__(291);
+	var _Series = __webpack_require__(292);
 
 	var _Series2 = _interopRequireDefault(_Series);
 
-	var _Season = __webpack_require__(292);
+	var _Season = __webpack_require__(293);
 
 	var _Season2 = _interopRequireDefault(_Season);
 
-	var _Collections = __webpack_require__(295);
+	var _Collections = __webpack_require__(296);
 
 	var _Collections2 = _interopRequireDefault(_Collections);
 
-	var _Collection = __webpack_require__(296);
+	var _Collection = __webpack_require__(297);
 
 	var _Collection2 = _interopRequireDefault(_Collection);
 
-	var _LiveTV = __webpack_require__(297);
+	var _LiveTV = __webpack_require__(298);
 
 	var _LiveTV2 = _interopRequireDefault(_LiveTV);
 
-	var _Watchlist = __webpack_require__(304);
+	var _Watchlist = __webpack_require__(305);
 
 	var _Watchlist2 = _interopRequireDefault(_Watchlist);
 
@@ -25641,19 +25641,22 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var env = __webpack_require__(243);
+	var localized = __webpack_require__(249);
 
 	exports.default = _react2.default.createClass({
 	  displayName: 'App',
 	  setLanguage: function setLanguage(lang, align) {
 	    this.setState({
 	      align: align,
+	      local: this.localized(localized, 'ar'),
 	      language: lang
 	    });
 	  },
 	  _getLoginState: function _getLoginState() {
 	    return {
 	      page: 0,
-	      language: 'en',
+	      language: 'ar',
+	      local: this.localized(localized, 'ar'),
 	      align: 'left',
 	      user: _LoginStore2.default.user,
 	      userLoggedIn: _LoginStore2.default.isLoggedIn()
@@ -25840,6 +25843,7 @@
 
 	  render: function render() {
 	    $('.watchlist.item.left.aligned').hide();
+	    var local = this.localized(localized, this.state.language);
 	    return _react2.default.createElement(
 	      'div',
 	      { style: { 'textAlign': this.state.align + ' !important' } },
@@ -25849,10 +25853,12 @@
 	        register: this.register,
 	        closeModal: this.closeModal,
 	        setLanguage: this.setLanguage,
+	        local: local,
 	        language: this.state.language }),
 	      this.props.children && _react2.default.cloneElement(this.props.children, {
 	        page: this.state.page,
 	        language: this.state.language,
+	        local: local,
 	        textAlign: this.state.align,
 	        myAccount: this.myAccount,
 	        isLoggedIn: this.state.userLoggedIn,
@@ -25905,12 +25911,9 @@
 	    _LoginActionCreators2.default.signup(user);
 	  },
 	  closeModal: function closeModal() {
-	    $('.my-account.modal').modal('hide', function () {
-	      console.log("modal closed");
-	    });
+	    $('.my-account.modal').modal('hide', function () {});
 	  },
 	  linkFromModal: function linkFromModal(link) {
-	    console.log("linking from modal", link);
 	    if (link) {
 	      $('.my-watchlist.modal').modal('hide', function () {
 	        var transitionPath = '/movies/2';
@@ -25920,6 +25923,13 @@
 	        }, 500);
 	      });
 	    }
+	  },
+	  localized: function localized(text, language) {
+	    var meta = {};
+	    for (var key in text) {
+	      meta[key] = text[key][language];
+	    }
+	    return meta;
 	  }
 	});
 
@@ -25965,6 +25975,8 @@
 	  },
 	  render: function render() {
 	    var menu = this.languageMenu(this.props.language);
+	    var local = this.props.local;
+	    console.log("menu", menu);
 	    return _react2.default.createElement(
 	      'div',
 	      null,
@@ -25984,37 +25996,37 @@
 	          _react2.default.createElement(
 	            _reactRouter.Link,
 	            { to: '/movies', className: 'item' },
-	            'Movies'
+	            '1'
 	          ),
 	          _react2.default.createElement(
 	            _reactRouter.Link,
 	            { to: '/series', className: 'item' },
-	            'Series'
+	            '2'
 	          ),
 	          _react2.default.createElement(
 	            _reactRouter.Link,
 	            { to: '/music', className: 'item' },
-	            'Music'
+	            '3'
 	          ),
 	          _react2.default.createElement(
 	            _reactRouter.Link,
 	            { to: '/plays', className: 'item' },
-	            'Plays'
+	            '4'
 	          ),
 	          _react2.default.createElement(
 	            _reactRouter.Link,
 	            { to: '/classics', className: 'item' },
-	            'Classics'
+	            '5'
 	          ),
 	          _react2.default.createElement(
 	            _reactRouter.Link,
 	            { to: '/collections', className: 'item' },
-	            'Collections'
+	            '6'
 	          ),
 	          _react2.default.createElement(
 	            _reactRouter.Link,
 	            { to: '/livetv', className: 'item' },
-	            'Live'
+	            '7'
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -26044,7 +26056,7 @@
 	                  _react2.default.createElement(
 	                    'span',
 	                    { className: 'text' },
-	                    'My Account'
+	                    '7'
 	                  )
 	                ),
 	                _react2.default.createElement(
@@ -26054,11 +26066,11 @@
 	                  _react2.default.createElement(
 	                    'span',
 	                    { className: 'text' },
-	                    'Watchlist'
+	                    '7'
 	                  )
 	                ),
 	                _react2.default.createElement(
-	                  'a',
+	                  'div',
 	                  { className: 'item', onClick: this.props.setLanguage.bind(null, menu.lang, menu.align) },
 	                  _react2.default.createElement('i', { className: 'flag icon' }),
 	                  _react2.default.createElement(
@@ -26083,37 +26095,37 @@
 	        _react2.default.createElement(
 	          _reactRouter.Link,
 	          { to: '/movies', className: 'item' },
-	          'Movies'
+	          '1'
 	        ),
 	        _react2.default.createElement(
 	          _reactRouter.Link,
 	          { to: '/series', className: 'item' },
-	          'Series'
+	          '2'
 	        ),
 	        _react2.default.createElement(
 	          _reactRouter.Link,
 	          { to: '/music', className: 'item' },
-	          'Music'
+	          '3'
 	        ),
 	        _react2.default.createElement(
 	          _reactRouter.Link,
 	          { to: '/plays', className: 'item' },
-	          'Plays'
+	          '4'
 	        ),
 	        _react2.default.createElement(
 	          'a',
 	          { className: 'item' },
-	          'Classics'
+	          '5'
 	        ),
 	        _react2.default.createElement(
 	          _reactRouter.Link,
 	          { to: '/collections', className: 'item' },
-	          'Collections'
+	          '6'
 	        ),
 	        _react2.default.createElement(
 	          _reactRouter.Link,
 	          { to: '/livetv', className: 'item' },
-	          'Live'
+	          '7'
 	        ),
 	        _react2.default.createElement(
 	          'div',
@@ -26133,7 +26145,7 @@
 	          _react2.default.createElement(
 	            'h6',
 	            null,
-	            'My Account'
+	            '8'
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -26142,7 +26154,7 @@
 	          _react2.default.createElement(
 	            'h6',
 	            null,
-	            'Watchlist'
+	            '9'
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -33875,23 +33887,27 @@
 	  },
 
 	  componentDidMount: function componentDidMount() {
-	    this.fetch = $.get(env.endpoint + '/v1/assets/sets/Genres', function (genres) {
-	      this.setState({
-	        genres: genres['sets']
-	      });
-	    }.bind(this));
+	    if (!this.props.genres) {
+	      this.fetch = $.get(env.endpoint + '/v1/assets/sets/Genres', function (genres) {
+	        this.setState({
+	          genres: genres['sets']
+	        });
+	      }.bind(this));
+	    }
 	  },
 
 	  componentWillUnmount: function componentWillUnmount() {
-	    this.fetch.abort();
+	    if (this.fetch) this.fetch.abort();
 	  },
 
 	  render: function render() {
 	    var _this = this;
 
-	    var title = this.props.activeGenre[this.props.language] ? this.props.activeGenre[this.props.language].name : 'Genres';
+	    var local = this.props.local;
+	    var title = this.props.activeGenre[this.props.language] ? this.props.activeGenre[this.props.language].name : local.genres;
 	    var GENRES = [];
-	    this.state.genres.map(function (genre, i) {
+	    var _genres = this.props.genres || this.state.genres;
+	    _genres.map(function (genre, i) {
 	      if (genre.meta[_this.props.language]) {
 	        var name = genre.meta[_this.props.language].name;
 	        GENRES.push(_react2.default.createElement(
@@ -33914,7 +33930,7 @@
 	        _react2.default.createElement(
 	          'span',
 	          { className: 'title' },
-	          this.props.title
+	          local[this.props.title]
 	        ),
 	        _react2.default.createElement(
 	          'div',
@@ -33931,7 +33947,8 @@
 	        _react2.default.createElement(
 	          'div',
 	          { id: 'seasons-dropdown', className: 'ui simple dropdown item inverted' },
-	          'SORT BY ',
+	          local.sortBy,
+	          ' ',
 	          _react2.default.createElement('i', { className: 'plus icon' }),
 	          _react2.default.createElement(
 	            'div',
@@ -33939,22 +33956,22 @@
 	            _react2.default.createElement(
 	              'a',
 	              { className: 'item', onClick: this.props.filter.bind(null, 'featured') },
-	              'FEATURED'
+	              local.featured
 	            ),
 	            _react2.default.createElement(
 	              'a',
 	              { className: 'item', onClick: this.props.filter.bind(null, 'a-z') },
-	              'A -Z'
+	              local.az
 	            ),
 	            _react2.default.createElement(
 	              'a',
 	              { className: 'item', onClick: this.props.filter.bind(null, 'new') },
-	              'JUST ADDED'
+	              local.justAdded
 	            ),
 	            _react2.default.createElement(
 	              'a',
 	              { className: 'item', onClick: this.props.filter.bind(null, 'top') },
-	              'TOP'
+	              local.top
 	            )
 	          )
 	        )
@@ -34052,6 +34069,103 @@
 
 /***/ },
 /* 249 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	module.exports = {
+	  "faq": {
+	    "en": "Featured",
+	    "ar": "الأسئلة المتداولة"
+	  },
+	  "help": {
+	    "en": "Help",
+	    "ar": "المساعدة"
+	  },
+	  "jobs": {
+	    "en": "Jobs",
+	    "ar": "وظائف"
+	  },
+	  "termsOfUse": {
+	    "en": "Terms of Use",
+	    "ar": "شروط الاستخدام"
+	  },
+	  "privacyPolicy": {
+	    "en": "Privacy Policy",
+	    "ar": "سياسة الخصوصية"
+	  },
+	  "copyright": {
+	    "en": "Copyright",
+	    "ar": "حق النشر"
+	  },
+	  "genres": {
+	    "en": "Genres",
+	    "ar": "الفئات"
+	  },
+	  "sortBy": {
+	    "en": "Sort By",
+	    "ar": "ترتيب حسب"
+	  },
+	  "featured": {
+	    "en": "Featured",
+	    "ar": "مميز"
+	  },
+	  "az": {
+	    "en": "A - Z",
+	    "ar": "أ - ي"
+	  },
+	  "justAdded": {
+	    "en": "Just Added",
+	    "ar": "آخر الاضافات"
+	  },
+	  "top": {
+	    "en": "Top",
+	    "ar": "أعلى"
+	  },
+	  "myAccount": {
+	    "en": "My Account",
+	    "ar": "حسابي"
+	  },
+	  "watchlist": {
+	    "en": "Watchlist",
+	    "ar": "قائمة المشاهدة"
+	  },
+	  "movies": {
+	    "en": "Movies",
+	    "ar": "أفلام"
+	  },
+	  "series": {
+	    "en": "Series",
+	    "ar": "مسلسلات"
+	  },
+	  "music": {
+	    "en": "Music",
+	    "ar": "موسيقى"
+	  },
+	  "plays": {
+	    "en": "Plays",
+	    "ar": "مسرحيات"
+	  },
+	  "classics": {
+	    "en": "Classics",
+	    "ar": "كلاسيكيات"
+	  },
+	  "collections": {
+	    "en": "Collections",
+	    "ar": "مجموعات"
+	  },
+	  "live": {
+	    "en": "Live",
+	    "ar": "يبث حاليا"
+	  },
+	  "search": {
+	    "en": "Searchc",
+	    "ar": "بحث"
+	  }
+	};
+
+/***/ },
+/* 250 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34066,11 +34180,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactSlick = __webpack_require__(250);
+	var _reactSlick = __webpack_require__(251);
 
 	var _reactSlick2 = _interopRequireDefault(_reactSlick);
 
-	var _Carousel = __webpack_require__(270);
+	var _Carousel = __webpack_require__(271);
 
 	var _Carousel2 = _interopRequireDefault(_Carousel);
 
@@ -34096,7 +34210,7 @@
 	      autoplaySpeed: 7500,
 	      infinite: false,
 	      speed: 1300,
-	      useCSS: true,
+	      useCSS: false,
 	      fade: false,
 	      slidesToShow: 1,
 	      slidesToScroll: 1,
@@ -34129,15 +34243,15 @@
 	});
 
 /***/ },
-/* 250 */
+/* 251 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	module.exports = __webpack_require__(251);
+	module.exports = __webpack_require__(252);
 
 /***/ },
-/* 251 */
+/* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34148,21 +34262,21 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _innerSlider = __webpack_require__(252);
+	var _innerSlider = __webpack_require__(253);
 
-	var _objectAssign = __webpack_require__(258);
+	var _objectAssign = __webpack_require__(259);
 
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
-	var _json2mq = __webpack_require__(265);
+	var _json2mq = __webpack_require__(266);
 
 	var _json2mq2 = _interopRequireDefault(_json2mq);
 
-	var _reactResponsiveMixin = __webpack_require__(267);
+	var _reactResponsiveMixin = __webpack_require__(268);
 
 	var _reactResponsiveMixin2 = _interopRequireDefault(_reactResponsiveMixin);
 
-	var _defaultProps = __webpack_require__(260);
+	var _defaultProps = __webpack_require__(261);
 
 	var _defaultProps2 = _interopRequireDefault(_defaultProps);
 
@@ -34239,7 +34353,7 @@
 	module.exports = Slider;
 
 /***/ },
-/* 252 */
+/* 253 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34256,31 +34370,31 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _mixinsEventHandlers = __webpack_require__(253);
+	var _mixinsEventHandlers = __webpack_require__(254);
 
 	var _mixinsEventHandlers2 = _interopRequireDefault(_mixinsEventHandlers);
 
-	var _mixinsHelpers = __webpack_require__(256);
+	var _mixinsHelpers = __webpack_require__(257);
 
 	var _mixinsHelpers2 = _interopRequireDefault(_mixinsHelpers);
 
-	var _initialState = __webpack_require__(259);
+	var _initialState = __webpack_require__(260);
 
 	var _initialState2 = _interopRequireDefault(_initialState);
 
-	var _defaultProps = __webpack_require__(260);
+	var _defaultProps = __webpack_require__(261);
 
 	var _defaultProps2 = _interopRequireDefault(_defaultProps);
 
-	var _classnames = __webpack_require__(261);
+	var _classnames = __webpack_require__(262);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
-	var _track = __webpack_require__(262);
+	var _track = __webpack_require__(263);
 
-	var _dots = __webpack_require__(263);
+	var _dots = __webpack_require__(264);
 
-	var _arrows = __webpack_require__(264);
+	var _arrows = __webpack_require__(265);
 
 	var InnerSlider = _react2['default'].createClass({
 	  displayName: 'InnerSlider',
@@ -34433,7 +34547,7 @@
 	exports.InnerSlider = InnerSlider;
 
 /***/ },
-/* 253 */
+/* 254 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34443,13 +34557,13 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _trackHelper = __webpack_require__(254);
+	var _trackHelper = __webpack_require__(255);
 
-	var _helpers = __webpack_require__(256);
+	var _helpers = __webpack_require__(257);
 
 	var _helpers2 = _interopRequireDefault(_helpers);
 
-	var _objectAssign = __webpack_require__(258);
+	var _objectAssign = __webpack_require__(259);
 
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
@@ -34622,7 +34736,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 254 */
+/* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34632,7 +34746,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _ReactDOM = __webpack_require__(255);
+	var _ReactDOM = __webpack_require__(256);
 
 	var _ReactDOM2 = _interopRequireDefault(_ReactDOM);
 
@@ -34748,7 +34862,7 @@
 	exports.getTrackLeft = getTrackLeft;
 
 /***/ },
-/* 255 */
+/* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34773,7 +34887,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 256 */
+/* 257 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34788,17 +34902,17 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _ReactDOM = __webpack_require__(255);
+	var _ReactDOM = __webpack_require__(256);
 
 	var _ReactDOM2 = _interopRequireDefault(_ReactDOM);
 
-	var _reactLibReactTransitionEvents = __webpack_require__(257);
+	var _reactLibReactTransitionEvents = __webpack_require__(258);
 
 	var _reactLibReactTransitionEvents2 = _interopRequireDefault(_reactLibReactTransitionEvents);
 
-	var _trackHelper = __webpack_require__(254);
+	var _trackHelper = __webpack_require__(255);
 
-	var _objectAssign = __webpack_require__(258);
+	var _objectAssign = __webpack_require__(259);
 
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
@@ -35074,7 +35188,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 257 */
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -35188,7 +35302,7 @@
 	module.exports = ReactTransitionEvents;
 
 /***/ },
-/* 258 */
+/* 259 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -35220,7 +35334,7 @@
 
 
 /***/ },
-/* 259 */
+/* 260 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -35270,7 +35384,7 @@
 	module.exports = initialState;
 
 /***/ },
-/* 260 */
+/* 261 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -35323,7 +35437,7 @@
 	module.exports = defaultProps;
 
 /***/ },
-/* 261 */
+/* 262 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -35377,7 +35491,7 @@
 
 
 /***/ },
-/* 262 */
+/* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -35392,11 +35506,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _objectAssign = __webpack_require__(258);
+	var _objectAssign = __webpack_require__(259);
 
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
-	var _classnames = __webpack_require__(261);
+	var _classnames = __webpack_require__(262);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -35525,7 +35639,7 @@
 	exports.Track = Track;
 
 /***/ },
-/* 263 */
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -35540,7 +35654,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _classnames = __webpack_require__(261);
+	var _classnames = __webpack_require__(262);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -35604,7 +35718,7 @@
 	exports.Dots = Dots;
 
 /***/ },
-/* 264 */
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -35621,7 +35735,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _classnames = __webpack_require__(261);
+	var _classnames = __webpack_require__(262);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -35721,10 +35835,10 @@
 	exports.NextArrow = NextArrow;
 
 /***/ },
-/* 265 */
+/* 266 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var camel2hyphen = __webpack_require__(266);
+	var camel2hyphen = __webpack_require__(267);
 
 	var isDimension = function (feature) {
 	  var re = /[height|width]$/;
@@ -35777,7 +35891,7 @@
 	module.exports = json2mq;
 
 /***/ },
-/* 266 */
+/* 267 */
 /***/ function(module, exports) {
 
 	var camel2hyphen = function (str) {
@@ -35791,12 +35905,12 @@
 	module.exports = camel2hyphen;
 
 /***/ },
-/* 267 */
+/* 268 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var canUseDOM = __webpack_require__(268);
-	var enquire = canUseDOM && __webpack_require__(269);
-	var json2mq = __webpack_require__(265);
+	var canUseDOM = __webpack_require__(269);
+	var enquire = canUseDOM && __webpack_require__(270);
+	var json2mq = __webpack_require__(266);
 
 	var ResponsiveMixin = {
 	  media: function (query, handler) {
@@ -35826,7 +35940,7 @@
 	module.exports = ResponsiveMixin;
 
 /***/ },
-/* 268 */
+/* 269 */
 /***/ function(module, exports) {
 
 	var canUseDOM = !!(
@@ -35838,7 +35952,7 @@
 	module.exports = canUseDOM;
 
 /***/ },
-/* 269 */
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -36136,7 +36250,7 @@
 	}));
 
 /***/ },
-/* 270 */
+/* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36153,11 +36267,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _CarouselColumn = __webpack_require__(271);
+	var _CarouselColumn = __webpack_require__(272);
 
 	var _CarouselColumn2 = _interopRequireDefault(_CarouselColumn);
 
-	var _reactSlick = __webpack_require__(250);
+	var _reactSlick = __webpack_require__(251);
 
 	var _reactSlick2 = _interopRequireDefault(_reactSlick);
 
@@ -36354,7 +36468,7 @@
 	}
 
 /***/ },
-/* 271 */
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36423,7 +36537,7 @@
 	}
 
 /***/ },
-/* 272 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36458,7 +36572,7 @@
 	});
 
 /***/ },
-/* 273 */
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36473,7 +36587,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Grid = __webpack_require__(274);
+	var _Grid = __webpack_require__(275);
 
 	var _Grid2 = _interopRequireDefault(_Grid);
 
@@ -36484,7 +36598,7 @@
 	  render: function render() {
 	    return _react2.default.createElement(_Grid2.default, _extends({}, this.props, {
 	      limit: '5',
-	      title: 'Music',
+	      title: 'music',
 	      source: '/albums',
 	      thumbPath: 'songThumb',
 	      href: '/albums/:id' }));
@@ -36492,7 +36606,7 @@
 	});
 
 /***/ },
-/* 274 */
+/* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36511,7 +36625,7 @@
 
 	var _Filter2 = _interopRequireDefault(_Filter);
 
-	var _Column = __webpack_require__(275);
+	var _Column = __webpack_require__(276);
 
 	var _Column2 = _interopRequireDefault(_Column);
 
@@ -36558,13 +36672,12 @@
 	          featured: featured['assets']
 	        });
 	      }.bind(this));
-	      console.log('');
 	    }
 	  },
 
 	  componentWillUnmount: function componentWillUnmount() {
-	    this.fetch.abort();
-	    if (this.props.fetchFeatured) this.fetchFeatured.abort();
+	    if (this.fetch) this.fetch.abort();
+	    if (this.fetchFeatured) this.fetchFeatured.abort();
 	  },
 
 	  render: function render() {
@@ -36603,9 +36716,10 @@
 	    if (startIndex > 0) {
 	      perPage = startIndex * perPage;
 	    }
+	    var _inGenres = [];
+	    var genres = [];
 	    var delay = 0;
 	    var collection = collection.slice(0, perPage);
-	    console.log("Page", this.props.page);
 	    var delay = 100;
 	    collection.map(function (data, i) {
 	      delay += i * 1;
@@ -36631,6 +36745,12 @@
 	        ));
 	        COLUMNS = [];
 	      }
+	      data.genres.map(function (genre) {
+	        if (_inGenres.indexOf(genre.meta.en.name) == -1) {
+	          _inGenres.push(genre.meta.en.name);
+	          genres.push(genre);
+	        }
+	      });
 	    });
 	    if (COLUMNS.length) {
 	      ROWS.push(_react2.default.createElement(
@@ -36642,7 +36762,7 @@
 	    return _react2.default.createElement(
 	      'div',
 	      null,
-	      _react2.default.createElement(_Filter2.default, _extends({}, this.props, { filter: this.filter, filterGenre: this.filterGenre, activeFilter: this.state.filter, activeGenre: this.state.genre })),
+	      _react2.default.createElement(_Filter2.default, _extends({}, this.props, { filter: this.filter, filterGenre: this.filterGenre, activeFilter: this.state.filter, activeGenre: this.state.genre, genres: genres })),
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'ui vertical center container aligned grids large-container' },
@@ -36657,7 +36777,7 @@
 	});
 
 /***/ },
-/* 275 */
+/* 276 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36692,9 +36812,10 @@
 	    } else {
 	      this.props.href ? link = generateLink(this.props) : link = this.props.href;
 	    }
-	    var thumb = '/images/melody/' + this.props.data.thumb.replace('M1', 'M11');
+	    //var thumb = '/images/melody-images/' + this.props.data.thumb.replace('M1','M11');
+	    var thumb = '/images/melody/' + this.props.data.thumb;
 	    if (this.props.thumbPath) {
-	      thumb = '/images/melody/' + this.props.data[this.props.thumbPath];
+	      thumb = '/images/melody-images/' + this.props.data[this.props.thumbPath];
 	    }
 	    var id = this.props.data.id;
 	    var visible = this.props.className || '';
@@ -36745,7 +36866,7 @@
 	}
 
 /***/ },
-/* 276 */
+/* 277 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36760,7 +36881,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _AlbumDetail = __webpack_require__(277);
+	var _AlbumDetail = __webpack_require__(278);
 
 	var _AlbumDetail2 = _interopRequireDefault(_AlbumDetail);
 
@@ -36777,7 +36898,7 @@
 	});
 
 /***/ },
-/* 277 */
+/* 278 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36790,15 +36911,15 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _SeasonFilter = __webpack_require__(278);
+	var _SeasonFilter = __webpack_require__(279);
 
 	var _SeasonFilter2 = _interopRequireDefault(_SeasonFilter);
 
-	var _AlbumWatchlist = __webpack_require__(279);
+	var _AlbumWatchlist = __webpack_require__(280);
 
 	var _AlbumWatchlist2 = _interopRequireDefault(_AlbumWatchlist);
 
-	var _Roles = __webpack_require__(281);
+	var _Roles = __webpack_require__(282);
 
 	var _Roles2 = _interopRequireDefault(_Roles);
 
@@ -36925,7 +37046,7 @@
 	});
 
 /***/ },
-/* 278 */
+/* 279 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -36978,7 +37099,7 @@
 	});
 
 /***/ },
-/* 279 */
+/* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36995,7 +37116,7 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _VideoPlayer = __webpack_require__(280);
+	var _VideoPlayer = __webpack_require__(281);
 
 	var _VideoPlayer2 = _interopRequireDefault(_VideoPlayer);
 
@@ -37111,7 +37232,7 @@
 	}
 
 /***/ },
-/* 280 */
+/* 281 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37195,7 +37316,7 @@
 	}
 
 /***/ },
-/* 281 */
+/* 282 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37210,7 +37331,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _People = __webpack_require__(282);
+	var _People = __webpack_require__(283);
 
 	var _People2 = _interopRequireDefault(_People);
 
@@ -37250,7 +37371,7 @@
 	});
 
 /***/ },
-/* 282 */
+/* 283 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37263,7 +37384,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Person = __webpack_require__(283);
+	var _Person = __webpack_require__(284);
 
 	var _Person2 = _interopRequireDefault(_Person);
 
@@ -37350,7 +37471,7 @@
 	}
 
 /***/ },
-/* 283 */
+/* 284 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37377,7 +37498,7 @@
 	});
 
 /***/ },
-/* 284 */
+/* 285 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37392,7 +37513,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _VideoDetail = __webpack_require__(285);
+	var _VideoDetail = __webpack_require__(286);
 
 	var _VideoDetail2 = _interopRequireDefault(_VideoDetail);
 
@@ -37409,7 +37530,7 @@
 	});
 
 /***/ },
-/* 285 */
+/* 286 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37422,7 +37543,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Roles = __webpack_require__(281);
+	var _Roles = __webpack_require__(282);
 
 	var _Roles2 = _interopRequireDefault(_Roles);
 
@@ -37585,39 +37706,6 @@
 	}
 
 /***/ },
-/* 286 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _Grid = __webpack_require__(274);
-
-	var _Grid2 = _interopRequireDefault(_Grid);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = _react2.default.createClass({
-	  displayName: 'Plays',
-	  render: function render() {
-	    return _react2.default.createElement(_Grid2.default, _extends({}, this.props, {
-	      limit: '5',
-	      title: 'Plays',
-	      source: '/plays',
-	      href: '/plays/:id' }));
-	  }
-	});
-
-/***/ },
 /* 287 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -37633,19 +37721,20 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _VideoDetail = __webpack_require__(285);
+	var _Grid = __webpack_require__(275);
 
-	var _VideoDetail2 = _interopRequireDefault(_VideoDetail);
+	var _Grid2 = _interopRequireDefault(_Grid);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _react2.default.createClass({
-	  displayName: 'Play',
+	  displayName: 'Plays',
 	  render: function render() {
-	    // if (!this.props.user)
-	    //   this.props.myAccount()
-	    var source = '/plays/' + this.props.params.id;
-	    return _react2.default.createElement(_VideoDetail2.default, _extends({}, this.props, { source: source }));
+	    return _react2.default.createElement(_Grid2.default, _extends({}, this.props, {
+	      limit: '5',
+	      title: 'plays',
+	      source: '/plays',
+	      href: '/plays/:id' }));
 	  }
 	});
 
@@ -37665,20 +37754,19 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Grid = __webpack_require__(274);
+	var _VideoDetail = __webpack_require__(286);
 
-	var _Grid2 = _interopRequireDefault(_Grid);
+	var _VideoDetail2 = _interopRequireDefault(_VideoDetail);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _react2.default.createClass({
-	  displayName: 'Classics',
+	  displayName: 'Play',
 	  render: function render() {
-	    return _react2.default.createElement(_Grid2.default, _extends({}, this.props, {
-	      limit: '5',
-	      title: 'Classics',
-	      source: '/classics',
-	      href: '/classics/:id' }));
+	    // if (!this.props.user)
+	    //   this.props.myAccount()
+	    var source = '/plays/' + this.props.params.id;
+	    return _react2.default.createElement(_VideoDetail2.default, _extends({}, this.props, { source: source }));
 	  }
 	});
 
@@ -37698,19 +37786,20 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _VideoDetail = __webpack_require__(285);
+	var _Grid = __webpack_require__(275);
 
-	var _VideoDetail2 = _interopRequireDefault(_VideoDetail);
+	var _Grid2 = _interopRequireDefault(_Grid);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _react2.default.createClass({
-	  displayName: 'Classic',
+	  displayName: 'Classics',
 	  render: function render() {
-	    // if (!this.props.user)
-	    //   this.props.myAccount()
-	    var source = '/classics/' + this.props.params.id;
-	    return _react2.default.createElement(_VideoDetail2.default, _extends({}, this.props, { source: source }));
+	    return _react2.default.createElement(_Grid2.default, _extends({}, this.props, {
+	      limit: '5',
+	      title: 'Classics',
+	      source: '/classics',
+	      href: '/classics/:id' }));
 	  }
 	});
 
@@ -37730,21 +37819,19 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Grid = __webpack_require__(274);
+	var _VideoDetail = __webpack_require__(286);
 
-	var _Grid2 = _interopRequireDefault(_Grid);
+	var _VideoDetail2 = _interopRequireDefault(_VideoDetail);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _react2.default.createClass({
-	  displayName: 'Movies',
+	  displayName: 'Classic',
 	  render: function render() {
-	    return _react2.default.createElement(_Grid2.default, _extends({}, this.props, {
-	      limit: '5',
-	      title: 'Movies',
-	      source: '/movies',
-	      href: '/movies/:id',
-	      featured: '/sets/Featuredmovies' }));
+	    // if (!this.props.user)
+	    //   this.props.myAccount()
+	    var source = '/classics/' + this.props.params.id;
+	    return _react2.default.createElement(_VideoDetail2.default, _extends({}, this.props, { source: source }));
 	  }
 	});
 
@@ -37764,20 +37851,21 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Grid = __webpack_require__(274);
+	var _Grid = __webpack_require__(275);
 
 	var _Grid2 = _interopRequireDefault(_Grid);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _react2.default.createClass({
-	  displayName: 'Series',
+	  displayName: 'Movies',
 	  render: function render() {
 	    return _react2.default.createElement(_Grid2.default, _extends({}, this.props, {
 	      limit: '5',
-	      title: 'Series',
-	      source: '/series',
-	      href: '/series/:id' }));
+	      title: 'movies',
+	      source: '/movies',
+	      href: '/movies/:id',
+	      featured: '/sets/Featuredmovies' }));
 	  }
 	});
 
@@ -37797,7 +37885,40 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _SeasonDetail = __webpack_require__(293);
+	var _Grid = __webpack_require__(275);
+
+	var _Grid2 = _interopRequireDefault(_Grid);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	  displayName: 'Series',
+	  render: function render() {
+	    return _react2.default.createElement(_Grid2.default, _extends({}, this.props, {
+	      limit: '5',
+	      title: 'series',
+	      source: '/series',
+	      href: '/series/:id' }));
+	  }
+	});
+
+/***/ },
+/* 293 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _SeasonDetail = __webpack_require__(294);
 
 	var _SeasonDetail2 = _interopRequireDefault(_SeasonDetail);
 
@@ -37814,7 +37935,7 @@
 	});
 
 /***/ },
-/* 293 */
+/* 294 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37827,15 +37948,15 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _SeasonFilter = __webpack_require__(278);
+	var _SeasonFilter = __webpack_require__(279);
 
 	var _SeasonFilter2 = _interopRequireDefault(_SeasonFilter);
 
-	var _SeasonWatchlist = __webpack_require__(294);
+	var _SeasonWatchlist = __webpack_require__(295);
 
 	var _SeasonWatchlist2 = _interopRequireDefault(_SeasonWatchlist);
 
-	var _Roles = __webpack_require__(281);
+	var _Roles = __webpack_require__(282);
 
 	var _Roles2 = _interopRequireDefault(_Roles);
 
@@ -37999,7 +38120,7 @@
 	});
 
 /***/ },
-/* 294 */
+/* 295 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38016,7 +38137,7 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _VideoPlayer = __webpack_require__(280);
+	var _VideoPlayer = __webpack_require__(281);
 
 	var _VideoPlayer2 = _interopRequireDefault(_VideoPlayer);
 
@@ -38132,7 +38253,7 @@
 	}
 
 /***/ },
-/* 295 */
+/* 296 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38147,7 +38268,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Grid = __webpack_require__(274);
+	var _Grid = __webpack_require__(275);
 
 	var _Grid2 = _interopRequireDefault(_Grid);
 
@@ -38166,7 +38287,7 @@
 	});
 
 /***/ },
-/* 296 */
+/* 297 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38181,7 +38302,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Grid = __webpack_require__(274);
+	var _Grid = __webpack_require__(275);
 
 	var _Grid2 = _interopRequireDefault(_Grid);
 
@@ -38200,7 +38321,7 @@
 	});
 
 /***/ },
-/* 297 */
+/* 298 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38213,15 +38334,15 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactSlick = __webpack_require__(250);
+	var _reactSlick = __webpack_require__(251);
 
 	var _reactSlick2 = _interopRequireDefault(_reactSlick);
 
-	var _EPGuide = __webpack_require__(298);
+	var _EPGuide = __webpack_require__(299);
 
 	var _EPGuide2 = _interopRequireDefault(_EPGuide);
 
-	var _Carousel = __webpack_require__(270);
+	var _Carousel = __webpack_require__(271);
 
 	var _Carousel2 = _interopRequireDefault(_Carousel);
 
@@ -38322,7 +38443,7 @@
 	});
 
 /***/ },
-/* 298 */
+/* 299 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38335,19 +38456,19 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Channels = __webpack_require__(299);
+	var _Channels = __webpack_require__(300);
 
 	var _Channels2 = _interopRequireDefault(_Channels);
 
-	var _Filter = __webpack_require__(300);
+	var _Filter = __webpack_require__(301);
 
 	var _Filter2 = _interopRequireDefault(_Filter);
 
-	var _Schedule = __webpack_require__(301);
+	var _Schedule = __webpack_require__(302);
 
 	var _Schedule2 = _interopRequireDefault(_Schedule);
 
-	var _MobileSchedule = __webpack_require__(303);
+	var _MobileSchedule = __webpack_require__(304);
 
 	var _MobileSchedule2 = _interopRequireDefault(_MobileSchedule);
 
@@ -38381,7 +38502,7 @@
 	});
 
 /***/ },
-/* 299 */
+/* 300 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -38467,7 +38588,7 @@
 	});
 
 /***/ },
-/* 300 */
+/* 301 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -38755,7 +38876,7 @@
 	});
 
 /***/ },
-/* 301 */
+/* 302 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38768,7 +38889,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _TimeBlockHead = __webpack_require__(302);
+	var _TimeBlockHead = __webpack_require__(303);
 
 	var _TimeBlockHead2 = _interopRequireDefault(_TimeBlockHead);
 
@@ -39052,7 +39173,7 @@
 	});
 
 /***/ },
-/* 302 */
+/* 303 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39199,7 +39320,7 @@
 	var TimeList = ['1am', '1:30', '2am', '2:30', '3am', '3:30', '4am', '4:30', '5am', '5:30', '6am', '6:30', '7am', '7:30', '8am', '8:30', '9am', '9:30', '10am', '10:30', '11am', '11:30', '12', '12:30', '1pm', '1:30', '2pm', '2:30', '3pm', '3:30', '4pm', '4:30', '5pm', '5:30', '6pm', '6:30', '7pm', '7:30', '8pm', '8:30', '9pm', '9:30', '10pm', '10:30', '11pm', '11:30', '12'];
 
 /***/ },
-/* 303 */
+/* 304 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -39751,7 +39872,7 @@
 	});
 
 /***/ },
-/* 304 */
+/* 305 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

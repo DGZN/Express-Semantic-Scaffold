@@ -1,4 +1,4 @@
-import React from 'react'
+import React       from 'react'
 import Filter from './Filter'
 import Column from './Column'
 const env = require('./env.js')
@@ -42,13 +42,13 @@ export default React.createClass({
           featured: featured['assets']
         });
       }.bind(this));
-      console.log('')
     }
   },
 
   componentWillUnmount: function() {
-    this.fetch.abort();
-    if (this.props.fetchFeatured)
+    if (this.fetch)
+      this.fetch.abort();
+    if (this.fetchFeatured)
       this.fetchFeatured.abort()
   },
 
@@ -87,9 +87,10 @@ export default React.createClass({
     if (startIndex > 0) {
       perPage = startIndex * perPage;
     }
+    var _inGenres = []
+    var genres = []
     var delay = 0;
     var collection = collection.slice(0, perPage);
-    console.log("Page", this.props.page);
     var delay = 100;
     collection.map((data, i) => {
       delay += i*1
@@ -115,7 +116,12 @@ export default React.createClass({
         )
         COLUMNS = []
       }
-
+      data.genres.map((genre) => {
+        if (_inGenres.indexOf(genre.meta.en.name) == -1) {
+          _inGenres.push(genre.meta.en.name)
+          genres.push(genre)
+        }
+      })
     })
     if (COLUMNS.length) {
       ROWS.push(
@@ -126,7 +132,7 @@ export default React.createClass({
     }
     return (
       <div>
-        <Filter {...this.props} filter={this.filter} filterGenre={this.filterGenre} activeFilter={this.state.filter} activeGenre={this.state.genre} />
+        <Filter {...this.props} filter={this.filter} filterGenre={this.filterGenre} activeFilter={this.state.filter} activeGenre={this.state.genre} genres={genres} />
         <div className="ui vertical center container aligned grids large-container">
           <div className="ui equal width grid container"  style={{ 'textAlign': this.props.textAlign }} id="rows">
             {ROWS}

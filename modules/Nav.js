@@ -1,4 +1,5 @@
-import React from 'react'
+import React       from 'react'
+
 import { render } from 'react-dom'
 
 import { Link } from 'react-router'
@@ -20,6 +21,8 @@ export default React.createClass({
 
   render() {
     var menu = this.languageMenu(this.props.language)
+    var local = this.props.local
+    console.log("menu", menu)
     return (
       <div>
         <MyAccount setUser={this.props.setUser} {...this.props} />
@@ -29,34 +32,36 @@ export default React.createClass({
             <Link to="/" className="item">
               <img src="/images/melody-logo.png" className="ui tiny image"/>
             </Link>
-            <Link to="/movies" className="item">Movies</Link>
-            <Link to="/series" className="item">Series</Link>
-            <Link to="/music" className="item">Music</Link>
-            <Link to="/plays" className="item">Plays</Link>
-            <Link to="/classics" className="item">Classics</Link>
-            <Link to="/collections" className="item">Collections</Link>
-            <Link to="/livetv" className="item">Live</Link>
+            <Link to="/movies" className="item">1</Link>
+            <Link to="/series" className="item">2</Link>
+            <Link to="/music" className="item">3</Link>
+            <Link to="/plays" className="item">4</Link>
+            <Link to="/classics" className="item">5</Link>
+            <Link to="/collections" className="item">6</Link>
+            <Link to="/livetv" className="item">7</Link>
             <div className="ui category search item nav-search">
               <div className="ui transparent icon input">
-                <input type="text" placeholder="Search..." className="prompt"/><i className="search link icon"></i>
+                <input type="text" placeholder="Search..." className="prompt"/>
+                <i className="search link icon"></i>
               </div>
               <div className="results"></div>
             </div>
             <div className="right menu">
-              <div id="account-dropdown" className="ui left dropdown item"><i className="setting icon"></i>
+              <div id="account-dropdown" className="ui left dropdown item">
+                <i className="setting icon"></i>
                 <div className="menu">
                   <a className="item" onClick={this.myAccount}>
                     <i className="user icon"></i>
-                    <span className="text">My Account</span>
+                    <span className="text">7</span>
                   </a>
                   <Link to="/watchlist" className="item">
                     <i className="list layout icon"></i>
-                    <span className="text">Watchlist</span>
+                    <span className="text">7</span>
                   </Link>
-                  <a className="item" onClick={this.props.setLanguage.bind(null, menu.lang, menu.align)}>
+                  <div className="item" onClick={this.props.setLanguage.bind(null, menu.lang, menu.align)}>
                     <i className="flag icon"></i>
                     <span className="text">{menu.name}</span>
-                  </a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -64,13 +69,13 @@ export default React.createClass({
         </div>
         <div id="nav-sidebar" className="ui right vertical sidebar menu">
           <Link to="/" className="item">Home</Link>
-          <Link to="/movies" className="item">Movies</Link>
-          <Link to="/series" className="item">Series</Link>
-          <Link to="/music" className="item">Music</Link>
-          <Link to="/plays" className="item">Plays</Link>
-          <a className="item">Classics</a>
-          <Link to="/collections" className="item">Collections</Link>
-          <Link to="/livetv" className="item">Live</Link>
+          <Link to="/movies" className="item">1</Link>
+          <Link to="/series" className="item">2</Link>
+          <Link to="/music" className="item">3</Link>
+          <Link to="/plays" className="item">4</Link>
+          <a className="item">5</a>
+          <Link to="/collections" className="item">6</Link>
+          <Link to="/livetv" className="item">7</Link>
           <div className="ui category search item">
             <div className="ui transparent icon input">
               <input type="text" placeholder="Search..." className="prompt"/><i className="search link icon"></i>
@@ -78,8 +83,8 @@ export default React.createClass({
             <div className="results"></div>
           </div><a className="item horizontal divider"></a>
             <a className="item" onClick={this.handleClick} >
-              <h6>My Account</h6></a><a className="item">
-              <h6>Watchlist</h6></a><a className="sidebar item">
+              <h6>8</h6></a><a className="item">
+              <h6>9</h6></a><a className="sidebar item">
               <h6 >Arabic</h6>
             </a>
         </div>

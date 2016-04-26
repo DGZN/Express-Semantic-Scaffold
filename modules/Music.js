@@ -8,7 +8,7 @@ export default React.createClass({
       <Grid
         {...this.props}
         limit="5"
-        title="Music"
+        title="music"
         source="/albums"
         thumbPath="songThumb"
         href="/albums/:id" />

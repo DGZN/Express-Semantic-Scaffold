@@ -1,5 +1,4 @@
-import React from 'react'
-
+import React       from 'react'
 import Grid from './Grid'
 
 export default React.createClass({
@@ -8,7 +7,7 @@ export default React.createClass({
       <Grid
         {...this.props}
         limit="5"
-        title="Movies"
+        title="movies"
         source="/movies"
         href="/movies/:id"
         featured="/sets/Featuredmovies" />

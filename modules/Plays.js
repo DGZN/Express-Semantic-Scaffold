@@ -8,7 +8,7 @@ export default React.createClass({
       <Grid
         {...this.props}
         limit="5"
-        title="Plays"
+        title="plays"
         source="/plays"
         href="/plays/:id" />
     );
