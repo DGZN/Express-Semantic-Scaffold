@@ -3,9 +3,10 @@ import React from 'react'
 export default React.createClass({
 
   render() {
+    var local = this.props.local
     if (this.props.video) {
       var video = {
-        duration: Math.floor(this.props.video.duration / 60) + ' min'
+        duration: Math.floor(this.props.video.duration / 60) + ' ' + local.min
       , player: this.getPlayer(this.props.video['video_url'])
       }
     }

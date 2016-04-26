@@ -98,12 +98,13 @@ export default React.createClass({
         // delay = (i * i * 5 * 50);
       })
     },100)
+    var local = this.props.local
     return (
       <div key={'carousel-'+Math.random()}>
         <div className="ui one column equal width grid container">
          <div className="column header">
             <Link to={'/'+this.props.title.toLowerCase()} className="item">
-              <h4 className="ui header grid-title"><br/>{this.props.title} &gt;</h4>
+              <h4 className="ui header grid-title"><br/>{local[this.props.title]} &gt;</h4>
             </Link>
          </div>
         </div>

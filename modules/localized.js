@@ -1,6 +1,6 @@
 module.exports = {
     "faq": {
-      "en": "Featured"
+      "en": "FAQ"
     , "ar": "الأسئلة المتداولة"
     }
   , "help": {
@@ -63,6 +63,14 @@ module.exports = {
       "en": "Series"
     , "ar": "مسلسلات"
     }
+  , "season": {
+      "en": "Season"
+    , "ar": "الموسم"
+    }
+  , "ep": {
+      "en": "Ep"
+    , "ar": "حلقة"
+    }
   , "music": {
       "en": "Music"
     , "ar": "موسيقى"
@@ -87,4 +95,16 @@ module.exports = {
       "en": "Searchc"
     , "ar": "بحث"
     }
+  , "released": {
+      "en": "Released"
+    , "ar": "صدر"
+  }
+  , "min": {
+      "en": "min"
+    , "ar": "دقيقة"
+  }
+  , "track": {
+      "en": "Track"
+    , "ar": "أغنية"
+  }
 }

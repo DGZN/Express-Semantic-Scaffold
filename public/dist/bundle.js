@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "fe013c0c0be832e1c0f5"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "418adfd56a28a8773544"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -25864,7 +25864,7 @@
 	        isLoggedIn: this.state.userLoggedIn,
 	        user: this.state.user
 	      }),
-	      _react2.default.createElement(_Footer2.default, null)
+	      _react2.default.createElement(_Footer2.default, { local: local })
 	    );
 	  },
 	  logout: function logout(e) {
@@ -25976,7 +25976,6 @@
 	  render: function render() {
 	    var menu = this.languageMenu(this.props.language);
 	    var local = this.props.local;
-	    console.log("menu", menu);
 	    return _react2.default.createElement(
 	      'div',
 	      null,
@@ -25996,37 +25995,37 @@
 	          _react2.default.createElement(
 	            _reactRouter.Link,
 	            { to: '/movies', className: 'item' },
-	            '1'
+	            local.movies
 	          ),
 	          _react2.default.createElement(
 	            _reactRouter.Link,
 	            { to: '/series', className: 'item' },
-	            '2'
+	            local.series
 	          ),
 	          _react2.default.createElement(
 	            _reactRouter.Link,
 	            { to: '/music', className: 'item' },
-	            '3'
+	            local.music
 	          ),
 	          _react2.default.createElement(
 	            _reactRouter.Link,
 	            { to: '/plays', className: 'item' },
-	            '4'
+	            local.plays
 	          ),
 	          _react2.default.createElement(
 	            _reactRouter.Link,
 	            { to: '/classics', className: 'item' },
-	            '5'
+	            local.classics
 	          ),
 	          _react2.default.createElement(
 	            _reactRouter.Link,
 	            { to: '/collections', className: 'item' },
-	            '6'
+	            local.collections
 	          ),
 	          _react2.default.createElement(
 	            _reactRouter.Link,
 	            { to: '/livetv', className: 'item' },
-	            '7'
+	            local.live
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -26056,7 +26055,7 @@
 	                  _react2.default.createElement(
 	                    'span',
 	                    { className: 'text' },
-	                    '7'
+	                    local.myAccount
 	                  )
 	                ),
 	                _react2.default.createElement(
@@ -26066,7 +26065,7 @@
 	                  _react2.default.createElement(
 	                    'span',
 	                    { className: 'text' },
-	                    '7'
+	                    local.watchlist
 	                  )
 	                ),
 	                _react2.default.createElement(
@@ -26095,37 +26094,37 @@
 	        _react2.default.createElement(
 	          _reactRouter.Link,
 	          { to: '/movies', className: 'item' },
-	          '1'
+	          'Movies'
 	        ),
 	        _react2.default.createElement(
 	          _reactRouter.Link,
 	          { to: '/series', className: 'item' },
-	          '2'
+	          'Series'
 	        ),
 	        _react2.default.createElement(
 	          _reactRouter.Link,
 	          { to: '/music', className: 'item' },
-	          '3'
+	          'Music'
 	        ),
 	        _react2.default.createElement(
 	          _reactRouter.Link,
 	          { to: '/plays', className: 'item' },
-	          '4'
+	          'Plays'
 	        ),
 	        _react2.default.createElement(
 	          'a',
 	          { className: 'item' },
-	          '5'
+	          'Classics'
 	        ),
 	        _react2.default.createElement(
 	          _reactRouter.Link,
 	          { to: '/collections', className: 'item' },
-	          '6'
+	          'Collections'
 	        ),
 	        _react2.default.createElement(
 	          _reactRouter.Link,
 	          { to: '/livetv', className: 'item' },
-	          '7'
+	          'Live'
 	        ),
 	        _react2.default.createElement(
 	          'div',
@@ -26145,7 +26144,7 @@
 	          _react2.default.createElement(
 	            'h6',
 	            null,
-	            '8'
+	            'My Account'
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -26154,7 +26153,7 @@
 	          _react2.default.createElement(
 	            'h6',
 	            null,
-	            '9'
+	            'Watchlist'
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -26163,7 +26162,7 @@
 	          _react2.default.createElement(
 	            'h6',
 	            null,
-	            'Arabic'
+	            'English'
 	          )
 	        )
 	      ),
@@ -33619,6 +33618,7 @@
 	exports.default = _react2.default.createClass({
 	  displayName: "Footer",
 	  render: function render() {
+	    var local = this.props.local;
 	    return _react2.default.createElement(
 	      "div",
 	      { className: "ui inverted vertical footer stackable center aligned segment", id: "footer" },
@@ -33637,20 +33637,9 @@
 	              _react2.default.createElement(
 	                "h4",
 	                null,
-	                "FAQ/Help"
-	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            "div",
-	            { className: "column middle aligned" },
-	            _react2.default.createElement(
-	              "a",
-	              { className: "link" },
-	              _react2.default.createElement(
-	                "h4",
-	                null,
-	                "Legal"
+	                local.faq,
+	                " / ",
+	                local.help
 	              )
 	            )
 	          )
@@ -34075,7 +34064,7 @@
 
 	module.exports = {
 	  "faq": {
-	    "en": "Featured",
+	    "en": "FAQ",
 	    "ar": "الأسئلة المتداولة"
 	  },
 	  "help": {
@@ -34138,6 +34127,14 @@
 	    "en": "Series",
 	    "ar": "مسلسلات"
 	  },
+	  "season": {
+	    "en": "Season",
+	    "ar": "الموسم"
+	  },
+	  "ep": {
+	    "en": "Ep",
+	    "ar": "حلقة"
+	  },
 	  "music": {
 	    "en": "Music",
 	    "ar": "موسيقى"
@@ -34161,6 +34158,18 @@
 	  "search": {
 	    "en": "Searchc",
 	    "ar": "بحث"
+	  },
+	  "released": {
+	    "en": "Released",
+	    "ar": "صدر"
+	  },
+	  "min": {
+	    "en": "min",
+	    "ar": "دقيقة"
+	  },
+	  "track": {
+	    "en": "Track",
+	    "ar": "أغنية"
 	  }
 	};
 
@@ -34234,9 +34243,9 @@
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'ui vertical center container aligned grids carousel-container' },
-	        _react2.default.createElement(_Carousel2.default, _extends({ title: 'Movies', source: '/movies', limit: '15', href: '/movies/:id' }, this.props)),
-	        _react2.default.createElement(_Carousel2.default, _extends({ title: 'Series', source: '/series', limit: '10', href: '/series/:id' }, this.props)),
-	        _react2.default.createElement(_Carousel2.default, _extends({ title: 'Plays', source: '/plays', limit: '15', href: '/plays/:id' }, this.props))
+	        _react2.default.createElement(_Carousel2.default, _extends({ title: 'movies', source: '/movies', limit: '15', href: '/movies/:id' }, this.props)),
+	        _react2.default.createElement(_Carousel2.default, _extends({ title: 'series', source: '/series', limit: '10', href: '/series/:id' }, this.props)),
+	        _react2.default.createElement(_Carousel2.default, _extends({ title: 'plays', source: '/plays', limit: '15', href: '/plays/:id' }, this.props))
 	      )
 	    );
 	  }
@@ -36419,6 +36428,7 @@
 	        // delay = (i * i * 5 * 50);
 	      });
 	    }, 100);
+	    var local = this.props.local;
 	    return _react2.default.createElement(
 	      'div',
 	      { key: 'carousel-' + Math.random() },
@@ -36435,7 +36445,7 @@
 	              'h4',
 	              { className: 'ui header grid-title' },
 	              _react2.default.createElement('br', null),
-	              this.props.title,
+	              local[this.props.title],
 	              ' >'
 	            )
 	          )
@@ -36812,8 +36822,8 @@
 	    } else {
 	      this.props.href ? link = generateLink(this.props) : link = this.props.href;
 	    }
-	    //var thumb = '/images/melody-images/' + this.props.data.thumb.replace('M1','M11');
-	    var thumb = '/images/melody/' + this.props.data.thumb;
+	    var thumb = '/images/melody-images/' + this.props.data.thumb.replace('M1', 'M11');
+	    //var thumb = '/images/melody/' + this.props.data.thumb;
 	    if (this.props.thumbPath) {
 	      thumb = '/images/melody-images/' + this.props.data[this.props.thumbPath];
 	    }
@@ -36907,6 +36917,8 @@
 	  value: true
 	});
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -36999,7 +37011,7 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'details six wide computer only column centered season-watchlist' },
-	            _react2.default.createElement(_AlbumWatchlist2.default, { language: this.props.language, episodes: album.songs })
+	            _react2.default.createElement(_AlbumWatchlist2.default, _extends({ language: this.props.language, episodes: album.songs }, this.props))
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -37073,20 +37085,25 @@
 	        i + 1
 	      ));
 	    });
+	    var local = this.props.local;
 	    return _react2.default.createElement(
 	      "div",
 	      { className: "row subnav" },
 	      _react2.default.createElement(
 	        "span",
 	        { className: "title small" },
-	        "Series ",
+	        local.series,
+	        " ",
 	        this.props.title,
-	        " season 1"
+	        " ",
+	        local.season,
+	        " 1"
 	      ),
 	      _react2.default.createElement(
 	        "div",
 	        { id: "seasons-dropdown", className: "ui simple dropdown item inverted" },
-	        "SEASON 1",
+	        local.series,
+	        " 1",
 	        _react2.default.createElement("i", { className: "plus icon" }),
 	        _react2.default.createElement(
 	          "div",
@@ -37107,6 +37124,8 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 	var _react = __webpack_require__(1);
 
@@ -37130,7 +37149,7 @@
 	    var ROWS = [];
 	    if (!this.props.episodes) return _react2.default.createElement('div', { className: 'row watchlist' });
 	    this.props.episodes.map(function (episode, i) {
-	      ROWS.push(_react2.default.createElement(WatchlistRow, { key: 'watchlist-' + i, episode: episode, track: i + 1, language: _this.props.language }));
+	      ROWS.push(_react2.default.createElement(WatchlistRow, _extends({ key: 'watchlist-' + i, episode: episode, track: i + 1, language: _this.props.language }, _this.props)));
 	    });
 	    // setTimeout(function(){
 	    //   $('.season-watchlist').velocity("scroll", {
@@ -37158,6 +37177,7 @@
 	var WatchlistRow = _react2.default.createClass({
 	  displayName: 'WatchlistRow',
 	  render: function render() {
+	    var local = this.props.local;
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'row watchlist' },
@@ -37169,7 +37189,8 @@
 	        _react2.default.createElement(
 	          'span',
 	          { className: 'watchlist-button' },
-	          'Track ',
+	          local.track,
+	          ' ',
 	          this.props.track
 	        )
 	      ),
@@ -37189,11 +37210,12 @@
 
 	    var episode = this.props.episode;
 	    var language = this.props.language;
+	    var local = this.props.local;
 
 	    $('#video-slide-out, .videoPlayer').velocity({
 	      opacity: 0
 	    }, 200, function () {
-	      _reactDom2.default.render(_react2.default.createElement(_VideoPlayer2.default, { video: episode, language: language }), document.getElementById('video-slide-out'));
+	      _reactDom2.default.render(_react2.default.createElement(_VideoPlayer2.default, { video: episode, language: language, local: local }), document.getElementById('video-slide-out'));
 	    });
 
 	    $('.season-detail').velocity({
@@ -37250,9 +37272,10 @@
 	exports.default = _react2.default.createClass({
 	  displayName: 'VideoPlayer',
 	  render: function render() {
+	    var local = this.props.local;
 	    if (this.props.video) {
 	      var video = {
-	        duration: Math.floor(this.props.video.duration / 60) + ' min',
+	        duration: Math.floor(this.props.video.duration / 60) + ' ' + local.min,
 	        player: this.getPlayer(this.props.video['video_url'])
 	      };
 	    }
@@ -37575,6 +37598,7 @@
 	  render: function render() {
 	    var _this = this;
 
+	    var local = this.props.local;
 	    var movie = {
 	      name: '',
 	      description: '',
@@ -37592,8 +37616,8 @@
 	      var movie = {
 	        name: this.state.movie.meta[this.props.language].name,
 	        description: this.state.movie.meta[this.props.language].description,
-	        productionYear: 'Produced ' + this.state.movie['production_year'],
-	        duration: Math.floor(this.state.movie.duration / 60) + ' min',
+	        productionYear: local.released + ' ' + this.state.movie['production_year'],
+	        duration: Math.floor(this.state.movie.duration / 60) + ' ' + local.min,
 	        player: this.getPlayer(this.state.movie['video_url']),
 	        roles: roles
 	      };
@@ -37998,6 +38022,7 @@
 	  render: function render() {
 	    var _this = this;
 
+	    var local = this.props.local;
 	    var series = {
 	      name: '',
 	      description: '',
@@ -38020,8 +38045,8 @@
 	        description: this.state.series.meta[this.props.language].description,
 	        thumb: '/images/melody/' + this.state.series.thumb.replace('M1', 'M11'),
 	        seasonText: 'Season 1',
-	        productionYear: 'Released ' + this.state.series['production_year'],
-	        duration: Math.floor(this.state.series.seasons[0].episodes[0].duration / 60) + ' min',
+	        productionYear: local.released + ' ' + this.state.series['production_year'],
+	        duration: Math.floor(this.state.series.seasons[0].episodes[0].duration / 60) + ' ' + local.min,
 	        seasons: this.state.series.seasons,
 	        episodes: this.state.series.seasons[0].episodes,
 	        roles: roles
@@ -38038,7 +38063,7 @@
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'ui container grids' },
-	        _react2.default.createElement(_SeasonFilter2.default, { title: series.name, seasons: series.seasons })
+	        _react2.default.createElement(_SeasonFilter2.default, { title: series.name, seasons: series.seasons, local: local })
 	      ),
 	      _react2.default.createElement(
 	        'div',
@@ -38049,7 +38074,7 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'details six wide computer only column centered season-watchlist' },
-	            _react2.default.createElement(_SeasonWatchlist2.default, { language: this.props.language, episodes: series.episodes })
+	            _react2.default.createElement(_SeasonWatchlist2.default, { language: this.props.language, episodes: series.episodes, local: local })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -38129,6 +38154,8 @@
 	  value: true
 	});
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -38151,7 +38178,7 @@
 	    var ROWS = [];
 	    if (!this.props.episodes) return _react2.default.createElement('div', { className: 'row watchlist' });
 	    this.props.episodes.map(function (episode, i) {
-	      ROWS.push(_react2.default.createElement(WatchlistRow, { key: 'watchlist-' + i, episode: episode, language: _this.props.language }));
+	      ROWS.push(_react2.default.createElement(WatchlistRow, _extends({ key: 'watchlist-' + i, episode: episode, language: _this.props.language }, _this.props)));
 	    });
 	    // setTimeout(function(){
 	    //   $('.season-watchlist').velocity("scroll", {
@@ -38179,6 +38206,7 @@
 	var WatchlistRow = _react2.default.createClass({
 	  displayName: 'WatchlistRow',
 	  render: function render() {
+	    var local = this.props.local;
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'row watchlist' },
@@ -38186,11 +38214,10 @@
 	        'div',
 	        { className: 'sixteen wide tablet four wide computer column tight-right' },
 	        _react2.default.createElement('i', { className: 'play large icon watchlist-button tight', onClick: this.playEpisode }),
-	        _react2.default.createElement('i', { className: 'plus icon watchlist-button' }),
 	        _react2.default.createElement(
 	          'span',
 	          { className: 'watchlist-button' },
-	          'Ep ',
+	          local.ep + ' ',
 	          this.props.episode.episode_number
 	        )
 	      ),
@@ -38210,11 +38237,11 @@
 
 	    var episode = this.props.episode;
 	    var language = this.props.language;
-
+	    var local = this.props.local;
 	    $('#video-slide-out, .videoPlayer').velocity({
 	      opacity: 0
 	    }, 200, function () {
-	      _reactDom2.default.render(_react2.default.createElement(_VideoPlayer2.default, { video: episode, language: language }), document.getElementById('video-slide-out'));
+	      _reactDom2.default.render(_react2.default.createElement(_VideoPlayer2.default, { video: episode, language: language, local: local }), document.getElementById('video-slide-out'));
 	    });
 
 	    $('.season-detail').velocity({

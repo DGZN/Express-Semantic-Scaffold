@@ -24,6 +24,7 @@ export default React.createClass({
   },
 
   render() {
+    var local = this.props.local
     var movie = {
       name: ''
     , description: ''
@@ -41,8 +42,8 @@ export default React.createClass({
       var movie = {
         name: this.state.movie.meta[this.props.language].name
       , description: this.state.movie.meta[this.props.language].description
-      , productionYear: 'Produced ' + this.state.movie['production_year']
-      , duration: Math.floor(this.state.movie.duration / 60) + ' min'
+      , productionYear: local.released + ' ' + this.state.movie['production_year']
+      , duration: Math.floor(this.state.movie.duration / 60) + ' ' + local.min
       , player: this.getPlayer(this.state.movie['video_url'])
       , roles: roles
       }

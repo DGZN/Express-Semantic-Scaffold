@@ -9,7 +9,7 @@ export default React.createClass({
     if (!this.props.episodes)
       return (<div className="row watchlist"></div>)
     this.props.episodes.map((episode, i) => {
-      ROWS.push(<WatchlistRow key={'watchlist-'+i} episode={episode} track={i+1} language={this.props.language} />)
+      ROWS.push(<WatchlistRow key={'watchlist-'+i} episode={episode} track={i+1} language={this.props.language} {...this.props} />)
     })
     // setTimeout(function(){
     //   $('.season-watchlist').velocity("scroll", {
@@ -34,14 +34,14 @@ export default React.createClass({
 });
 
 const WatchlistRow = React.createClass({
-
   render() {
+    var local = this.props.local
     return (
       <div className="row watchlist">
         <div className="sixteen wide tablet four wide computer column tight-right">
           <i className="play large icon watchlist-button tight" onClick={this.playEpisode}></i>
           <i className="plus icon watchlist-button"></i>
-          <span className="watchlist-button">Track {this.props.track}</span>
+          <span className="watchlist-button">{local.track} {this.props.track}</span>
         </div>
         <div className="sixteen wide tablet eleven wide computer column tight-left">
           <div className="ui progress watchlist small error episode">
@@ -60,12 +60,13 @@ const WatchlistRow = React.createClass({
 
     const episode = this.props.episode;
     const language = this.props.language;
+    const local = this.props.local
 
     $('#video-slide-out, .videoPlayer').velocity({
       opacity: 0
     }, 200, function(){
       ReactDOM.render(
-        <VideoPlayer video={episode} language={language} />,
+        <VideoPlayer video={episode} language={language} local={local} />,
         document.getElementById('video-slide-out')
       );
     })

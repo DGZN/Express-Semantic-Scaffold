@@ -235,7 +235,7 @@ export default React.createClass({
         , isLoggedIn: this.state.userLoggedIn
         , user: this.state.user
         })}
-        <Footer />
+        <Footer local={local} />
       </div>
     );
   },

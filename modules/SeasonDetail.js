@@ -40,6 +40,7 @@ export default React.createClass({
   },
 
   render() {
+    var local = this.props.local
     var series = {
       name: ''
     , description: ''
@@ -62,8 +63,8 @@ export default React.createClass({
       , description: this.state.series.meta[this.props.language].description
       , thumb: '/images/melody/' + this.state.series.thumb.replace('M1','M11')
       , seasonText: 'Season 1'
-      , productionYear: 'Released ' + this.state.series['production_year']
-      , duration: Math.floor(this.state.series.seasons[0].episodes[0].duration / 60) + ' min'
+      , productionYear: local.released + ' ' + this.state.series['production_year']
+      , duration: Math.floor(this.state.series.seasons[0].episodes[0].duration / 60) + ' ' + local.min
       , seasons: this.state.series.seasons
       , episodes: this.state.series.seasons[0].episodes
       , roles: roles
@@ -79,12 +80,12 @@ export default React.createClass({
     return (
       <div>
         <div className="ui container grids">
-          <SeasonFilter title={series.name} seasons={series.seasons} />
+          <SeasonFilter title={series.name} seasons={series.seasons} local={local} />
         </div>
         <div className="ui vertical center container aligned grids" style={{ 'textAlign': this.props.textAlign }} >
           <div className="ui two column grid container details pad-top-medium" style={{ overflow: 'hidden' }} >
             <div className="details six wide computer only column centered season-watchlist">
-              <SeasonWatchlist language={this.props.language} episodes={series.episodes} />
+              <SeasonWatchlist language={this.props.language} episodes={series.episodes} local={local} />
             </div>
             <div className="details sixteen wide tablet seven wide computer column centered">
               <div id="video-slide-out"></div>

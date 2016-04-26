@@ -22,7 +22,6 @@ export default React.createClass({
   render() {
     var menu = this.languageMenu(this.props.language)
     var local = this.props.local
-    console.log("menu", menu)
     return (
       <div>
         <MyAccount setUser={this.props.setUser} {...this.props} />
@@ -32,13 +31,13 @@ export default React.createClass({
             <Link to="/" className="item">
               <img src="/images/melody-logo.png" className="ui tiny image"/>
             </Link>
-            <Link to="/movies" className="item">1</Link>
-            <Link to="/series" className="item">2</Link>
-            <Link to="/music" className="item">3</Link>
-            <Link to="/plays" className="item">4</Link>
-            <Link to="/classics" className="item">5</Link>
-            <Link to="/collections" className="item">6</Link>
-            <Link to="/livetv" className="item">7</Link>
+            <Link to="/movies" className="item">{local.movies}</Link>
+            <Link to="/series" className="item">{local.series}</Link>
+            <Link to="/music" className="item">{local.music}</Link>
+            <Link to="/plays" className="item">{local.plays}</Link>
+            <Link to="/classics" className="item">{local.classics}</Link>
+            <Link to="/collections" className="item">{local.collections}</Link>
+            <Link to="/livetv" className="item">{local.live}</Link>
             <div className="ui category search item nav-search">
               <div className="ui transparent icon input">
                 <input type="text" placeholder="Search..." className="prompt"/>
@@ -52,11 +51,11 @@ export default React.createClass({
                 <div className="menu">
                   <a className="item" onClick={this.myAccount}>
                     <i className="user icon"></i>
-                    <span className="text">7</span>
+                    <span className="text">{local.myAccount}</span>
                   </a>
                   <Link to="/watchlist" className="item">
                     <i className="list layout icon"></i>
-                    <span className="text">7</span>
+                    <span className="text">{local.watchlist}</span>
                   </Link>
                   <div className="item" onClick={this.props.setLanguage.bind(null, menu.lang, menu.align)}>
                     <i className="flag icon"></i>
@@ -69,23 +68,24 @@ export default React.createClass({
         </div>
         <div id="nav-sidebar" className="ui right vertical sidebar menu">
           <Link to="/" className="item">Home</Link>
-          <Link to="/movies" className="item">1</Link>
-          <Link to="/series" className="item">2</Link>
-          <Link to="/music" className="item">3</Link>
-          <Link to="/plays" className="item">4</Link>
-          <a className="item">5</a>
-          <Link to="/collections" className="item">6</Link>
-          <Link to="/livetv" className="item">7</Link>
+          <Link to="/movies" className="item">Movies</Link>
+          <Link to="/series" className="item">Series</Link>
+          <Link to="/music" className="item">Music</Link>
+          <Link to="/plays" className="item">Plays</Link>
+          <a className="item">Classics</a>
+          <Link to="/collections" className="item">Collections</Link>
+          <Link to="/livetv" className="item">Live</Link>
           <div className="ui category search item">
             <div className="ui transparent icon input">
               <input type="text" placeholder="Search..." className="prompt"/><i className="search link icon"></i>
             </div>
             <div className="results"></div>
-          </div><a className="item horizontal divider"></a>
+          </div>
+          <a className="item horizontal divider"></a>
             <a className="item" onClick={this.handleClick} >
-              <h6>8</h6></a><a className="item">
-              <h6>9</h6></a><a className="sidebar item">
-              <h6 >Arabic</h6>
+              <h6>My Account</h6></a><a className="item">
+              <h6>Watchlist</h6></a><a className="sidebar item">
+              <h6 >English</h6>
             </a>
         </div>
         <div id="watchlist-sidebar" className="ui left vertical sidebar inverted menu">

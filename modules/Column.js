@@ -24,8 +24,8 @@ export default React.createClass({
         ? link = generateLink(this.props)
         : link = this.props.href;
     }
-    //var thumb = '/images/melody-images/' + this.props.data.thumb.replace('M1','M11');
-    var thumb = '/images/melody/' + this.props.data.thumb;
+    var thumb = '/images/melody-images/' + this.props.data.thumb.replace('M1','M11');
+    //var thumb = '/images/melody/' + this.props.data.thumb;
     if (this.props.thumbPath) {
       thumb = '/images/melody-images/' + this.props.data[this.props.thumbPath];
     }

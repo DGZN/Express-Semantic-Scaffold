@@ -74,8 +74,7 @@ export default React.createClass({
         <div className="ui vertical center container aligned grids" style={{ 'textAlign': this.props.textAlign }} >
           <div className="ui two column grid container details pad-top-medium" style={{ overflow: 'hidden' }} >
             <div className="details six wide computer only column centered season-watchlist">
-              <AlbumWatchlist language={this.props.language} episodes={album.songs} />
-
+              <AlbumWatchlist language={this.props.language} episodes={album.songs} {...this.props} />
             </div>
             <div className="details sixteen wide tablet seven wide computer column centered">
               <div id="video-slide-out"></div>

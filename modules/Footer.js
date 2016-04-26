@@ -2,18 +2,14 @@ import React       from 'react'
 
 export default React.createClass({
   render() {
+    var local = this.props.local
     return (
       <div className="ui inverted vertical footer stackable center aligned segment" id="footer">
         <div className="ui middle aligned six column centered stackable grid footer container">
           <div className="row">
             <div className="column middle aligned">
               <a className="link">
-                <h4>FAQ/Help</h4>
-              </a>
-            </div>
-            <div className="column middle aligned">
-              <a className="link">
-                <h4>Legal</h4>
+                <h4>{local.faq} / {local.help}</h4>
               </a>
             </div>
           </div>
