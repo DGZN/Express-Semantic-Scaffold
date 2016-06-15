@@ -59,7 +59,7 @@ export default React.createClass({
       , description: this.state.album.meta.en.description
       , albumText: 'Album 1'
       , songs: this.state.album.songs
-      , thumb: '/images/melody/' + this.state.album.songs[0].thumb.replace('M1','M11')
+      , thumb: '/images/melody/' + this.state.album.thumb
       }
     }
     setTimeout(function(){
