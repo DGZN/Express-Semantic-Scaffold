@@ -100,8 +100,6 @@ export default React.createClass({
             if (genre.meta[this.props.language].name == this.state.genre[this.props.language].name) {
               COLUMNS.push(<Column key={'col-'+data.id+Math.random()*Math.random()} data={data} {...this.props} delay={delay} />)
               return true;
-            } else {
-              //COLUMNS.push(<Column key={'col-'+data.id+Math.random()*Math.random()} data={data} {...this.props} hidden="true" />)
             }
           })
         }
