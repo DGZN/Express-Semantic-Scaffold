@@ -5,6 +5,7 @@
   "scripts": {
     "build:js": "webpack",
     "build": "npm run build:js",
+    "dev": "npm run build && npm run start",
     "watch": "watch 'npm run build' ./modules",
     "start": "node ./bin/www"
   },
