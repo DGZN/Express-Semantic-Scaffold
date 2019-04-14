@@ -24,11 +24,10 @@ export default React.createClass({
         ? link = generateLink(this.props)
         : link = this.props.href;
     }
-    var thumb = '/images/melody-images/' + this.props.data.thumb.replace('M1','M11');
-    //var thumb = '/images/melody/' + this.props.data.thumb;
-    if (this.props.thumbPath) {
-      thumb = '/images/melody-images/' + this.props.data[this.props.thumbPath];
-    }
+    var thumb = this.props.thumbPath 
+      ? 'http://giantapi.melodynow.net/images/thumb/' + this.props.data[this.props.thumbPath] 
+      : 'http://giantapi.melodynow.net/images/thumb/' + this.props.data.thumb;
+
     var id = this.props.data.id
     var visible = this.props.className || ''
     var hrefCSS = 'image preview load '

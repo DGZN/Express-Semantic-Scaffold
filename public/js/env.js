@@ -1,3 +1,3 @@
 module.exports = {
-  "endpoint": "http://dgzn.io:8080"
+  "endpoint": "http://melodyentertainment.net"
 }

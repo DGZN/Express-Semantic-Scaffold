@@ -38,7 +38,7 @@ export default React.createClass({
         </div>
         <div className="ui vertical center container aligned grids carousel-container" >
           <Carousel title="movies" source="/movies" limit="15" href="/movies/:id"  {...this.props} />
-          <Carousel title="series" source="/series" limit="10" href="/series/:id" {...this.props}  />
+          <Carousel title="classics" source="/classics" limit="10" href="/classics/:id" {...this.props}  />
           <Carousel title="plays"  source="/plays"  limit="15" href="/plays/:id" {...this.props}   />
         </div>
       </div>

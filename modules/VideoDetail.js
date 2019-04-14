@@ -13,10 +13,19 @@ export default React.createClass({
 
   componentDidMount: function() {
     this.fetch = $.get(env.endpoint + '/v1/assets' +this.props.source, function (result) {
+      console.log(arguments)
       this.setState({
         movie: result
       });
-    }.bind(this));
+    }.bind(this))
+    .fail(function (result) {
+      console.log(result)
+      console.log(result.statusCode)
+      Object.keys(result).map((k) => {
+        console.log(k)
+        console.log(result[k])
+      })
+    });
   },
 
   componentWillUnmount: function() {
@@ -28,7 +37,7 @@ export default React.createClass({
     var movie = {
       name: ''
     , description: ''
-    , productionYear: 'Produced ' + this.state.movie['production_year']
+    , productionYear: this.state.movie['production_year'] ? 'Produced ' + this.state.movie['production_year'] : ''
     , duration: 0
     , player: ''
     }

@@ -59,8 +59,9 @@ export default React.createClass({
     var ids = []
     var COLUMNS = [];
     this.state.collection.some((data, i) => {
+      console.log(data)
       var id = this.props.title + '-col' + (i + 1)
-      var thumb = '/images/melody/' + data.thumb.replace('M1','M11');
+      var thumb = 'http://giantapi.melodynow.net/images/thumb/' + data.thumb.replace('M1', 'M11');
       if (self.thumbPath) {
         thumb = '/images/wireframe/16x9.png';
       }
