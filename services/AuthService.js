@@ -22,7 +22,7 @@ class AuthService {
 
   signup(user) {
     return new bluebird( (resolve, reject) => {
-      $.post('http://dgzn.io:8080/v1/users', user)
+      $.post('http://45.56.87.206/v1/users', user)
       .done(function(data) {
         return resolve(data)
       })

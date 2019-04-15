@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "c01fde3352566dd2c385"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "d69a29c80cf12f5fd69c"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -34488,7 +34488,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	var BASE_URL = 'http://dgzn.io:8080';
+	var BASE_URL = 'http://45.56.87.206:3131';
 	exports.default = {
 	  BASE_URL: BASE_URL,
 	  LOGIN_URL: BASE_URL + 'v1/users/auth',
@@ -35114,7 +35114,7 @@
 	"use strict";
 
 	module.exports = {
-	  "endpoint": "http://dgzn.io:8080",
+	  "endpoint": "http://45.56.87.206:3131/",
 	  "authenticated": function authenticated() {
 	    var token = localStorage.getItem('melody::authToken');
 	    if (!token || !token.length) return false;
