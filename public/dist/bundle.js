@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "d69a29c80cf12f5fd69c"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "9d3320863dff8321c1ec"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -28464,7 +28464,7 @@
 	    key: 'signup',
 	    value: function signup(user) {
 	      return new _bluebird2.default(function (resolve, reject) {
-	        $.post('http://dgzn.io:8080/v1/users', user).done(function (data) {
+	        $.post('http://45.56.87.206/v1/users', user).done(function (data) {
 	          return resolve(data);
 	        }).fail(function (err) {
 	          return reject(err.statusText);
@@ -34488,7 +34488,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	var BASE_URL = 'http://45.56.87.206:3131';
+	var BASE_URL = 'http://45.56.87.206';
 	exports.default = {
 	  BASE_URL: BASE_URL,
 	  LOGIN_URL: BASE_URL + 'v1/users/auth',
@@ -35114,7 +35114,7 @@
 	"use strict";
 
 	module.exports = {
-	  "endpoint": "http://45.56.87.206:3131/",
+	  "endpoint": "http://45.56.87.206",
 	  "authenticated": function authenticated() {
 	    var token = localStorage.getItem('melody::authToken');
 	    if (!token || !token.length) return false;
