@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "e1e3f83f2272f80e7528"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "ee041322d74613d3f00b"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -26682,6 +26682,7 @@
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'ui large top fixed hidden menu inverted' },
+	        _react2.default.createElement('div', { className: 'sidebar' }),
 	        MAIN_NAV
 	      ),
 	      _react2.default.createElement(
@@ -26943,68 +26944,12 @@
 	    );
 	  },
 	  arabicNav: function arabicNav(menu, local) {
-	    _react2.default.createElement(
+	    return _react2.default.createElement(
 	      'div',
 	      { className: 'ui container nav' },
 	      _react2.default.createElement(
 	        'div',
-	        { className: 'left menu' },
-	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          { to: '/', className: 'item' },
-	          _react2.default.createElement('img', { src: '/images/melody-logo.png', className: 'ui tiny image' })
-	        ),
-	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          { to: '/movies', className: 'item' },
-	          local.movies
-	        ),
-	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          { to: '/series', className: 'item' },
-	          local.series
-	        ),
-	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          { to: '/music', className: 'item' },
-	          local.music
-	        ),
-	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          { to: '/plays', className: 'item' },
-	          local.plays
-	        ),
-	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          { to: '/classics', className: 'item' },
-	          local.classics
-	        ),
-	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          { to: '/collections', className: 'item' },
-	          local.collections
-	        ),
-	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          { to: '/livetv', className: 'item' },
-	          local.live
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'ui category search item nav-search' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'ui transparent icon input' },
-	            _react2.default.createElement('input', { type: 'text', placeholder: 'Search...', className: 'prompt' }),
-	            _react2.default.createElement('i', { className: 'search link icon' })
-	          ),
-	          _react2.default.createElement('div', { className: 'results' })
-	        )
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { id: 'account-dropdown', className: 'ui right dropdown item' },
-	        _react2.default.createElement('i', { className: 'setting icon' }),
+	        { id: 'account-dropdown', className: 'ui left dropdown item' },
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'menu' },
@@ -27037,7 +26982,58 @@
 	              { className: 'text' },
 	              menu.name
 	            )
-	          )
+	          ),
+	          _react2.default.createElement('i', { className: 'setting icon' })
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'right menu' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'ui category search item nav-search' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'ui transparent icon input' },
+	            _react2.default.createElement('input', { type: 'text', placeholder: 'Search...', className: 'prompt' }),
+	            _react2.default.createElement('i', { className: 'search link icon' })
+	          ),
+	          _react2.default.createElement('div', { className: 'results' })
+	        ),
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: '/collections', className: 'item' },
+	          local.collections
+	        ),
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: '/classics', className: 'item' },
+	          local.classics
+	        ),
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: '/plays', className: 'item' },
+	          local.plays
+	        ),
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: '/music', className: 'item' },
+	          local.music
+	        ),
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: '/series', className: 'item' },
+	          local.series
+	        ),
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: '/movies', className: 'item' },
+	          local.movies
+	        ),
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: '/', className: 'item' },
+	          _react2.default.createElement('img', { src: '/images/melody-logo.png', className: 'ui tiny image' })
 	        )
 	      )
 	    );

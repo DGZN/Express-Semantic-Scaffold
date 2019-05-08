@@ -22,7 +22,7 @@ export default React.createClass({
   render() {
     var menu = this.languageMenu(this.props.language)
     var local = this.props.local
-    var MAIN_NAV = this.englishNav(menu, local)
+    var MAIN_NAV = this.arabicNav(menu, local)
     if (this.props.language == 'en') {
       var MAIN_NAV = this.englishNav(menu, local)
     }
@@ -126,11 +126,11 @@ export default React.createClass({
   },
 
   arabicNav(menu, local) {
-    <div className="ui container nav">
+    return (
+      <div className="ui container nav">
         <div id="account-dropdown" className="ui left dropdown item">
-          <i className="setting icon"></i>
           <div className="menu">
-            <a className="item" onClick={this.myAccount}> 
+            <a className="item" onClick={this.myAccount}>
               <i className="user icon"></i>
               <span className="text">{local.myAccount}</span>
             </a>
@@ -142,29 +142,29 @@ export default React.createClass({
               <i className="flag icon"></i>
               <span className="text">{menu.name}</span>
             </div>
+            <i className="setting icon"></i>
           </div>
         </div>
-      <div className="right menu">
-        <Link to="/" className="item">
-          <img src="/images/melody-logo.png" className="ui tiny image"/>
-        </Link>
-        <Link to="/movies" className="item">{local.movies}</Link>
-        <Link to="/series" className="item">{local.series}</Link>
-        <Link to="/music" className="item">{local.music}</Link>
-        <Link to="/plays" className="item">{local.plays}</Link>
-        <Link to="/classics" className="item">{local.classics}</Link>
-        <Link to="/collections" className="item">{local.collections}</Link>
-        <Link to="/livetv" className="item">{local.live}</Link>
-        <div className="ui category search item nav-search">
-          <div className="ui transparent icon input">
-            <input type="text" placeholder="Search..." className="prompt"/>
-            <i className="search link icon"></i>
+        <div className="right menu">
+          <div className="ui category search item nav-search">
+            <div className="ui transparent icon input">
+              <input type="text" placeholder="Search..." className="prompt" />
+              <i className="search link icon"></i>
+            </div>
+            <div className="results"></div>
           </div>
-          <div className="results"></div>
-        </div>   
-
+          <Link to="/collections" className="item">{local.collections}</Link>
+          <Link to="/classics" className="item">{local.classics}</Link>
+          <Link to="/plays" className="item">{local.plays}</Link>
+          <Link to="/music" className="item">{local.music}</Link>
+          <Link to="/series" className="item">{local.series}</Link>
+          <Link to="/movies" className="item">{local.movies}</Link>
+          <Link to="/" className="item">
+            <img src="/images/melody-logo.png" className="ui tiny image" />
+          </Link>
+        </div>
       </div>
-    </div>
+    )
   },
 
   englishNav(menu, local) {
@@ -179,7 +179,6 @@ export default React.createClass({
         <Link to="/plays" className="item">{local.plays}</Link>
         <Link to="/classics" className="item">{local.classics}</Link>
         <Link to="/collections" className="item">{local.collections}</Link>
-        <Link to="/livetv" className="item">{local.live}</Link>
         <div className="ui category search item nav-search">
           <div className="ui transparent icon input">
             <input type="text" placeholder="Search..." className="prompt"/>
