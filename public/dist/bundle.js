@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "9d3320863dff8321c1ec"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "e1e3f83f2272f80e7528"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -684,7 +684,7 @@
 	    _react2.default.createElement(_reactRouter.Route, { path: '/plays', component: _Plays2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/plays/:id', component: _Play2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/classics', component: _Classics2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: '/classics/:id', component: _Movie2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/classics/:id', component: _Classic2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/collections', component: _Collections2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/collections/:id', component: _Collection2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/livetv', component: _LiveTV2.default }),
@@ -26352,7 +26352,7 @@
 	      page: 0,
 	      language: 'ar',
 	      local: this.localized(localized, 'ar'),
-	      align: 'left',
+	      align: 'right',
 	      user: _LoginStore2.default.user,
 	      userLoggedIn: _LoginStore2.default.isLoggedIn()
 	    };
@@ -26541,7 +26541,7 @@
 	    var local = this.localized(localized, this.state.language);
 	    return _react2.default.createElement(
 	      'div',
-	      { style: { 'textAlign': this.state.align + ' !important' } },
+	      null,
 	      _react2.default.createElement(_Nav2.default, {
 	        user: this.state.user,
 	        myAccount: this.myAccount,
@@ -26671,6 +26671,10 @@
 	  render: function render() {
 	    var menu = this.languageMenu(this.props.language);
 	    var local = this.props.local;
+	    var MAIN_NAV = this.arabicNav(menu, local);
+	    if (this.props.language == 'en') {
+	      var MAIN_NAV = this.englishNav(menu, local);
+	    }
 	    return _react2.default.createElement(
 	      'div',
 	      null,
@@ -26678,105 +26682,7 @@
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'ui large top fixed hidden menu inverted' },
-	        _react2.default.createElement('div', { className: 'sidebar' }),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'ui container nav' },
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: '/', className: 'item' },
-	            _react2.default.createElement('img', { src: '/images/melody-logo.png', className: 'ui tiny image' })
-	          ),
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: '/movies', className: 'item' },
-	            local.movies
-	          ),
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: '/series', className: 'item' },
-	            local.series
-	          ),
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: '/music', className: 'item' },
-	            local.music
-	          ),
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: '/plays', className: 'item' },
-	            local.plays
-	          ),
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: '/classics', className: 'item' },
-	            local.classics
-	          ),
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: '/collections', className: 'item' },
-	            local.collections
-	          ),
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: '/livetv', className: 'item' },
-	            local.live
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'ui category search item nav-search' },
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'ui transparent icon input' },
-	              _react2.default.createElement('input', { type: 'text', placeholder: 'Search...', className: 'prompt' }),
-	              _react2.default.createElement('i', { className: 'search link icon' })
-	            ),
-	            _react2.default.createElement('div', { className: 'results' })
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'right menu' },
-	            _react2.default.createElement(
-	              'div',
-	              { id: 'account-dropdown', className: 'ui left dropdown item' },
-	              _react2.default.createElement('i', { className: 'setting icon' }),
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'menu' },
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'item', onClick: this.myAccount },
-	                  _react2.default.createElement('i', { className: 'user icon' }),
-	                  _react2.default.createElement(
-	                    'span',
-	                    { className: 'text' },
-	                    local.myAccount
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  _reactRouter.Link,
-	                  { to: '/watchlist', className: 'item' },
-	                  _react2.default.createElement('i', { className: 'list layout icon' }),
-	                  _react2.default.createElement(
-	                    'span',
-	                    { className: 'text' },
-	                    local.watchlist
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'item', onClick: this.props.setLanguage.bind(null, menu.lang, menu.align) },
-	                  _react2.default.createElement('i', { className: 'flag icon' }),
-	                  _react2.default.createElement(
-	                    'span',
-	                    { className: 'text' },
-	                    menu.name
-	                  )
-	                )
-	              )
-	            )
-	          )
-	        )
+	        MAIN_NAV
 	      ),
 	      _react2.default.createElement(
 	        'div',
@@ -27030,6 +26936,206 @@
 	              'a',
 	              { className: 'toc item right aligned' },
 	              _react2.default.createElement('i', { className: 'sidebar icon' })
+	            )
+	          )
+	        )
+	      )
+	    );
+	  },
+	  arabicNav: function arabicNav(menu, local) {
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'ui container nav' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'left menu' },
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: '/', className: 'item' },
+	          _react2.default.createElement('img', { src: '/images/melody-logo.png', className: 'ui tiny image' })
+	        ),
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: '/movies', className: 'item' },
+	          local.movies
+	        ),
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: '/series', className: 'item' },
+	          local.series
+	        ),
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: '/music', className: 'item' },
+	          local.music
+	        ),
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: '/plays', className: 'item' },
+	          local.plays
+	        ),
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: '/classics', className: 'item' },
+	          local.classics
+	        ),
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: '/collections', className: 'item' },
+	          local.collections
+	        ),
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: '/livetv', className: 'item' },
+	          local.live
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'ui category search item nav-search' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'ui transparent icon input' },
+	            _react2.default.createElement('input', { type: 'text', placeholder: 'Search...', className: 'prompt' }),
+	            _react2.default.createElement('i', { className: 'search link icon' })
+	          ),
+	          _react2.default.createElement('div', { className: 'results' })
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { id: 'account-dropdown', className: 'ui right dropdown item' },
+	        _react2.default.createElement('i', { className: 'setting icon' }),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'menu' },
+	          _react2.default.createElement(
+	            'a',
+	            { className: 'item', onClick: this.myAccount },
+	            _react2.default.createElement('i', { className: 'user icon' }),
+	            _react2.default.createElement(
+	              'span',
+	              { className: 'text' },
+	              local.myAccount
+	            )
+	          ),
+	          _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: '/watchlist', className: 'item' },
+	            _react2.default.createElement('i', { className: 'list layout icon' }),
+	            _react2.default.createElement(
+	              'span',
+	              { className: 'text' },
+	              local.watchlist
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'item', onClick: this.props.setLanguage.bind(null, menu.lang, menu.align) },
+	            _react2.default.createElement('i', { className: 'flag icon' }),
+	            _react2.default.createElement(
+	              'span',
+	              { className: 'text' },
+	              menu.name
+	            )
+	          )
+	        )
+	      )
+	    );
+	  },
+	  englishNav: function englishNav(menu, local) {
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'ui container nav' },
+	      _react2.default.createElement(
+	        _reactRouter.Link,
+	        { to: '/', className: 'item' },
+	        _react2.default.createElement('img', { src: '/images/melody-logo.png', className: 'ui tiny image' })
+	      ),
+	      _react2.default.createElement(
+	        _reactRouter.Link,
+	        { to: '/movies', className: 'item' },
+	        local.movies
+	      ),
+	      _react2.default.createElement(
+	        _reactRouter.Link,
+	        { to: '/series', className: 'item' },
+	        local.series
+	      ),
+	      _react2.default.createElement(
+	        _reactRouter.Link,
+	        { to: '/music', className: 'item' },
+	        local.music
+	      ),
+	      _react2.default.createElement(
+	        _reactRouter.Link,
+	        { to: '/plays', className: 'item' },
+	        local.plays
+	      ),
+	      _react2.default.createElement(
+	        _reactRouter.Link,
+	        { to: '/classics', className: 'item' },
+	        local.classics
+	      ),
+	      _react2.default.createElement(
+	        _reactRouter.Link,
+	        { to: '/collections', className: 'item' },
+	        local.collections
+	      ),
+	      _react2.default.createElement(
+	        _reactRouter.Link,
+	        { to: '/livetv', className: 'item' },
+	        local.live
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'ui category search item nav-search' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'ui transparent icon input' },
+	          _react2.default.createElement('input', { type: 'text', placeholder: 'Search...', className: 'prompt' }),
+	          _react2.default.createElement('i', { className: 'search link icon' })
+	        ),
+	        _react2.default.createElement('div', { className: 'results' })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'right menu' },
+	        _react2.default.createElement(
+	          'div',
+	          { id: 'account-dropdown', className: 'ui left dropdown item' },
+	          _react2.default.createElement('i', { className: 'setting icon' }),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'menu' },
+	            _react2.default.createElement(
+	              'a',
+	              { className: 'item', onClick: this.myAccount },
+	              _react2.default.createElement('i', { className: 'user icon' }),
+	              _react2.default.createElement(
+	                'span',
+	                { className: 'text' },
+	                local.myAccount
+	              )
+	            ),
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: '/watchlist', className: 'item' },
+	              _react2.default.createElement('i', { className: 'list layout icon' }),
+	              _react2.default.createElement(
+	                'span',
+	                { className: 'text' },
+	                local.watchlist
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'item', onClick: this.props.setLanguage.bind(null, menu.lang, menu.align) },
+	              _react2.default.createElement('i', { className: 'flag icon' }),
+	              _react2.default.createElement(
+	                'span',
+	                { className: 'text' },
+	                menu.name
+	              )
 	            )
 	          )
 	        )
@@ -28449,7 +28555,7 @@
 	    key: 'login',
 	    value: function login(email, password) {
 	      return new _bluebird2.default(function (resolve, reject) {
-	        $.post('http://dgzn.io:8080/v1/users/auth', {
+	        $.post('http://dgzn.io/v1/users/auth', {
 	          email: email,
 	          password: password
 	        }).done(function (data) {
@@ -28464,7 +28570,7 @@
 	    key: 'signup',
 	    value: function signup(user) {
 	      return new _bluebird2.default(function (resolve, reject) {
-	        $.post('http://45.56.87.206/v1/users', user).done(function (data) {
+	        $.post('http://dgzn.io/v1/users', user).done(function (data) {
 	          return resolve(data);
 	        }).fail(function (err) {
 	          return reject(err.statusText);
@@ -34488,7 +34594,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	var BASE_URL = 'http://45.56.87.206';
+	var BASE_URL = 'http://dgzn.io:80';
 	exports.default = {
 	  BASE_URL: BASE_URL,
 	  LOGIN_URL: BASE_URL + 'v1/users/auth',
@@ -35114,7 +35220,7 @@
 	"use strict";
 
 	module.exports = {
-	  "endpoint": "http://45.56.87.206",
+	  "endpoint": "http://dgzn.io:80",
 	  "authenticated": function authenticated() {
 	    var token = localStorage.getItem('melody::authToken');
 	    if (!token || !token.length) return false;
@@ -35435,7 +35541,7 @@
 	    });
 	    return _react2.default.createElement(
 	      'div',
-	      { className: 'ui container grids pad-bottom-medium' },
+	      { className: 'ui container grids pad-bottom-medium', style: { 'textAlign': this.props.textAlign } },
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'row subnav' },
@@ -35446,7 +35552,8 @@
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { id: 'seasons-dropdown', className: 'ui simple dropdown item inverted' },
+	          { id: 'seasons-dropdown',
+	            className: 'ui simple dropdown item inverted', style: { 'textAlign': this.props.textAlign } },
 	          title,
 	          ' ',
 	          _react2.default.createElement('i', { className: 'plus icon' }),
@@ -35458,7 +35565,7 @@
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { id: 'seasons-dropdown', className: 'ui simple dropdown item inverted' },
+	          { id: 'seasons-dropdown', className: 'ui simple dropdown item inverted', style: { 'textAlign': this.props.textAlign } },
 	          local.sortBy,
 	          ' ',
 	          _react2.default.createElement('i', { className: 'plus icon' }),

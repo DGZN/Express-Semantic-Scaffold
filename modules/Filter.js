@@ -45,15 +45,16 @@ export default React.createClass({
         }
     })
     return (
-      <div className="ui container grids pad-bottom-medium">
+      <div className = "ui container grids pad-bottom-medium" style={{'textAlign': this.props.textAlign }}>
         <div className="row subnav"><span className="title">{local[this.props.title]}</span>
-          <div id="seasons-dropdown" className="ui simple dropdown item inverted">
+          < div id = "seasons-dropdown"
+          className = "ui simple dropdown item inverted" style = {{'textAlign': this.props.textAlign}}>
             {title} <i className="plus icon"></i>
             <div className="menu">
               {GENRES}
             </div>
           </div>
-          <div id="seasons-dropdown" className="ui simple dropdown item inverted">
+          <div id="seasons-dropdown" className="ui simple dropdown item inverted"  style={{'textAlign': this.props.textAlign }}>
           {local.sortBy} <i className="plus icon"></i>
             <div className="menu">
               <a className="item" onClick={this.props.filter.bind(null, 'featured')}>{local.featured}</a>

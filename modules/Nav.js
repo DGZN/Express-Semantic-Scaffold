@@ -22,49 +22,16 @@ export default React.createClass({
   render() {
     var menu = this.languageMenu(this.props.language)
     var local = this.props.local
+    var MAIN_NAV = this.englishNav(menu, local)
+    if (this.props.language == 'en') {
+      var MAIN_NAV = this.englishNav(menu, local)
+    }
     return (
       <div>
         <MyAccount setUser={this.props.setUser} {...this.props} />
         <div className="ui large top fixed hidden menu inverted">
           <div className="sidebar"></div>
-          <div className="ui container nav">
-            <Link to="/" className="item">
-              <img src="/images/melody-logo.png" className="ui tiny image"/>
-            </Link>
-            <Link to="/movies" className="item">{local.movies}</Link>
-            <Link to="/series" className="item">{local.series}</Link>
-            <Link to="/music" className="item">{local.music}</Link>
-            <Link to="/plays" className="item">{local.plays}</Link>
-            <Link to="/classics" className="item">{local.classics}</Link>
-            <Link to="/collections" className="item">{local.collections}</Link>
-            <Link to="/livetv" className="item">{local.live}</Link>
-            <div className="ui category search item nav-search">
-              <div className="ui transparent icon input">
-                <input type="text" placeholder="Search..." className="prompt"/>
-                <i className="search link icon"></i>
-              </div>
-              <div className="results"></div>
-            </div>
-            <div className="right menu">
-              <div id="account-dropdown" className="ui left dropdown item">
-                <i className="setting icon"></i>
-                <div className="menu">
-                  <a className="item" onClick={this.myAccount}>
-                    <i className="user icon"></i>
-                    <span className="text">{local.myAccount}</span>
-                  </a>
-                  <Link to="/watchlist" className="item">
-                    <i className="list layout icon"></i>
-                    <span className="text">{local.watchlist}</span>
-                  </Link>
-                  <div className="item" onClick={this.props.setLanguage.bind(null, menu.lang, menu.align)}>
-                    <i className="flag icon"></i>
-                    <span className="text">{menu.name}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          {MAIN_NAV}
         </div>
         <div id="nav-sidebar" className="ui right vertical sidebar menu">
           <Link to="/" className="item">Home</Link>
@@ -156,6 +123,91 @@ export default React.createClass({
         </div>
       </div>
     );
+  },
+
+  arabicNav(menu, local) {
+    <div className="ui container nav">
+        <div id="account-dropdown" className="ui left dropdown item">
+          <i className="setting icon"></i>
+          <div className="menu">
+            <a className="item" onClick={this.myAccount}> 
+              <i className="user icon"></i>
+              <span className="text">{local.myAccount}</span>
+            </a>
+            <Link to="/watchlist" className="item">
+              <i className="list layout icon"></i>
+              <span className="text">{local.watchlist}</span>
+            </Link>
+            <div className="item" onClick={this.props.setLanguage.bind(null, menu.lang, menu.align)}>
+              <i className="flag icon"></i>
+              <span className="text">{menu.name}</span>
+            </div>
+          </div>
+        </div>
+      <div className="right menu">
+        <Link to="/" className="item">
+          <img src="/images/melody-logo.png" className="ui tiny image"/>
+        </Link>
+        <Link to="/movies" className="item">{local.movies}</Link>
+        <Link to="/series" className="item">{local.series}</Link>
+        <Link to="/music" className="item">{local.music}</Link>
+        <Link to="/plays" className="item">{local.plays}</Link>
+        <Link to="/classics" className="item">{local.classics}</Link>
+        <Link to="/collections" className="item">{local.collections}</Link>
+        <Link to="/livetv" className="item">{local.live}</Link>
+        <div className="ui category search item nav-search">
+          <div className="ui transparent icon input">
+            <input type="text" placeholder="Search..." className="prompt"/>
+            <i className="search link icon"></i>
+          </div>
+          <div className="results"></div>
+        </div>   
+
+      </div>
+    </div>
+  },
+
+  englishNav(menu, local) {
+    return (
+      <div className="ui container nav">
+        <Link to="/" className="item">
+          <img src="/images/melody-logo.png" className="ui tiny image"/>
+        </Link>
+        <Link to="/movies" className="item">{local.movies}</Link>
+        <Link to="/series" className="item">{local.series}</Link>
+        <Link to="/music" className="item">{local.music}</Link>
+        <Link to="/plays" className="item">{local.plays}</Link>
+        <Link to="/classics" className="item">{local.classics}</Link>
+        <Link to="/collections" className="item">{local.collections}</Link>
+        <Link to="/livetv" className="item">{local.live}</Link>
+        <div className="ui category search item nav-search">
+          <div className="ui transparent icon input">
+            <input type="text" placeholder="Search..." className="prompt"/>
+            <i className="search link icon"></i>
+          </div>
+          <div className="results"></div>
+        </div>
+        <div className="right menu">
+          <div id="account-dropdown" className="ui left dropdown item">
+            <i className="setting icon"></i>
+            <div className="menu">
+              <a className="item" onClick={this.myAccount}>
+                <i className="user icon"></i>
+                <span className="text">{local.myAccount}</span>
+              </a>
+              <Link to="/watchlist" className="item">
+                <i className="list layout icon"></i>
+                <span className="text">{local.watchlist}</span>
+              </Link>
+              <div className="item" onClick={this.props.setLanguage.bind(null, menu.lang, menu.align)}>
+                <i className="flag icon"></i>
+                <span className="text">{menu.name}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
   },
 
   myAccount() {

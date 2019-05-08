@@ -28,7 +28,7 @@ export default React.createClass({
       page: 0
     , language: 'ar'
     , local: this.localized(localized, 'ar')
-    , align: 'left'
+    , align: 'right'
     , user: LoginStore.user
     , userLoggedIn: LoginStore.isLoggedIn()
     };
@@ -217,7 +217,7 @@ export default React.createClass({
     $('.watchlist.item.left.aligned').hide()
     var local = this.localized(localized, this.state.language)
     return (
-      <div style={{ 'textAlign': this.state.align + ' !important'}}>
+      <div>
         <Nav
           user={this.state.user}
           myAccount={this.myAccount}
